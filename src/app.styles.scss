@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.body {
+  overflow: hidden;
+}
+.app {
+  display: flex;
+  width: 100%;
+}
+.space-container {
+  height: 100vh;
+  background: blue;
+}
+.home-container {
+  width: 100%;
+}
