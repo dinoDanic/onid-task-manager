@@ -1,0 +1,37 @@
+@import "../../../theme.styles.scss";
+.retroButton {
+  font-family: "Press Start 2P", cursive;
+  background: $primary;
+  border-radius: 5px;
+  border: none;
+  color: white;
+  height: 36px;
+  min-width: 150px;
+  font-size: 8px;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
+  transition: 0.2s ease all;
+  padding-right: 20px;
+  padding-left: 20px;
+  .children {
+    transition: 0.2s ease all;
+  }
+  &:hover {
+    box-shadow: inset 0px -6px 0 0 rgba(0, 0, 0, 0.3);
+    /* padding-top: 4px; */
+    transform: scale(1.02);
+    .children {
+      margin-top: -2px;
+    }
+  }
+  &:active {
+    box-shadow: inset 0px 4px 0 0 rgba(0, 0, 0, 0.3);
+    /* padding-top: 6px; */
+    color: rgba(255, 255, 255, 0.5);
+    transform: scale(0.98);
+    .children {
+      margin-top: 6px;
+    }
+  }
+}

@@ -1,13 +1,14 @@
 import React from "react";
-import { Route } from "react-router-dom";
-
-import DockStation from "../dock-station/dock-station.component";
-import Station from "../station/station.component";
+import { auth } from "../../firebase/firebase.utils";
 
 import "./space.styles.scss";
 
 function Space() {
-  return <div className="space">space</div>;
+  return (
+    <div className="space">
+      <button onClick={() => auth.signOut()}>logout</button>
+    </div>
+  );
 }
 
 export default Space;
