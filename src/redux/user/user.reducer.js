@@ -13,7 +13,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
     case UserActionTypes.SET_CURRENT_USER_NULL:
       return {
         ...state,
-        currentUser: false,
+        currentUser: null,
       };
     default:
       return state;

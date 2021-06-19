@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
-import { auth } from "./firebase/firebase.utils";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
+import { auth, createUserInFirebase } from "./firebase/firebase.utils";
 
 import { signIn, signOut } from "./redux/user/user.actions";
 
@@ -18,10 +18,9 @@ function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const history = useHistory();
-  let unsubscribeFromAuth = null;
 
   useEffect(() => {
-    unsubscribeFromAuth = auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged((user) => {
       if (user) {
         const { photoURL, uid, displayName, email } = user;
         const userData = {
@@ -31,15 +30,13 @@ function App() {
           email,
         };
         dispatch(signIn(userData));
+        createUserInFirebase(userData);
         history.push("/");
       } else {
         dispatch(signOut());
         history.push("/signin");
       }
     });
-    return () => {
-      unsubscribeFromAuth();
-    };
   }, []);
 
   return (

@@ -11,22 +11,53 @@ const firebaseConfig = {
   appId: "1:141658461672:web:47706ce9c15eb178dd805d",
 };
 
-firebase.initializeApp(firebaseConfig);
+if (!firebase.apps.length) {
+  firebase.initializeApp(firebaseConfig);
+}
+const db = firebase.firestore();
 
 var provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
 const LoginWithGoogle = () => {
-  auth
-    .signInWithPopup(provider)
-    .then((result) => {
-      console.log(result);
-    })
-    .catch((error) => {
-      console.log(error.message);
-    });
+  auth.signInWithPopup(provider).catch((error) => {
+    console.log(error.message);
+  });
 };
 
-const db = firebase.firestore();
+const loginWithEmailAndPassword = (email, password) => {
+  auth.signInWithEmailAndPassword(email, password).catch((error) => {
+    var errorMessage = error.message;
+    console.log(errorMessage);
+  });
+};
 
-export { db, auth, LoginWithGoogle };
+const createUserInFirebase = async ({ email, image, uid, userName }) => {
+  const userRef = db.doc(`users/${uid}`);
+  const snapShot = await userRef.get();
+  if (!snapShot.exists) {
+    console.log("no data, creating");
+    userRef.set({
+      email,
+      imageUrl: image,
+      uid,
+      userName,
+    });
+  } else {
+    console.log("we got u allready, updating ");
+    userRef.update({
+      email,
+      imageUrl: image,
+      uid,
+      userName,
+    });
+  }
+};
+
+export {
+  db,
+  auth,
+  LoginWithGoogle,
+  loginWithEmailAndPassword,
+  createUserInFirebase,
+};
