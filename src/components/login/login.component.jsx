@@ -25,7 +25,6 @@ class Login extends React.Component {
     });
   }
   render() {
-    const { email, password } = this.state;
     return (
       <LoginContainer>
         <h2>Login</h2>

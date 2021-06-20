@@ -1,0 +1,15 @@
+.spaceFly {
+  display: flex;
+  flex-direction: column;
+  button {
+    margin-bottom: 10px;
+  }
+}
+
+.sf__line {
+  width: 100%;
+  height: 2px;
+  border-radius: 100%;
+  background: #48575d;
+  margin-bottom: 10px;
+}

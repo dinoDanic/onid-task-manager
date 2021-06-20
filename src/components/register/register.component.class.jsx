@@ -12,6 +12,7 @@ class Register extends React.Component {
     this.state = {
       email: "",
       password: "",
+      userName: "",
       repeatPassword: "",
       errorMessage: "",
     };
@@ -38,6 +39,9 @@ class Register extends React.Component {
         <form>
           <div onChange={(e) => this.setState({ email: e.target.value })}>
             <Input type="email" placeholder="email" />
+          </div>
+          <div onChange={(e) => this.setState({ userName: e.target.value })}>
+            <Input type="text" placeholder="User name" />
           </div>
           <div onChange={(e) => this.setState({ password: e.target.value })}>
             <Input type="password" placeholder="password" />

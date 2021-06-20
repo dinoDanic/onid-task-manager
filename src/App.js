@@ -5,8 +5,8 @@ import { auth, createUserInFirebase } from "./firebase/firebase.utils";
 
 import { signIn, signOut } from "./redux/user/user.actions";
 
-import Space from "./pages/space/space.component";
-import Home from "./pages/home/home.component";
+import Space from "./pages/space/space.component.class";
+import Home from "./pages/home/home.component.class";
 import DockStation from "./pages/dock-station/dock-station.component";
 import Station from "./pages/station/station.component";
 import SignIn from "./pages/sing-in/sign-in.component.class";
@@ -20,6 +20,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
+    console.log("App useEffect");
     auth.onAuthStateChanged((user) => {
       if (user) {
         const { photoURL, uid, displayName, email } = user;
@@ -37,7 +38,7 @@ function App() {
         history.push("/signin");
       }
     });
-  }, []);
+  }, [dispatch, history]);
 
   return (
     <div className="app">
@@ -46,7 +47,7 @@ function App() {
           <Space />
           <ProtectedRoute
             exact
-            path="/"
+            path={["/"]}
             component={Home}
             isAuth={currentUser}
           />

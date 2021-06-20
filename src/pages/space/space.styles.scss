@@ -1,7 +1,11 @@
+@import "../../theme.styles.scss";
 .space {
   display: flex;
+  flex-direction: column;
   height: 100vh;
   min-width: 80px;
-  padding-top: 20px;
-  justify-content: center;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 0;
+  background: $secondary;
 }

@@ -54,10 +54,38 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
   }
 };
 
+const createNewSpace = async (name, creatorId, color, setLayer) => {
+  if (!name) {
+    alert("Space name is req");
+    return;
+  }
+  await db
+    .collection("space")
+    .add({
+      name: name,
+      admin: creatorId,
+      color: color,
+      members: firebase.firestore.FieldValue.arrayUnion(creatorId),
+    })
+    .then((data) => {
+      let id = data.id;
+      db.collection("space").doc(id).set(
+        {
+          spaceId: id,
+        },
+        { merge: true }
+      );
+    });
+  if (setLayer) {
+    setLayer(false);
+  }
+};
+
 export {
   db,
   auth,
   LoginWithGoogle,
   loginWithEmailAndPassword,
   createUserInFirebase,
+  createNewSpace,
 };
