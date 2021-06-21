@@ -17,30 +17,38 @@ const SpaceFly = () => {
   return (
     <>
       <div className="spaceFly">
-        {spaceData?.map((space) => {
-          return (
-            <div key={space.spaceId}>
-              <Link to={`/s/${space.spaceId}`}>
-                <RetroButton
-                  style={{ background: `${space.color}` }}
-                  charAt
-                  size="box"
-                >
-                  {space.name}
-                </RetroButton>
-              </Link>
-            </div>
-          );
-        })}
-        <div className="sf__line"></div>
-        <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
-          <AddIcon fontSize="small" />
-        </RetroButton>
-        <Link to="/">
-          <RetroButton size="box">
-            <HomeIcon fontSize="small" />
+        <div className="sf__flys">
+          {/* <div className="sf__flysName">
+            <p>
+              <i>Space</i>
+            </p>
+          </div> */}
+          {spaceData?.map((space) => {
+            return (
+              <div key={space.spaceId}>
+                <Link to={`/s/${space.spaceId}`}>
+                  <RetroButton
+                    style={{ background: `${space.color}` }}
+                    charAt
+                    size="box"
+                  >
+                    {space.name}
+                  </RetroButton>
+                </Link>
+              </div>
+            );
+          })}
+        </div>
+        <div className="sf__controls">
+          <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
+            <AddIcon fontSize="small" />
           </RetroButton>
-        </Link>
+          <Link to="/">
+            <RetroButton size="box">
+              <HomeIcon fontSize="small" />
+            </RetroButton>
+          </Link>
+        </div>
       </div>
       <AnimatePresence>
         {createNewSpace && <CreateSpace setLayer={setCreateNewSpace} />}

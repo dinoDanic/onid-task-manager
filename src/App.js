@@ -13,6 +13,7 @@ import SignIn from "./pages/sing-in/sign-in.component.class";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 
 import "./app.styles.scss";
+import { AnimatePresence } from "framer-motion";
 
 function App() {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -32,7 +33,7 @@ function App() {
         };
         dispatch(signIn(userData));
         createUserInFirebase(userData);
-        history.push("/");
+        /*  history.push("/"); */
       } else {
         dispatch(signOut());
         history.push("/signin");
@@ -47,15 +48,17 @@ function App() {
           <Space />
           <ProtectedRoute
             exact
-            path={["/"]}
+            path={["/", "/signin"]}
             component={Home}
             isAuth={currentUser}
           />
-          <ProtectedRoute
-            path="/s/:id"
-            component={Station}
-            isAuth={currentUser}
-          />
+          <AnimatePresence>
+            <ProtectedRoute
+              path="/s/:id"
+              component={Station}
+              isAuth={currentUser}
+            />
+          </AnimatePresence>
           <ProtectedRoute
             exact
             path="/s/:id"

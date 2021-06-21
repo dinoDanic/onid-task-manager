@@ -1,8 +1,11 @@
 import React from "react";
-import { BoxContainer } from "./box.styles";
+
+import "./box.styles.scss";
 
 const Box = ({ children, ...otherProps }) => (
-  <BoxContainer {...otherProps}>{children}</BoxContainer>
+  <div className="retroBox" {...otherProps}>
+    {children}
+  </div>
 );
 
 export default Box;

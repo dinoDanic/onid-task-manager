@@ -19,7 +19,7 @@ import SpaceData from "../../components/spaceData/space-data.component";
 function Home({ spaceData }) {
   return (
     <HomeContainer>
-      {/* <CreateSpace></CreateSpace> */}2
+      {/* <CreateSpace></CreateSpace> */}
       <Content>
         <Spaces>
           <Titleh2>Your Space</Titleh2>

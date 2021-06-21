@@ -6,7 +6,7 @@ import { createStructuredSelector } from "reselect";
 import Avatar from "../../components/retro/avatar/avatar.component";
 import SpaceFly from "../../components/space-fly/space-fly.component";
 
-import { setSpaceData } from "../../redux/space/space.actions";
+import { setSpaceData, removeSpaceData } from "../../redux/space/space.actions";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import "./space.styles.scss";
@@ -14,6 +14,7 @@ import "./space.styles.scss";
 class Space extends React.Component {
   componentDidMount() {
     this.checkSpace();
+    this.handleLogout = this.handleLogout.bind(this);
   }
 
   checkSpace = async () => {
@@ -31,13 +32,17 @@ class Space extends React.Component {
         }
       });
   };
+  handleLogout() {
+    removeSpaceData();
+    auth.signOut();
+  }
   render() {
     return (
       <div className="space">
         <div className="space__fly">
           <SpaceFly />
         </div>
-        <div className="space__user" onClick={() => auth.signOut()}>
+        <div className="space__user" onClick={() => this.handleLogout()}>
           <Avatar src={this.props.currentUser.image} />
         </div>
       </div>
@@ -51,6 +56,7 @@ const mapStateToProps = createStructuredSelector({
 
 const mapDispatchToProps = (dispatch) => ({
   setSpaceData: (data) => dispatch(setSpaceData(data)),
+  removeSpaceData: () => dispatch(removeSpaceData()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Space);

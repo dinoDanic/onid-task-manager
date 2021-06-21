@@ -81,6 +81,26 @@ const createNewSpace = async (name, creatorId, color, setLayer) => {
   }
 };
 
+const createNewStation = (spaceId, stationName) => {
+  const stationsRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations");
+  stationsRef
+    .add({
+      name: stationName,
+    })
+    .then((data) => {
+      let id = data.id;
+      stationsRef.doc(id).set(
+        {
+          stationsId: id,
+        },
+        { merge: true }
+      );
+    });
+};
+
 export {
   db,
   auth,
@@ -88,4 +108,5 @@ export {
   loginWithEmailAndPassword,
   createUserInFirebase,
   createNewSpace,
+  createNewStation,
 };

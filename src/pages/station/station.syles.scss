@@ -1,6 +1,20 @@
+@import "../../theme.styles.scss";
 .station {
-  background-color: purple;
   height: 100vh;
   width: 300px;
   padding: 20px;
+  background: $secondary2;
+  color: white;
+  border-radius: 0 10px 10px 0;
+  box-shadow: 0 0 36px -10px black;
+}
+
+.station__header {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  h3 {
+    margin-left: 10px;
+  }
 }

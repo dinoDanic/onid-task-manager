@@ -1,19 +1,21 @@
 @import "../../../theme.styles.scss";
 .retroButton {
   font-family: "Press Start 2P", cursive;
+  font-size: 8px;
   background: $primary;
   border-radius: 8px;
   border: none;
   color: white;
   height: 36px;
-  min-width: 150px;
-  font-size: 8px;
   text-transform: uppercase;
   cursor: pointer;
   box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
   transition: 0.2s ease all;
   padding-right: 20px;
   padding-left: 20px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
   .children {
     transition: 0.2s ease all;
@@ -39,6 +41,7 @@
     /* padding-top: 6px; */
     color: rgba(255, 255, 255, 0.5);
     transform: scale(0.98);
+
     .children {
       margin-top: 6px;
     }
@@ -66,12 +69,10 @@
   }
 }
 .box {
-  min-width: 20px;
-  max-width: 50px;
 }
 .charAt {
   position: relative;
-
+  pointer-events: none;
   .charAtFull {
     position: absolute;
     background: #333;

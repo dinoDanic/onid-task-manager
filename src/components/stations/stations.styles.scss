@@ -1,0 +1,26 @@
+@import "../../theme.styles.scss";
+.stations {
+  button {
+    width: 100%;
+    margin-bottom: 10px;
+  }
+}
+.stations__input {
+  position: relative;
+}
+.stations__ok {
+  position: absolute;
+  right: 3px;
+  top: 4px;
+  button {
+    width: 30px;
+    height: 25px;
+  }
+}
+.stations__createStation {
+  button {
+    background: $info;
+  }
+}
+.stations__stationItem {
+}

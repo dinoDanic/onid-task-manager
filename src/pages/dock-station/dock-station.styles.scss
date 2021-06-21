@@ -1,5 +1,30 @@
 .dockStation {
-  padding: 20px;
+  padding: 25px 30px;
   width: 100%;
-  background: blue;
+}
+
+.ds__header {
+  margin-bottom: 20px;
+}
+
+.ds__content {
+  display: flex;
+}
+
+.ds__recentStations {
+  .retroBox {
+  }
+}
+
+.ds__item {
+  min-width: 200px;
+  max-width: 400px;
+  flex: 1;
+  margin-right: 20px;
+  h2 {
+    margin-bottom: 10px;
+  }
+  &:last-child {
+    margin-right: 0;
+  }
 }
