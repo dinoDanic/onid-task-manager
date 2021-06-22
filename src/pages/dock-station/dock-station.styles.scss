@@ -1,14 +1,27 @@
+@import "../../theme.styles.scss";
 .dockStation {
-  padding: 25px 30px;
   width: 100%;
+  .retroBox {
+    padding: 20px;
+  }
 }
 
-.ds__header {
+.ds__headerContainer {
   margin-bottom: 20px;
+  background: #e4e4e4;
+  padding: 50px 0;
+  padding-left: 70px;
+  width: 105%;
+  margin-left: -10px;
+  left: 0;
 }
-
+.ds__header {
+  display: flex;
+  bottom: 0;
+}
 .ds__content {
   display: flex;
+  padding: 30px 60px;
 }
 
 .ds__recentStations {

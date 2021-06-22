@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import useActiveSpaceData from "../../hooks/useActiveSpaceData";
+import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
 import RetroButton from "../../components/retro/button/retro-button.component";
 import Stations from "../../components/stations/stations.component";

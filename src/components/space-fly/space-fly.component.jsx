@@ -18,11 +18,6 @@ const SpaceFly = () => {
     <>
       <div className="spaceFly">
         <div className="sf__flys">
-          {/* <div className="sf__flysName">
-            <p>
-              <i>Space</i>
-            </p>
-          </div> */}
           {spaceData?.map((space) => {
             return (
               <div key={space.spaceId}>

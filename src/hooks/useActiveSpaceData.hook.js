@@ -1,7 +1,7 @@
 import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const useActiveSpaceData = () => {
+export const useActiveSpaceData = () => {
   const history = useHistory();
   const spaceData = useSelector((state) => state.space.spaceData);
 
@@ -11,5 +11,3 @@ const useActiveSpaceData = () => {
 
   return data[0];
 };
-
-export default useActiveSpaceData;

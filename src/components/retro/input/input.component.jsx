@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useRef } from "react";
 
-import { InputContainer } from "./input.styles";
+import "./input.styles.scss";
 
-const RetroInput = ({ ...otherProps }) => {
-  return <InputContainer {...otherProps} />;
-};
+const RetroInput = React.forwardRef((props, ref) => (
+  <input className="retroInput" ref={ref} {...props} />
+));
 export default RetroInput;

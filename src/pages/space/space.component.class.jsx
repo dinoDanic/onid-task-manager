@@ -22,6 +22,7 @@ class Space extends React.Component {
     const current = this.props.currentUser;
     db.collection("space")
       .where("members", "array-contains", current.uid)
+      .orderBy("created", "asc")
       .onSnapshot((snapShot) => {
         if (!snapShot.empty) {
           let shots = [];

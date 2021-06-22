@@ -2,7 +2,7 @@ import React from "react";
 
 import RetroButton from "../retro/button/retro-button.component";
 
-import BlurOnOutlinedIcon from "@material-ui/icons/BlurOnOutlined";
+import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
 
 import "./station.styles.scss";
 
@@ -10,7 +10,7 @@ function StationItem({ data }) {
   return (
     <div className="stationItem">
       <RetroButton>
-        <BlurOnOutlinedIcon fontSize="small" />
+        <AssignmentOutlinedIcon fontSize="small" />
         {data.name}
       </RetroButton>
     </div>

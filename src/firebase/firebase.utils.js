@@ -19,6 +19,8 @@ const db = firebase.firestore();
 var provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 
+export const fieldValue = firebase.firestore.FieldValue;
+
 const LoginWithGoogle = () => {
   auth.signInWithPopup(provider).catch((error) => {
     console.log(error.message);
@@ -44,7 +46,6 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       userName,
     });
   } else {
-    console.log("we got u allready, updating ");
     userRef.update({
       email,
       imageUrl: image,
@@ -66,6 +67,7 @@ const createNewSpace = async (name, creatorId, color, setLayer) => {
       admin: creatorId,
       color: color,
       members: firebase.firestore.FieldValue.arrayUnion(creatorId),
+      created: new Date(),
     })
     .then((data) => {
       let id = data.id;
@@ -89,6 +91,7 @@ const createNewStation = (spaceId, stationName) => {
   stationsRef
     .add({
       name: stationName,
+      created: new Date(),
     })
     .then((data) => {
       let id = data.id;

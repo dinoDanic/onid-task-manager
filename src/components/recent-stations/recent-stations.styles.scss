@@ -1,0 +1,12 @@
+.recentStations {
+  button {
+    width: 100%;
+    height: 60px;
+    border-radius: 10px;
+    margin-bottom: 5px;
+    box-shadow: none;
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+}

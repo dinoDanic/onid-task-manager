@@ -8,3 +8,8 @@ export const signIn = (userData) => ({
 export const signOut = () => ({
   type: UserActionTypes.SET_CURRENT_USER_NULL,
 });
+
+export const setUsers = (users) => ({
+  type: UserActionTypes.SET_USERS,
+  payload: users,
+});

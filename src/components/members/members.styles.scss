@@ -1,0 +1,32 @@
+.members {
+  position: relative;
+}
+.members__show {
+  border-radius: 10px;
+  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    transform: scale(1.02);
+  }
+}
+.members__name {
+  margin-left: 10px;
+}
+.members__button {
+  display: flex;
+  justify-content: flex-end;
+}
+.members__admin {
+  position: absolute;
+  right: 0;
+  top: 13px;
+  svg {
+    color: rgb(251, 203, 0);
+  }
+}

@@ -1,9 +1,11 @@
 .stationItem {
   button {
     justify-content: flex-start;
+    box-shadow: none;
     svg {
       margin-right: 10px;
       font-weight: 200;
+      opacity: 0.8;
     }
   }
 }

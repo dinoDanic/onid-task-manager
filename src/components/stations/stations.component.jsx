@@ -25,6 +25,7 @@ const Stations = () => {
     db.collection("space")
       .doc(activeSpaceId)
       .collection("stations")
+      .orderBy("created", "asc")
       .onSnapshot((querySnapshot) => {
         let docs = [];
         querySnapshot.forEach((doc) => {
@@ -32,7 +33,7 @@ const Stations = () => {
         });
         dispatch(setStationData(docs));
       });
-  }, [activeSpaceId]);
+  }, [activeSpaceId, dispatch]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -41,7 +42,8 @@ const Stations = () => {
       return;
     }
     createNewStation(activeSpaceId, newStationName);
-    this.setState({ createStation: false, newStationName: "" });
+    setCreateStation(false);
+    setNewStationName("");
   };
 
   return (

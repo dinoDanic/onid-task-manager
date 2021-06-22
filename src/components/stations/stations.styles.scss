@@ -3,6 +3,7 @@
   button {
     width: 100%;
     margin-bottom: 10px;
+    background: $secondary;
   }
 }
 .stations__input {
@@ -23,4 +24,5 @@
   }
 }
 .stations__stationItem {
+  margin-top: 20px;
 }
