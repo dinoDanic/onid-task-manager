@@ -44,6 +44,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       imageUrl: image,
       uid,
       userName,
+      favoriteSpace: "",
     });
   } else {
     userRef.update({
@@ -55,18 +56,20 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
   }
 };
 
-const createNewSpace = async (name, creatorId, color, setLayer) => {
+const createNewSpace = async (name, currentUser, color, setLayer) => {
+  const { uid } = currentUser;
   if (!name) {
     alert("Space name is req");
     return;
   }
+
   await db
     .collection("space")
     .add({
       name: name,
-      admin: creatorId,
+      admin: uid,
       color: color,
-      members: firebase.firestore.FieldValue.arrayUnion(creatorId),
+      members: firebase.firestore.FieldValue.arrayUnion(uid),
       created: new Date(),
     })
     .then((data) => {
@@ -78,6 +81,7 @@ const createNewSpace = async (name, creatorId, color, setLayer) => {
         { merge: true }
       );
     });
+
   if (setLayer) {
     setLayer(false);
   }
@@ -104,6 +108,19 @@ const createNewStation = (spaceId, stationName) => {
     });
 };
 
+export const removeMember = (spaceId, memberId) => {
+  db.collection("space")
+    .doc(spaceId)
+    .update({
+      members: firebase.firestore.FieldValue.arrayRemove(memberId),
+    });
+};
+
+export const newAdmin = (spaceId, memberId) => {
+  db.collection("space").doc(spaceId).update({
+    admin: memberId,
+  });
+};
 export {
   db,
   auth,

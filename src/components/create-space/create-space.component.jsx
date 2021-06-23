@@ -16,7 +16,7 @@ function CreateSpace({ setLayer }) {
   const [currentColor, setCurrentColor] = useState("#8f00ff");
 
   const handleNewSpace = () => {
-    createNewSpace(spaceName, currentUser.uid, currentColor, setLayer);
+    createNewSpace(spaceName, currentUser, currentColor, setLayer);
   };
 
   return (

@@ -2,12 +2,12 @@
 .retroButton {
   font-family: "Press Start 2P", cursive;
   font-size: 8px;
+  text-transform: uppercase;
   background: $primary;
   border-radius: 8px;
   border: none;
   color: white;
   height: 36px;
-  text-transform: uppercase;
   cursor: pointer;
   box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
   transition: 0.2s ease all;
@@ -46,6 +46,10 @@
       margin-top: 6px;
     }
   }
+}
+.small {
+  height: 27px;
+  font-size: 7.5px;
 }
 .gray {
   background: none;
@@ -87,7 +91,27 @@
     opacity: 0;
   }
 }
-.small {
-  height: 25px;
-  font-size: 8px;
+
+.flat {
+  box-shadow: none;
+  width: 100%;
+  height: 50px;
+  background: #eff2f5;
+  color: #333;
+  justify-content: flex-start;
+  border-radius: 10px;
+  &:hover {
+    box-shadow: inset 0px -3px 0 0 rgba(0, 0, 0, 0.3);
+    transform: scale(1.01);
+  }
+  &:active {
+    box-shadow: inset 0px 3px 0 0 rgba(0, 0, 0, 0.3);
+    /* padding-top: 6px; */
+    color: rgba(255, 255, 255, 0.5);
+    transform: scale(0.99);
+  }
+  svg {
+    opacity: 0.8;
+    margin-right: 10px;
+  }
 }

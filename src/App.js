@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, createUserInFirebase } from "./firebase/firebase.utils";
+import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
 
 import { signIn, signOut } from "./redux/user/user.actions";
 
@@ -21,8 +21,7 @@ function App() {
   const history = useHistory();
 
   useEffect(() => {
-    console.log("App useEffect");
-    auth.onAuthStateChanged((user) => {
+    auth.onAuthStateChanged(async (user) => {
       if (user) {
         const { photoURL, uid, displayName, email } = user;
         const userData = {
@@ -33,7 +32,6 @@ function App() {
         };
         dispatch(signIn(userData));
         createUserInFirebase(userData);
-        /*  history.push("/"); */
       } else {
         dispatch(signOut());
         history.push("/signin");

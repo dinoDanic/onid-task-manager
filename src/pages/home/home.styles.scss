@@ -1,0 +1,29 @@
+.home {
+  width: 100%;
+  height: 100vh;
+}
+
+.home__createSpace {
+  background: white;
+  height: 40px;
+}
+.home__content {
+  padding: 40px 80px;
+  .sectionBox {
+    margin-bottom: 30px;
+  }
+}
+.home__recent {
+  display: flex;
+}
+.home__recentStations,
+.home__something {
+  flex: 1;
+}
+.home__recentStations {
+  margin-right: 20px;
+  button {
+    background: #eff2f5;
+    color: #333;
+  }
+}

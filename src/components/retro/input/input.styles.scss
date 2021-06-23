@@ -1,6 +1,23 @@
 .retroInput {
   border-radius: 5px;
   border: none;
+  border: 1px solid #f0f2f5;
+  border-radius: 8px;
+  height: 36px;
+  width: 100px;
+  padding: 10px;
+  outline: none;
+  margin-bottom: 10px;
+  width: 100%;
+  transition: 0.2s;
+  &:focus {
+    transform: scale(1.02);
+    border: 1px solid #c5c6c7;
+  }
+}
+/* .retroInput {
+  border-radius: 5px;
+  border: none;
   box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
   height: 36px;
   width: 100px;
@@ -16,4 +33,4 @@
     box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.5);
     transform: scale(1.02);
   }
-}
+} */

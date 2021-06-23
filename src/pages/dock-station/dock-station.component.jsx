@@ -5,7 +5,6 @@ import { useDispatch } from "react-redux";
 import { setUsers } from "../../redux/user/user.actions";
 
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
-import useCurrentMembers from "../../hooks/useCurrentMembers.hook";
 
 import Box from "../../components/retro/box/box.component";
 import RecentStations from "../../components/recent-stations/recent-stations.component";
@@ -16,7 +15,6 @@ import "./dock-station.styles.scss";
 const DockStation = () => {
   const dispatch = useDispatch();
   const activeSpaceData = useActiveSpaceData();
-  const members = useCurrentMembers();
 
   useEffect(() => {
     const getAllUsers = async () => {
@@ -53,7 +51,7 @@ const DockStation = () => {
             <div className="ds__members ds__item">
               <h2>Members</h2>
               <Box>
-                <Members members={members} activeSpaceData={activeSpaceData} />
+                <Members activeSpaceData={activeSpaceData} />
               </Box>
             </div>
             <div className="ds__members ds__item">

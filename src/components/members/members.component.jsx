@@ -1,29 +1,30 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
-import { addNewUser, db, fieldValue } from "../../firebase/firebase.utils";
+import { db, fieldValue } from "../../firebase/firebase.utils";
 
-import RetroAvatar from "../retro/avatar/avatar.component";
+import useCurrentMembers from "../../hooks/useCurrentMembers.hook";
+
 import RetroButton from "../retro/button/retro-button.component";
 import RetroInput from "../retro/input/input.component";
-
-import StarIcon from "@material-ui/icons/Star";
+import Member from "./member/member.component";
 
 import "./members.styles.scss";
-import { InsertInvitationRounded } from "@material-ui/icons";
 
-const Members = ({ members, activeSpaceData }) => {
-  const { admin } = activeSpaceData;
+const Members = ({ activeSpaceData }) => {
   const history = useHistory();
   const activeSpaceId = history.location.pathname.split("/")[2];
   const [load, setLoad] = useState(0);
   const [email, setEmail] = useState("");
   const [invite, setInvite] = useState(false);
+  const [memberData, setMemberData] = useState([]);
   const inputRef = useRef();
 
+  const memberPromise = useCurrentMembers();
+
   useEffect(() => {
-    setTimeout(() => {
-      setLoad(load + 1);
-    }, 500);
+    memberPromise.then((data) => {
+      setMemberData(data);
+    });
   }, [activeSpaceId]);
 
   const handleSubmit = (e) => {
@@ -45,6 +46,7 @@ const Members = ({ members, activeSpaceData }) => {
                 alert("user added");
                 inputRef.current.value = "";
                 setInvite(false);
+                history.go(0);
               });
           });
         }
@@ -53,21 +55,14 @@ const Members = ({ members, activeSpaceData }) => {
 
   return (
     <div className="members">
-      {members.map((member) => {
+      {memberData?.map((member) => {
         return (
-          <div key={member.uid} className="members__show">
-            <div className="members__avatar">
-              <RetroAvatar src={member.imageUrl} />
-            </div>
-            <div className="members__name">
-              <p>{member.userName}</p>
-            </div>
-            {member.uid === admin && (
-              <div className="members__admin">
-                <StarIcon fontSize="small" />
-              </div>
-            )}
-          </div>
+          <Member
+            key={member.uid}
+            member={member}
+            activeSpaceData={activeSpaceData}
+            activeSpaceId={activeSpaceId}
+          />
         );
       })}
       {invite && (

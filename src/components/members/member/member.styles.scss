@@ -1,0 +1,80 @@
+@import "../../../theme.styles.scss";
+.member {
+  margin-bottom: 10px;
+  display: flex;
+  justify-content: space-between;
+  cursor: pointer;
+  &:hover {
+    .member__delete {
+      opacity: 1;
+    }
+    .member__noAdmin {
+      svg {
+        opacity: 0.1;
+      }
+    }
+  }
+}
+.member__user {
+  display: flex;
+  align-items: center;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+}
+.member__name {
+  margin-left: 10px;
+}
+.member__admin {
+  svg {
+    color: rgb(251, 203, 0);
+  }
+}
+.member__noAdmin {
+  svg {
+    opacity: 0;
+    &:hover {
+      color: rgb(251, 203, 0);
+      opacity: 1 !important;
+    }
+  }
+}
+.member__controls {
+  display: flex;
+  margin-top: 10px;
+}
+.member__delete {
+  opacity: 0;
+  svg {
+    opacity: 0.1;
+    &:hover {
+      opacity: 1;
+      color: $danger !important;
+    }
+  }
+}
+.member__deleteBtns {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
+  button {
+    &:last-child {
+      background: $danger;
+    }
+  }
+}
+.member__addBtns {
+  display: flex;
+  margin-top: 20px;
+  justify-content: flex-end;
+  button {
+    &:last-child {
+      background: $info;
+    }
+  }
+}
