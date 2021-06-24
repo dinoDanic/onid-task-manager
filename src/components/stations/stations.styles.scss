@@ -1,5 +1,6 @@
 @import "../../theme.styles.scss";
 .stations {
+  margin-top: 20px;
   button {
     width: 100%;
     margin-bottom: 10px;
@@ -24,5 +25,5 @@
   }
 }
 .stations__stationItem {
-  margin-top: 20px;
+  margin-top: 10px;
 }

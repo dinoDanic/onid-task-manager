@@ -2,6 +2,7 @@ const spaceActionTypes = {
   SET_SPACE_DATA: "SET_SPACE_DATA",
   REMOVE_SPACE_DATA: "REMOVE_SPACE_DATA",
   SET_STATION_DATA: "SET_STATION_DATA",
+  REMOVE_ONE_SPACE: "REMOVE_ONE_SPACE",
 };
 
 export default spaceActionTypes;

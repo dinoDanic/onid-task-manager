@@ -121,6 +121,56 @@ export const newAdmin = (spaceId, memberId) => {
     admin: memberId,
   });
 };
+
+export const setSpaceAsFavorite = (userId, spaceId) => {
+  db.collection("users").doc(userId).update({
+    favoriteSpace: spaceId,
+  });
+};
+
+export const getFavoriteStations = async (favoriteSpaceId) => {
+  if (!favoriteSpaceId) return;
+  const colRef = db
+    .collection("space")
+    .doc(favoriteSpaceId)
+    .collection("stations");
+  const querySnapshop = await colRef.get();
+  if (querySnapshop.empty) {
+    console.log("empity");
+  }
+  let list = [];
+  querySnapshop.forEach((data) => {
+    list.push(data.data());
+  });
+  return list;
+};
+
+export const renameStation = (spaceId, stationId, newName) => {
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .update({
+      name: newName,
+    });
+};
+
+export const renameSpace = (spaceId, newName) => {
+  db.collection("space").doc(spaceId).update({
+    name: newName,
+  });
+};
+
+export const deleteSpace = (spaceId) => {
+  db.collection("space").doc(spaceId).delete();
+};
+
+export const updateColorOfSpace = (spaceId, color) => {
+  db.collection("space").doc(spaceId).update({
+    color: color,
+  });
+};
+
 export {
   db,
   auth,

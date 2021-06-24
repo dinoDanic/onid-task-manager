@@ -5,16 +5,50 @@
   padding: 20px;
   background: $secondary2;
   color: white;
-  border-radius: 0 10px 0px 0;
   box-shadow: 0 0 36px -10px black;
 }
 
 .station__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.station__name {
   margin-top: 10px;
   margin-bottom: 10px;
   display: flex;
   align-items: center;
   h3 {
     margin-left: 10px;
+    margin-top: -5px;
+  }
+  button {
+    width: 40px;
+    height: 40px;
+  }
+}
+.station__menu {
+  position: relative;
+  button.flat {
+    width: 35px;
+    padding: 0px 5px;
+    height: 20px;
+    border-radius: 8px;
+    background: $secondary2;
+    color: white;
+  }
+  svg {
+    margin: 0;
+  }
+  .boxLayer {
+    align-items: flex-start;
+  }
+  .bl__content {
+    margin-top: 70px;
+  }
+  .retroBox {
+    padding: 5px;
+    width: 220px;
   }
 }

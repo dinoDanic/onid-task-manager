@@ -21,6 +21,18 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         users: action.payload,
       };
+    case UserActionTypes.SET_FAVORITE_SPACE:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favoriteSpace: action.payload,
+        },
+      };
+    /* return {
+        ...state,
+        currentUser: action.payload,
+      }; */
     default:
       return state;
   }

@@ -14,3 +14,8 @@ export const setStationData = (stationData) => ({
   type: spaceActionTypes.SET_STATION_DATA,
   payload: stationData,
 });
+
+export const removeOneSpace = (spaceId) => ({
+  type: spaceActionTypes.REMOVE_ONE_SPACE,
+  payload: spaceId,
+});

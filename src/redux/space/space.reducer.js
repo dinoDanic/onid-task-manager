@@ -1,7 +1,7 @@
 import spaceActionTypes from "./space.types";
 
 const INITIAL_STATE = {
-  spaceData: null,
+  spaceData: [],
   stationData: null,
 };
 
@@ -21,6 +21,15 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         stationData: action.payload,
+      };
+    case spaceActionTypes.REMOVE_ONE_SPACE:
+      let filtered = state.stationData.filter(
+        (space) => space !== action.payload
+      );
+
+      return {
+        ...state,
+        spaceData: filtered,
       };
     default:
       return state;

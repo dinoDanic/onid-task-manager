@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .spaceData {
   display: flex;
   button {
@@ -30,11 +31,49 @@
   padding: 8px 10px 5px 10px;
   margin-bottom: 5px;
   transition: 0.2s;
-  cursor: pointer;
   &:hover {
-    transform: scale(1.01);
+    .sd__favorite {
+      svg {
+        opacity: 1;
+      }
+    }
+  }
+}
+.sd__btnClick {
+  display: flex;
+  align-items: center;
+  transition: 0.2s;
+  &:hover {
+    transform: scale(1.03);
   }
   &:active {
-    transform: scale(0.99);
+    transform: scale(0.97);
+  }
+}
+.sd__favorite {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+
+  svg {
+    transition: 0.2s ease all;
+    color: #dadada;
+    cursor: pointer;
+    opacity: 0;
+    &:hover {
+      transform: scale(1.2);
+      color: $warning;
+    }
+    &:active {
+      transform: scale(0.95);
+    }
+  }
+}
+.sd__favoriteActive {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  svg {
+    color: $warning !important;
   }
 }

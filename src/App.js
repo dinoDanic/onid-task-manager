@@ -24,14 +24,31 @@ function App() {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
         const { photoURL, uid, displayName, email } = user;
-        const userData = {
-          image: photoURL,
-          uid,
-          userName: displayName,
-          email,
-        };
-        dispatch(signIn(userData));
-        createUserInFirebase(userData);
+        const userRef = db.collection("users").doc(uid);
+        const getRef = await userRef.get();
+        const gotData = getRef.data();
+        if (!gotData) {
+          const userData = {
+            image: photoURL,
+            uid,
+            userName: displayName,
+            email,
+            favoriteSpace: "",
+          };
+          dispatch(signIn(userData));
+          createUserInFirebase(userData);
+        }
+        if (gotData) {
+          const userData = {
+            image: photoURL,
+            uid,
+            userName: displayName,
+            email,
+            favoriteSpace: gotData.favoriteSpace,
+          };
+          dispatch(signIn(userData));
+          createUserInFirebase(userData);
+        }
       } else {
         dispatch(signOut());
         history.push("/signin");

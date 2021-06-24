@@ -1,0 +1,58 @@
+@import "../../theme.styles.scss";
+.miniMenu {
+  top: 25px;
+
+  ul li {
+    text-transform: none;
+    list-style: none;
+    color: #333;
+    display: flex;
+    align-items: center;
+    padding: 5px 8px;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
+    &:hover {
+      background: #e7e7e9;
+    }
+    svg {
+      opacity: 0.5;
+      margin-right: 5px;
+    }
+  }
+}
+.mm__reName {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  .retroInput {
+    display: flex;
+
+    width: 190px;
+  }
+}
+.mm__reName-btn {
+  margin-top: -5px;
+  display: flex;
+  justify-content: flex-end;
+}
+.mm__delete-btns {
+  display: flex;
+  justify-content: center;
+  padding: 0 10px;
+  button {
+    flex: 1;
+  }
+}
+.mm__colors {
+  .colors {
+    justify-content: space-between;
+  }
+  .colors__color {
+    margin-right: 0;
+    margin-top: 5px;
+  }
+}

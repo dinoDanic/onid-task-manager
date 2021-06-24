@@ -2,9 +2,9 @@ import React from "react";
 
 import "./retro-button.styles.scss";
 
-function RetroButton({ children, mode, charAt, size, ...otherProps }) {
+function RetroButton({ children, mode, charAt, size, color, ...otherProps }) {
   return (
-    <button className={`retroButton ${mode} ${size} `} {...otherProps}>
+    <button className={`retroButton ${mode} ${size} ${color} `} {...otherProps}>
       {charAt ? (
         <div className="charAt">
           {children.charAt(0)}

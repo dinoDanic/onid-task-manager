@@ -5,6 +5,11 @@ export const signIn = (userData) => ({
   payload: userData,
 });
 
+export const setFavoriteSpace = (favoriteSpaceId) => ({
+  type: UserActionTypes.SET_FAVORITE_SPACE,
+  payload: favoriteSpaceId,
+});
+
 export const signOut = () => ({
   type: UserActionTypes.SET_CURRENT_USER_NULL,
 });

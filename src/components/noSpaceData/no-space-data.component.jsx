@@ -13,6 +13,12 @@ function NoSpaceData() {
     <>
       <div className="noSpaceData">
         <h3>Hey, seems like you dont have any Space!</h3>
+        <p>
+          By creating a <b>Space</b> you can invite others to work on tasks.{" "}
+          <br />
+          Inside <b>Space</b> you create <b>Stations</b> for You and Your
+          members
+        </p>
         <RetroButton onClick={() => setCreate(!create)}>
           <AddIcon fontSize="small" />
           Create new space
