@@ -17,6 +17,7 @@ const SpaceFly = () => {
   return (
     <>
       <div className="spaceFly">
+        <p>Space</p>
         <div className="sf__flys">
           {spaceData?.map((space) => {
             return (

@@ -23,8 +23,6 @@ const Station = () => {
   const [miniMenu, setMiniMenu] = useState(false);
 
   useEffect(async () => {
-    console.log(currentUserUid);
-    console.log(activeSpaceId);
     const docRef = await db.collection("space").doc(activeSpaceId).get();
     const spaceData = docRef.data();
     if (!spaceData.members.includes(currentUserUid)) {
@@ -36,10 +34,11 @@ const Station = () => {
   return (
     <motion.div
       className="station"
-      initial={{ x: "-100%" }}
+      /*  initial={{ x: "-100%" }}
       animate={{ x: 0 }}
-      transition={{ type: "tween" }}
+      transition={{ type: "tween" }} */
     >
+      <p className="station__pre">Station</p>
       {activeSpaceData && (
         <div className="station__header">
           <div className="station__name">

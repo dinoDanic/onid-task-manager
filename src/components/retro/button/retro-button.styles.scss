@@ -4,12 +4,12 @@
   font-size: 8px;
   text-transform: uppercase;
   background: $primary;
-  border-radius: 8px;
+  border-radius: 7px;
   border: none;
   color: white;
   height: 36px;
   cursor: pointer;
-  box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
+  box-shadow: inset 0px -3px 0 0 rgba(0, 0, 0, 0.3);
   transition: 0.2s ease all;
   padding-right: 20px;
   padding-left: 20px;
@@ -26,9 +26,9 @@
     }
   }
   &:hover {
-    box-shadow: inset 0px -6px 0 0 rgba(0, 0, 0, 0.3);
-    /* padding-top: 4px; */
-    transform: scale(1.02);
+    box-shadow: inset 0px -4px 0 0 rgba(0, 0, 0, 0.3);
+    /*    padding-top: 1px; */
+    transform: scale(1.01);
     .children {
       margin-top: -2px;
     }
@@ -38,9 +38,9 @@
   }
   &:active {
     box-shadow: inset 0px 4px 0 0 rgba(0, 0, 0, 0.3);
-    /* padding-top: 6px; */
+    /*     padding-top: 2px; */
     color: rgba(255, 255, 255, 0.5);
-    transform: scale(0.98);
+    transform: scale(0.99);
 
     .children {
       margin-top: 6px;

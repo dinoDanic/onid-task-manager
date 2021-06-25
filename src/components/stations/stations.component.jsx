@@ -9,6 +9,7 @@ import { setStationData } from "../../redux/space/space.actions";
 import RetroButton from "../retro/button/retro-button.component";
 import RetroInput from "../retro/input/input.component";
 import StationItem from "../station-item/station-item.component.class";
+import BoxLayer from "../retro/box-layer/box-layer.component";
 
 import "./stations.styles.scss";
 
@@ -60,20 +61,11 @@ const Stations = () => {
       </div>
       <AnimatePresence>
         {createStation && (
-          <motion.div
-            className="stations__input"
-            initial={{ y: -30, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-          >
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <div onChange={(e) => setNewStationName(e.target.value)}>
-                <RetroInput placeholder="Station name" />
-                <div className="stations__ok">
-                  <RetroButton type="submit">ok</RetroButton>
-                </div>
-              </div>
-            </form>
-          </motion.div>
+          <BoxLayer setLayer={setCreateStation}>
+            <div className="staions__createPop">
+              <h2>Create Station</h2>
+            </div>
+          </BoxLayer>
         )}
       </AnimatePresence>
     </div>

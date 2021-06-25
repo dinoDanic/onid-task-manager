@@ -35,8 +35,8 @@ class Home extends React.Component {
             )}
           </SectionBox>
           <SectionBox
-            title="Recent Stations"
-            subTitle="Recent Station of your main Space"
+            title="Favorite Stations"
+            subTitle="Recent Stations of your favorite Space"
           >
             <div className="home__recent">
               <div className="home__recentStations">

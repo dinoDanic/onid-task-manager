@@ -11,6 +11,7 @@ import DockStation from "./pages/dock-station/dock-station.component";
 import Station from "./pages/station/station.component";
 import SignIn from "./pages/sing-in/sign-in.component.class";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
+import EnterStation from "./pages/enter-station/enter-station.component";
 
 import "./app.styles.scss";
 import { AnimatePresence } from "framer-motion";
@@ -78,6 +79,12 @@ function App() {
             exact
             path="/s/:id"
             component={DockStation}
+            isAuth={currentUser}
+          />
+          <ProtectedRoute
+            exact
+            path="/s/:id/e/:id"
+            component={EnterStation}
             isAuth={currentUser}
           />
         </>

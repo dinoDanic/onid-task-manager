@@ -71,6 +71,7 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
       color: color,
       members: firebase.firestore.FieldValue.arrayUnion(uid),
       created: new Date(),
+      description: "Add description",
     })
     .then((data) => {
       let id = data.id;
@@ -168,6 +169,12 @@ export const deleteSpace = (spaceId) => {
 export const updateColorOfSpace = (spaceId, color) => {
   db.collection("space").doc(spaceId).update({
     color: color,
+  });
+};
+
+export const changeDescriptionOfSpace = (spaceId, newDesc) => {
+  db.collection("space").doc(spaceId).update({
+    description: newDesc,
   });
 };
 

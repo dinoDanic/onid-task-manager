@@ -1,6 +1,6 @@
 @import "../../theme.styles.scss";
 .stations {
-  margin-top: 20px;
+  margin-top: 7px;
   button {
     width: 100%;
     margin-bottom: 10px;
@@ -26,4 +26,7 @@
 }
 .stations__stationItem {
   margin-top: 10px;
+}
+.staions__createPop {
+  width: 550px;
 }

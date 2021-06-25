@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import { db } from "../../firebase/firebase.utils";
 import { useDispatch } from "react-redux";
 
@@ -6,6 +6,7 @@ import { setUsers } from "../../redux/user/user.actions";
 
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
+import DockHeader from "../../components/dock-header/dock-header.component";
 import Box from "../../components/retro/box/box.component";
 import RecentStations from "../../components/recent-stations/recent-stations.component";
 import Members from "../../components/members/members.component";
@@ -33,14 +34,7 @@ const DockStation = () => {
     <div className="dockStation">
       {activeSpaceData && (
         <div>
-          <div className="ds__headerContainer">
-            <div className="ds__header">
-              <div className="ds__text">
-                <h1>{activeSpaceData.name}</h1>
-                <p>description</p>
-              </div>
-            </div>
-          </div>
+          <DockHeader activeSpaceData={activeSpaceData} />
           <div className="ds__content ">
             <div className="ds__recentStations ds__item">
               <h2>Recent Stations</h2>
