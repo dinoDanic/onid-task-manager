@@ -7,6 +7,7 @@ import RetroInput from "../../../retro/input/input.component";
 import Colors from "../../../colors/colors.component";
 
 import ChevronRightIcon from "@material-ui/icons/ChevronRight";
+import DeleteIcon from "@material-ui/icons/Delete";
 
 import "./status.styles.scss";
 
@@ -19,12 +20,7 @@ const Status = ({ status, statusType, setStatusType, setForce, force }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     let array = statusType;
-    const newStatus = {
-      name: name,
-      color: color,
-    };
     let index = array.findIndex((item) => item.name === status.name);
-
     array[index] = {
       name: name,
       color: color,
@@ -34,6 +30,15 @@ const Status = ({ status, statusType, setStatusType, setForce, force }) => {
     setForce(force + 1);
     console.log(array);
   };
+
+  const handleDelete = () => {
+    let array = statusType;
+    let arrayDeleted = array.filter((item) => item.name !== status.name);
+    console.log(arrayDeleted);
+    setStatusType(arrayDeleted);
+    /* setForce(force + 1); */
+  };
+
   return (
     <div className="status__btn">
       <RetroButton
@@ -49,8 +54,16 @@ const Status = ({ status, statusType, setStatusType, setForce, force }) => {
         <div className="status__controls">
           <Box>
             <form onSubmit={(e) => handleSubmit(e)}>
-              <div onChange={(e) => setName(e.target.value)}>
-                <RetroInput placeholder="new name" />
+              <div className="status__header">
+                <div
+                  className="status__input"
+                  onChange={(e) => setName(e.target.value)}
+                >
+                  <RetroInput placeholder="Change name" />
+                </div>
+                <div className="status__delete" onClick={() => handleDelete()}>
+                  <DeleteIcon fontSize="small" />
+                </div>
               </div>
               <Colors returnColor={setColor} />
               <div className="status__setbtn">

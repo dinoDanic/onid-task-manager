@@ -6,25 +6,29 @@ import BoxLayer from "../retro/box-layer/box-layer.component";
 import RetroButton from "../retro/button/retro-button.component";
 import Step1 from "./step1/step1.component";
 import Step2 from "./step2/step2.component";
+import Step3 from "./step3/step3.component";
 
 const CreateStation = ({ setCreateStation }) => {
   const [stationName, setStationName] = useState("Enter Station name");
+  const [steps, setSteps] = useState({
+    step1: true,
+    step2: false,
+    step3: false,
+  });
 
-  const [step1, setStep1] = useState(true);
-  const [step2, setStep2] = useState(false);
   return (
     <div className="createStation">
       <BoxLayer setLayer={setCreateStation}>
         <div className="cs__createPop">
-          {step1 && (
+          {steps.step1 && (
             <Step1
               stationName={stationName}
               setStationName={setStationName}
-              setStep1={setStep1}
-              setStep2={setStep2}
+              setSteps={setSteps}
             />
           )}
-          {step2 && <Step2 setStep1={setStep1} setStep2={setStep2} />}
+          {steps.step2 && <Step2 setSteps={setSteps} />}
+          {steps.step3 && <Step3 setSteps={setSteps} />}
         </div>
       </BoxLayer>
     </div>

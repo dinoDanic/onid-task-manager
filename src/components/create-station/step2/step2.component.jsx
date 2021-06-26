@@ -7,7 +7,7 @@ import Status from "./status/status.component";
 
 import "./step2.styles.scss";
 
-const Step2 = ({ setStep1, setStep2 }) => {
+const Step2 = ({ setSteps }) => {
   console.log("step2");
   const [newStatusName, setNewStatusName] = useState("Add new");
   const [force, setForce] = useState(0);
@@ -68,13 +68,24 @@ const Step2 = ({ setStep1, setStep2 }) => {
         <RetroButton
           mode="gray"
           onClick={() => {
-            setStep1(true);
-            setStep2(false);
+            setSteps({
+              step1: true,
+              step2: false,
+            });
           }}
         >
           Back
         </RetroButton>
-        <RetroButton>Next</RetroButton>
+        <RetroButton
+          onClick={() =>
+            setSteps({
+              step2: false,
+              step3: true,
+            })
+          }
+        >
+          Next
+        </RetroButton>
       </div>
     </div>
   );

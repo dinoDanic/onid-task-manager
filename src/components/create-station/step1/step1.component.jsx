@@ -5,7 +5,7 @@ import RetroInput from "../../retro/input/input.component";
 
 import "./step1.styles.scss";
 
-const Step1 = ({ stationName, setStationName, setStep1, setStep2 }) => {
+const Step1 = ({ stationName, setStationName, setSteps }) => {
   const [isNameOK, setIsNameOK] = useState(false);
   const unClick = {
     background: "gray",
@@ -16,8 +16,10 @@ const Step1 = ({ stationName, setStationName, setStep1, setStep2 }) => {
       alert("Station name is req");
       return;
     }
-    setStep1(false);
-    setStep2(true);
+    setSteps({
+      step1: false,
+      step2: true,
+    });
   };
 
   useEffect(() => {

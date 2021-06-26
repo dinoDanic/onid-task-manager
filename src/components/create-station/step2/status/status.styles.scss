@@ -1,3 +1,4 @@
+@import "../../../../theme.styles.scss";
 .status__btn {
   position: relative;
   display: flex;
@@ -43,4 +44,28 @@
 }
 .status__setbtn {
   margin-top: 10px;
+}
+
+.status__header {
+  display: flex;
+  justify-content: space-between;
+}
+.status__input {
+  width: 100%;
+}
+.status__delete {
+  margin-left: 5px;
+  opacity: 0.2;
+  cursor: pointer;
+  transition: 0.2s;
+  &:hover {
+    opacity: 1;
+    transform: scale(1.15);
+    svg {
+      color: $danger;
+    }
+  }
+  svg {
+    margin-top: 8px;
+  }
 }
