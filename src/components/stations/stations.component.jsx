@@ -7,9 +7,8 @@ import { useHistory } from "react-router-dom";
 import { setStationData } from "../../redux/space/space.actions";
 
 import RetroButton from "../retro/button/retro-button.component";
-import RetroInput from "../retro/input/input.component";
 import StationItem from "../station-item/station-item.component.class";
-import BoxLayer from "../retro/box-layer/box-layer.component";
+import CreateStation from "../create-station/create-station.component";
 
 import "./stations.styles.scss";
 
@@ -60,13 +59,7 @@ const Stations = () => {
         ))}
       </div>
       <AnimatePresence>
-        {createStation && (
-          <BoxLayer setLayer={setCreateStation}>
-            <div className="staions__createPop">
-              <h2>Create Station</h2>
-            </div>
-          </BoxLayer>
-        )}
+        {createStation && <CreateStation setCreateStation={setCreateStation} />}
       </AnimatePresence>
     </div>
   );

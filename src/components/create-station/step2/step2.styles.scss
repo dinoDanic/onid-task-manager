@@ -1,0 +1,34 @@
+.sn__name {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  p {
+    margin-bottom: 5px;
+  }
+}
+.step2__next {
+  display: flex;
+  width: 100%;
+  justify-content: flex-end;
+}
+.step2__statusContainer {
+  /*   display: flex;
+  justify-content: center;
+  align-items: center; */
+}
+.step2__statusType {
+  width: fit-content;
+}
+.step2__types {
+  background: #f0f2f5;
+  padding: 10px;
+  border-radius: 10px;
+  button {
+    width: 100%;
+  }
+}
+.step2__addStatus {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+}

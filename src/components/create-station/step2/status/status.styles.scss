@@ -1,0 +1,46 @@
+.status__btn {
+  position: relative;
+  display: flex;
+  margin-bottom: 5px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    svg {
+      opacity: 1;
+    }
+  }
+  input {
+    margin-bottom: 0;
+    &::placeholder {
+    }
+  }
+  .colors__color {
+    margin-right: 0;
+  }
+}
+
+.status__arrow {
+  position: absolute;
+  right: -30px;
+  top: 6px;
+  svg {
+    color: #d8d8da;
+    opacity: 0;
+  }
+}
+
+.status__controls {
+  position: absolute;
+  width: 270px;
+  top: -10px;
+  left: 170px;
+  .retroBox {
+    padding: 10px;
+  }
+  .boxLayer {
+  }
+}
+.status__setbtn {
+  margin-top: 10px;
+}

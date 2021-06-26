@@ -1,11 +1,6 @@
 @import "../../theme.styles.scss";
 .stations {
   margin-top: 7px;
-  button {
-    width: 100%;
-    margin-bottom: 10px;
-    background: $secondary;
-  }
 }
 .stations__input {
   position: relative;
@@ -21,12 +16,11 @@
 }
 .stations__createStation {
   button {
-    background: $info;
+    width: 100%;
+    margin-bottom: 10px;
+    background: $secondary;
   }
 }
 .stations__stationItem {
   margin-top: 10px;
-}
-.staions__createPop {
-  width: 550px;
 }

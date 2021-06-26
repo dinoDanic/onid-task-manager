@@ -32,12 +32,7 @@ const Station = () => {
   }, []);
 
   return (
-    <motion.div
-      className="station"
-      /*  initial={{ x: "-100%" }}
-      animate={{ x: 0 }}
-      transition={{ type: "tween" }} */
-    >
+    <motion.div className="station">
       <p className="station__pre">Station</p>
       {activeSpaceData && (
         <div className="station__header">
@@ -51,15 +46,17 @@ const Station = () => {
             <RetroButton mode="flat" onClick={() => setMiniMenu(true)}>
               <MoreHorizIcon />
             </RetroButton>
-            {miniMenu && (
-              <BoxLayer setLayer={setMiniMenu}>
-                <MiniMenu setMiniMenu={setMiniMenu} />
-              </BoxLayer>
-            )}
           </div>
         </div>
       )}
       <Stations />
+      <div className="station__miniMenu">
+        {miniMenu && (
+          <BoxLayer setLayer={setMiniMenu}>
+            <MiniMenu setMiniMenu={setMiniMenu} />
+          </BoxLayer>
+        )}
+      </div>
     </motion.div>
   );
 };

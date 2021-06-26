@@ -18,13 +18,6 @@ const BoxLayer = ({ children, setLayer }) => {
         className="bl__content"
         initial={{ y: -36, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
-        drag
-        dragConstraints={{
-          top: -10,
-          left: -10,
-          right: 10,
-          bottom: 10,
-        }}
       >
         <Box>{children}</Box>
       </motion.div>
