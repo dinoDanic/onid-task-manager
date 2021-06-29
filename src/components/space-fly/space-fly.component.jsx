@@ -6,8 +6,10 @@ import RetroButton from "../retro/button/retro-button.component";
 import CreateSpace from "../create-space/create-space.component";
 
 import "./space-fly.styles.scss";
-import HomeIcon from "@material-ui/icons/Home";
-import AddIcon from "@material-ui/icons/Add";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHome, faRocket } from "@fortawesome/free-solid-svg-icons";
+
 import { AnimatePresence } from "framer-motion";
 
 const SpaceFly = () => {
@@ -37,11 +39,11 @@ const SpaceFly = () => {
         </div>
         <div className="sf__controls">
           <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
-            <AddIcon fontSize="small" />
+            <FontAwesomeIcon icon={faRocket} size="2x" />
           </RetroButton>
           <Link to="/">
             <RetroButton size="box">
-              <HomeIcon fontSize="small" />
+              <FontAwesomeIcon icon={faHome} size="2x" />
             </RetroButton>
           </Link>
         </div>

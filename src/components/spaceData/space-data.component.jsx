@@ -5,11 +5,12 @@ import { Link } from "react-router-dom";
 import { setSpaceAsFavorite } from "../../firebase/firebase.utils";
 import { setFavoriteSpace } from "../../redux/user/user.actions";
 
-import FavoriteIcon from "@material-ui/icons/Favorite";
-import StarIcon from "@material-ui/icons/Star";
 import RetroButton from "../retro/button/retro-button.component";
 
 import "./space-data.styles.scss";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 function SpaceData() {
   const spaceData = useSelector((state) => state.space.spaceData);
@@ -45,11 +46,12 @@ function SpaceData() {
               </Link>
               {data.spaceId === currentUser.favoriteSpace ? (
                 <div className="sd__favoriteActive">
-                  <StarIcon />
+                  <FontAwesomeIcon icon={faStar} />
                 </div>
               ) : (
                 <div className="sd__favorite">
-                  <StarIcon
+                  <FontAwesomeIcon
+                    icon={faStar}
                     onClick={() => handleFavorite(currentUser.uid, spaceId)}
                   />
                 </div>

@@ -1,3 +1,4 @@
+@import "../../../theme.styles.scss";
 .sn__name {
   margin-top: 50px;
   margin-bottom: 20px;
@@ -9,4 +10,12 @@
   display: flex;
   width: 100%;
   justify-content: flex-end;
+}
+.sn__icon {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  svg {
+    color: $primary;
+  }
 }

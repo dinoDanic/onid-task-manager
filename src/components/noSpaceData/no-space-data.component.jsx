@@ -5,7 +5,8 @@ import CreateSpace from "../create-space/create-space.component";
 
 import "./no-space-data.styles.scss";
 
-import AddIcon from "@material-ui/icons/Add";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlus } from "@fortawesome/free-solid-svg-icons";
 
 function NoSpaceData() {
   const [create, setCreate] = useState(false);
@@ -20,7 +21,7 @@ function NoSpaceData() {
           members
         </p>
         <RetroButton onClick={() => setCreate(!create)}>
-          <AddIcon fontSize="small" />
+          <FontAwesomeIcon icon={faPlus} />
           Create new space
         </RetroButton>
       </div>

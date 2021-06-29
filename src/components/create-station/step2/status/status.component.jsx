@@ -2,12 +2,11 @@ import React, { useState } from "react";
 
 import RetroButton from "../../../retro/button/retro-button.component";
 import Box from "../../../retro/box/box.component";
-import BoxLayer from "../../../retro/box-layer/box-layer.component";
 import RetroInput from "../../../retro/input/input.component";
 import Colors from "../../../colors/colors.component";
 
-import ChevronRightIcon from "@material-ui/icons/ChevronRight";
-import DeleteIcon from "@material-ui/icons/Delete";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleRight, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import "./status.styles.scss";
 
@@ -48,7 +47,7 @@ const Status = ({ status, statusType, setStatusType, setForce, force }) => {
         {status.name}
       </RetroButton>
       <div className="status__arrow">
-        <ChevronRightIcon />
+        <FontAwesomeIcon icon={faAngleRight} />
       </div>
       {controls && (
         <div className="status__controls">
@@ -62,7 +61,7 @@ const Status = ({ status, statusType, setStatusType, setForce, force }) => {
                   <RetroInput placeholder="Change name" />
                 </div>
                 <div className="status__delete" onClick={() => handleDelete()}>
-                  <DeleteIcon fontSize="small" />
+                  <FontAwesomeIcon icon={faTrashAlt} />
                 </div>
               </div>
               <Colors returnColor={setColor} />

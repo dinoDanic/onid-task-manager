@@ -1,4 +1,11 @@
 .step3__create {
   display: flex;
   justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.step3__modules {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
 }

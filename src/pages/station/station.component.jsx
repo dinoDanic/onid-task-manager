@@ -11,7 +11,8 @@ import Stations from "../../components/stations/stations.component";
 import MiniMenu from "../../components/mini-menu/mini-menu.component";
 import BoxLayer from "../../components/retro/box-layer/box-layer.component";
 
-import MoreHorizIcon from "@material-ui/icons/MoreHoriz";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
 
 import "./station.syles.scss";
 
@@ -44,7 +45,7 @@ const Station = () => {
           </div>
           <div className="station__menu">
             <RetroButton mode="flat" onClick={() => setMiniMenu(true)}>
-              <MoreHorizIcon />
+              <FontAwesomeIcon icon={faEllipsisH} size="2x" />
             </RetroButton>
           </div>
         </div>

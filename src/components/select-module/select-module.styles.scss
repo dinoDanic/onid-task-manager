@@ -1,0 +1,31 @@
+@import "../../theme.styles.scss";
+
+.selectModule {
+  margin-bottom: 10px;
+  min-width: 49%;
+  cursor: pointer;
+  svg {
+    font-size: 20px;
+    margin-right: 10px;
+  }
+}
+
+.sm__module {
+  display: flex;
+  padding: 0px 30px;
+  align-items: center;
+  height: 90px;
+  border-radius: 10px;
+}
+.sm__module-false {
+  border: 1px solid gray;
+}
+.sm__module-true {
+  border: 1px solid $primary;
+  p {
+    color: $primary;
+  }
+  svg {
+    color: $primary;
+  }
+}

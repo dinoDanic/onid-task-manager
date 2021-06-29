@@ -3,7 +3,8 @@ import { Link, useHistory } from "react-router-dom";
 
 import RetroButton from "../retro/button/retro-button.component";
 
-import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 import "./station.styles.scss";
 
@@ -14,7 +15,7 @@ function StationItem({ data }) {
     <div className="stationItem">
       <Link to={`/s/${activeSpaceId}/e/${data.stationsId}`}>
         <RetroButton>
-          <AssignmentOutlinedIcon fontSize="small" />
+          <FontAwesomeIcon icon={faTasks} />
           {data.name}
         </RetroButton>
       </Link>

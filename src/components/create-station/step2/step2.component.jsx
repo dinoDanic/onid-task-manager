@@ -7,24 +7,11 @@ import Status from "./status/status.component";
 
 import "./step2.styles.scss";
 
-const Step2 = ({ setSteps }) => {
+const Step2 = ({ setSteps, setStatusType, statusType }) => {
   console.log("step2");
   const [newStatusName, setNewStatusName] = useState("Add new");
   const [force, setForce] = useState(0);
-  const [statusType, setStatusType] = useState([
-    {
-      name: "to do",
-      color: "#34b5e4",
-    },
-    {
-      name: "stuck",
-      color: "#e2445c",
-    },
-    {
-      name: "done",
-      color: "#05ce91",
-    },
-  ]);
+
   const inputRef = useRef();
   const addNewType = (e) => {
     e.preventDefault();

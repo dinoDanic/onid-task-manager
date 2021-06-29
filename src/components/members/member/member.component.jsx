@@ -8,8 +8,8 @@ import RetroAvatar from "../../retro/avatar/avatar.component";
 import RetroButton from "../../retro/button/retro-button.component";
 import BoxLayer from "../../retro/box-layer/box-layer.component";
 
-import DeleteIcon from "@material-ui/icons/Delete";
-import StarIcon from "@material-ui/icons/Star";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 import "./member.styles.scss";
 import { AnimatePresence } from "framer-motion";
@@ -81,13 +81,13 @@ function Member({ member, activeSpaceData, activeSpaceId }) {
                     className="member__delete"
                     onClick={() => handleRemove()}
                   >
-                    <DeleteIcon fontSize="small" />
+                    <FontAwesomeIcon icon={faTrashAlt} />
                   </div>
                   <div
                     className="member__noAdmin"
                     onClick={() => setAdminStatus(true)}
                   >
-                    <StarIcon fontSize="small" />
+                    <FontAwesomeIcon icon={faStar} />
                   </div>
                 </>
               )}
@@ -96,7 +96,7 @@ function Member({ member, activeSpaceData, activeSpaceId }) {
 
           {isAdmin && (
             <div className="member__admin">
-              <StarIcon fontSize="small" />
+              <FontAwesomeIcon icon={faStar} />
             </div>
           )}
         </div>

@@ -11,10 +11,14 @@ import Colors from "../colors/colors.component";
 import { removeOneSpace } from "../../redux/space/space.actions";
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
-import EditIcon from "@material-ui/icons/Edit";
-import DeleteIcon from "@material-ui/icons/Delete";
-import ExitToAppIcon from "@material-ui/icons/ExitToApp";
-import ColorLensIcon from "@material-ui/icons/ColorLens";
+/* import ExitToAppIcon from "@material-ui/icons/ExitToApp"; */
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+  faEdit,
+  faPaintRoller,
+  faTrashAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import {
   renameSpace,
@@ -77,7 +81,7 @@ const MiniMenu = ({ setMiniMenu }) => {
     <div className="miniMenu">
       <ul>
         <li onClick={() => setRename(!rename)}>
-          <EditIcon fontSize="small" />
+          <FontAwesomeIcon icon={faEdit} />
           <p>Rename</p>
         </li>
         {rename && (
@@ -92,7 +96,8 @@ const MiniMenu = ({ setMiniMenu }) => {
         {isUserAdmin ? (
           <>
             <li onClick={() => setDeleteSpaceStatus(!deleteSpaceStatus)}>
-              <DeleteIcon fontSize="small" />
+              {/* <DeleteIcon fontSize="small" /> */}
+              <FontAwesomeIcon icon={faTrashAlt} />
               <p>Delete</p>
             </li>
             {deleteSpaceStatus && (
@@ -119,7 +124,7 @@ const MiniMenu = ({ setMiniMenu }) => {
         ) : (
           <>
             <li onClick={() => setDeleteSpaceStatus(!deleteSpaceStatus)}>
-              <ExitToAppIcon fontSize="small" />
+              {/*   <ExitToAppIcon fontSize="small" /> */}
               <p>Leave</p>
             </li>
             {deleteSpaceStatus && (
@@ -146,7 +151,8 @@ const MiniMenu = ({ setMiniMenu }) => {
         )}
 
         <li onClick={() => setColorStatus(!colorStatus)}>
-          <ColorLensIcon fontSize="small" />
+          {/* <ColorLensIcon fontSize="small" /> */}
+          <FontAwesomeIcon icon={faPaintRoller} />
           <p>Change color</p>
         </li>
         <div className="mm__colors">

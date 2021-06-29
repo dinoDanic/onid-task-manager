@@ -1,7 +1,5 @@
 import React from "react";
 import { motion } from "framer-motion";
-import ExpandMoreIcon from "@material-ui/icons/ExpandMore";
-import ExpandLessIcon from "@material-ui/icons/ExpandLess";
 
 import Login from "../../components/login/login.component";
 import Register from "../../components/register/register.component.class";
@@ -16,6 +14,9 @@ import {
   QuestionBold,
   Scroll,
 } from "./sing-in.styles";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faAngleDown, faAngleUp } from "@fortawesome/free-solid-svg-icons";
 
 class SignIn extends React.Component {
   constructor() {
@@ -44,7 +45,7 @@ class SignIn extends React.Component {
                   >
                     Don't have account? <QuestionBold>Register!</QuestionBold>
                     <br />
-                    <ExpandMoreIcon fontSize="small" />
+                    <FontAwesomeIcon icon={faAngleDown} />
                   </motion.p>
                 </NoAccount>
               </LoginContent>
@@ -58,7 +59,7 @@ class SignIn extends React.Component {
                   >
                     Allready a member? <QuestionBold>Login!</QuestionBold>
                     <br />
-                    <ExpandLessIcon fontSize="small" />
+                    <FontAwesomeIcon icon={faAngleUp} />
                   </motion.p>
                 </NoAccount>
               </RegisterContent>

@@ -3,6 +3,9 @@ import React, { useEffect, useState } from "react";
 import RetroButton from "../../retro/button/retro-button.component";
 import RetroInput from "../../retro/input/input.component";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faSatellite } from "@fortawesome/free-solid-svg-icons";
+
 import "./step1.styles.scss";
 
 const Step1 = ({ stationName, setStationName, setSteps }) => {
@@ -33,6 +36,9 @@ const Step1 = ({ stationName, setStationName, setSteps }) => {
   return (
     <section className="sectionName">
       <h2>Create Station</h2>
+      <div className="sn__icon">
+        <FontAwesomeIcon icon={faSatellite} size="6x" />
+      </div>
       <div className="sn__name">
         <p>Station name</p>
         <div onChange={(e) => setStationName(e.target.value)}>

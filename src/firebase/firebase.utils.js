@@ -88,15 +88,18 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
   }
 };
 
-const createNewStation = (spaceId, stationName) => {
+const createNewStation = (spaceId, stationName, modules, statusType) => {
   const stationsRef = db
     .collection("space")
     .doc(spaceId)
     .collection("stations");
+
   stationsRef
     .add({
       name: stationName,
       created: new Date(),
+      modules,
+      statusType,
     })
     .then((data) => {
       let id = data.id;

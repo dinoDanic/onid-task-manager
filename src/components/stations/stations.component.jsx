@@ -59,7 +59,12 @@ const Stations = () => {
         ))}
       </div>
       <AnimatePresence>
-        {createStation && <CreateStation setCreateStation={setCreateStation} />}
+        {createStation && (
+          <CreateStation
+            setCreateStation={setCreateStation}
+            activeSpaceId={activeSpaceId}
+          />
+        )}
       </AnimatePresence>
     </div>
   );

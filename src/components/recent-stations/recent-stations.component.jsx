@@ -3,9 +3,10 @@ import { useSelector } from "react-redux";
 
 import RetroButton from "../retro/button/retro-button.component";
 
-import AssignmentOutlinedIcon from "@material-ui/icons/AssignmentOutlined";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./recent-stations.styles.scss";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 function RecentStations() {
   const [recentStation, setRecentStation] = useState(null);
@@ -25,7 +26,7 @@ function RecentStations() {
         recentStation?.map((data) => {
           return (
             <RetroButton mode="flat" key={data.stationsId}>
-              <AssignmentOutlinedIcon fontSize="small" />
+              <FontAwesomeIcon icon={faTasks} />
               {data.name}
             </RetroButton>
           );

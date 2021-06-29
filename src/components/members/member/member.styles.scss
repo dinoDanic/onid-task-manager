@@ -32,14 +32,15 @@
 }
 .member__admin {
   svg {
-    color: rgb(251, 203, 0);
+    color: #ffdf58;
   }
 }
 .member__noAdmin {
+  margin-left: 5px;
   svg {
     opacity: 0;
     &:hover {
-      color: rgb(251, 203, 0);
+      color: #ffdf58;
       opacity: 1 !important;
     }
   }
