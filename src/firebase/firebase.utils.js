@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import { v4 as uuidv4 } from "uuid";
 
 const firebaseConfig = {
   apiKey: "AIzaSyCHAllXm9uaufWa4JBdr3dwV9qfmE2rSyI",
@@ -164,9 +165,11 @@ export const createNewTask = async (
   // TASKS
   let taskArray = Object.values(tasks);
   let indexTask = taskArray.length;
+  let v4 = uuidv4();
+  console.log(v4);
   let newTask = {
-    [indexTask]: {
-      id: indexTask.toString(),
+    [v4]: {
+      id: v4,
       content: newTaskName,
     },
   };
@@ -179,13 +182,14 @@ export const createNewTask = async (
 
   let taskIds = statusType[statusName].taskIds;
 
-  taskIds.push(indexTask.toString());
+  taskIds.push(v4);
 
   const newData = {
     ...data,
     statusType: {
       ...statusType,
       [statusName]: {
+        ...data.statusType[statusName],
         taskIds: taskIds,
       },
     },
@@ -195,7 +199,6 @@ export const createNewTask = async (
   console.log(newData);
 
   docRef.set({
-    ...data,
     ...newData,
   });
 };

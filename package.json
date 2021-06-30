@@ -23,6 +23,7 @@
     "reselect": "^4.0.0",
     "sass": "^1.35.0",
     "styled-components": "^5.3.0",
+    "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"
   },
   "scripts": {

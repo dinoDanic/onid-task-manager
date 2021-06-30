@@ -41,7 +41,7 @@ const Step2 = ({ setSteps, setStatusType, statusType }) => {
             {statusTypeValues.map((status) => {
               return (
                 <Status
-                  key={status.title}
+                  key={status.id}
                   status={status}
                   statusTypeValues={statusTypeValues}
                   setStatusType={setStatusType}

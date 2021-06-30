@@ -17,8 +17,7 @@ const EnterStation = () => {
       .doc(currentSpaceId)
       .collection("stations")
       .doc(currentStationId)
-      .get()
-      .then((stationData) => {
+      .onSnapshot((stationData) => {
         setStation(stationData.data());
       });
   }, [currentSpaceId, currentStationId]);

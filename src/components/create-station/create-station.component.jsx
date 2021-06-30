@@ -42,9 +42,9 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   const [statusOrder, setStatusOrder] = useState(["to do", "stuck", "done"]);
 
   useEffect(() => {
-    /* let keys = Object.keys(statusType);
-    setStatusOrder(keys); */
-    // OVO SE TRENUTNO NE UPDAJTA !!!!!!!!!!!!!!!!!
+    let keys = Object.keys(statusType);
+    setStatusOrder(keys);
+    console.log(statusOrder);
   }, [statusType, setStatusType, force, setForce]);
 
   const [modules, setModules] = useState([
