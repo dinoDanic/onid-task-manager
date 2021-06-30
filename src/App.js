@@ -82,7 +82,6 @@ function App() {
             isAuth={currentUser}
           />
           <ProtectedRoute
-            exact
             path="/s/:id/e/:id"
             component={EnterStation}
             isAuth={currentUser}

@@ -1,0 +1,15 @@
+.task {
+  border: 1px solid lightgray;
+  padding: 8px;
+  margin-bottom: 8px;
+  border-radius: 2px;
+  background: white;
+  display: flex;
+  align-items: center;
+}
+.handle {
+  background: orange;
+  width: 10px;
+  height: 10px;
+  margin-right: 10px;
+}

@@ -8,33 +8,44 @@ import Colors from "../../../colors/colors.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAngleRight, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
+import { convertArrayToObject } from "../../../../utils/utils";
+
 import "./status.styles.scss";
 
-const Status = ({ status, statusType, setStatusType, setForce, force }) => {
-  console.log("stat");
+const Status = ({
+  status,
+  statusTypeValues,
+  setStatusType,
+  setForce,
+  force,
+}) => {
   const [controls, setControls] = useState(false);
   const [color, setColor] = useState(status.color);
   const [name, setName] = useState(status.name);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    let array = statusType;
+    let array = statusTypeValues;
     let index = array.findIndex((item) => item.name === status.name);
     array[index] = {
       name: name,
       color: color,
+      id: name,
+      taskIds: [],
     };
-    setStatusType(array);
+    let ArrayToObject = convertArrayToObject(array, "id");
+    setStatusType(ArrayToObject);
     setControls(false);
     setForce(force + 1);
-    console.log(array);
+    console.log(ArrayToObject);
   };
 
   const handleDelete = () => {
-    let array = statusType;
+    let array = statusTypeValues;
     let arrayDeleted = array.filter((item) => item.name !== status.name);
-    console.log(arrayDeleted);
-    setStatusType(arrayDeleted);
+    let ArrayToObject = convertArrayToObject(arrayDeleted, "id");
+    setStatusType(ArrayToObject);
+    console.log(ArrayToObject);
     /* setForce(force + 1); */
   };
 

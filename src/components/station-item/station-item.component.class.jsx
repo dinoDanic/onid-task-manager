@@ -13,7 +13,7 @@ function StationItem({ data }) {
   const activeSpaceId = history.location.pathname.split("/")[2];
   return (
     <div className="stationItem">
-      <Link to={`/s/${activeSpaceId}/e/${data.stationsId}`}>
+      <Link to={`/s/${activeSpaceId}/e/${data.stationsId}/b`}>
         <RetroButton>
           <FontAwesomeIcon icon={faTasks} />
           {data.name}

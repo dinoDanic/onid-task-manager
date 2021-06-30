@@ -112,6 +112,105 @@ const createNewStation = (spaceId, stationName, modules, statusType) => {
     });
 };
 
+export const createNewStation2 = (
+  spaceId,
+  stationName,
+  statusType,
+  statusOrder
+) => {
+  const stationsRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations");
+
+  stationsRef
+    .add({
+      name: stationName,
+      tasks: {
+        1: { id: "1", content: "teke out the garbage" },
+        2: { id: "2", content: "teke out the fridge" },
+        3: { id: "3", content: "teke out the lun" },
+        4: { id: "4", content: "melita nina" },
+      },
+      statusType,
+      statusOrder,
+    })
+    .then((data) => {
+      let id = data.id;
+      stationsRef.doc(id).set(
+        {
+          stationsId: id,
+        },
+        { merge: true }
+      );
+    });
+};
+
+export const createNewTask = async (
+  spaceId,
+  stationId,
+  statusName,
+  newTaskName
+) => {
+  const docRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId);
+  const getData = await docRef.get();
+  const data = getData.data();
+  const { statusType, tasks } = data;
+
+  // TASKS
+  let taskArray = Object.values(tasks);
+  let indexTask = taskArray.length;
+  let newTask = {
+    [indexTask]: {
+      id: indexTask.toString(),
+      content: newTaskName,
+    },
+  };
+  let newTasks = {
+    ...tasks,
+    ...newTask,
+  };
+
+  // STATUS TYPE
+
+  let taskIds = statusType[statusName].taskIds;
+
+  taskIds.push(indexTask.toString());
+
+  const newData = {
+    ...data,
+    statusType: {
+      ...statusType,
+      [statusName]: {
+        taskIds: taskIds,
+      },
+    },
+    tasks: newTasks,
+  };
+  console.log(data);
+  console.log(newData);
+
+  docRef.set({
+    ...data,
+    ...newData,
+  });
+};
+
+export const updateDrag = (spaceId, stationId, newState) => {
+  console.log("updateing");
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .set({
+      ...newState,
+    });
+};
+
 export const removeMember = (spaceId, memberId) => {
   db.collection("space")
     .doc(spaceId)

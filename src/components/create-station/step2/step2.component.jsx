@@ -8,17 +8,26 @@ import Status from "./status/status.component";
 import "./step2.styles.scss";
 
 const Step2 = ({ setSteps, setStatusType, statusType }) => {
-  console.log("step2");
+  const statusTypeValues = Object.values(statusType);
   const [newStatusName, setNewStatusName] = useState("Add new");
   const [force, setForce] = useState(0);
 
   const inputRef = useRef();
+
   const addNewType = (e) => {
     e.preventDefault();
-    console.log("add");
-    let array = statusType;
-    array.push({ name: newStatusName, color: "#fbcb00" });
-    setStatusType(array);
+    console.log(statusType);
+    let newStatus = {
+      ...statusType,
+      [newStatusName]: {
+        name: newStatusName,
+        id: newStatusName,
+        color: "#fbcb00",
+        taskIds: [],
+      },
+    };
+
+    setStatusType(newStatus);
     setNewStatusName("Add new");
     inputRef.current.value = "";
   };
@@ -29,12 +38,12 @@ const Step2 = ({ setSteps, setStatusType, statusType }) => {
       <div className="step2__statusContainer">
         <div className="step2__statusType">
           <div className="step2__types">
-            {statusType.map((status) => {
+            {statusTypeValues.map((status) => {
               return (
                 <Status
-                  key={status.name}
+                  key={status.title}
                   status={status}
-                  statusType={statusType}
+                  statusTypeValues={statusTypeValues}
                   setStatusType={setStatusType}
                   setForce={setForce}
                   force={force}

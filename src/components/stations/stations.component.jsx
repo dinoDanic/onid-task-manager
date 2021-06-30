@@ -25,7 +25,7 @@ const Stations = () => {
     db.collection("space")
       .doc(activeSpaceId)
       .collection("stations")
-      .orderBy("created", "asc")
+      /* .orderBy("created", "asc") */
       .onSnapshot((querySnapshot) => {
         let docs = [];
         querySnapshot.forEach((doc) => {
