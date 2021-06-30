@@ -25,5 +25,9 @@
   button {
     background: #eff2f5;
     color: #333;
+    margin-bottom: 5px;
+    &:last-child {
+      margin-bottom: 0;
+    }
   }
 }

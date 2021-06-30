@@ -1,15 +1,24 @@
 .task {
+  position: relative;
   border: 1px solid lightgray;
   padding: 8px;
   margin-bottom: 8px;
-  border-radius: 2px;
   background: white;
   display: flex;
   align-items: center;
+  border-radius: 8px;
+  &:hover {
+    .task__drag {
+      opacity: 1;
+    }
+  }
 }
-.handle {
-  background: orange;
-  width: 10px;
-  height: 10px;
-  margin-right: 10px;
+.task__drag {
+  position: absolute;
+  top: 5px;
+  left: -12px;
+  opacity: 0;
+  svg {
+    color: lightgray;
+  }
 }

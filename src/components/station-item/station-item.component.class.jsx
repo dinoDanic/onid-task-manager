@@ -6,7 +6,7 @@ import RetroButton from "../retro/button/retro-button.component";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
-import "./station.styles.scss";
+import "./station-item.styles.scss";
 
 function StationItem({ data }) {
   const history = useHistory();

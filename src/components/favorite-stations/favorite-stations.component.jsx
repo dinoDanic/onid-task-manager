@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import { getFavoriteStations } from "../../firebase/firebase.utils";
 
@@ -11,6 +12,7 @@ const FavoriteStations = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [spaces, setSpaces] = useState([]);
 
+  const { favoriteSpace } = currentUser;
   const favSpaces = getFavoriteStations(currentUser.favoriteSpace);
 
   useEffect(() => {
@@ -20,12 +22,16 @@ const FavoriteStations = () => {
   }, [currentUser]);
 
   return (
-    <div>
+    <div className="favoriteStation">
       {spaces?.map((space) => {
+        console.log(space);
+        console.log(currentUser);
         return (
-          <RetroButton key={space.stationsId} mode="flat">
-            {space.name}
-          </RetroButton>
+          <div className="fs__item" key={space.stationsId}>
+            <Link to={`/s/${favoriteSpace}/e/${space.stationsId}/b`}>
+              <RetroButton mode="flat">{space.name}</RetroButton>
+            </Link>
+          </div>
         );
       })}
     </div>

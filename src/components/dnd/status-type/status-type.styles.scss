@@ -5,12 +5,34 @@
   width: 300px;
   display: flex;
   flex-direction: column;
+  border-radius: 10px;
+
+  .retroBox {
+    padding: 20px 10px;
+  }
 }
 
 .st__content {
+  border-radius: 10px;
 }
 .st__taskList {
   padding: 8px;
   flex-grow: 1;
   min-height: 100px;
+}
+.st__newTask {
+  margin-top: 10px;
+  input {
+    width: 80px;
+    background: transparent;
+    border: none;
+    &:focus {
+      width: 100%;
+      background: white;
+    }
+  }
+}
+
+.st__title {
+  padding: 10px;
 }

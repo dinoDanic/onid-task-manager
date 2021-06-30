@@ -1,7 +1,7 @@
 @import "../../theme.styles.scss";
 .station {
   height: 100vh;
-  width: 300px;
+  min-width: 250px;
   padding: 20px;
   background: $secondary2;
   color: white;
@@ -54,8 +54,8 @@
   position: relative;
   button.flat {
     width: 35px;
-    padding: 0px 5px;
-    height: 20px 9px;
+    padding: 0px 9px;
+    height: 20px;
     border-radius: 8px;
     background: $secondary2;
     color: white;

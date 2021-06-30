@@ -1,5 +1,6 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useHistory } from "react";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import RetroButton from "../retro/button/retro-button.component";
 
@@ -8,7 +9,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import "./recent-stations.styles.scss";
 import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
-function RecentStations() {
+function RecentStations({ activeSpaceData }) {
   const [recentStation, setRecentStation] = useState(null);
   const stationData = useSelector((state) => state.space.stationData);
 
@@ -21,14 +22,20 @@ function RecentStations() {
   return (
     <div className="recentStations">
       {stationData?.length < 1 ? (
-        <p>U have no Stations!</p>
+        <>
+          <p>U have no Stations!</p>
+        </>
       ) : (
         recentStation?.map((data) => {
           return (
-            <RetroButton mode="flat" key={data.stationsId}>
-              <FontAwesomeIcon icon={faTasks} />
-              {data.name}
-            </RetroButton>
+            <div className="rs__item" key={data.stationsId}>
+              <Link to={`/s/${activeSpaceData.spaceId}/e/${data.stationsId}/b`}>
+                <RetroButton mode="flat">
+                  <FontAwesomeIcon icon={faTasks} size="2x" />
+                  {data.name}
+                </RetroButton>
+              </Link>
+            </div>
           );
         })
       )}

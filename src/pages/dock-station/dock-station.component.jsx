@@ -39,7 +39,7 @@ const DockStation = () => {
             <div className="ds__recentStations ds__item">
               <h2>Recent Stations</h2>
               <Box>
-                <RecentStations />
+                <RecentStations activeSpaceData={activeSpaceData} />
               </Box>
             </div>
             <div className="ds__members ds__item">

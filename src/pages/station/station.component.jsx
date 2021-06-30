@@ -3,6 +3,7 @@ import { db } from "../../firebase/firebase.utils";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
 
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
@@ -38,9 +39,11 @@ const Station = () => {
       {activeSpaceData && (
         <div className="station__header">
           <div className="station__name">
-            <RetroButton style={{ background: activeSpaceData.color }}>
-              {activeSpaceData.name.charAt(0)}
-            </RetroButton>
+            <Link to={`/s/${activeSpaceId}`}>
+              <RetroButton style={{ background: activeSpaceData.color }}>
+                {activeSpaceData.name.charAt(0)}
+              </RetroButton>
+            </Link>
             <h3>{activeSpaceData.name}</h3>
           </div>
           <div className="station__menu">

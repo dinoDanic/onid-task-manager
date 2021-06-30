@@ -54,9 +54,9 @@ const Stations = () => {
         </RetroButton>
       </div>
       <div className="stations__stationItem">
-        {stationData?.map((station) => (
-          <StationItem key={station.stationsId} data={station} />
-        ))}
+        {stationData?.map((station) => {
+          return <StationItem key={station.stationsId} data={station} />;
+        })}
       </div>
       <AnimatePresence>
         {createStation && (
