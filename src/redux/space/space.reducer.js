@@ -3,6 +3,7 @@ import spaceActionTypes from "./space.types";
 const INITIAL_STATE = {
   spaceData: [],
   stationData: null,
+  moduleData: [],
 };
 
 const spaceReducer = (state = INITIAL_STATE, action) => {
@@ -26,10 +27,14 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
       let filtered = state.stationData.filter(
         (space) => space !== action.payload
       );
-
       return {
         ...state,
         spaceData: filtered,
+      };
+    case spaceActionTypes.SET_MODULES:
+      return {
+        ...state,
+        moduleData: action.payload,
       };
     default:
       return state;

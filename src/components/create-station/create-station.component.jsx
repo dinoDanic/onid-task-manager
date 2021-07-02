@@ -57,7 +57,13 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   ]);
 
   const handleCreate = () => {
-    createNewStation2(activeSpaceId, stationName, statusType, statusOrder);
+    createNewStation2(
+      activeSpaceId,
+      stationName,
+      statusType,
+      statusOrder,
+      modules
+    );
     setCreateStation(false);
   };
 

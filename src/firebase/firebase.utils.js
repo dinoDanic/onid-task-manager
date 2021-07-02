@@ -117,7 +117,8 @@ export const createNewStation2 = (
   spaceId,
   stationName,
   statusType,
-  statusOrder
+  statusOrder,
+  modules
 ) => {
   const stationsRef = db
     .collection("space")
@@ -127,14 +128,7 @@ export const createNewStation2 = (
   stationsRef
     .add({
       name: stationName,
-      tasks: {
-        1: { id: "1", content: "teke out the garbage" },
-        2: { id: "2", content: "teke out the fridge" },
-        3: { id: "3", content: "teke out the lun" },
-        4: { id: "4", content: "melita nina" },
-      },
-      statusType,
-      statusOrder,
+      description: "Add description",
     })
     .then((data) => {
       let id = data.id;
@@ -144,6 +138,23 @@ export const createNewStation2 = (
         },
         { merge: true }
       );
+      stationsRef
+        .doc(id)
+        .collection("tasks")
+        .doc("tasks")
+        .set({
+          tasks: {
+            1: { id: "1", content: "teke out the garbage" },
+            2: { id: "2", content: "teke out the fridge" },
+            3: { id: "3", content: "teke out the lun" },
+            4: { id: "4", content: "melita nina" },
+          },
+          statusType,
+          statusOrder,
+        });
+      stationsRef.doc(id).collection("modules").doc("modules").set({
+        modules,
+      });
     });
 };
 
@@ -157,7 +168,9 @@ export const createNewTask = async (
     .collection("space")
     .doc(spaceId)
     .collection("stations")
-    .doc(stationId);
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
   const getData = await docRef.get();
   const data = getData.data();
   const { statusType, tasks } = data;
@@ -209,6 +222,8 @@ export const updateDrag = (spaceId, stationId, newState) => {
     .doc(spaceId)
     .collection("stations")
     .doc(stationId)
+    .collection("tasks")
+    .doc("tasks")
     .set({
       ...newState,
     });
@@ -281,6 +296,26 @@ export const changeDescriptionOfSpace = (spaceId, newDesc) => {
   db.collection("space").doc(spaceId).update({
     description: newDesc,
   });
+};
+
+export const changeDescriptionOfStation = (spaceId, stationId, newDesc) => {
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .update({
+      description: newDesc,
+    });
+};
+export const changeNameOfStation = (spaceId, stationId, newName) => {
+  console.log(spaceId, stationId, newName);
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .update({
+      name: newName,
+    });
 };
 
 export {

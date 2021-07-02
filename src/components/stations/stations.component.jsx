@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { setStationData } from "../../redux/space/space.actions";
+import { setStationData, setModules } from "../../redux/space/space.actions";
 
 import RetroButton from "../retro/button/retro-button.component";
 import StationItem from "../station-item/station-item.component.class";
@@ -20,6 +20,7 @@ const Stations = () => {
   const history = useHistory();
   const dispatch = useDispatch();
   const activeSpaceId = history.location.pathname.split("/")[2];
+  const activeStationId = history.location.pathname.split("/")[4];
 
   useEffect(() => {
     db.collection("space")
@@ -35,6 +36,21 @@ const Stations = () => {
       });
   }, [activeSpaceId, dispatch]);
 
+  useEffect(() => {
+    if (activeStationId) {
+      db.collection("space")
+        .doc(activeSpaceId)
+        .collection("stations")
+        .doc(activeStationId)
+        .collection("modules")
+        .doc("modules")
+        .onSnapshot((doc) => {
+          const data = doc.data().modules;
+          dispatch(setModules(data));
+        });
+    }
+  }, [activeStationId]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     if (newStationName === "") {
@@ -48,15 +64,16 @@ const Stations = () => {
 
   return (
     <div className="stations">
-      <div className="stations__createStation">
-        <RetroButton onClick={() => setCreateStation(!createStation)}>
-          {createStation ? "Cancel" : "Create station"}
-        </RetroButton>
-      </div>
+      <p className="stations__pre">Stations</p>
       <div className="stations__stationItem">
         {stationData?.map((station) => {
           return <StationItem key={station.stationsId} data={station} />;
         })}
+      </div>
+      <div className="stations__createStation">
+        <RetroButton onClick={() => setCreateStation(!createStation)}>
+          {createStation ? "Cancel" : "Create station"}
+        </RetroButton>
       </div>
       <AnimatePresence>
         {createStation && (

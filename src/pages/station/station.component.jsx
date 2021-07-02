@@ -35,7 +35,6 @@ const Station = () => {
 
   return (
     <motion.div className="station">
-      <p className="station__pre">Station</p>
       {activeSpaceData && (
         <div className="station__header">
           <div className="station__name">

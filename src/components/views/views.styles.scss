@@ -1,0 +1,22 @@
+.views {
+  display: flex;
+  cursor: pointer;
+}
+
+.views__view {
+  padding: 10px 15px;
+  border-radius: 8px;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  &:hover {
+    background: #f0f2f5;
+  }
+  p {
+    font-size: 14px;
+  }
+  svg {
+    margin-right: 5px;
+    opacity: 0.6;
+  }
+}

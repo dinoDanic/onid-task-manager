@@ -3,6 +3,7 @@ import { Route, useHistory } from "react-router-dom";
 import { db } from "../../firebase/firebase.utils";
 
 import Board from "../board/board.component";
+import StationMenu from "../../components/create-station/station-menu/station-menu.component";
 
 import "./enter-station.stayles.scss";
 
@@ -17,19 +18,24 @@ const EnterStation = () => {
       .doc(currentSpaceId)
       .collection("stations")
       .doc(currentStationId)
+      .collection("tasks")
+      .doc("tasks")
       .onSnapshot((stationData) => {
         setStation(stationData.data());
       });
   }, [currentSpaceId, currentStationId]);
 
   return (
-    <>
+    <div className="enterStation">
+      <Route path="/s/:id/e/:id">
+        <StationMenu />
+      </Route>
       <Route
         exact
         path="/s/:id/e/:id/b"
         render={() => <Board station={station} />}
       />
-    </>
+    </div>
   );
 };
 

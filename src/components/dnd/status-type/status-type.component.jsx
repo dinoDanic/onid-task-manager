@@ -18,13 +18,15 @@ const StatusType = ({
 }) => {
   const [newTaskName, setNewTaskName] = useState("");
   const inputRef = useRef();
-  console.log(status);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewTask(currentSpaceId, currentStationId, status.name, newTaskName);
     inputRef.current.value = "";
     inputRef.current.blur();
+  };
+  const retroInput = {
+    outlineColor: status.color,
   };
   return (
     <Draggable draggableId={status.name} index={index}>
@@ -37,14 +39,15 @@ const StatusType = ({
           <div className="st__title" {...provided.dragHandleProps}>
             <h2 style={{ color: status.color }}>{status.name}</h2>
           </div>
-          <Box>
-            <div
-              className="st__content" /* style={{ background: status.color }} */
-            >
+          <Box style={{ background: status.color }}>
+            <div className="st__content">
               <Droppable droppableId={status.id}>
                 {(provided, snapshot) => {
                   const style = {
-                    backgroundColor: snapshot.isDraggingOver ? "skyblue" : "",
+                    backgroundColor: snapshot.isDraggingOver
+                      ? "rgba(0,0,0,0.1)"
+                      : "",
+                    borderRadius: "8px",
                   };
                   return (
                     <div
@@ -70,7 +73,11 @@ const StatusType = ({
               }}
             >
               <div onChange={(e) => setNewTaskName(e.target.value)}>
-                <RetroInput ref={inputRef} placeholder="Add Task" />
+                <RetroInput
+                  ref={inputRef}
+                  placeholder="Add Task"
+                  style={retroInput}
+                />
               </div>
             </form>
           </div>

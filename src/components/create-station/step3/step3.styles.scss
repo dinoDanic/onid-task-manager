@@ -8,4 +8,12 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
+  margin-bottom: 20px;
+  .moduleList {
+    min-width: 49%;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
 }

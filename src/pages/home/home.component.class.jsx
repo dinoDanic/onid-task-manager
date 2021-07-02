@@ -22,7 +22,6 @@ class Home extends React.Component {
   render() {
     return (
       <div className="home">
-        {/* <CreateSpace></CreateSpace> */}
         <div className="home__content">
           <SectionBox
             title="Your Space"

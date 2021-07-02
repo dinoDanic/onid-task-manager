@@ -31,7 +31,7 @@ const DockHeader = ({ activeSpaceData }) => {
 
   return (
     <div className="dockHeader">
-      <img src={bg1Img}></img>
+      <img src={bg1Img} />
       <div className="dh__header">
         <div className="dh__text">
           <div className="dh__name">

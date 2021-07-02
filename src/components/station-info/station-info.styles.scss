@@ -1,0 +1,33 @@
+.si__title {
+  display: flex;
+  flex-direction: column;
+  max-width: 300px;
+  input {
+    background: transparent;
+    border: 1px dotted rgba(0, 0, 0, 0);
+    padding: 5px 10px;
+    border-radius: 5px;
+    margin-left: -10px;
+    outline: none;
+    width: 100%;
+    &::placeholder {
+      color: #333;
+    }
+
+    &:hover {
+      border: 1px dotted gray;
+    }
+    &:focus {
+      border: 1px dotted gray;
+      &::placeholder {
+        color: gray;
+      }
+    }
+  }
+  .si__name {
+    input {
+      font-size: 1.5em;
+      font-weight: 800;
+    }
+  }
+}

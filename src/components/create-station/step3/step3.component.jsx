@@ -1,7 +1,6 @@
 import React from "react";
 
-import RetroButton from "../../retro/button/retro-button.component";
-import SelectModule from "../../select-module/select-module.component";
+import ModuleList from "../../modules/module-list/module-list.component";
 
 import "./step3.styles.scss";
 
@@ -11,8 +10,9 @@ const Step3 = ({ setSteps, modules, setModules, setForce, force }) => {
       <h2>Choose modules</h2>
       <div className="step3__modules">
         {modules.map((module) => (
-          <SelectModule
+          <ModuleList
             key={module.name}
+            type="local"
             module={module}
             modules={modules}
             setModules={setModules}

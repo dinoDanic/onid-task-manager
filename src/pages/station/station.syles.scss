@@ -2,16 +2,11 @@
 .station {
   height: 100vh;
   min-width: 250px;
-  padding: 20px;
+  padding: 20px 15px;
   background: $secondary2;
   color: white;
-  box-shadow: 0 0 36px -10px black;
+  /* box-shadow: 0 0 36px -10px black; */
   position: relative;
-  p.station__pre {
-    color: white;
-    opacity: 0.3;
-    margin-bottom: 3px;
-  }
 }
 
 .station__miniMenu {
@@ -34,6 +29,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-top: 20px;
 }
 
 .station__name {

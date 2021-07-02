@@ -15,7 +15,7 @@ function StationItem({ data }) {
     <div className="stationItem">
       <Link to={`/s/${activeSpaceId}/e/${data.stationsId}/b`}>
         <RetroButton>
-          <FontAwesomeIcon icon={faTasks} />
+          <FontAwesomeIcon icon={faTasks} size="2x" />
           {data.name}
         </RetroButton>
       </Link>

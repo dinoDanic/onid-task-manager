@@ -1,0 +1,24 @@
+.modules {
+}
+
+.modules__window {
+  position: fixed;
+  right: 70px;
+  top: 170px;
+  width: 300px;
+}
+.modules__win {
+  .retroBox {
+    padding: 10px;
+  }
+  .bl__content {
+    right: 70px;
+    top: 170px;
+    width: 300px;
+    position: absolute;
+  }
+  .bl__layer {
+    background: transparent;
+    backdrop-filter: none;
+  }
+}

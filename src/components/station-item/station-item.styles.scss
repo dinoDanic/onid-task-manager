@@ -1,13 +1,17 @@
 .stationItem {
+  margin-bottom: 5px;
+  &:last-child {
+    margin-bottom: 0;
+  }
   button {
     justify-content: flex-start;
     box-shadow: none;
     width: 100%;
-    margin-bottom: 10px;
+    background: #3c4f56;
     svg {
       margin-right: 10px;
       font-weight: 200;
-      opacity: 0.8;
+      opacity: 1;
     }
   }
 }

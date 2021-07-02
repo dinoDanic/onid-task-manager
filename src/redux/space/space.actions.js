@@ -19,3 +19,8 @@ export const removeOneSpace = (spaceId) => ({
   type: spaceActionTypes.REMOVE_ONE_SPACE,
   payload: spaceId,
 });
+
+export const setModules = (moduleData) => ({
+  type: spaceActionTypes.SET_MODULES,
+  payload: moduleData,
+});

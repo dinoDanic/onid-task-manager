@@ -103,34 +103,38 @@ const Board = ({ station }) => {
         type="column"
         direction="horizontal"
       >
-        {(provided) => (
-          <div
-            className="board"
-            ref={provided.innerRef}
-            {...provided.droppableProps}
-          >
-            <>
-              {state?.statusOrder?.map((statusId, index) => {
-                const status = state.statusType[statusId];
-                const tasks = status.taskIds.map(
-                  (taskId) => state.tasks[taskId]
-                );
+        {(provided, snapshot) => {
+          const style = {};
+          return (
+            <div
+              className="board"
+              ref={provided.innerRef}
+              {...provided.droppableProps}
+              style={style}
+            >
+              <>
+                {state?.statusOrder?.map((statusId, index) => {
+                  const status = state.statusType[statusId];
+                  const tasks = status.taskIds.map(
+                    (taskId) => state.tasks[taskId]
+                  );
 
-                return (
-                  <StatusType
-                    currentSpaceId={currentSpaceId}
-                    currentStationId={currentStationId}
-                    key={status.id}
-                    status={status}
-                    tasks={tasks}
-                    index={index}
-                  />
-                );
-              })}
-              {provided.placeholder}
-            </>
-          </div>
-        )}
+                  return (
+                    <StatusType
+                      currentSpaceId={currentSpaceId}
+                      currentStationId={currentStationId}
+                      key={status.id}
+                      status={status}
+                      tasks={tasks}
+                      index={index}
+                    />
+                  );
+                })}
+                {provided.placeholder}
+              </>
+            </div>
+          );
+        }}
       </Droppable>
     </DragDropContext>
   );

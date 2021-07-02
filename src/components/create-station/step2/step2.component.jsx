@@ -22,7 +22,7 @@ const Step2 = ({ setSteps, setStatusType, statusType }) => {
       [newStatusName]: {
         name: newStatusName,
         id: newStatusName,
-        color: "#fbcb00",
+        color: "#FDAB3D",
         taskIds: [],
       },
     };

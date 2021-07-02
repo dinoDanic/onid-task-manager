@@ -1,12 +1,11 @@
 .dockHeader {
   margin-bottom: 20px;
-  /* background: #e4e4e4; */
-  padding: 50px 0;
-  padding-left: 70px;
-  width: 105%;
-  margin-left: -10px;
+  padding-left: 60px;
   left: 0;
   position: relative;
+  height: 160px;
+  display: flex;
+  align-items: center;
   img {
     position: absolute;
     width: 100%;
@@ -21,7 +20,7 @@
 }
 .dh__header {
   display: flex;
-  bottom: 0;
+  align-items: center;
 }
 
 .dh__description,

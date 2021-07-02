@@ -1,0 +1,20 @@
+.moduleList {
+  margin-bottom: 5px;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.2s transform;
+  svg {
+    margin-right: 5px;
+  }
+  &:hover {
+    transform: scale(1.02);
+  }
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}

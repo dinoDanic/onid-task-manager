@@ -11,8 +11,8 @@ const Task = ({ task, index }) => {
     <Draggable draggableId={task.id} index={index}>
       {(provided, snapshot) => {
         const style = {
-          backgroundColor: snapshot.isDragging ? "lightgreen" : "",
           ...provided.draggableProps.style,
+          boxShadow: snapshot.isDragging ? "0 0 5px -1px black" : "",
         };
         return (
           <div

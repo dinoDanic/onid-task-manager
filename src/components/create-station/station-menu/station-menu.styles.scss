@@ -1,0 +1,21 @@
+.stationMenu {
+  background: white;
+  width: 100%;
+  padding-left: 70px;
+  padding-top: 20px;
+  padding-right: 70px;
+  padding-bottom: 5px;
+  height: 160px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.sm__buttomRow {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  bottom: 5px;
+  width: 100%;
+}
