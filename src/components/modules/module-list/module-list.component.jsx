@@ -10,7 +10,18 @@ import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
 
-const ModuleList = ({ module, setModules, modules, setForce, force, type }) => {
+import { updateModulesDb } from "../../../firebase/firebase.utils";
+
+const ModuleList = ({
+  module,
+  setModules,
+  modules,
+  setForce,
+  force,
+  type,
+  currentStationId,
+  currentSpaceId,
+}) => {
   // => dok se raid createStation 1. put ide lokalno, dalje sve prek db
   // => ako je local, obavezno naglasiti type="local"
 
@@ -25,7 +36,8 @@ const ModuleList = ({ module, setModules, modules, setForce, force, type }) => {
   };
 
   const toggleStateDb = () => {
-    console.log("db");
+    console.log(module);
+    updateModulesDb(currentSpaceId, currentStationId, module, modules);
   };
 
   // AKO JE DB

@@ -4,13 +4,16 @@
   padding: 8px;
   margin-bottom: 8px;
   background: white;
-  display: flex;
   align-items: center;
   border-radius: 8px;
+  min-height: 182px;
   &:hover {
     .task__drag {
       opacity: 1;
     }
+  }
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 .task__drag {
@@ -21,4 +24,7 @@
   svg {
     color: lightgray;
   }
+}
+.task__taskName {
+  margin-bottom: 10px;
 }

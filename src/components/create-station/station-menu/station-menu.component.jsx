@@ -33,7 +33,10 @@ const StationMenu = () => {
       />
       <div className="sm__buttomRow">
         <Views view={view} />
-        <Modules />
+        <Modules
+          currentStationId={currentStationId}
+          currentSpaceId={currentSpaceId}
+        />
       </div>
     </div>
   );

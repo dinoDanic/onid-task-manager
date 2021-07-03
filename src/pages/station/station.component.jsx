@@ -3,23 +3,23 @@ import { db } from "../../firebase/firebase.utils";
 import { useHistory } from "react-router";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
-import { Link } from "react-router-dom";
+/* import { Link } from "react-router-dom"; */
 
-import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
-
-import RetroButton from "../../components/retro/button/retro-button.component";
+/* import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook"; */
+/* 
+import RetroButton from "../../components/retro/button/retro-button.component"; */
 import Stations from "../../components/stations/stations.component";
 import MiniMenu from "../../components/mini-menu/mini-menu.component";
 import BoxLayer from "../../components/retro/box-layer/box-layer.component";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faEllipsisH } from "@fortawesome/free-solid-svg-icons";
+/* import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEllipsisH } from "@fortawesome/free-solid-svg-icons"; */
 
 import "./station.syles.scss";
 
 const Station = () => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
-  const activeSpaceData = useActiveSpaceData();
+  /* const activeSpaceData = useActiveSpaceData(); */
   const history = useHistory();
   const activeSpaceId = history.location.pathname.split("/")[2];
   const [miniMenu, setMiniMenu] = useState(false);
@@ -35,7 +35,7 @@ const Station = () => {
 
   return (
     <motion.div className="station">
-      {activeSpaceData && (
+      {/*  {activeSpaceData && (
         <div className="station__header">
           <div className="station__name">
             <Link to={`/s/${activeSpaceId}`}>
@@ -51,7 +51,7 @@ const Station = () => {
             </RetroButton>
           </div>
         </div>
-      )}
+      )} */}
       <Stations />
       <div className="station__miniMenu">
         {miniMenu && (

@@ -138,20 +138,11 @@ export const createNewStation2 = (
         },
         { merge: true }
       );
-      stationsRef
-        .doc(id)
-        .collection("tasks")
-        .doc("tasks")
-        .set({
-          tasks: {
-            1: { id: "1", content: "teke out the garbage" },
-            2: { id: "2", content: "teke out the fridge" },
-            3: { id: "3", content: "teke out the lun" },
-            4: { id: "4", content: "melita nina" },
-          },
-          statusType,
-          statusOrder,
-        });
+      stationsRef.doc(id).collection("tasks").doc("tasks").set({
+        tasks: null,
+        statusType,
+        statusOrder,
+      });
       stationsRef.doc(id).collection("modules").doc("modules").set({
         modules,
       });
@@ -162,7 +153,8 @@ export const createNewTask = async (
   spaceId,
   stationId,
   statusName,
-  newTaskName
+  newTaskName,
+  userId
 ) => {
   const docRef = db
     .collection("space")
@@ -176,14 +168,12 @@ export const createNewTask = async (
   const { statusType, tasks } = data;
 
   // TASKS
-  let taskArray = Object.values(tasks);
-  let indexTask = taskArray.length;
   let v4 = uuidv4();
-  console.log(v4);
   let newTask = {
     [v4]: {
       id: v4,
       content: newTaskName,
+      createdBy: userId,
     },
   };
   let newTasks = {
@@ -208,9 +198,6 @@ export const createNewTask = async (
     },
     tasks: newTasks,
   };
-  console.log(data);
-  console.log(newData);
-
   docRef.set({
     ...newData,
   });
@@ -316,6 +303,27 @@ export const changeNameOfStation = (spaceId, stationId, newName) => {
     .update({
       name: newName,
     });
+};
+
+export const updateModulesDb = (spaceId, stationId, module, modules) => {
+  let objIndex = modules.findIndex((item) => item.name === module.name);
+  modules[objIndex].active = !modules[objIndex].active;
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("modules")
+    .doc("modules")
+    .set({
+      modules,
+    });
+};
+
+export const getUserDataWithId = async (userId) => {
+  /*   const userRef = db.collection("users").doc(userId);
+  const userData = await userRef.get();
+  const data = userData.data();
+  return data; */
 };
 
 export {

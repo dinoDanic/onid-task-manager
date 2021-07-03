@@ -4,6 +4,7 @@ const INITIAL_STATE = {
   spaceData: [],
   stationData: null,
   moduleData: [],
+  activeModulesData: [],
 };
 
 const spaceReducer = (state = INITIAL_STATE, action) => {
@@ -35,6 +36,11 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         moduleData: action.payload,
+      };
+    case spaceActionTypes.SET_ACTIVE_MODULES:
+      return {
+        ...state,
+        activeModulesData: action.payload,
       };
     default:
       return state;

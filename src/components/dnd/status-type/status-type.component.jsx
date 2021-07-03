@@ -1,5 +1,6 @@
 import React, { useRef, useState } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
+import { useSelector } from "react-redux";
 
 import Task from "../task/task-component";
 import RetroInput from "../../retro/input/input.component";
@@ -17,11 +18,18 @@ const StatusType = ({
   index,
 }) => {
   const [newTaskName, setNewTaskName] = useState("");
+  const currentUser = useSelector((state) => state.user.currentUser);
   const inputRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    createNewTask(currentSpaceId, currentStationId, status.name, newTaskName);
+    createNewTask(
+      currentSpaceId,
+      currentStationId,
+      status.name,
+      newTaskName,
+      currentUser.uid
+    );
     inputRef.current.value = "";
     inputRef.current.blur();
   };
@@ -56,7 +64,7 @@ const StatusType = ({
                       className="st__taskList"
                       style={style}
                     >
-                      {tasks.map((task, index) => (
+                      {tasks?.map((task, index) => (
                         <Task key={task.id} task={task} index={index} />
                       ))}
                       {provided.placeholder}

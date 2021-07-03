@@ -4,7 +4,11 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { setStationData, setModules } from "../../redux/space/space.actions";
+import {
+  setStationData,
+  setModules,
+  setActiveModules,
+} from "../../redux/space/space.actions";
 
 import RetroButton from "../retro/button/retro-button.component";
 import StationItem from "../station-item/station-item.component.class";
@@ -45,8 +49,10 @@ const Stations = () => {
         .collection("modules")
         .doc("modules")
         .onSnapshot((doc) => {
-          const data = doc.data().modules;
-          dispatch(setModules(data));
+          const modules = doc.data().modules;
+          const filterData = modules.filter((item) => item.active === true);
+          dispatch(setModules(modules));
+          dispatch(setActiveModules(filterData));
         });
     }
   }, [activeStationId]);

@@ -7,7 +7,7 @@ import RetroButton from "../retro/button/retro-button.component";
 import BoxLayer from "../retro/box-layer/box-layer.component";
 import ModuleList from "./module-list/module-list.component";
 
-const Modules = () => {
+const Modules = ({ currentStationId, currentSpaceId }) => {
   const moduleData = useSelector((state) => state.space.moduleData);
   const [moduleWindow, setModuleWindow] = useState(false);
   return (
@@ -25,7 +25,15 @@ const Modules = () => {
         <div className="modules__win">
           <BoxLayer setLayer={setModuleWindow}>
             {moduleData?.map((module) => {
-              return <ModuleList key={module.name} module={module} />;
+              return (
+                <ModuleList
+                  key={module.name}
+                  module={module}
+                  modules={moduleData}
+                  currentStationId={currentStationId}
+                  currentSpaceId={currentSpaceId}
+                />
+              );
             })}
           </BoxLayer>
         </div>

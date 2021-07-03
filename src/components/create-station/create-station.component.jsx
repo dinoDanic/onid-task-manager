@@ -22,7 +22,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
     "to do": {
       id: "to do",
       name: "to do",
-      taskIds: ["1", "2"],
+      taskIds: [],
       color: "#34b5e4",
     },
     stuck: {
@@ -53,7 +53,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
     { name: "Priority", active: true, icon: "faExclamationCircle" },
     { name: "Status", active: true, icon: "faInfoCircle" },
     { name: "CreatedDate", active: true, icon: "faCalendarCheck" },
-    { name: "Deadling", active: true, icon: "faCalendarAlt" },
+    { name: "Deadline", active: true, icon: "faCalendarAlt" },
   ]);
 
   const handleCreate = () => {

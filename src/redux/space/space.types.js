@@ -4,6 +4,7 @@ const spaceActionTypes = {
   SET_STATION_DATA: "SET_STATION_DATA",
   REMOVE_ONE_SPACE: "REMOVE_ONE_SPACE",
   SET_MODULES: "SET_MODULES",
+  SET_ACTIVE_MODULES: "SET_ACTIVE_MODULES",
 };
 
 export default spaceActionTypes;
