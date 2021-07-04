@@ -1,15 +1,20 @@
 import React, { memo, useState, useEffect } from "react";
 import CreatedBy from "../created-by/created-by.component";
 
-const LoadModule = memo(({ moduleData }) => {
-  const [createdBy, setCreatedBy] = useState(true);
-  /* 
-  useEffect(() => {
-    let cbi = moduleData.findIndex((item) => item.name === "CreatedBy");
-    setCreatedBy(moduleData[cbi].active);
-  }, [moduleData]); */
+import "./load-module.styles.scss";
 
-  return <div>{createdBy && <CreatedBy />}</div>;
+const LoadModule = memo(({ module }) => {
+  useEffect(() => {}, []);
+  return (
+    <div className="loadModule">
+      <div className="lm__name">
+        <p>{module.name}</p>
+      </div>
+      <div className="lm__module">
+        {module.name === "CreatedBy" && <CreatedBy />}
+      </div>
+    </div>
+  );
 });
 
 export default LoadModule;

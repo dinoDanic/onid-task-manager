@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useHistory } from "react-router-dom";
 import { db, fieldValue } from "../../firebase/firebase.utils";
+import { useSelector } from "react-redux";
 
 import useCurrentMembers from "../../hooks/useCurrentMembers.hook";
 
@@ -12,8 +13,7 @@ import "./members.styles.scss";
 
 const Members = ({ activeSpaceData }) => {
   const history = useHistory();
-  const activeSpaceId = history.location.pathname.split("/")[2];
-  const [load, setLoad] = useState(0);
+  const activeSpaceId = useSelector((state) => state.history.spaceId);
   const [email, setEmail] = useState("");
   const [invite, setInvite] = useState(false);
   const [memberData, setMemberData] = useState([]);

@@ -1,0 +1,13 @@
+.loadModule {
+  display: flex;
+  height: 40px;
+  align-items: center;
+}
+.lm__name {
+  flex: 0.4;
+}
+.lm__module {
+  flex: 0.6;
+  display: flex;
+  justify-content: center;
+}

@@ -3,6 +3,8 @@ import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
 
+// TODO SVE STVARI POVLECI HISTORY SPACEID STATION ID
+
 import { signIn, signOut } from "./redux/user/user.actions";
 
 import Space from "./pages/space/space.component.class";

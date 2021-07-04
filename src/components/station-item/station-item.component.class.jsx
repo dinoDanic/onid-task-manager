@@ -1,5 +1,6 @@
 import React from "react";
-import { Link, useHistory } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import RetroButton from "../retro/button/retro-button.component";
 
@@ -9,8 +10,7 @@ import { faTasks } from "@fortawesome/free-solid-svg-icons";
 import "./station-item.styles.scss";
 
 function StationItem({ data }) {
-  const history = useHistory();
-  const activeSpaceId = history.location.pathname.split("/")[2];
+  const activeSpaceId = useSelector((state) => state.history.spaceId);
   return (
     <div className="stationItem">
       <Link to={`/s/${activeSpaceId}/e/${data.stationsId}/b`}>

@@ -1,11 +1,9 @@
-import { useHistory } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { db } from "../firebase/firebase.utils";
 
 const useCurrentMembers = async () => {
   const spaceData = useSelector((state) => state.space.spaceData);
-  const history = useHistory();
-  const activeSpaceId = history.location.pathname.split("/")[2];
+  const activeSpaceId = useSelector((state) => state.history.spaceId);
   if (!spaceData || !spaceData[0].members) return;
   const data = spaceData.filter((data) => data.spaceId === activeSpaceId);
 

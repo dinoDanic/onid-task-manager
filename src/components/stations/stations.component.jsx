@@ -9,6 +9,7 @@ import {
   setModules,
   setActiveModules,
 } from "../../redux/space/space.actions";
+import { setSpaceId, setStationId } from "../../redux/history/history.actions";
 
 import RetroButton from "../retro/button/retro-button.component";
 import StationItem from "../station-item/station-item.component.class";
@@ -38,6 +39,9 @@ const Stations = () => {
         });
         dispatch(setStationData(docs));
       });
+    if (activeSpaceId) {
+      dispatch(setSpaceId(activeSpaceId));
+    }
   }, [activeSpaceId, dispatch]);
 
   useEffect(() => {
@@ -54,6 +58,7 @@ const Stations = () => {
           dispatch(setModules(modules));
           dispatch(setActiveModules(filterData));
         });
+      dispatch(setStationId(activeStationId));
     }
   }, [activeStationId]);
 

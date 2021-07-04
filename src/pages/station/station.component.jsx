@@ -19,12 +19,13 @@ import "./station.syles.scss";
 
 const Station = () => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
+  const activeSpaceId = useSelector((state) => state.history.spaceId);
   /* const activeSpaceData = useActiveSpaceData(); */
   const history = useHistory();
-  const activeSpaceId = history.location.pathname.split("/")[2];
   const [miniMenu, setMiniMenu] = useState(false);
 
   useEffect(async () => {
+    if (!activeSpaceId) return;
     const docRef = await db.collection("space").doc(activeSpaceId).get();
     const spaceData = docRef.data();
     if (!spaceData.members.includes(currentUserUid)) {

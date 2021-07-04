@@ -29,10 +29,10 @@ import {
 
 const MiniMenu = ({ setMiniMenu }) => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
+  const activeSpaceId = useSelector((state) => state.history.spaceId);
   const dispatch = useDispatch();
   const history = useHistory();
   const activeSpaceData = useActiveSpaceData();
-  const activeSpaceId = history.location.pathname.split("/")[2];
   const [rename, setRename] = useState(false);
   const [deleteSpaceStatus, setDeleteSpaceStatus] = useState(false);
   const [nameInput, setNameInput] = useState("");
