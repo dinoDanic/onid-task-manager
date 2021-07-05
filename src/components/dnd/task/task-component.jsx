@@ -32,7 +32,7 @@ const Task = ({ task, index }) => {
               <p>{task.content}</p>
             </div>
             {activeModules?.map((module) => {
-              return <LoadModule module={module} />;
+              return <LoadModule module={module} task={task} />;
             })}
           </div>
         );

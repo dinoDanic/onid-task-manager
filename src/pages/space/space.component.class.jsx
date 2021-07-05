@@ -7,6 +7,7 @@ import Avatar from "../../components/retro/avatar/avatar.component";
 import SpaceFly from "../../components/space-fly/space-fly.component";
 
 import { setSpaceData, removeSpaceData } from "../../redux/space/space.actions";
+import { setUsers } from "../../redux/user/user.actions";
 import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import "./space.styles.scss";
@@ -14,7 +15,9 @@ import "./space.styles.scss";
 class Space extends React.Component {
   componentDidMount() {
     this.checkSpace();
+    this.getAllUsers();
     this.handleLogout = this.handleLogout.bind(this);
+    this.getAllUsers = this.getAllUsers.bind(this);
   }
 
   checkSpace = async () => {
@@ -33,6 +36,18 @@ class Space extends React.Component {
         }
       });
   };
+
+  getAllUsers = async () => {
+    const { setUsers } = this.props;
+    let users = [];
+    const userRef = db.collection("users");
+    const usersQuery = await userRef.get();
+    usersQuery.forEach((user) => {
+      users.push(user.data());
+    });
+    setUsers(users);
+  };
+
   handleLogout() {
     removeSpaceData();
     auth.signOut();
@@ -58,6 +73,7 @@ const mapStateToProps = createStructuredSelector({
 const mapDispatchToProps = (dispatch) => ({
   setSpaceData: (data) => dispatch(setSpaceData(data)),
   removeSpaceData: () => dispatch(removeSpaceData()),
+  setUsers: (users) => dispatch(setUsers(users)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Space);

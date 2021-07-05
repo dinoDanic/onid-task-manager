@@ -17,7 +17,7 @@ const DockStation = () => {
   const dispatch = useDispatch();
   const activeSpaceData = useActiveSpaceData();
 
-  useEffect(() => {
+  /*   useEffect(() => {
     const getAllUsers = async () => {
       let users = [];
       const userRef = db.collection("users");
@@ -28,7 +28,7 @@ const DockStation = () => {
       dispatch(setUsers(users));
     };
     getAllUsers();
-  }, []);
+  }, []); */
 
   return (
     <div className="dockStation">

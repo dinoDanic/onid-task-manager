@@ -320,10 +320,10 @@ export const updateModulesDb = (spaceId, stationId, module, modules) => {
 };
 
 export const getUserDataWithId = async (userId) => {
-  /*   const userRef = db.collection("users").doc(userId);
+  const userRef = db.collection("users").doc(userId);
   const userData = await userRef.get();
   const data = userData.data();
-  return data; */
+  return data;
 };
 
 export {
