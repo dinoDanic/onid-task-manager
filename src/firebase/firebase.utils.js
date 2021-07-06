@@ -174,6 +174,7 @@ export const createNewTask = async (
       id: v4,
       content: newTaskName,
       createdBy: userId,
+      assign: null,
     },
   };
   let newTasks = {
@@ -324,6 +325,44 @@ export const getUserDataWithId = async (userId) => {
   const userData = await userRef.get();
   const data = userData.data();
   return data;
+};
+
+export const assignMember = (spaceId, stationId, taskId, userId) => {
+  /* console.log(spaceId, stationId, taskId, userId); */
+  let allTasks = [];
+  let task = [];
+  console.log(taskId);
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        assign: userId,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
 };
 
 export {

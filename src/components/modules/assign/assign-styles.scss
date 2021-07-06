@@ -1,0 +1,30 @@
+.assign {
+  .avatar {
+    width: 35px;
+    height: 35px;
+    cursor: pointer;
+  }
+  position: relative;
+}
+.assign__choose {
+  .bll__content {
+    left: -50%;
+    margin-left: -25px;
+    margin-top: 5px;
+  }
+}
+.assign__member {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  cursor: pointer;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .avatar {
+    margin-right: 10px;
+    min-width: 40px;
+    height: 40px;
+  }
+}

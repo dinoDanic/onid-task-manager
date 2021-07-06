@@ -1,0 +1,19 @@
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  svg {
+    width: 60% !important;
+    height: 60%;
+    color: lightgray;
+  }
+  img {
+    width: 100%;
+  }
+}

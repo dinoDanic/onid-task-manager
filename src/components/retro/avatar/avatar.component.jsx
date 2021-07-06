@@ -1,11 +1,14 @@
 import React from "react";
 
-import { AvatarC, Img } from "./avatar.styles";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUser } from "@fortawesome/free-solid-svg-icons";
+
+import "./avatar.styles.scss";
 
 const Avatar = ({ src }) => (
-  <AvatarC>
-    <Img src={src} />
-  </AvatarC>
+  <div className="avatar">
+    {src ? <img src={src} /> : <FontAwesomeIcon icon={faUser} />}
+  </div>
 );
 
 export default Avatar;
