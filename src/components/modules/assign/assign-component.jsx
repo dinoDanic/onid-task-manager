@@ -35,10 +35,8 @@ const Assign = ({ task }) => {
   }, [spaceData]);
 
   useMemo(() => {
-    console.log(task);
     const { assign } = task;
     const getAssignUser = users.filter((item) => item.uid === assign);
-    console.log(getAssignUser);
     setAssignedUser(getAssignUser[0]);
   }, [task]);
 

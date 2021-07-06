@@ -175,6 +175,12 @@ export const createNewTask = async (
       content: newTaskName,
       createdBy: userId,
       assign: null,
+      priority: [
+        { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
+        { name: "High", active: false, color: "rgb(253, 171, 61)" },
+        { name: "Nomal", active: true, color: "rgb(52, 181, 228)" },
+        { name: "Low", active: false, color: "rgb(5, 206, 145)" },
+      ],
     },
   };
   let newTasks = {
@@ -328,10 +334,9 @@ export const getUserDataWithId = async (userId) => {
 };
 
 export const assignMember = (spaceId, stationId, taskId, userId) => {
-  /* console.log(spaceId, stationId, taskId, userId); */
   let allTasks = [];
   let task = [];
-  console.log(taskId);
+
   const tasksRef = db
     .collection("space")
     .doc(spaceId)
@@ -348,6 +353,55 @@ export const assignMember = (spaceId, stationId, taskId, userId) => {
       task = {
         ...task,
         assign: userId,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
+};
+
+export const setPriority = (
+  spaceId,
+  stationId,
+  taskId,
+  allPriority,
+  priority
+) => {
+  let allTasks = [];
+  let task = [];
+
+  // set all false
+  allPriority.map((item) => (item, (item.active = false)));
+
+  // set active on clicked element
+  priority.active = true;
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        priority: [...allPriority],
       };
     })
     .then(() => {
