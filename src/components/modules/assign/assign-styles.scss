@@ -1,10 +1,15 @@
 .assign {
+  position: relative;
   .avatar {
     width: 35px;
     height: 35px;
     cursor: pointer;
   }
-  position: relative;
+  &:hover {
+    .assign__nameHover {
+      opacity: 1;
+    }
+  }
 }
 .assign__choose {
   .bll__content {
@@ -17,14 +22,31 @@
   width: 100px;
   display: flex;
   align-items: center;
-  margin-bottom: 10px;
   cursor: pointer;
+  padding: 5px;
+  border-radius: 8px;
   &:last-child {
     margin-bottom: 0;
   }
+  &:hover {
+    background-color: #f0f2f5;
+  }
   .avatar {
     margin-right: 10px;
-    min-width: 40px;
-    height: 40px;
+    min-width: 35px;
+    height: 35px;
   }
+}
+.assign__nameHover {
+  position: absolute;
+  width: 100px;
+  margin-left: -30px;
+  text-align: center;
+  background: white;
+  border-radius: 8px;
+  top: -15px;
+  opacity: 0;
+  z-index: 100;
+  transition: 0.2s ease opacity;
+  border: 1px solid rgb(238, 238, 238);
 }

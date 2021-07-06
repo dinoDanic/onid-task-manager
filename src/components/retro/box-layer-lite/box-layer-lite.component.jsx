@@ -10,8 +10,9 @@ const BoxLayerLite = ({ children, setLayer }) => {
     <div className="boxLayerLite">
       <motion.div
         className="bll__content"
-        initial={{ y: -30, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
+        initial={{ y: -50, opacity: 0, scale: 0.5 }}
+        animate={{ y: 0, opacity: 1, scale: 1 }}
+        exit={{ y: -50, opacity: 0, scale: 0.5 }}
       >
         <Box>{children}</Box>
       </motion.div>

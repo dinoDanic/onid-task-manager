@@ -19,6 +19,7 @@ const CreatedBy = ({ task }) => {
   return (
     <div className="createdBy">
       <Avatar src={user?.imageUrl} />
+      <p className="cb__nameHover">{user ? user.userName : ""}</p>
     </div>
   );
 };
