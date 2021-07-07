@@ -5,6 +5,7 @@ import Assign from "../assign/assign-component";
 import Priority from "../priority/priority.component";
 import Status from "../status/status.component";
 import CreatedDate from "../created-date/created-date.component";
+import Deadline from "../deadline/deadline.component";
 
 import "./load-module.styles.scss";
 
@@ -20,6 +21,7 @@ const LoadModule = memo(({ module, task }) => {
         {module.name === "Priority" && <Priority task={task} />}
         {module.name === "Status" && <Status task={task} />}
         {module.name === "CreatedDate" && <CreatedDate task={task} />}
+        {module.name === "Deadline" && <Deadline task={task} />}
       </div>
     </div>
   );

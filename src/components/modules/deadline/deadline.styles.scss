@@ -1,0 +1,34 @@
+.deadline {
+  position: relative;
+  display: flex;
+  align-items: center;
+  svg {
+    opacity: 0.2;
+    margin-right: 5px;
+  }
+  input {
+    border: none;
+    position: absolute;
+    opacity: 1;
+    width: 20px;
+    left: -5px;
+    z-index: 100;
+    opacity: 0;
+  }
+  ::-webkit-datetime-edit-fields-wrapper {
+    background: silver;
+    min-width: 100px;
+    opacity: 0;
+  }
+  ::-webkit-calendar-picker-indicator {
+    background: orange;
+    position: absolute;
+    cursor: pointer;
+    left: 0;
+    margin: 0;
+    opacity: 1;
+  }
+  p {
+    color: gray;
+  }
+}

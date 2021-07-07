@@ -478,6 +478,44 @@ export const convertDate = (timestamp) => {
   return `${date}.${month + 1}.${year}`;
 };
 
+export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
+  console.log(spaceId, stationId, date, taskId);
+  let allTasks = [];
+  let task = [];
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        deadline: date,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
+};
+
 export {
   db,
   auth,
