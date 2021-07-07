@@ -54,6 +54,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
     { name: "Status", active: true, icon: "faInfoCircle" },
     { name: "CreatedDate", active: true, icon: "faCalendarCheck" },
     { name: "Deadline", active: true, icon: "faCalendarAlt" },
+    { name: "DaysLeft", active: true, icon: "faHourglassHalf" },
   ]);
 
   const handleCreate = () => {

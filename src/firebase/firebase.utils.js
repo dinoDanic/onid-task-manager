@@ -176,6 +176,7 @@ export const createNewTask = async (
       createdBy: userId,
       assign: null,
       created: new Date(),
+      deadline: null,
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },

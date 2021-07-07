@@ -29,7 +29,6 @@ const Deadline = ({ task }) => {
     let differenceInDays = differenceInTime / (1000 * 3600 * 24);
 
     setDaysLeft(Math.round(-differenceInDays));
-    console.log(daysLeft);
 
     // set date order
     let day = dd.getDate();
@@ -40,6 +39,7 @@ const Deadline = ({ task }) => {
   };
   useMemo(() => {
     if (!task);
+    if (task.deadline === null) return;
     let d = task.deadline.toDate();
     let day = d.getDate();
     let month = d.getMonth();
@@ -54,7 +54,6 @@ const Deadline = ({ task }) => {
       <FontAwesomeIcon icon={faCalendarAlt} />
 
       <p>{date}</p>
-      {/*  {daysLeft} */}
     </div>
   );
 };

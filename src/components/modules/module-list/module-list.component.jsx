@@ -9,6 +9,7 @@ import { faExclamationCircle } from "@fortawesome/free-solid-svg-icons";
 import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarCheck } from "@fortawesome/free-solid-svg-icons";
 import { faCalendarAlt } from "@fortawesome/free-solid-svg-icons";
+import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
 
 import { updateModulesDb } from "../../../firebase/firebase.utils";
 
@@ -72,6 +73,9 @@ const ModuleList = ({
         )}
         {module.icon === "faCalendarAlt" && (
           <FontAwesomeIcon icon={faCalendarAlt} />
+        )}
+        {module.icon === "faHourglassHalf" && (
+          <FontAwesomeIcon icon={faHourglassHalf} />
         )}
         {module.name}
       </p>

@@ -6,6 +6,7 @@ import Priority from "../priority/priority.component";
 import Status from "../status/status.component";
 import CreatedDate from "../created-date/created-date.component";
 import Deadline from "../deadline/deadline.component";
+import DaysLeft from "../days-left/days-left.component";
 
 import "./load-module.styles.scss";
 
@@ -22,6 +23,7 @@ const LoadModule = memo(({ module, task }) => {
         {module.name === "Status" && <Status task={task} />}
         {module.name === "CreatedDate" && <CreatedDate task={task} />}
         {module.name === "Deadline" && <Deadline task={task} />}
+        {module.name === "DaysLeft" && <DaysLeft task={task} />}
       </div>
     </div>
   );
