@@ -372,6 +372,36 @@ export const assignMember = (spaceId, stationId, taskId, userId) => {
     });
 };
 
+export const unAssign = (spaceId, stationId, taskId) => {
+  let task = [];
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        assign: null,
+      };
+    })
+    .then(() => {
+      tasksRef.update({
+        tasks: {
+          [taskId]: {
+            ...task,
+          },
+        },
+      });
+    });
+};
+
 export const setPriority = (
   spaceId,
   stationId,
@@ -514,6 +544,65 @@ export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
         },
         { merge: true }
       );
+    });
+};
+
+export const changeStatusTypeName = (
+  spaceId,
+  stationId,
+  statusName,
+  newName,
+  statusTypeCheck
+) => {
+  let keys = Object.keys(statusTypeCheck);
+  if (statusName === newName) {
+    alert("same name");
+    return;
+  }
+  if (keys.includes(newName)) {
+    alert("name allready takaen");
+    return;
+  }
+
+  let statusOrder = [];
+  let statusType = {};
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      statusOrder = taskData.data().statusOrder;
+      let indexStatus = statusOrder.findIndex((item) => item === statusName);
+      statusOrder[indexStatus] = newName;
+      console.log(statusOrder);
+
+      statusType = taskData.data().statusType;
+
+      statusType = {
+        ...statusType,
+        [statusName]: {
+          ...statusType[statusName],
+          name: newName,
+          id: newName,
+        },
+      };
+      statusType[newName] = {
+        ...statusType[statusName],
+      };
+      delete statusType[statusName];
+    })
+    .then(() => {
+      tasksRef.update({
+        statusOrder,
+        statusType,
+      });
     });
 };
 

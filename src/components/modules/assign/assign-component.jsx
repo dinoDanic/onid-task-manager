@@ -4,8 +4,10 @@ import { useActiveSpaceData } from "../../../hooks/useActiveSpaceData.hook";
 
 import { AnimatePresence } from "framer-motion";
 
-import { assignMember } from "../../../firebase/firebase.utils";
-import { getUserDataWithId } from "../../../firebase/firebase.utils";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faUserSlash, faUserTimes } from "@fortawesome/free-solid-svg-icons";
+
+import { assignMember, unAssign } from "../../../firebase/firebase.utils";
 
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
@@ -56,11 +58,11 @@ const Assign = ({ task }) => {
           <div className="assign__choose">
             <BoxLayerLite setLayer={setShowMembers}>
               {allMembers?.map((member) => {
-                console.log(task.id);
                 const { imageUrl, userName, uid } = member;
                 return (
                   <div
                     className="assign__member"
+                    key={uid}
                     onClick={() => {
                       assignMember(spaceId, stationId, task.id, uid);
                       setShowMembers(false);
@@ -71,6 +73,15 @@ const Assign = ({ task }) => {
                   </div>
                 );
               })}
+              <div
+                className="assign__remove"
+                onClick={() => {
+                  unAssign(spaceId, stationId, task.id);
+                  setShowMembers(false);
+                }}
+              >
+                <FontAwesomeIcon icon={faUserSlash} />
+              </div>
             </BoxLayerLite>
           </div>
         )}

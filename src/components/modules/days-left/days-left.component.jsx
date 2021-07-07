@@ -1,15 +1,17 @@
 import React, { useMemo, useState } from "react";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
+
 import "./days-left-styles.scss";
 
 const DaysLeft = ({ task }) => {
-  let [daysLeft, setDaysLeft] = useState(0);
+  let [daysLeft, setDaysLeft] = useState(null);
   const [daysColor, setDaysColor] = useState("gray");
 
   useMemo(() => {
     const { created, deadline } = task;
     if (!created || !deadline) return;
-    console.log(created, deadline);
 
     let cd = created.toDate();
     let dd = deadline.toDate();
@@ -30,8 +32,10 @@ const DaysLeft = ({ task }) => {
   return (
     <div className="daysLeft">
       <p style={{ color: daysColor }}>
-        {daysLeft > 0 && `${daysLeft} days left`}
+        {daysLeft > 0 && `${daysLeft} days`}
         {daysLeft === 0 && `today`}
+        {daysLeft === null && `no deadline set`}
+        {daysLeft !== null && <FontAwesomeIcon icon={faHourglassHalf} />}
       </p>
     </div>
   );

@@ -52,7 +52,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
     { name: "Assign", active: true, icon: "faUserCheck" },
     { name: "Priority", active: true, icon: "faExclamationCircle" },
     { name: "Status", active: true, icon: "faInfoCircle" },
-    { name: "CreatedDate", active: true, icon: "faCalendarCheck" },
+    { name: "CreatedDate", active: false, icon: "faCalendarCheck" },
     { name: "Deadline", active: true, icon: "faCalendarAlt" },
     { name: "DaysLeft", active: true, icon: "faHourglassHalf" },
   ]);

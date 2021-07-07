@@ -47,7 +47,6 @@ const Deadline = ({ task }) => {
     setDate(`${day}.${month + 1}.${year}`);
   }, [task]);
 
-  console.log(task);
   return (
     <div className="deadline">
       <input type="date" onChange={(e) => handleDate(e)} />

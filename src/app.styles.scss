@@ -1,26 +1,7 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-body {
-  overflow: hidden;
-  font-family: "Noto Sans JP", sans-serif;
-  background-color: #f9f9f9;
-  background: #f0f2f5;
-}
-hr {
-  margin: 20px 0;
-  border: none;
-  border-bottom: 1px solid #f0f2f5;
-}
-p {
-  font-size: 0.8rem;
-  color: #333;
-}
 .app {
   display: flex;
   width: 100%;
+  overflow: hidden;
 }
 .space-container {
   height: 100vh;

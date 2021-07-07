@@ -34,7 +34,7 @@ const Board = ({ station }) => {
       ) {
         return;
       }
-
+      console.log(state.statusType);
       const start = state.statusType[source.droppableId];
       const finish = state.statusType[destination.droppableId];
       if (start === finish) {
@@ -68,7 +68,7 @@ const Board = ({ station }) => {
         ...start,
         taskIds: startTaskIds,
       };
-
+      console.log(finish);
       const finishTaskIds = Array.from(finish.taskIds);
       finishTaskIds.splice(destination.index, 0, draggableId);
       const newFinish = {
@@ -108,7 +108,7 @@ const Board = ({ station }) => {
         type="column"
         direction="horizontal"
       >
-        {(provided, snapshot) => {
+        {(provided) => {
           const style = {};
           return (
             <div

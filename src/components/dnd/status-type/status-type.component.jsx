@@ -1,12 +1,16 @@
 import React, { useRef, useState } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
+import styled from "styled-components";
 
 import Task from "../task/task-component";
 import RetroInput from "../../retro/input/input.component";
 import Box from "../../retro/box/box.component";
 
-import { createNewTask } from "../../../firebase/firebase.utils";
+import {
+  createNewTask,
+  changeStatusTypeName,
+} from "../../../firebase/firebase.utils";
 
 import "./status-type.styles.scss";
 
@@ -17,9 +21,12 @@ const StatusType = ({
   tasks,
   index,
 }) => {
-  const [newTaskName, setNewTaskName] = useState("");
   const currentUser = useSelector((state) => state.user.currentUser);
+  const statusType = useSelector((state) => state.space.statusType);
+  const [newTaskName, setNewTaskName] = useState("");
+  const [inputName, setInputName] = useState("");
   const inputRef = useRef();
+  const inputNameRef = useRef();
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -33,9 +40,27 @@ const StatusType = ({
     inputRef.current.value = "";
     inputRef.current.blur();
   };
-  const retroInput = {
-    outlineColor: status.color,
+
+  const handleNameSubmit = (e) => {
+    e.preventDefault();
+    if (!statusType) return;
+    changeStatusTypeName(
+      currentSpaceId,
+      currentStationId,
+      status.name,
+      inputNameRef.current.value,
+      statusType
+    );
   };
+
+  const InputName = styled.input`
+    &::placeholder {
+      color: ${status.color};
+    }
+    &:hover {
+    }
+  `;
+
   return (
     <Draggable draggableId={status.name} index={index}>
       {(provided) => (
@@ -45,7 +70,9 @@ const StatusType = ({
           ref={provided.innerRef}
         >
           <div className="st__title" {...provided.dragHandleProps}>
-            <h2 style={{ color: status.color }}>{status.name}</h2>
+            <form onSubmit={(e) => handleNameSubmit(e)}>
+              <InputName placeholder={status.name} ref={inputNameRef} />
+            </form>
           </div>
           <Box style={{ background: status.color }}>
             <div className="st__content">
@@ -81,11 +108,7 @@ const StatusType = ({
               }}
             >
               <div onChange={(e) => setNewTaskName(e.target.value)}>
-                <RetroInput
-                  ref={inputRef}
-                  placeholder="Add Task"
-                  style={retroInput}
-                />
+                <RetroInput ref={inputRef} placeholder="Add Task" />
               </div>
             </form>
           </div>
