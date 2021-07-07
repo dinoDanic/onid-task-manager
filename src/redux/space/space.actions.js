@@ -29,3 +29,8 @@ export const setActiveModules = (moduleData) => ({
   type: spaceActionTypes.SET_ACTIVE_MODULES,
   payload: moduleData,
 });
+
+export const setStatusType = (statusType) => ({
+  type: spaceActionTypes.SET_STATUS_TYPE,
+  payload: statusType,
+});

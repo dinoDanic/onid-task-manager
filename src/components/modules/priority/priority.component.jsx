@@ -17,12 +17,10 @@ const Priority = ({ task }) => {
 
   const [currentPriority, setCurrentPriority] = useState();
   const [showPriority, setShowPriority] = useState(false);
-  /*  console.log(task); */
 
   useMemo(() => {
     if (!task.priority) return;
     const { priority } = task;
-    console.log(priority);
     const findActive = priority.filter((item) => item.active === true);
     setCurrentPriority(findActive[0]);
   }, [task]);

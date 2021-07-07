@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
+import { useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { updateDrag } from "../../firebase/firebase.utils";
+
+import { setStatusType } from "../../redux/space/space.actions";
 
 import StatusType from "../../components/dnd/status-type/status-type.component";
 
 import "./board.styles.scss";
 
 const Board = ({ station }) => {
+  const dispatch = useDispatch();
   const history = useHistory();
   const currentSpaceId = history.location.pathname.split("/")[2];
   const currentStationId = history.location.pathname.split("/")[4];
@@ -15,6 +19,7 @@ const Board = ({ station }) => {
 
   useEffect(() => {
     setState(station);
+    dispatch(setStatusType(station.statusType));
   }, [station]);
 
   const onDragEnd = (result) => {

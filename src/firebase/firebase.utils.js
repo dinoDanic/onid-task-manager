@@ -419,6 +419,52 @@ export const setPriority = (
     });
 };
 
+export const setStatus = (
+  spaceId,
+  stationId,
+  currentStatusType,
+  taskId,
+  status,
+  statusType
+) => {
+  let allStatusType = {};
+  let removedStatus = {};
+
+  console.log(statusType);
+
+  // remove taskId from current
+  let removeCurrentId = currentStatusType.taskIds.filter((id) => id !== taskId);
+
+  removedStatus = currentStatusType.taskIds = removeCurrentId;
+  console.log(removedStatus[0]);
+
+  // add taskId to new
+
+  statusType[status.name] = {
+    ...status,
+    taskIds: [...status.taskIds, taskId],
+  };
+
+  console.log(statusType);
+
+  // set taskIds
+
+  const statusTypeRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  statusTypeRef.set(
+    {
+      statusType: { ...statusType },
+    },
+    { merge: true }
+  );
+};
+
 export {
   db,
   auth,
