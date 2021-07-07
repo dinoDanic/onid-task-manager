@@ -1,0 +1,11 @@
+.createDate {
+  display: flex;
+  align-items: center;
+  p {
+    color: gray;
+  }
+  svg {
+    opacity: 0.3;
+    margin-right: 5px;
+  }
+}

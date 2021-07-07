@@ -19,7 +19,7 @@ const db = firebase.firestore();
 
 var provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
-
+export const timestamp = firebase.firestore.Timestamp;
 export const fieldValue = firebase.firestore.FieldValue;
 
 const LoginWithGoogle = () => {
@@ -175,6 +175,7 @@ export const createNewTask = async (
       content: newTaskName,
       createdBy: userId,
       assign: null,
+      created: new Date(),
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -463,6 +464,18 @@ export const setStatus = (
     },
     { merge: true }
   );
+};
+
+export const convertDate = (timestamp) => {
+  if (!timestamp) {
+    return;
+  }
+
+  let myTime = timestamp.toDate();
+  let date = myTime.getDate();
+  let month = myTime.getMonth();
+  let year = myTime.getFullYear();
+  return `${date}.${month + 1}.${year}`;
 };
 
 export {

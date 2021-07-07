@@ -4,6 +4,7 @@ import CreatedBy from "../created-by/created-by.component";
 import Assign from "../assign/assign-component";
 import Priority from "../priority/priority.component";
 import Status from "../status/status.component";
+import CreatedDate from "../created-date/created-date.component";
 
 import "./load-module.styles.scss";
 
@@ -18,6 +19,7 @@ const LoadModule = memo(({ module, task }) => {
         {module.name === "Assign" && <Assign task={task} />}
         {module.name === "Priority" && <Priority task={task} />}
         {module.name === "Status" && <Status task={task} />}
+        {module.name === "CreatedDate" && <CreatedDate task={task} />}
       </div>
     </div>
   );

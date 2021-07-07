@@ -1,8 +1,10 @@
 @import "../../../theme.styles.scss";
 .retroButton {
-  font-family: "Press Start 2P", cursive;
-  font-size: 8px;
+  /* font-family: "Press Start 2P", cursive;
+  font-size: 8px; */
   text-transform: uppercase;
+  font-size: 11px;
+  font-weight: 600;
   background: $primary;
   border-radius: 7px;
   border: none;
@@ -23,6 +25,8 @@
     justify-content: center;
     align-items: center;
     svg {
+      width: 15px;
+      height: 15px;
     }
   }
   &:hover {
@@ -49,7 +53,7 @@
 }
 .small {
   height: 27px;
-  font-size: 7.5px;
+  font-size: 10px;
 }
 .gray {
   background: none;
@@ -77,6 +81,8 @@
 .charAt {
   position: relative;
   pointer-events: none;
+  font-weight: 800;
+  font-size: 20px;
   .charAtFull {
     position: absolute;
     background: #333;

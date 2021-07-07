@@ -39,11 +39,11 @@ const SpaceFly = () => {
         </div>
         <div className="sf__controls">
           <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
-            <FontAwesomeIcon icon={faRocket} size="2x" />
+            <FontAwesomeIcon icon={faRocket} />
           </RetroButton>
           <Link to="/">
             <RetroButton size="box">
-              <FontAwesomeIcon icon={faHome} size="2x" />
+              <FontAwesomeIcon icon={faHome} />
             </RetroButton>
           </Link>
         </div>

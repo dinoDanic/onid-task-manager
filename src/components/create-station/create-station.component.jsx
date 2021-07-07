@@ -48,7 +48,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   }, [statusType, setStatusType, force, setForce]);
 
   const [modules, setModules] = useState([
-    { name: "CreatedBy", active: true, icon: "faUser" },
+    { name: "CreatedBy", active: false, icon: "faUser" },
     { name: "Assign", active: true, icon: "faUserCheck" },
     { name: "Priority", active: true, icon: "faExclamationCircle" },
     { name: "Status", active: true, icon: "faInfoCircle" },
