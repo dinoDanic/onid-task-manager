@@ -11,12 +11,16 @@ import BoardNewStatus from "../../components/board-new-status/board-new-status.c
 
 import "./board.styles.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+
 const Board = ({ station }) => {
   const dispatch = useDispatch();
   const history = useHistory();
   const currentSpaceId = history.location.pathname.split("/")[2];
   const currentStationId = history.location.pathname.split("/")[4];
   const [state, setState] = useState([]);
+  const [bOpacity, setBOpacity] = useState(0);
 
   useEffect(() => {
     setState(station);
@@ -25,6 +29,8 @@ const Board = ({ station }) => {
 
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
+
+    setBOpacity(0);
 
     if (!destination) return;
 
@@ -35,7 +41,6 @@ const Board = ({ station }) => {
       ) {
         return;
       }
-      console.log(state.statusType);
       const start = state.statusType[source.droppableId];
       const finish = state.statusType[destination.droppableId];
       if (start === finish) {
@@ -61,6 +66,33 @@ const Board = ({ station }) => {
         return;
       }
 
+      // on drag delete
+      if (destination.droppableId === "delete") {
+        console.log(state);
+        const taskId = draggableId;
+        const statusName = source.droppableId;
+        // get task ids
+        const taskIds = state.statusType[statusName].taskIds.filter(
+          (id) => id !== taskId
+        );
+
+        const newState = {
+          ...state,
+          statusType: {
+            ...state.statusType,
+            [statusName]: {
+              ...state.statusType[statusName],
+              taskIds: taskIds,
+            },
+          },
+        };
+
+        setState(newState);
+        updateDrag(currentSpaceId, currentStationId, newState);
+
+        return;
+      }
+
       // moving from one list to anoterh
 
       const startTaskIds = Array.from(start.taskIds);
@@ -69,7 +101,6 @@ const Board = ({ station }) => {
         ...start,
         taskIds: startTaskIds,
       };
-      console.log(finish);
       const finishTaskIds = Array.from(finish.taskIds);
       finishTaskIds.splice(destination.index, 0, draggableId);
       const newFinish = {
@@ -102,8 +133,16 @@ const Board = ({ station }) => {
     }
   };
 
+  const onDragStart = (result) => {
+    const { destination, source, draggableId } = result;
+    console.log(result);
+    if (result.type === "DEFAULT") {
+      setBOpacity(1);
+    }
+  };
+
   return (
-    <DragDropContext onDragEnd={onDragEnd}>
+    <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Droppable
         droppableId={"allStatusTypes"}
         type="column"
@@ -138,6 +177,7 @@ const Board = ({ station }) => {
                 })}
                 {provided.placeholder}
               </>
+
               <div className="statusType board__newStatus">
                 <BoardNewStatus />
               </div>
@@ -145,6 +185,35 @@ const Board = ({ station }) => {
           );
         }}
       </Droppable>
+      <div
+        className="board__dragDelete"
+        style={{
+          opacity: bOpacity,
+        }}
+      >
+        <Droppable droppableId="delete">
+          {(provided, snapshot) => {
+            const style = {
+              backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "",
+              borderRadius: "8px",
+            };
+            return (
+              <>
+                <div
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                  style={style}
+                >
+                  <FontAwesomeIcon icon={faTrashAlt} size="1x" />
+                </div>
+                <div className="board__placeholder" style={style}>
+                  {provided.placeholder}
+                </div>
+              </>
+            );
+          }}
+        </Droppable>
+      </div>
     </DragDropContext>
   );
 };

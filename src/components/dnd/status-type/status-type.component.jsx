@@ -102,9 +102,9 @@ const StatusType = ({
                       className="st__taskList"
                       style={style}
                     >
-                      {tasks?.map((task, index) => (
-                        <Task key={task.id} task={task} index={index} />
-                      ))}
+                      {tasks?.map((task, index) => {
+                        return <Task key={task.id} task={task} index={index} />;
+                      })}
                       {provided.placeholder}
                     </div>
                   );

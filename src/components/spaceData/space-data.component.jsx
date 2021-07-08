@@ -60,9 +60,6 @@ function SpaceData() {
           );
         })}
       </div>
-      <div className="sd__something">
-        <p> idea?</p>
-      </div>
     </div>
   );
 }

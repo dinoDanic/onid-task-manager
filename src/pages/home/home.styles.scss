@@ -9,15 +9,17 @@
 }
 .home__content {
   padding: 40px 80px;
+  display: flex;
+  justify-content: space-between;
   .sectionBox {
     margin-bottom: 30px;
+    flex: 0.49;
   }
 }
 .home__recent {
   display: flex;
 }
-.home__recentStations,
-.home__something {
+.home__recentStations {
   flex: 1;
 }
 .home__recentStations {

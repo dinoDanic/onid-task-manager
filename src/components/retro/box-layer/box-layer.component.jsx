@@ -2,10 +2,11 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import Box from "../box/box.component";
+import RetroButton from "../button/retro-button.component";
 
 import "./box-layer.styles.scss";
 
-const BoxLayer = ({ children, setLayer }) => {
+const BoxLayer = ({ children, setLayer, type }) => {
   return (
     <motion.div className="boxLayer">
       <motion.div
@@ -15,7 +16,7 @@ const BoxLayer = ({ children, setLayer }) => {
         animate={{ opacity: 1 }}
       />
       <motion.div
-        className="bl__content"
+        className={`bl__content ${type}`}
         initial={{ y: -36, opacity: 0 }}
         animate={{ y: 0, opacity: 1 }}
       >

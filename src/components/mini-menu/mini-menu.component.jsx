@@ -7,15 +7,16 @@ import "./mini-menu.styles.scss";
 import RetroInput from "../retro/input/input.component";
 import RetroButton from "../retro/button/retro-button.component";
 import Colors from "../colors/colors.component";
+import BoxLayer from "../retro/box-layer/box-layer.component";
 
 import { removeOneSpace } from "../../redux/space/space.actions";
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
-/* import ExitToAppIcon from "@material-ui/icons/ExitToApp"; */
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faEdit,
+  faFillDrip,
+  faICursor,
   faPaintRoller,
   faTrashAlt,
 } from "@fortawesome/free-solid-svg-icons";
@@ -81,7 +82,7 @@ const MiniMenu = ({ setMiniMenu }) => {
     <div className="miniMenu">
       <ul>
         <li onClick={() => setRename(!rename)}>
-          <FontAwesomeIcon icon={faEdit} />
+          <FontAwesomeIcon icon={faICursor} />
           <p>Rename</p>
         </li>
         {rename && (
@@ -101,24 +102,19 @@ const MiniMenu = ({ setMiniMenu }) => {
               <p>Delete</p>
             </li>
             {deleteSpaceStatus && (
-              <div className="mm__delete">
-                <div className="mm__delete-btns">
-                  <RetroButton
-                    mode="gray"
-                    size="small"
-                    onClick={() => setMiniMenu(false)}
-                  >
-                    cancel
-                  </RetroButton>
+              <BoxLayer type="question" set setLayer={setDeleteSpaceStatus}>
+                <h2>Delete Space {activeSpaceData.name} ?</h2>
+                <div className="mm__btns">
+                  <RetroButton mode="gray">cancel</RetroButton>
                   <RetroButton
                     color="danger"
-                    size="small"
+                    mode="flat"
                     onClick={() => handleDelete()}
                   >
-                    Delete
+                    yes
                   </RetroButton>
                 </div>
-              </div>
+              </BoxLayer>
             )}
           </>
         ) : (
@@ -152,7 +148,7 @@ const MiniMenu = ({ setMiniMenu }) => {
 
         <li onClick={() => setColorStatus(!colorStatus)}>
           {/* <ColorLensIcon fontSize="small" /> */}
-          <FontAwesomeIcon icon={faPaintRoller} />
+          <FontAwesomeIcon icon={faFillDrip} />
           <p>Change color</p>
         </li>
         <div className="mm__colors">

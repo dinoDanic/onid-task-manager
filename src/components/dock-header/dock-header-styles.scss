@@ -5,7 +5,15 @@
   position: relative;
   height: 160px;
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
+  &:hover {
+    .dh__settings-tool {
+      svg {
+        opacity: 0.3;
+      }
+    }
+  }
   img {
     position: absolute;
     width: 100%;
@@ -52,5 +60,31 @@
   input {
     font-size: 1.5em;
     font-weight: 800;
+  }
+}
+
+.dh__settings {
+  position: absolute;
+  right: 60px;
+  top: 30px;
+  .dh__settings-tool {
+    svg {
+      width: 25px !important;
+      height: 25px !important;
+      opacity: 0;
+      transition: 0.2s ease;
+      &:hover {
+        opacity: 0.8;
+        cursor: pointer;
+      }
+    }
+  }
+  .bll__content {
+    width: 180px;
+    left: -155px;
+    top: 40px;
+    .retroBox {
+      padding: 10px 0;
+    }
   }
 }

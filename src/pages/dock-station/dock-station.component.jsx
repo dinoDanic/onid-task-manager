@@ -1,8 +1,4 @@
-import React, { useEffect, useState, useRef } from "react";
-import { db } from "../../firebase/firebase.utils";
-import { useDispatch } from "react-redux";
-
-import { setUsers } from "../../redux/user/user.actions";
+import React from "react";
 
 import { useActiveSpaceData } from "../../hooks/useActiveSpaceData.hook";
 
@@ -14,21 +10,7 @@ import Members from "../../components/members/members.component";
 import "./dock-station.styles.scss";
 
 const DockStation = () => {
-  const dispatch = useDispatch();
   const activeSpaceData = useActiveSpaceData();
-
-  /*   useEffect(() => {
-    const getAllUsers = async () => {
-      let users = [];
-      const userRef = db.collection("users");
-      const usersQuery = await userRef.get();
-      usersQuery.forEach((user) => {
-        users.push(user.data());
-      });
-      dispatch(setUsers(users));
-    };
-    getAllUsers();
-  }, []); */
 
   return (
     <div className="dockStation">

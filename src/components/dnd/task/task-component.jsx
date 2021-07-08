@@ -3,7 +3,10 @@ import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+import {
+  faGripLinesVertical,
+  faExpandAlt,
+} from "@fortawesome/free-solid-svg-icons";
 
 import "./task-styles.scss";
 
@@ -24,12 +27,18 @@ const Task = ({ task, index }) => {
             {...provided.draggableProps}
             ref={provided.innerRef}
             style={style}
+            onClick={() => console.log("click")}
           >
             <div className="task__drag" {...provided.dragHandleProps}>
               <FontAwesomeIcon icon={faGripLinesVertical} />
             </div>
-            <div className="task__taskName">
-              <p>{task.content}</p>
+            <div className="task__header">
+              <div className="task__taskName">
+                <p>{task.content}</p>
+              </div>
+              <div className="task__expand">
+                <FontAwesomeIcon icon={faExpandAlt} />
+              </div>
             </div>
             {activeModules?.map((module) => {
               return <LoadModule module={module} task={task} />;

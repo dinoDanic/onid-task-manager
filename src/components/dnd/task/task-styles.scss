@@ -28,3 +28,19 @@
   margin-bottom: 10px;
   font-weight: 800;
 }
+
+.task__expand {
+  position: absolute;
+  top: 5px;
+  right: 8px;
+  opacity: 0.2;
+  transition: 0.2s ease;
+  cursor: pointer;
+  &:hover {
+    opacity: 0.4;
+    transform: scale(1.15);
+  }
+  &:active {
+    transform: slace(0.95);
+  }
+}

@@ -23,10 +23,7 @@ class Home extends React.Component {
     return (
       <div className="home">
         <div className="home__content">
-          <SectionBox
-            title="Your Space"
-            subTitle="Space in the account that you are a member of"
-          >
+          <SectionBox title="Your Space" subTitle="Space you are member of">
             {this.props.spaceData.length !== 0 ? (
               <SpaceData />
             ) : (
@@ -40,9 +37,6 @@ class Home extends React.Component {
             <div className="home__recent">
               <div className="home__recentStations">
                 <FavoriteStations />
-              </div>
-              <div className="home__something">
-                <p>idea?</p>
               </div>
             </div>
           </SectionBox>

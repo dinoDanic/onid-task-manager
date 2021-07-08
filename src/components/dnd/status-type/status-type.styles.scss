@@ -2,8 +2,7 @@
   margin: 8px;
   border-radius: 2px;
   height: fit-content;
-  min-width: 200px;
-  max-width: 300px;
+  max-width: 280px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
@@ -59,6 +58,7 @@
 }
 
 .st__settings,
+.st__expand,
 .st__drag {
   opacity: 0.1;
   transition: 0.2s ease;
