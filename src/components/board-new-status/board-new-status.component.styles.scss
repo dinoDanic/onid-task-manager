@@ -1,0 +1,18 @@
+.boardNewStatus {
+  margin-top: 25px;
+  margin-left: 10px;
+  display: flex;
+
+  svg {
+    opacity: 0.1;
+    transition: 0.2s ease;
+    cursor: pointer;
+    margin-top: 3px;
+    &:hover {
+      opacity: 0.3 !important;
+    }
+  }
+  input {
+    opacity: 1;
+  }
+}

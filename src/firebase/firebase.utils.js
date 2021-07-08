@@ -607,7 +607,6 @@ export const changeStatusTypeName = (
 };
 
 export const deleteStatusType = (spaceId, stationId, statusName) => {
-  console.log(spaceId, stationId);
   let statusOrder = [];
   let newOrder = [];
   let statusType = {};
@@ -625,7 +624,6 @@ export const deleteStatusType = (spaceId, stationId, statusName) => {
     .get()
     .then((taskData) => {
       // get all data
-      console.log(taskData.data());
       statusOrder = taskData.data().statusOrder;
       statusType = taskData.data().statusType;
       tasks = taskData.data().tasks;
@@ -641,6 +639,54 @@ export const deleteStatusType = (spaceId, stationId, statusName) => {
     .then(() => {
       tasksRef.update({
         statusOrder: [...newOrder],
+        statusType,
+      });
+    });
+};
+
+export const createNewStatus = (spaceId, stationId, newName) => {
+  let statusOrder = [];
+  let statusType = {};
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      // get all data
+      statusOrder = taskData.data().statusOrder;
+      statusType = taskData.data().statusType;
+
+      // chekc conditions
+      if (statusOrder.includes(newName)) {
+        alert("name allready taken");
+        return;
+      }
+
+      // set status order
+      statusOrder.push(newName);
+
+      // set status type
+      statusType = {
+        ...statusType,
+        [newName]: {
+          color: "#FDAB3D",
+          id: newName,
+          name: newName,
+          taskIds: [],
+        },
+      };
+      console.log(statusType);
+    })
+    .then(() => {
+      tasksRef.update({
+        statusOrder,
         statusType,
       });
     });

@@ -7,6 +7,7 @@ import { updateDrag } from "../../firebase/firebase.utils";
 import { setStatusType } from "../../redux/space/space.actions";
 
 import StatusType from "../../components/dnd/status-type/status-type.component";
+import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
 
 import "./board.styles.scss";
 
@@ -137,6 +138,9 @@ const Board = ({ station }) => {
                 })}
                 {provided.placeholder}
               </>
+              <div className="board__newStatus">
+                <BoardNewStatus />
+              </div>
             </div>
           );
         }}
