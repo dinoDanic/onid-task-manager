@@ -16,7 +16,7 @@ const Task = ({ task, index }) => {
       {(provided, snapshot) => {
         const style = {
           ...provided.draggableProps.style,
-          /*     boxShadow: snapshot.isDragging ? "0 0 5px -1px black" : "", */
+          /* transform: snapshot.isDragging ? "skew(2deg)" : "", */
         };
         return (
           <div

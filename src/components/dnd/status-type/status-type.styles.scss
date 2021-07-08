@@ -36,10 +36,44 @@
   }
 }
 
+.st__header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.st__menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  padding-top: 20px;
+  position: relative;
+  .bll__content {
+    width: 130px;
+    left: -50%;
+    top: 60px;
+    .retroBox {
+      padding: 10px 0;
+    }
+  }
+}
+
+.st__settings,
+.st__drag {
+  opacity: 0.1;
+  transition: 0.2s ease;
+  cursor: pointer;
+  margin-left: 10px;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
 .st__title {
   padding: 5px 10px;
-  max-width: fit-content;
-
+  max-width: 50%;
+  form {
+  }
   input {
     background: transparent;
     border: 1px dotted rgba(0, 0, 0, 0);
@@ -47,7 +81,7 @@
     border-radius: 5px;
     margin-left: -10px;
     outline: none;
-    max-width: 50%;
+    max-width: 100%;
     font-size: 24px;
     font-weight: 800;
     color: #333;

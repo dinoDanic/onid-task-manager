@@ -606,6 +606,46 @@ export const changeStatusTypeName = (
     });
 };
 
+export const deleteStatusType = (spaceId, stationId, statusName) => {
+  console.log(spaceId, stationId);
+  let statusOrder = [];
+  let newOrder = [];
+  let statusType = {};
+  let tasks = {};
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      // get all data
+      console.log(taskData.data());
+      statusOrder = taskData.data().statusOrder;
+      statusType = taskData.data().statusType;
+      tasks = taskData.data().tasks;
+
+      // set status order
+      newOrder = statusOrder.filter((item) => item !== statusName);
+      console.log(newOrder);
+
+      // set status type
+      delete statusType[statusName];
+      console.log(statusType);
+    })
+    .then(() => {
+      tasksRef.update({
+        statusOrder: [...newOrder],
+        statusType,
+      });
+    });
+};
+
 export {
   db,
   auth,

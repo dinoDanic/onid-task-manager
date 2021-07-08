@@ -6,6 +6,10 @@ import styled from "styled-components";
 import Task from "../task/task-component";
 import RetroInput from "../../retro/input/input.component";
 import Box from "../../retro/box/box.component";
+import TaskSettings from "../../task-settings/task-settings.component";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGripLines } from "@fortawesome/free-solid-svg-icons";
 
 import {
   createNewTask,
@@ -24,7 +28,6 @@ const StatusType = ({
   const currentUser = useSelector((state) => state.user.currentUser);
   const statusType = useSelector((state) => state.space.statusType);
   const [newTaskName, setNewTaskName] = useState("");
-  const [inputName, setInputName] = useState("");
   const inputRef = useRef();
   const inputNameRef = useRef();
 
@@ -69,10 +72,18 @@ const StatusType = ({
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
-          <div className="st__title" {...provided.dragHandleProps}>
-            <form onSubmit={(e) => handleNameSubmit(e)}>
-              <InputName placeholder={status.name} ref={inputNameRef} />
-            </form>
+          <div className="st__header">
+            <div className="st__title">
+              <form onSubmit={(e) => handleNameSubmit(e)}>
+                <InputName placeholder={status.name} ref={inputNameRef} />
+              </form>
+            </div>
+            <div className="st__menu">
+              <div className="st__drag" {...provided.dragHandleProps}>
+                <FontAwesomeIcon icon={faGripLines} />
+              </div>
+              <TaskSettings status={status} />
+            </div>
           </div>
           <Box style={{ background: status.color }}>
             <div className="st__content">
