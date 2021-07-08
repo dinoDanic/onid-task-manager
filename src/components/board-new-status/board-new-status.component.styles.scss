@@ -1,5 +1,8 @@
 .boardNewStatus {
-  margin-top: 25px;
+  width: 100%;
+}
+.bns__header {
+  margin-top: 10px;
   margin-left: 10px;
   display: flex;
 
@@ -14,5 +17,19 @@
   }
   input {
     opacity: 1;
+    background: transparent;
+    color: rgb(253, 171, 61);
+    font-weight: 800;
+    font-size: 21px;
   }
+}
+.bns__fakeContainer {
+  background: rgb(253, 171, 61);
+  height: 120px;
+  border-radius: 10px;
+  transition: 0.2s ease;
+}
+.bns__fakeAddTask {
+  margin: 20px;
+  opacity: 0.1;
 }

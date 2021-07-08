@@ -82,7 +82,7 @@ const StatusType = ({
               <div className="st__drag" {...provided.dragHandleProps}>
                 <FontAwesomeIcon icon={faGripLines} />
               </div>
-              <TaskSettings status={status} />
+              <TaskSettings status={status} inputNameRef={inputNameRef} />
             </div>
           </div>
           <Box style={{ background: status.color }}>

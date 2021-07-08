@@ -138,7 +138,7 @@ const Board = ({ station }) => {
                 })}
                 {provided.placeholder}
               </>
-              <div className="board__newStatus">
+              <div className="statusType board__newStatus">
                 <BoardNewStatus />
               </div>
             </div>

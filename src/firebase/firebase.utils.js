@@ -692,6 +692,41 @@ export const createNewStatus = (spaceId, stationId, newName) => {
     });
 };
 
+export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
+  console.log("setting new color", newColor);
+  let statusType = {};
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      // get all data
+      statusType = taskData.data().statusType;
+
+      // set status type
+      statusType = {
+        ...statusType,
+        [statusName]: {
+          ...statusType[statusName],
+          color: newColor,
+        },
+      };
+      console.log(statusType);
+    })
+    .then(() => {
+      tasksRef.update({
+        statusType,
+      });
+    });
+};
+
 export {
   db,
   auth,
