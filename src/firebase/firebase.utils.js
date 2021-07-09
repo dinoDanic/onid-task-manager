@@ -45,7 +45,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       imageUrl: image,
       uid,
       userName,
-      favoriteStations: {},
+      favoriteStations: [],
     });
   } else {
     userRef.update({

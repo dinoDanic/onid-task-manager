@@ -30,10 +30,6 @@ const DockStation = () => {
                 <Members activeSpaceData={activeSpaceData} />
               </Box>
             </div>
-            <div className="ds__members ds__item">
-              <h2>Controls</h2>
-              <Box>on off</Box>
-            </div>
           </div>
         </div>
       )}
