@@ -9,8 +9,6 @@ export const selectCurrentUser = createSelector(
 
 export const filterForMembers = (allUsers, membersIds) => {
   if (!allUsers) return;
-  /*   console.log(allUsers);
-  console.log("members Ids ", membersIds); */
 
   let filteredUsersArray = [];
   membersIds.forEach((memberId) => {
@@ -19,8 +17,6 @@ export const filterForMembers = (allUsers, membersIds) => {
   });
 
   const filterdMembers = allUsers.filter((member) => member.uid == membersIds);
-  /* 
-  console.log(filteredUsersArray); */
 
   return filteredUsersArray;
 };

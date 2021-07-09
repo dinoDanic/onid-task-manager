@@ -10,6 +10,12 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  &:hover {
+    .fs__false {
+      opacity: 0.2;
+      color: gray;
+    }
+  }
 }
 
 .sm__buttomRow {
@@ -18,4 +24,10 @@
   justify-content: space-between;
   bottom: 5px;
   width: 100%;
+}
+.sm__favorite {
+  position: absolute;
+  top: 27.5px;
+  left: 20px;
+  color: white;
 }

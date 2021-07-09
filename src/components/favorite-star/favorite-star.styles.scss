@@ -1,0 +1,16 @@
+.favoriteStar {
+}
+.fs__star {
+  cursor: pointer;
+  transition: 0.2s ease;
+  &:hover {
+    transform: scale(1.1);
+  }
+}
+.fs__false {
+  opacity: 0;
+  &:hover {
+    opacity: 0.8 !important;
+    color: rgb(255 227 86) !important;
+  }
+}

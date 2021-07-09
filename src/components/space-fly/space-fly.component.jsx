@@ -23,7 +23,7 @@ const SpaceFly = () => {
         <div className="sf__flys">
           {spaceData?.map((space) => {
             return (
-              <div key={space.spaceId}>
+              <div className="sf__icon" key={space.spaceId}>
                 <Link to={`/s/${space.spaceId}`}>
                   <RetroButton
                     style={{ background: `${space.color}` }}

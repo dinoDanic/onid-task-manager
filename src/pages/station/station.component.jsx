@@ -29,7 +29,7 @@ const Station = () => {
     if (!activeSpaceId) return;
     const docRef = await db.collection("space").doc(activeSpaceId).get();
     const spaceData = docRef.data();
-    /*  if (!spaceData) return; */
+    if (!spaceData) return;
     if (!spaceData.members.includes(currentUserUid)) {
       alert("u have no acces");
       history.push("/");

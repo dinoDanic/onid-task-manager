@@ -50,31 +50,7 @@
   }
 }
 .ts__changeColor {
-  .colors {
-    width: 130px;
-    justify-content: center;
-    margin-top: 5px;
-    .color1 {
-      border-radius: 7px 0 0 0;
-    }
-    .color6 {
-      border-radius: 0 7px 0 0;
-    }
-    .color7 {
-      border-radius: 0 0 0 7px;
-    }
-    .color12 {
-      border-radius: 0 0 7px 0;
-    }
-  }
-  .colors__color {
-    width: 20px;
-    height: 20px;
-    margin-top: 0;
-    border-radius: 0px;
-    margin-right: 0;
-    box-shadow: none;
-  }
+  margin-top: 10px;
 }
 
 .ts__item-icon {

@@ -82,7 +82,10 @@ const Stations = () => {
         })}
       </div>
       <div className="stations__createStation">
-        <RetroButton onClick={() => setCreateStation(!createStation)}>
+        <RetroButton
+          mode="flat"
+          onClick={() => setCreateStation(!createStation)}
+        >
           {createStation ? "Cancel" : "Create station"}
         </RetroButton>
       </div>

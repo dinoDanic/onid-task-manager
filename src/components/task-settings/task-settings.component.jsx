@@ -2,10 +2,10 @@ import React, { useState, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { motion } from "framer-motion";
 
-import BoxLayerLite from "../retro/box-layer-lite/box-layer-lite.component";
 import BoxLayer from "../retro/box-layer/box-layer.component";
 import RetroButton from "../retro/button/retro-button.component";
 import Colors from "../colors/colors.component";
+import MiniMenu from "../retro/mini-menu/mini-menu.component";
 
 import { deleteStatusType, setTaskColor } from "../../firebase/firebase.utils";
 
@@ -44,34 +44,26 @@ const TaskSettings = ({ status, inputNameRef }) => {
         <FontAwesomeIcon icon={faTools} />
       </div>
       {showSettings && (
-        <BoxLayerLite setLayer={setShowSettings}>
-          <div className="ts__item" onClick={() => setShowDelete(!showDelete)}>
-            <div className="ts__item-icon">
+        <MiniMenu setLayer={setShowSettings}>
+          <ul>
+            <li onClick={() => setShowDelete(!showDelete)}>
+              <div className="tooltip">Delete</div>
               <FontAwesomeIcon icon={faTrashAlt} />
-            </div>
-            <p>Delete</p>
-          </div>
-          <div
-            className="ts__item ts__item-color"
-            onClick={() => setShowColors(!showColors)}
-          >
-            <div className="ts__item-icon">
+            </li>
+            <li onClick={() => setShowColors(!showColors)}>
+              <div className="tooltip">Colors</div>
               <FontAwesomeIcon icon={faFillDrip} />
-            </div>
-            <p>Change color</p>
-          </div>
-          <div
-            className="ts__item"
-            onClick={() => {
-              inputNameRef.current.focus();
-              setShowSettings(false);
-            }}
-          >
-            <div className="ts__item-icon">
+            </li>
+            <li
+              onClick={() => {
+                inputNameRef.current.focus();
+                setShowSettings(false);
+              }}
+            >
+              <div className="tooltip">Rename</div>
               <FontAwesomeIcon icon={faICursor} />
-            </div>
-            <p>Rename</p>
-          </div>
+            </li>
+          </ul>
           {showColors && (
             <motion.div
               className="ts__changeColor"
@@ -81,7 +73,7 @@ const TaskSettings = ({ status, inputNameRef }) => {
               <Colors returnColor={setColor} />
             </motion.div>
           )}
-        </BoxLayerLite>
+        </MiniMenu>
       )}
       {showDelete && (
         <div className="ts__delete">

@@ -21,7 +21,7 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         users: action.payload,
       };
-    case UserActionTypes.SET_FAVORITE_SPACE:
+    case UserActionTypes.SET_FAVORITE_STATION:
       return {
         ...state,
         currentUser: {
@@ -29,10 +29,27 @@ const userReducer = (state = INITIAL_STATE, action) => {
           favoriteSpace: action.payload,
         },
       };
-    /* return {
+    case UserActionTypes.REMOVE_ONE_STATION:
+      let allFavIds = state.currentUser.favoriteStations;
+      let removeId = allFavIds.filter((item) => item !== action.payload);
+      return {
         ...state,
-        currentUser: action.payload,
-      }; */
+        currentUser: {
+          ...state.currentUser,
+          favoriteStations: removeId,
+        },
+      };
+    case UserActionTypes.ADD_ONE_STATION:
+      let addOne = state.currentUser.favoriteStations;
+      addOne.push(action.payload);
+      console.log(addOne);
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          favoriteStations: addOne,
+        },
+      };
     default:
       return state;
   }

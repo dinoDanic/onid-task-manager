@@ -36,7 +36,7 @@ function App() {
             uid,
             userName: displayName,
             email,
-            favoriteSpace: "",
+            favoriteStations: [],
           };
           dispatch(signIn(userData));
           createUserInFirebase(userData);
@@ -47,7 +47,7 @@ function App() {
             uid,
             userName: displayName,
             email,
-            favoriteSpace: gotData.favoriteSpace,
+            favoriteStations: gotData.favoriteStations,
           };
           dispatch(signIn(userData));
           createUserInFirebase(userData);

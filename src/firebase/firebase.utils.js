@@ -45,7 +45,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       imageUrl: image,
       uid,
       userName,
-      favoriteSpace: "",
+      favoriteStations: [],
     });
   } else {
     userRef.update({
@@ -725,6 +725,20 @@ export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
         statusType,
       });
     });
+};
+
+export const addStationFavorite = (userId, stationId) => {
+  const userRef = db.collection("users").doc(userId);
+  userRef.update({
+    favoriteStations: firebase.firestore.FieldValue.arrayUnion(stationId),
+  });
+};
+export const removeStationFavorite = (userId, stationId) => {
+  console.log(userId, stationId);
+  const userRef = db.collection("users").doc(userId);
+  userRef.update({
+    favoriteStations: firebase.firestore.FieldValue.arrayRemove(stationId),
+  });
 };
 
 export {

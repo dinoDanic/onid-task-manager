@@ -5,9 +5,9 @@ export const signIn = (userData) => ({
   payload: userData,
 });
 
-export const setFavoriteSpace = (favoriteSpaceId) => ({
-  type: UserActionTypes.SET_FAVORITE_SPACE,
-  payload: favoriteSpaceId,
+export const setFavoriteStation = (favoriteStationId) => ({
+  type: UserActionTypes.SET_FAVORITE_STATION,
+  payload: favoriteStationId,
 });
 
 export const signOut = () => ({
@@ -17,4 +17,13 @@ export const signOut = () => ({
 export const setUsers = (users) => ({
   type: UserActionTypes.SET_USERS,
   payload: users,
+});
+
+export const removeOneFavoriteStation = (stationId) => ({
+  type: UserActionTypes.REMOVE_ONE_STATION,
+  payload: stationId,
+});
+export const addOneFavoriteStation = (stationId) => ({
+  type: UserActionTypes.ADD_ONE_STATION,
+  payload: stationId,
 });

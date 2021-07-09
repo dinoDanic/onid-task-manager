@@ -5,6 +5,7 @@ import { useHistory } from "react-router-dom";
 import Views from "../../views/views.component";
 import Modules from "../../modules/modules.component";
 import StationInfo from "../../station-info/station-info.component";
+import FavoriteStar from "../../favorite-star/favorite-star.component";
 
 import "./station-menu.styles.scss";
 
@@ -37,6 +38,9 @@ const StationMenu = () => {
           currentStationId={currentStationId}
           currentSpaceId={currentSpaceId}
         />
+      </div>
+      <div className="sm__favorite">
+        <FavoriteStar />
       </div>
     </div>
   );
