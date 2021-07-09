@@ -1,39 +1,39 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
-import { getFavoriteStations } from "../../firebase/firebase.utils";
-
 import RetroButton from "../retro/button/retro-button.component";
+
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faStar } from "@fortawesome/free-solid-svg-icons";
 
 import "./favorite-stations.styles.scss";
 
 const FavoriteStations = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
-  const [spaces, setSpaces] = useState([]);
-
-  const { favoriteSpace } = currentUser;
-  const favSpaces = getFavoriteStations(currentUser.favoriteSpace);
-
-  useEffect(() => {
-    favSpaces.then((spaces) => {
-      setSpaces(spaces);
-    });
-  }, [currentUser]);
-
+  const favoriteStations = useSelector(
+    (state) => state.user.currentUser.favoriteStations
+  );
   return (
     <div className="favoriteStation">
-      {spaces?.map((space) => {
-        console.log(space);
-        console.log(currentUser);
-        return (
-          <div className="fs__item" key={space.stationsId}>
-            <Link to={`/s/${favoriteSpace}/e/${space.stationsId}/b`}>
-              <RetroButton mode="flat">{space.name}</RetroButton>
-            </Link>
-          </div>
-        );
-      })}
+      {favoriteStations.length === 0 ? (
+        <div className="fs__noStar">
+          <FontAwesomeIcon icon={faStar} size="4x" />
+          <p>No Stations Favorited</p>
+        </div>
+      ) : (
+        <>
+          {favoriteStations?.map((station) => {
+            const { fromSpaceId, stationId } = station;
+            return (
+              <div className="fs__item" key={station.stationId}>
+                <Link to={`/s/${fromSpaceId}/e/${stationId}/b`}>
+                  <RetroButton mode="flat">{station.name}</RetroButton>
+                </Link>
+              </div>
+            );
+          })}
+        </>
+      )}
     </div>
   );
 };

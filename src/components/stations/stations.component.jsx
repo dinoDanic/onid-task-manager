@@ -78,7 +78,7 @@ const Stations = () => {
       <p className="stations__pre">Stations</p>
       <div className="stations__stationItem">
         {stationData?.map((station) => {
-          return <StationItem key={station.stationsId} data={station} />;
+          return <StationItem key={station.stationId} data={station} />;
         })}
       </div>
       <div className="stations__createStation">

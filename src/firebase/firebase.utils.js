@@ -45,7 +45,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       imageUrl: image,
       uid,
       userName,
-      favoriteStations: [],
+      favoriteStations: {},
     });
   } else {
     userRef.update({
@@ -106,7 +106,7 @@ const createNewStation = (spaceId, stationName, modules, statusType) => {
       let id = data.id;
       stationsRef.doc(id).set(
         {
-          stationsId: id,
+          stationId: id,
         },
         { merge: true }
       );
@@ -129,12 +129,13 @@ export const createNewStation2 = (
     .add({
       name: stationName,
       description: "Add description",
+      fromSpaceId: spaceId,
     })
     .then((data) => {
       let id = data.id;
       stationsRef.doc(id).set(
         {
-          stationsId: id,
+          stationId: id,
         },
         { merge: true }
       );
@@ -254,12 +255,13 @@ export const getFavoriteStations = async (favoriteSpaceId) => {
   const querySnapshop = await colRef.get();
   if (querySnapshop.empty) {
     console.log("empity");
+
+    let list = [];
+    querySnapshop.forEach((data) => {
+      list.push(data.data());
+    });
+    return list;
   }
-  let list = [];
-  querySnapshop.forEach((data) => {
-    list.push(data.data());
-  });
-  return list;
 };
 
 export const renameStation = (spaceId, stationId, newName) => {
@@ -727,18 +729,23 @@ export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
     });
 };
 
-export const addStationFavorite = (userId, stationId) => {
+export const updateFavoriteStation = (userId, user) => {
   const userRef = db.collection("users").doc(userId);
   userRef.update({
-    favoriteStations: firebase.firestore.FieldValue.arrayUnion(stationId),
+    ...user,
   });
 };
-export const removeStationFavorite = (userId, stationId) => {
-  console.log(userId, stationId);
-  const userRef = db.collection("users").doc(userId);
-  userRef.update({
-    favoriteStations: firebase.firestore.FieldValue.arrayRemove(stationId),
-  });
+
+export const getTaskData = (spaceId, stationId) => {
+  return db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .get()
+    .then((data) => {
+      return data.data();
+    });
 };
 
 export {

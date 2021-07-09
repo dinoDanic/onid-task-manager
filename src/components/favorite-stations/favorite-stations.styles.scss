@@ -1,3 +1,18 @@
+.favoriteStation {
+}
+.fs__noStar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  svg {
+    opacity: 0.1;
+    margin-bottom: 15px;
+  }
+  p {
+    opacity: 0.4;
+  }
+}
 .fs__item {
   margin-bottom: 5px;
   &:last-child {

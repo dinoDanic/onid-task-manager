@@ -13,7 +13,7 @@ function StationItem({ data }) {
   const activeSpaceId = useSelector((state) => state.history.spaceId);
   return (
     <div className="stationItem">
-      <Link to={`/s/${activeSpaceId}/e/${data.stationsId}/b`}>
+      <Link to={`/s/${activeSpaceId}/e/${data.stationId}/b`}>
         <RetroButton>
           <FontAwesomeIcon icon={faTasks} size="2x" />
           {data.name}

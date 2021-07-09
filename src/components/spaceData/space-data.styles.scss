@@ -16,8 +16,6 @@
 }
 
 .sd__data {
-  margin-right: 20px;
-
   h4 {
     margin-top: -10px;
     margin-left: 7px;
@@ -48,6 +46,10 @@
   }
   &:active {
     transform: scale(0.97);
+  }
+  button {
+    font-size: 22px;
+    text-transform: uppercase;
   }
 }
 .sd__favorite {

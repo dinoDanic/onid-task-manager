@@ -28,8 +28,8 @@ function RecentStations({ activeSpaceData }) {
       ) : (
         recentStation?.map((data) => {
           return (
-            <div className="rs__item" key={data.stationsId}>
-              <Link to={`/s/${activeSpaceData.spaceId}/e/${data.stationsId}/b`}>
+            <div className="rs__item" key={data.stationId}>
+              <Link to={`/s/${activeSpaceData.spaceId}/e/${data.stationId}/b`}>
                 <RetroButton mode="flat">
                   <FontAwesomeIcon icon={faTasks} size="2x" />
                   {data.name}

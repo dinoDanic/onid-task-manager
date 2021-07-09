@@ -27,3 +27,8 @@ export const addOneFavoriteStation = (stationId) => ({
   type: UserActionTypes.ADD_ONE_STATION,
   payload: stationId,
 });
+
+export const addToFavorite = (favoriteData) => ({
+  tpye: UserActionTypes.ADD_TO_FAVORITE,
+  payload: favoriteData,
+});

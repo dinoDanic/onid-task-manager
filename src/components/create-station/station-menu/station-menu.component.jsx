@@ -20,7 +20,7 @@ const StationMenu = () => {
   useEffect(() => {
     if (!stationData) return;
     const data = stationData.filter(
-      (item) => item.stationsId === currentStationId
+      (item) => item.stationId === currentStationId
     );
     setData(data[0]);
   }, [stationData, currentStationId]);
