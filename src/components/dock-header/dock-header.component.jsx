@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import bg1Img from "../../img/bg6.jpeg";
@@ -6,25 +6,39 @@ import bg1Img from "../../img/bg6.jpeg";
 import "./dock-header-styles.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faTools, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
+import {
+  faFillDrip,
+  faICursor,
+  faTools,
+} from "@fortawesome/free-solid-svg-icons";
 
-import BoxLayerLite from "../retro/box-layer-lite/box-layer-lite.component";
-import BoxLayer from "../retro/box-layer/box-layer.component";
-import RetroButton from "../retro/button/retro-button.component";
+import MiniMenu from "../retro/mini-menu/mini-menu.component";
+import DeleteStation from "./delete-station/delete-station.component";
+import Colors from "../colors/colors.component";
 
 import {
   changeDescriptionOfSpace,
   renameSpace,
+  updateColorOfSpace,
 } from "../../firebase/firebase.utils";
-import MiniMenu from "../mini-menu/mini-menu.component";
 
 const DockHeader = ({ activeSpaceData }) => {
+  const spaceId = useSelector((state) => state.history.spaceId);
   const [inputDesc, setInputDesc] = useState("");
   const [inputName, setInputName] = useState("");
-  const [showSettings, setShowSettings] = useState(false);
-  /* const [showDelete, setShowDelete] = useState(false); */
+  const [showMiniMenu, setShowMiniMenu] = useState(false);
+  const [showColors, setShowColors] = useState(false);
+  const [color, setColor] = useState("");
+
   const inputRefDesc = useRef();
   const inputRefName = useRef();
+
+  useEffect(() => {
+    if (!color) return;
+    updateColorOfSpace(spaceId, color);
+    setShowColors(false);
+    setShowMiniMenu(false);
+  }, [color]);
 
   const handleSubmitDesc = (e) => {
     e.preventDefault();
@@ -68,31 +82,34 @@ const DockHeader = ({ activeSpaceData }) => {
 
       <div className="dh__settings">
         <div className="dh__settings-tool">
-          <FontAwesomeIcon
-            icon={faTools}
-            onClick={() => setShowSettings(!showSettings)}
-          />
+          <div className="dh__settings-icon">
+            <FontAwesomeIcon
+              icon={faTools}
+              onClick={() => setShowMiniMenu(!showMiniMenu)}
+            />
+          </div>
+          {showMiniMenu && (
+            <MiniMenu setLayer={setShowMiniMenu}>
+              <ul>
+                <li
+                  onClick={() => {
+                    inputRefName.current.focus();
+                    setShowMiniMenu(false);
+                  }}
+                >
+                  <div className="tooltip">Rename</div>
+                  <FontAwesomeIcon icon={faICursor} fontSize="1x" />
+                </li>
+                <DeleteStation data={activeSpaceData} />
+                <li onClick={() => setShowColors(!showColors)}>
+                  <div className="tooltip">colors</div>
+                  <FontAwesomeIcon icon={faFillDrip} fontSize="1x" />
+                </li>
+                {showColors && <Colors returnColor={setColor} />}
+              </ul>
+            </MiniMenu>
+          )}
         </div>
-        {showSettings && (
-          <BoxLayerLite setLayer={setShowSettings}>
-            <MiniMenu setMiniMenu={setShowSettings} />
-          </BoxLayerLite>
-        )}
-        {/*  {showDelete && (
-          <BoxLayer type="question" set setLayer={setShowDelete}>
-            <h2>Delete Space {activeSpaceData.name} ?</h2>
-            <div className="dh__btns">
-              <RetroButton mode="gray">cancel</RetroButton>
-              <RetroButton
-                color="danger"
-                mode="flat"
-                onClick={() => deleteSpace(spaceId)}
-              >
-                yes
-              </RetroButton>
-            </div>
-          </BoxLayer>
-        )} */}
       </div>
     </div>
   );

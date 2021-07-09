@@ -7,11 +7,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  z-index: 200;
+  z-index: 250;
   color: #333;
 }
 .bl__content {
-  z-index: 100;
+  z-index: 200;
+
+  .retroBox {
+    padding: 30px !important;
+  }
 }
 .bl__layer {
   background: rgba(0, 0, 0, 0.4);
@@ -19,13 +23,9 @@
   width: 100%;
   height: 100%;
   position: absolute;
+  z-index: 100;
 }
-.question {
-  .retroBox {
-    width: 500px;
-    padding: 30px !important;
-  }
-}
+
 /* .bl__btns {
   display: flex;
   justify-content: flex-end;

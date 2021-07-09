@@ -28,7 +28,8 @@ import {
   updateColorOfSpace,
 } from "../../firebase/firebase.utils";
 
-const MiniMenu = ({ setMiniMenu }) => {
+// TODO NAPRAVI LEAVE SPACE
+const MiniMenu = ({ setMiniMenu, inputRefName }) => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
   const activeSpaceId = useSelector((state) => state.history.spaceId);
   const dispatch = useDispatch();
@@ -57,15 +58,16 @@ const MiniMenu = ({ setMiniMenu }) => {
     }
   }, [color]);
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    try {
+  const handleSubmit = () => {
+    inputRefName.current.focus();
+    setMiniMenu(false);
+    /* try {
       renameSpace(activeSpaceId, nameInput);
     } catch (error) {
       console.log(error.message);
     } finally {
       setMiniMenu(false);
-    }
+    } */
   };
 
   const handleDelete = () => {
@@ -81,7 +83,7 @@ const MiniMenu = ({ setMiniMenu }) => {
   return (
     <div className="miniMenu">
       <ul>
-        <li onClick={() => setRename(!rename)}>
+        <li onClick={() => handleSubmit()}>
           <FontAwesomeIcon icon={faICursor} />
           <p>Rename</p>
         </li>
@@ -105,7 +107,12 @@ const MiniMenu = ({ setMiniMenu }) => {
               <BoxLayer type="question" set setLayer={setDeleteSpaceStatus}>
                 <h2>Delete Space {activeSpaceData.name} ?</h2>
                 <div className="mm__btns">
-                  <RetroButton mode="gray">cancel</RetroButton>
+                  <RetroButton
+                    mode="gray"
+                    onClick={() => setDeleteSpaceStatus(false)}
+                  >
+                    cancel
+                  </RetroButton>
                   <RetroButton
                     color="danger"
                     mode="flat"

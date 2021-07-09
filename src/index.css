@@ -37,3 +37,8 @@ a {
 input {
   font-family: "Noto Sans JP", sans-serif;
 }
+ul li {
+  list-style: none;
+  text-transform: none;
+  text-decoration: none;
+}

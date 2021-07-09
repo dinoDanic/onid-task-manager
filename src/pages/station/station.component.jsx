@@ -20,6 +20,7 @@ import "./station.syles.scss";
 const Station = () => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
   const activeSpaceId = useSelector((state) => state.history.spaceId);
+  const stationId = useSelector((state) => state.history.stationId);
   /* const activeSpaceData = useActiveSpaceData(); */
   const history = useHistory();
   const [miniMenu, setMiniMenu] = useState(false);
@@ -28,31 +29,15 @@ const Station = () => {
     if (!activeSpaceId) return;
     const docRef = await db.collection("space").doc(activeSpaceId).get();
     const spaceData = docRef.data();
+    /*  if (!spaceData) return; */
     if (!spaceData.members.includes(currentUserUid)) {
       alert("u have no acces");
       history.push("/");
     }
-  }, []);
+  }, [activeSpaceId, stationId]);
 
   return (
     <motion.div className="station">
-      {/*  {activeSpaceData && (
-        <div className="station__header">
-          <div className="station__name">
-            <Link to={`/s/${activeSpaceId}`}>
-              <RetroButton style={{ background: activeSpaceData.color }}>
-                {activeSpaceData.name.charAt(0)}
-              </RetroButton>
-            </Link>
-            <h3>{activeSpaceData.name}</h3>
-          </div>
-          <div className="station__menu">
-            <RetroButton mode="flat" onClick={() => setMiniMenu(true)}>
-              <FontAwesomeIcon icon={faEllipsisH} size="2x" />
-            </RetroButton>
-          </div>
-        </div>
-      )} */}
       <Stations />
       <div className="station__miniMenu">
         {miniMenu && (

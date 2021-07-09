@@ -8,12 +8,11 @@
   flex-direction: column;
   justify-content: center;
   &:hover {
-    .dh__settings-tool {
-      svg {
-        opacity: 0.3;
-      }
+    .dh__settings-icon {
+      opacity: 1;
     }
   }
+
   img {
     position: absolute;
     width: 100%;
@@ -65,26 +64,35 @@
 
 .dh__settings {
   position: absolute;
-  right: 60px;
-  top: 30px;
-  .dh__settings-tool {
-    svg {
-      width: 25px !important;
-      height: 25px !important;
-      opacity: 0;
-      transition: 0.2s ease;
-      &:hover {
-        opacity: 0.8;
-        cursor: pointer;
-      }
-    }
-  }
+  left: 20px;
+  top: 20px;
   .bll__content {
-    width: 180px;
-    left: -155px;
-    top: 40px;
-    .retroBox {
-      padding: 10px 0;
+    margin-top: 10px;
+  }
+}
+.dh__btns {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  button {
+    width: fit-content;
+    height: 30px;
+  }
+}
+.dh__settings-icon {
+  cursor: pointer;
+  transition: 0.2s ease;
+  opacity: 0;
+  &:hover {
+    transform: scale(1.1);
+  }
+  svg {
+    opacity: 0.5;
+    width: 20px !important;
+    height: 20px !important;
+    transition: 0.2s ease;
+    &:hover {
+      opacity: 0.8;
     }
   }
 }
