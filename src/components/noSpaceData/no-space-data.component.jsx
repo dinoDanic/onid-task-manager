@@ -6,24 +6,24 @@ import CreateSpace from "../create-space/create-space.component";
 import "./no-space-data.styles.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus } from "@fortawesome/free-solid-svg-icons";
+import { faPlus, faRocket } from "@fortawesome/free-solid-svg-icons";
 
 function NoSpaceData() {
   const [create, setCreate] = useState(false);
   return (
     <>
       <div className="noSpaceData">
-        <h3>Hey, seems like you dont have any Space!</h3>
+        <FontAwesomeIcon icon={faRocket} size="4x" />
         <p>
-          By creating a <b>Space</b> you can invite others to work on tasks.{" "}
-          <br />
-          Inside <b>Space</b> you create <b>Stations</b> for You and Your
-          members
+          No Space Fond, {/* */}
+          <span className="nsd__span" onClick={() => setCreate(!create)}>
+            <b>Create New Space!</b>
+          </span>
         </p>
-        <RetroButton onClick={() => setCreate(!create)}>
-          <FontAwesomeIcon icon={faPlus} />
-          Create new space
-        </RetroButton>
+        {/*  <p>
+          By creating a <b>Space</b> you can invite others to work on tasks
+        </p> */}
+        <div className="nsd__createBtn"></div>
       </div>
       {create && <CreateSpace setLayer={setCreate} />}
     </>

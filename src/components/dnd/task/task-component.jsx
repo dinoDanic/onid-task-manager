@@ -24,26 +24,38 @@ const Task = ({ task, index }) => {
   useEffect(() => {
     // AUTO UPDATE TASKS
     if (!task.assign) return;
-
     let getUser = users.filter((item) => item.uid === task.assign);
     let user = getUser[0];
 
-    if (user.assignedTasks.length === 0) {
-      // push task
+    console.log(task);
+    console.log(user);
+
+    const gotTask = user.assignedTasks.filter((item) => item.id === task.id);
+    const gotTaskRes = gotTask[0];
+
+    console.log(gotTaskRes);
+
+    if (gotTaskRes === undefined) {
       user.assignedTasks.push(task);
       updateUser(user.uid, user);
+      return;
     } else {
-      // update task
-      let deleteTask = user.assignedTasks.filter(
-        (item) => item.assign !== task.assign
+      let copyUser = user;
+      let deleteOldTask = copyUser.assignedTasks.filter(
+        (item) => item.id !== task.id
       );
-      deleteTask.push(task);
-      user = {
-        ...user,
-        assignedTasks: [...deleteTask],
+      deleteOldTask.push(task);
+      let newUser = {
+        ...copyUser,
+        assignedTasks: [...deleteOldTask],
       };
-      updateUser(user.uid, user);
+      updateUser(user.uid, newUser);
     }
+
+    /* user.assignedTasks.push(task);
+
+    console.log(user);
+    updateUser(user.uid, user); */
   }, [task]);
   return (
     <Draggable draggableId={task.id} index={index}>

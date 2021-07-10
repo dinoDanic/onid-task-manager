@@ -1,24 +1,22 @@
 .assignedTasks {
 }
 .at__task {
-  border: 1px solid #eff2f5;
+  background: #eff2f5;
   padding: 10px;
   border-radius: 10px;
   margin-bottom: 10px;
   p {
-    color: gray;
   }
   &:last-child {
     margin-bottom: 0;
   }
 }
 .at__modules {
-  margin-top: 10px;
   display: flex;
-
+  align-items: center;
   justify-content: flex-end;
   div {
-    margin-right: 5px;
+    margin-left: 5px;
     display: flex;
     justify-content: center;
   }
@@ -28,4 +26,23 @@
 }
 .at__status {
   pointer-events: none;
+}
+.at__noTasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  svg {
+    opacity: 0.1;
+    margin-bottom: 15px;
+  }
+  p {
+    opacity: 0.4;
+  }
+}
+.at__by {
+  .avatar {
+    width: 25px !important;
+    height: 25px !important;
+  }
 }

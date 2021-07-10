@@ -392,7 +392,7 @@ export const unAssign = (spaceId, stationId, taskId) => {
       task = taskData.data().tasks[taskId];
       task = {
         ...task,
-        assign: null,
+        assign: [],
       };
     })
     .then(() => {
@@ -746,6 +746,21 @@ export const getTaskData = (spaceId, stationId) => {
     .get()
     .then((data) => {
       return data.data();
+    });
+};
+
+export const removeStarFavorite = (userId, stationId) => {
+  db.collection("users")
+    .doc(userId)
+    .update({
+      favoriteStations: firebase.firestore.FieldValue.arrayRemove(stationId),
+    });
+};
+export const addStarFavorite = (userId, stationId) => {
+  db.collection("users")
+    .doc(userId)
+    .update({
+      favoriteStations: firebase.firestore.FieldValue.arrayUnion(stationId),
     });
 };
 

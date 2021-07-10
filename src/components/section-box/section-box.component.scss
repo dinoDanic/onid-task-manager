@@ -1,3 +1,15 @@
 .sb__title {
   margin-bottom: 10px;
+  margin-left: 10px;
+  h2 {
+    opacity: 0.8;
+  }
+  p {
+    opacity: 0.5;
+  }
+}
+.sb__contect {
+  .retroBox {
+    min-height: 158px;
+  }
 }

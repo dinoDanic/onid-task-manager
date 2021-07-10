@@ -66,10 +66,10 @@ function App() {
     });
   }, [dispatch, history]);
 
-  useEffect(() => {
+  /*   useEffect(() => {
     if (users === null) return;
     updateUser(currentUser.uid, currentUser);
-  }, [user]);
+  }, [user]); */
 
   return (
     <div className="app">

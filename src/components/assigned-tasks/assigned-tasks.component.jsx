@@ -6,7 +6,9 @@ import "./assigned-tasks.styles.scss";
 
 import DaysLeft from "../modules/days-left/days-left.component";
 import Priority from "../modules/priority/priority.component";
-import Status from "../modules/status/status.component";
+import CreatedBy from "../modules/created-by/created-by.component";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 const AssingedTasks = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -16,27 +18,41 @@ const AssingedTasks = () => {
     db.collection("users")
       .doc(currentUser.uid)
       .onSnapshot((userData) => {
-        setAssignedTasks(userData.data().assignedTasks);
+        if (userData.exists) {
+          setAssignedTasks(userData.data().assignedTasks);
+        }
       });
   }, [currentUser]);
   return (
     <div className="assignedTasks">
-      {assignedTasks?.map((task) => {
-        console.log(task);
-        return (
-          <div className="at__task" key={task.id}>
-            <p>{task.content}</p>
-            <div className="at__modules">
-              <div className="at__daysLeft">
-                <DaysLeft task={task} />
+      {!assignedTasks.length > 0 ? (
+        <div className="at__noTasks">
+          <FontAwesomeIcon icon={faTasks} size="4x" />
+          <p>All Tasks Done!</p>
+        </div>
+      ) : (
+        <>
+          {assignedTasks.map((task) => {
+            console.log(task);
+            return (
+              <div className="at__task" key={task.id}>
+                <p>{task.content}</p>
+                <div className="at__modules">
+                  <div className="at__daysLeft">
+                    <DaysLeft task={task} />
+                  </div>
+                  <div className="at__priority">
+                    <Priority task={task} />
+                  </div>
+                  <div className="at__by">
+                    <CreatedBy task={task} />
+                  </div>
+                </div>
               </div>
-              <div className="at__priority">
-                <Priority task={task} />
-              </div>
-            </div>
-          </div>
-        );
-      })}
+            );
+          })}
+        </>
+      )}
     </div>
   );
 };
