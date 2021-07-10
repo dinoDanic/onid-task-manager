@@ -8,7 +8,7 @@ import {
   updateUser,
 } from "./firebase/firebase.utils";
 
-import { setUser, signOut } from "./redux/user/user.actions";
+import { setCurrentUser, signOut } from "./redux/user/user.actions";
 
 import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
@@ -26,6 +26,7 @@ function App() {
   const dispatch = useDispatch();
   const history = useHistory();
   const { currentUser } = user;
+  console.log(currentUser);
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -43,7 +44,7 @@ function App() {
             favoriteStations: [],
             assignedTasks: [],
           };
-          dispatch(setUser(userData));
+          dispatch(setCurrentUser(userData));
           createUserInFirebase(userData);
         }
         if (gotData) {
@@ -55,7 +56,7 @@ function App() {
             favoriteStations: gotData.favoriteStations,
             assignedTasks: gotData.assignedTasks,
           };
-          dispatch(setUser(userData));
+          dispatch(setCurrentUser(userData));
           createUserInFirebase(userData);
         }
       } else {
@@ -67,6 +68,7 @@ function App() {
 
   useEffect(() => {
     if (currentUser === null) return;
+    console.log("updating users to firebase");
     updateUser(currentUser.uid, currentUser);
   }, [user]);
 

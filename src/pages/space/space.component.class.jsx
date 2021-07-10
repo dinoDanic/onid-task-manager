@@ -17,7 +17,6 @@ const Space = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    console.log("chekc space");
     db.collection("space")
       .where("members", "array-contains", currentUser.uid)
       .orderBy("created", "asc")

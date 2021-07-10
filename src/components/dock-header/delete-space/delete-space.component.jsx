@@ -13,16 +13,18 @@ import RetroButton from "../../retro/button/retro-button.component";
 import { deleteSpace, removeMember } from "../../../firebase/firebase.utils";
 
 import { removeOneSpace } from "../../../redux/space/space.actions";
-import { current } from "@reduxjs/toolkit";
+import { setCurrentUser } from "../../../redux/user/user.actions";
 
 const DeleteStation = ({ data }) => {
   const dispatch = useDispatch();
   const history = useHistory();
-  const currentUserUid = useSelector((state) => state.user.currentUser.uid);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const spaceId = useSelector((state) => state.history.spaceId);
   const activeSpaceData = useActiveSpaceData();
   const [isUserAdmin, setIsUserAdmin] = useState(false);
   const [showAction, setShowAction] = useState(false);
+  const currentUserUid = currentUser.uid;
+  console.log(currentUserUid);
 
   useEffect(() => {
     const { admin } = activeSpaceData;
@@ -32,6 +34,31 @@ const DeleteStation = ({ data }) => {
       setIsUserAdmin(false);
     }
   }, []);
+
+  const handleDeleteSpace = () => {
+    // in favorite or assinged tasks ?
+    let user = currentUser;
+    console.log(user);
+    let assignedArray = user.assignedTasks;
+    let filter = assignedArray.filter((item) => item.fromSpaceId === spaceId);
+    let result = filter[0];
+    if (result !== undefined) {
+      let taskIdtoRemove = result.id;
+      let filteredAssign = assignedArray.filter(
+        (item) => item.id !== taskIdtoRemove
+      );
+      let newUser = {
+        ...currentUser,
+        assignedTasks: [...filteredAssign],
+      };
+      console.log(newUser);
+      dispatch(setCurrentUser(newUser));
+    }
+
+    deleteSpace(spaceId);
+    dispatch(removeOneSpace(spaceId));
+    history.push("/");
+  };
 
   return (
     <>
@@ -51,7 +78,7 @@ const DeleteStation = ({ data }) => {
           <BoxLayer type="question" setLayer={setShowAction}>
             {!isUserAdmin ? (
               <>
-                <h2>Leace {data.name} Station?</h2>
+                <h2>Leave {data.name} Space?</h2>
                 <div className="dh__btns">
                   <RetroButton mode="gray" onClick={() => setShowAction(false)}>
                     cancel
@@ -70,7 +97,7 @@ const DeleteStation = ({ data }) => {
               </>
             ) : (
               <>
-                <h2>Delete {data.name} Station?</h2>
+                <h2>Delete {data.name} Space?</h2>
                 <div className="dh__btns">
                   <RetroButton mode="gray" onClick={() => setShowAction(false)}>
                     cancel
@@ -78,11 +105,7 @@ const DeleteStation = ({ data }) => {
                   <RetroButton
                     color="danger"
                     mode="flat"
-                    onClick={() => {
-                      deleteSpace(spaceId);
-                      dispatch(removeOneSpace(spaceId));
-                      history.push("/");
-                    }}
+                    onClick={() => handleDeleteSpace()}
                   >
                     Delete
                   </RetroButton>

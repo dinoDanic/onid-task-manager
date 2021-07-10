@@ -12,7 +12,7 @@ import { assignMember, unAssign } from "../../../firebase/firebase.utils";
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
 
-import { setUser } from "../../../redux/user/user.actions";
+import { setCurrentUser } from "../../../redux/user/user.actions";
 
 import "./assign-styles.scss";
 
@@ -51,13 +51,13 @@ const Assign = ({ task }) => {
     assignMember(spaceId, stationId, task.id, uid);
     setShowMembers(false);
 
-    //
+    /*   //
     let userArray = currentUser;
     userArray = {
       ...userArray,
       assignedTasks: [...userArray.assignedTasks, task],
     };
-    dispatch(setUser(userArray));
+    dispatch(setCurrentUser(userArray)); */
   };
 
   const handleUnAssignMember = () => {
@@ -72,7 +72,7 @@ const Assign = ({ task }) => {
       ...currentUser,
       assignedTasks: [...taskArray],
     };
-    dispatch(setUser(newUser));
+    dispatch(setCurrentUser(newUser));
   };
   return (
     <div className="assign">

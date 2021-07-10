@@ -44,7 +44,6 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   useEffect(() => {
     let keys = Object.keys(statusType);
     setStatusOrder(keys);
-    console.log(statusOrder);
   }, [statusType, setStatusType, force, setForce]);
 
   const [modules, setModules] = useState([

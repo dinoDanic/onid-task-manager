@@ -5,7 +5,7 @@ import { useHistory } from "react-router";
 import { updateDrag } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
-import { setUser } from "../../redux/user/user.actions";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 import StatusType from "../../components/dnd/status-type/status-type.component";
 import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
@@ -70,7 +70,6 @@ const Board = ({ station }) => {
 
       // on drag delete
       if (destination.droppableId === "delete") {
-        console.log(state);
         const taskId = draggableId;
         const statusName = source.droppableId;
         // get task ids
@@ -97,7 +96,7 @@ const Board = ({ station }) => {
           ...currentUser,
           assignedTasks: [...taskArray],
         };
-        dispatch(setUser(newUser));
+        dispatch(setCurrentUser(newUser));
 
         setState(newState);
         updateDrag(currentSpaceId, currentStationId, newState);
@@ -147,7 +146,6 @@ const Board = ({ station }) => {
 
   const onDragStart = (result) => {
     const { destination, source, draggableId } = result;
-    console.log(result);
     if (result.type === "DEFAULT") {
       setBOpacity(1);
     }

@@ -1,6 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setCurrentUser } from "../../../redux/user/user.actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -14,6 +16,36 @@ import LoadModule from "../../modules/load-module.component.jsx/load-module.comp
 
 const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    // AUTO UPDATE TASKS
+    if (!task.assign) return;
+    console.log("updateing user to redux");
+    let getUser = users.filter((item) => item.uid === task.assign);
+    let user = getUser[0];
+    let assignedTasks = user.assignedTasks;
+
+    let i = assignedTasks.findIndex((item) => item.id === task.id);
+    if (i === -1) {
+      assignedTasks.push(task);
+      user = {
+        ...user,
+        assignedTasks: [...assignedTasks],
+      };
+      dispatch(setCurrentUser(user));
+    } else {
+      let newtasks = assignedTasks.filter((item) => item.id !== task.id);
+      newtasks.push(task);
+      user = {
+        ...user,
+        assignedTasks: [...newtasks],
+      };
+      dispatch(setCurrentUser(user));
+    }
+  }, [task, users]);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {
@@ -26,7 +58,6 @@ const Task = ({ task, index }) => {
             {...provided.draggableProps}
             ref={provided.innerRef}
             style={style}
-            onClick={() => console.log("click")}
           >
             <div className="task__drag" {...provided.dragHandleProps}>
               <FontAwesomeIcon icon={faGripLinesVertical} />

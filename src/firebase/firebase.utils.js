@@ -179,6 +179,7 @@ export const createNewTask = async (
       assign: null,
       created: new Date(),
       deadline: null,
+      fromSpaceId: spaceId,
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -513,7 +514,6 @@ export const convertDate = (timestamp) => {
 };
 
 export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
-  console.log(spaceId, stationId, date, taskId);
   let allTasks = [];
   let task = [];
 

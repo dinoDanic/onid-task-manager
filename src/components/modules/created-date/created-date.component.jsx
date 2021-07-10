@@ -8,8 +8,6 @@ import "./created-date.styles.scss";
 
 const CreatedDate = ({ task }) => {
   const [date, setDate] = useState("no date");
-  console.log(task);
-
   useMemo(() => {
     if (!task) return;
     const d = convertDate(task.created);

@@ -42,15 +42,19 @@ const Deadline = ({ task }) => {
     setDeadlineDate(spaceId, stationId, dd, task.id);
 
     // set user
-    let assignArray = currentUser.assignedTasks;
+    /* let assignArray = currentUser.assignedTasks;
     let i = assignArray.findIndex((item) => item.id === task.id);
     if (i === -1) return;
-    assignArray[i].deadline = dd;
+    let deadline = {
+      nanoseconds: 123,
+      seconds: ddt,
+    };
+    assignArray[i].deadline = deadline;
     let newUser = {
       ...currentUser,
       assignedTasks: [...assignArray],
     };
-    dispatch(setUser(newUser));
+    dispatch(setUser(newUser)); */
   };
   useMemo(() => {
     if (!task);

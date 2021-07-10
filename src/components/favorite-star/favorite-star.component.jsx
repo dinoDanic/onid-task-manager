@@ -6,7 +6,7 @@ import "./favorite-star.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import { setUser } from "../../redux/user/user.actions";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
 import { updateUser, getTaskData } from "../../firebase/firebase.utils";
 
@@ -20,8 +20,6 @@ const FavoriteStar = () => {
   const { currentUser } = user;
 
   useEffect(() => {
-    console.log("trigger");
-
     if (!favoriteStations) return;
     const find = favoriteStations.filter(
       (item) => item.stationId === stationId
@@ -29,14 +27,12 @@ const FavoriteStar = () => {
 
     if (find.length === 0) {
       setIsFavorite(false);
-      console.log("nofav");
       return;
     }
 
     const findStationId = find[0].stationId;
     if (findStationId === stationId) {
       setIsFavorite(true);
-      console.log("fav");
     }
   }, [currentUser, stationId, dispatch, user]);
 
@@ -47,7 +43,7 @@ const FavoriteStar = () => {
     );
     user.favoriteStations = [...stations];
     console.log(user);
-    dispatch(setUser(user));
+    dispatch(setCurrentUser(user));
   };
 
   const addStar = () => {
@@ -55,7 +51,7 @@ const FavoriteStar = () => {
     getData.then((data) => {
       const user = currentUser;
       user.favoriteStations.push(data);
-      dispatch(setUser(user));
+      dispatch(setCurrentUser(user));
     });
   };
   return (

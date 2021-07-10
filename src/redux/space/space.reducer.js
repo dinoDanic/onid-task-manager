@@ -26,8 +26,9 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
         stationData: action.payload,
       };
     case spaceActionTypes.REMOVE_ONE_SPACE:
-      let filtered = state.stationData.filter(
-        (space) => space !== action.payload
+      console.log(state);
+      let filtered = state.spaceData.filter(
+        (space) => space.spaceId !== action.payload
       );
       return {
         ...state,

@@ -13,7 +13,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 
 import MiniMenu from "../retro/mini-menu/mini-menu.component";
-import DeleteStation from "./delete-station/delete-station.component";
+import DeleteStation from "./delete-space/delete-space.component";
 import Colors from "../colors/colors.component";
 
 import {

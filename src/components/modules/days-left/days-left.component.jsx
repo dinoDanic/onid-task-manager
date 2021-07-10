@@ -14,6 +14,7 @@ const DaysLeft = ({ task }) => {
     if (!created) return;
     if (!deadline) return;
 
+    if (deadline.seconds === undefined) return;
     let cd = created.toDate();
     let dd = deadline.toDate();
 
