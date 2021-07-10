@@ -25,8 +25,7 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { currentUser } = user;
-  console.log(currentUser);
+  const { currentUser, users } = user;
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -56,6 +55,7 @@ function App() {
             favoriteStations: gotData.favoriteStations,
             assignedTasks: gotData.assignedTasks,
           };
+
           dispatch(setCurrentUser(userData));
           createUserInFirebase(userData);
         }
@@ -67,8 +67,7 @@ function App() {
   }, [dispatch, history]);
 
   useEffect(() => {
-    if (currentUser === null) return;
-    console.log("updating users to firebase");
+    if (users === null) return;
     updateUser(currentUser.uid, currentUser);
   }, [user]);
 

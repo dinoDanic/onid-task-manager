@@ -21,39 +21,23 @@ const FavoriteStar = () => {
 
   useEffect(() => {
     if (!favoriteStations) return;
-    const find = favoriteStations.filter(
-      (item) => item.stationId === stationId
-    );
+    const find = favoriteStations.filter((item) => item === stationId);
+    console.log(find);
 
     if (find.length === 0) {
       setIsFavorite(false);
       return;
     }
 
-    const findStationId = find[0].stationId;
+    const findStationId = find[0];
     if (findStationId === stationId) {
       setIsFavorite(true);
     }
   }, [currentUser, stationId, dispatch, user]);
 
-  const removeStar = () => {
-    const user = currentUser;
-    let stations = user.favoriteStations.filter(
-      (item) => item.stationId !== stationId
-    );
-    user.favoriteStations = [...stations];
-    console.log(user);
-    dispatch(setCurrentUser(user));
-  };
+  const removeStar = () => {};
 
-  const addStar = () => {
-    const getData = getTaskData(spaceId, stationId);
-    getData.then((data) => {
-      const user = currentUser;
-      user.favoriteStations.push(data);
-      dispatch(setCurrentUser(user));
-    });
-  };
+  const addStar = () => {};
   return (
     <div className="favoriteStar">
       {isFavorite ? (

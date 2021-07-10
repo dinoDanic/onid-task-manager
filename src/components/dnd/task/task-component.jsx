@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector, useDispatch } from "react-redux";
 
-import { setCurrentUser } from "../../../redux/user/user.actions";
+import { setCurrentUser, setUsers } from "../../../redux/user/user.actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,6 +13,7 @@ import {
 import "./task-styles.scss";
 
 import LoadModule from "../../modules/load-module.component.jsx/load-module.component";
+import { updateUser } from "../../../firebase/firebase.utils";
 
 const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
@@ -23,29 +24,27 @@ const Task = ({ task, index }) => {
   useEffect(() => {
     // AUTO UPDATE TASKS
     if (!task.assign) return;
-    console.log("updateing user to redux");
+
     let getUser = users.filter((item) => item.uid === task.assign);
     let user = getUser[0];
-    let assignedTasks = user.assignedTasks;
 
-    let i = assignedTasks.findIndex((item) => item.id === task.id);
-    if (i === -1) {
-      assignedTasks.push(task);
-      user = {
-        ...user,
-        assignedTasks: [...assignedTasks],
-      };
-      dispatch(setCurrentUser(user));
+    if (user.assignedTasks.length === 0) {
+      // push task
+      user.assignedTasks.push(task);
+      updateUser(user.uid, user);
     } else {
-      let newtasks = assignedTasks.filter((item) => item.id !== task.id);
-      newtasks.push(task);
+      // update task
+      let deleteTask = user.assignedTasks.filter(
+        (item) => item.assign !== task.assign
+      );
+      deleteTask.push(task);
       user = {
         ...user,
-        assignedTasks: [...newtasks],
+        assignedTasks: [...deleteTask],
       };
-      dispatch(setCurrentUser(user));
+      updateUser(user.uid, user);
     }
-  }, [task, users]);
+  }, [task]);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {

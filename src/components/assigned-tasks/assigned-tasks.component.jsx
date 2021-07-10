@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { db } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 
 import "./assigned-tasks.styles.scss";
@@ -8,9 +9,16 @@ import Priority from "../modules/priority/priority.component";
 import Status from "../modules/status/status.component";
 
 const AssingedTasks = () => {
-  const assignedTasks = useSelector(
-    (state) => state.user.currentUser.assignedTasks
-  );
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const [assignedTasks, setAssignedTasks] = useState([]);
+  useEffect(() => {
+    if (!currentUser) return;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .onSnapshot((userData) => {
+        setAssignedTasks(userData.data().assignedTasks);
+      });
+  }, [currentUser]);
   return (
     <div className="assignedTasks">
       {assignedTasks?.map((task) => {

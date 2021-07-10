@@ -50,14 +50,6 @@ const Assign = ({ task }) => {
     //
     assignMember(spaceId, stationId, task.id, uid);
     setShowMembers(false);
-
-    /*   //
-    let userArray = currentUser;
-    userArray = {
-      ...userArray,
-      assignedTasks: [...userArray.assignedTasks, task],
-    };
-    dispatch(setCurrentUser(userArray)); */
   };
 
   const handleUnAssignMember = () => {
