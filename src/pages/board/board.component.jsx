@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
 import { updateDrag } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
+import { setUser } from "../../redux/user/user.actions";
 
 import StatusType from "../../components/dnd/status-type/status-type.component";
 import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
@@ -15,6 +16,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Board = ({ station }) => {
+  const currentUser = useSelector((state) => state.user.currentUser);
   const dispatch = useDispatch();
   const history = useHistory();
   const currentSpaceId = history.location.pathname.split("/")[2];
@@ -86,6 +88,16 @@ const Board = ({ station }) => {
             },
           },
         };
+
+        // set array user
+        let taskArray = currentUser.assignedTasks.filter(
+          (item) => item.id !== taskId
+        );
+        let newUser = {
+          ...currentUser,
+          assignedTasks: [...taskArray],
+        };
+        dispatch(setUser(newUser));
 
         setState(newState);
         updateDrag(currentSpaceId, currentStationId, newState);

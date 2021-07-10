@@ -16,10 +16,9 @@ const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided, snapshot) => {
+      {(provided) => {
         const style = {
           ...provided.draggableProps.style,
-          /* transform: snapshot.isDragging ? "skew(2deg)" : "", */
         };
         return (
           <div

@@ -1,6 +1,6 @@
 import UserActionTypes from "./user.types";
 
-export const signIn = (userData) => ({
+export const setUser = (userData) => ({
   type: UserActionTypes.SET_CURRENT_USER,
   payload: userData,
 });
@@ -17,18 +17,4 @@ export const signOut = () => ({
 export const setUsers = (users) => ({
   type: UserActionTypes.SET_USERS,
   payload: users,
-});
-
-export const removeOneFavoriteStation = (stationId) => ({
-  type: UserActionTypes.REMOVE_ONE_STATION,
-  payload: stationId,
-});
-export const addOneFavoriteStation = (stationId) => ({
-  type: UserActionTypes.ADD_ONE_STATION,
-  payload: stationId,
-});
-
-export const addToFavorite = (favoriteData) => ({
-  tpye: UserActionTypes.ADD_TO_FAVORITE,
-  payload: favoriteData,
 });

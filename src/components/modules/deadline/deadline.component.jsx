@@ -1,7 +1,9 @@
 import React, { useState, useMemo } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 
 import { setDeadlineDate } from "../../../firebase/firebase.utils";
+
+import { setUser } from "../../../redux/user/user.actions";
 
 import "./deadline.styles.scss";
 
@@ -13,7 +15,9 @@ import {
 
 const Deadline = ({ task }) => {
   const spaceId = useSelector((state) => state.history.spaceId);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const stationId = useSelector((state) => state.history.stationId);
+  const dispatch = useDispatch();
   const [date, setDate] = useState();
   const [daysLeft, setDaysLeft] = useState(null);
 
@@ -36,6 +40,17 @@ const Deadline = ({ task }) => {
     let year = dd.getFullYear();
     setDate(`${day}.${month + 1}.${year}`);
     setDeadlineDate(spaceId, stationId, dd, task.id);
+
+    // set user
+    let assignArray = currentUser.assignedTasks;
+    let i = assignArray.findIndex((item) => item.id === task.id);
+    if (i === -1) return;
+    assignArray[i].deadline = dd;
+    let newUser = {
+      ...currentUser,
+      assignedTasks: [...assignArray],
+    };
+    dispatch(setUser(newUser));
   };
   useMemo(() => {
     if (!task);

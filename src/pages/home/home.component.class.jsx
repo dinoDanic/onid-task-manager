@@ -1,8 +1,5 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import { createStructuredSelector } from "reselect";
-import { selectSpaceData } from "../../redux/space/space.selectors";
-import { db } from "../../firebase/firebase.utils";
 
 import "./home.styles.scss";
 
@@ -10,17 +7,10 @@ import NoSpaceData from "../../components/noSpaceData/no-space-data.component";
 import SpaceData from "../../components/spaceData/space-data.component";
 import SectionBox from "../../components/section-box/section-box.component";
 import FavoriteStations from "../../components/favorite-stations/favorite-stations.component";
+import AssignedTasks from "../../components/assigned-tasks/assigned-tasks.component";
 
 const Home = () => {
   const spaceData = useSelector((state) => state.space.spaceData);
-  const favoriteStations = useSelector(
-    (state) => state.user.currentUser.favoriteStations
-  );
-  const [spaces, setSpaces] = useState([]);
-
-  useEffect(() => {
-    let list = [];
-  }, [favoriteStations]);
 
   return (
     <div className="home">
@@ -33,11 +23,17 @@ const Home = () => {
           subTitle="Active Favorite stations
       "
         >
-          <div className="home__recent">
-            <div className="home__recentStations">
-              <FavoriteStations spaces={spaces} />
+          <div className="home__favorite">
+            <div className="home__favoriteStations">
+              <FavoriteStations />
             </div>
           </div>
+        </SectionBox>
+        <SectionBox
+          title="Assigned Tasks"
+          subTitle="Tasks that are Assinged to you"
+        >
+          <AssignedTasks />
         </SectionBox>
       </div>
     </div>

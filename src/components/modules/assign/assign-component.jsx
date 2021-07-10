@@ -1,5 +1,5 @@
-import React, { useState, useMemo, useEffect } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useMemo } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { useActiveSpaceData } from "../../../hooks/useActiveSpaceData.hook";
 
 import { AnimatePresence } from "framer-motion";
@@ -12,13 +12,17 @@ import { assignMember, unAssign } from "../../../firebase/firebase.utils";
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
 
+import { setUser } from "../../../redux/user/user.actions";
+
 import "./assign-styles.scss";
 
 const Assign = ({ task }) => {
   const users = useSelector((state) => state.user.users);
   const spaceId = useSelector((state) => state.history.spaceId);
   const stationId = useSelector((state) => state.history.stationId);
+  const currentUser = useSelector((state) => state.user.currentUser);
   const spaceData = useActiveSpaceData();
+  const dispatch = useDispatch();
 
   const [showMembers, setShowMembers] = useState(false);
   const [assignedUser, setAssignedUser] = useState({});
@@ -42,6 +46,34 @@ const Assign = ({ task }) => {
     setAssignedUser(getAssignUser[0]);
   }, [task]);
 
+  const handleAssignMember = (uid) => {
+    //
+    assignMember(spaceId, stationId, task.id, uid);
+    setShowMembers(false);
+
+    //
+    let userArray = currentUser;
+    userArray = {
+      ...userArray,
+      assignedTasks: [...userArray.assignedTasks, task],
+    };
+    dispatch(setUser(userArray));
+  };
+
+  const handleUnAssignMember = () => {
+    unAssign(spaceId, stationId, task.id);
+    setShowMembers(false);
+
+    // set array user
+    let taskArray = currentUser.assignedTasks.filter(
+      (item) => item.id !== task.id
+    );
+    let newUser = {
+      ...currentUser,
+      assignedTasks: [...taskArray],
+    };
+    dispatch(setUser(newUser));
+  };
   return (
     <div className="assign">
       <div
@@ -63,10 +95,7 @@ const Assign = ({ task }) => {
                   <div
                     className="assign__member"
                     key={uid}
-                    onClick={() => {
-                      assignMember(spaceId, stationId, task.id, uid);
-                      setShowMembers(false);
-                    }}
+                    onClick={() => handleAssignMember(uid)}
                   >
                     <Avatar src={imageUrl} />
                     <p>{userName}</p>
@@ -75,10 +104,7 @@ const Assign = ({ task }) => {
               })}
               <div
                 className="assign__remove"
-                onClick={() => {
-                  unAssign(spaceId, stationId, task.id);
-                  setShowMembers(false);
-                }}
+                onClick={() => handleUnAssignMember()}
               >
                 <FontAwesomeIcon icon={faUserSlash} />
               </div>

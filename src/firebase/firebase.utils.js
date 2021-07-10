@@ -46,6 +46,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       uid,
       userName,
       favoriteStations: [],
+      assignedTasks: [],
     });
   } else {
     userRef.update({
@@ -729,7 +730,7 @@ export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
     });
 };
 
-export const updateFavoriteStation = (userId, user) => {
+export const updateUser = (userId, user) => {
   const userRef = db.collection("users").doc(userId);
   userRef.update({
     ...user,

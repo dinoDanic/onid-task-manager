@@ -6,12 +6,9 @@ import "./favorite-star.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faStar } from "@fortawesome/free-solid-svg-icons";
 
-import { signIn } from "../../redux/user/user.actions";
+import { setUser } from "../../redux/user/user.actions";
 
-import {
-  updateFavoriteStation,
-  getTaskData,
-} from "../../firebase/firebase.utils";
+import { updateUser, getTaskData } from "../../firebase/firebase.utils";
 
 const FavoriteStar = () => {
   const user = useSelector((state) => state.user);
@@ -50,8 +47,7 @@ const FavoriteStar = () => {
     );
     user.favoriteStations = [...stations];
     console.log(user);
-    updateFavoriteStation(currentUser.uid, user);
-    dispatch(signIn(user));
+    dispatch(setUser(user));
   };
 
   const addStar = () => {
@@ -59,8 +55,7 @@ const FavoriteStar = () => {
     getData.then((data) => {
       const user = currentUser;
       user.favoriteStations.push(data);
-      updateFavoriteStation(currentUser.uid, user);
-      dispatch(signIn(user));
+      dispatch(setUser(user));
     });
   };
   return (

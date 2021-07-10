@@ -1,11 +1,14 @@
 import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserInFirebase,
+  db,
+  updateUser,
+} from "./firebase/firebase.utils";
 
-// TODO SVE STVARI POVLECI HISTORY SPACEID STATION ID
-
-import { signIn, signOut } from "./redux/user/user.actions";
+import { setUser, signOut } from "./redux/user/user.actions";
 
 import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
@@ -19,9 +22,10 @@ import "./app.styles.scss";
 import { AnimatePresence } from "framer-motion";
 
 function App() {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const { currentUser } = user;
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
@@ -37,8 +41,9 @@ function App() {
             userName: displayName,
             email,
             favoriteStations: [],
+            assignedTasks: [],
           };
-          dispatch(signIn(userData));
+          dispatch(setUser(userData));
           createUserInFirebase(userData);
         }
         if (gotData) {
@@ -48,8 +53,9 @@ function App() {
             userName: displayName,
             email,
             favoriteStations: gotData.favoriteStations,
+            assignedTasks: gotData.assignedTasks,
           };
-          dispatch(signIn(userData));
+          dispatch(setUser(userData));
           createUserInFirebase(userData);
         }
       } else {
@@ -58,6 +64,11 @@ function App() {
       }
     });
   }, [dispatch, history]);
+
+  useEffect(() => {
+    if (currentUser === null) return;
+    updateUser(currentUser.uid, currentUser);
+  }, [user]);
 
   return (
     <div className="app">

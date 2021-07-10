@@ -22,40 +22,6 @@ const userReducer = (state = INITIAL_STATE, action) => {
         ...state,
         users: action.payload,
       };
-    case UserActionTypes.SET_FAVORITE_STATION:
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          favoriteSpace: action.payload,
-        },
-      };
-    case UserActionTypes.REMOVE_ONE_STATION:
-      let allFavIds = state.currentUser.favoriteStations;
-      let removeId = allFavIds.filter((item) => item !== action.payload);
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          favoriteStations: removeId,
-        },
-      };
-    case UserActionTypes.ADD_ONE_STATION:
-      let addOne = state.currentUser.favoriteStations;
-      addOne.push(action.payload);
-      console.log(addOne);
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          favoriteStations: addOne,
-        },
-      };
-    case UserActionTypes.ADD_TO_FAVORITE:
-      return {
-        ...state,
-        favoriteSpaces: action.payload,
-      };
     default:
       return state;
   }

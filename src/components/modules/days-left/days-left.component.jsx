@@ -11,7 +11,8 @@ const DaysLeft = ({ task }) => {
 
   useMemo(() => {
     const { created, deadline } = task;
-    if (!created || !deadline) return;
+    if (!created) return;
+    if (!deadline) return;
 
     let cd = created.toDate();
     let dd = deadline.toDate();
