@@ -33,7 +33,6 @@ const AssingedTasks = () => {
       ) : (
         <>
           {assignedTasks.map((task) => {
-            console.log(task);
             return (
               <div className="at__task" key={task.id}>
                 <p>{task.content}</p>

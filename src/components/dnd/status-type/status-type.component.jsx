@@ -103,6 +103,7 @@ const StatusType = ({
                       style={style}
                     >
                       {tasks?.map((task, index) => {
+                        if (task === undefined) return;
                         return <Task key={task.id} task={task} index={index} />;
                       })}
                       {provided.placeholder}

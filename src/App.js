@@ -30,6 +30,7 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
+        console.log("on auth change setcurrent user");
         const { photoURL, uid, displayName, email } = user;
         const userRef = db.collection("users").doc(uid);
         const getRef = await userRef.get();
@@ -64,9 +65,9 @@ function App() {
         history.push("/signin");
       }
     });
-  }, [dispatch, history]);
+  }, [dispatch, history, users]);
 
-  /*   useEffect(() => {
+  /*  useEffect(() => {
     if (users === null) return;
     updateUser(currentUser.uid, currentUser);
   }, [user]); */

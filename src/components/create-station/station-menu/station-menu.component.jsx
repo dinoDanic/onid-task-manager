@@ -40,7 +40,7 @@ const StationMenu = () => {
         />
       </div>
       <div className="sm__favorite">
-        <FavoriteStar />
+        <FavoriteStar data={data} />
       </div>
     </div>
   );

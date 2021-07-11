@@ -32,14 +32,15 @@ const Space = () => {
   }, [currentUser]);
 
   useEffect(async () => {
-    // get all users
-    let users = [];
-    const userRef = db.collection("users");
-    const usersQuery = await userRef.get();
-    usersQuery.forEach((user) => {
-      users.push(user.data());
+    console.log("setting all users");
+    db.collection("users").onSnapshot((usersData) => {
+      let users = [];
+      usersData.forEach((userData) => {
+        users.push(userData.data());
+      });
+      console.log("db.users updated, dispathing users to redux");
+      dispatch(setUsers(users));
     });
-    dispatch(setUsers(users));
   }, []);
 
   function handleLogout() {

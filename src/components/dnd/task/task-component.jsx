@@ -26,18 +26,14 @@ const Task = ({ task, index }) => {
     if (!task.assign) return;
     let getUser = users.filter((item) => item.uid === task.assign);
     let user = getUser[0];
-
-    console.log(task);
-    console.log(user);
+    if (user === undefined) return;
 
     const gotTask = user.assignedTasks.filter((item) => item.id === task.id);
     const gotTaskRes = gotTask[0];
 
-    console.log(gotTaskRes);
-
     if (gotTaskRes === undefined) {
-      user.assignedTasks.push(task);
-      updateUser(user.uid, user);
+      /* user.assignedTasks.push(task);
+      updateUser(user.uid, user); */
       return;
     } else {
       let copyUser = user;
@@ -49,6 +45,7 @@ const Task = ({ task, index }) => {
         ...copyUser,
         assignedTasks: [...deleteOldTask],
       };
+      console.log("updateing from task ocmponent");
       updateUser(user.uid, newUser);
     }
 

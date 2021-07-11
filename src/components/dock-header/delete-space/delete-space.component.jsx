@@ -10,7 +10,11 @@ import { faSignOutAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 import BoxLayer from "../../retro/box-layer/box-layer.component";
 import RetroButton from "../../retro/button/retro-button.component";
 
-import { deleteSpace, removeMember } from "../../../firebase/firebase.utils";
+import {
+  deleteSpace,
+  removeMember,
+  updateUser,
+} from "../../../firebase/firebase.utils";
 
 import { removeOneSpace } from "../../../redux/space/space.actions";
 import { setCurrentUser } from "../../../redux/user/user.actions";
@@ -24,7 +28,6 @@ const DeleteStation = ({ data }) => {
   const [isUserAdmin, setIsUserAdmin] = useState(false);
   const [showAction, setShowAction] = useState(false);
   const currentUserUid = currentUser.uid;
-  console.log(currentUserUid);
 
   useEffect(() => {
     const { admin } = activeSpaceData;
@@ -38,26 +41,36 @@ const DeleteStation = ({ data }) => {
   const handleDeleteSpace = () => {
     // in favorite or assinged tasks ?
     let user = currentUser;
-    console.log(user);
     let assignedArray = user.assignedTasks;
+    console.log(user);
     let filter = assignedArray.filter((item) => item.fromSpaceId === spaceId);
     let result = filter[0];
+    // za assign
     if (result !== undefined) {
       let taskIdtoRemove = result.id;
       let filteredAssign = assignedArray.filter(
         (item) => item.id !== taskIdtoRemove
       );
       let newUser = {
-        ...currentUser,
+        ...user,
         assignedTasks: [...filteredAssign],
       };
-      console.log(newUser);
-      dispatch(setCurrentUser(newUser));
+      updateUser(newUser.uid, newUser);
+    }
+    console.log(user);
+    console.log(data);
+
+    if (user.favoriteStations.length > 0) {
+      user.favoriteStations = user.favoriteStations.filter(
+        (staion) => staion.fromSpaceId !== spaceId
+      );
+      console.log(user);
+      updateUser(user.uid, user);
     }
 
-    deleteSpace(spaceId);
+    /* deleteSpace(spaceId);
     dispatch(removeOneSpace(spaceId));
-    history.push("/");
+    history.push("/"); */
   };
 
   return (

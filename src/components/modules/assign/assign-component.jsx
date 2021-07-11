@@ -7,7 +7,11 @@ import { AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faUserSlash, faUserTimes } from "@fortawesome/free-solid-svg-icons";
 
-import { assignMember, unAssign } from "../../../firebase/firebase.utils";
+import {
+  assignMember,
+  unAssign,
+  updateUser,
+} from "../../../firebase/firebase.utils";
 
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
@@ -46,17 +50,48 @@ const Assign = ({ task }) => {
     setAssignedUser(getAssignUser[0]);
   }, [task]);
 
-  const handleAssignMember = (uid) => {
-    //
-    assignMember(spaceId, stationId, task.id, uid);
+  const handleAssignMember = (userId) => {
+    if (task.assign) {
+      let oldAssign = users.filter((user) => user.uid === task.assign);
+      let oldUser = oldAssign[0];
+      if (oldUser !== undefined) {
+        oldUser.assignedTasks = oldUser.assignedTasks.filter(
+          (item) => item.id !== task.id
+        );
+
+        updateUser(oldUser.uid, oldUser);
+      }
+    }
+    let findUser = users.filter((user) => user.uid === userId);
+    let theUser = findUser[0];
+
+    theUser.assignedTasks.push(task);
+    //za db.users
+    updateUser(theUser.uid, theUser);
+    //za db.tasks
+    assignMember(spaceId, stationId, task.id, userId);
     setShowMembers(false);
   };
 
   const handleUnAssignMember = () => {
+    if (task.assign !== null) {
+      let findUser = users.filter((user) => user.uid === task.assign);
+      let theUser = findUser[0];
+      //remove task
+      theUser.assignedTasks = theUser.assignedTasks.filter(
+        (item) => item.id !== task.id
+      );
+
+      // za sve users
+      let filterUsers = users.filter((user) => user.uid !== theUser.uid);
+      filterUsers.push(theUser);
+      updateUser(theUser.uid, theUser);
+    }
+
     unAssign(spaceId, stationId, task.id);
     setShowMembers(false);
 
-    // set array user
+    /* // set array user
     let taskArray = currentUser.assignedTasks.filter(
       (item) => item.id !== task.id
     );
@@ -64,7 +99,7 @@ const Assign = ({ task }) => {
       ...currentUser,
       assignedTasks: [...taskArray],
     };
-    dispatch(setCurrentUser(newUser));
+    dispatch(setCurrentUser(newUser)); */
   };
   return (
     <div className="assign">

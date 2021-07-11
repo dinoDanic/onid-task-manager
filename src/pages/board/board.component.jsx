@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router";
-import { updateDrag } from "../../firebase/firebase.utils";
+import { updateDrag, updateUser } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
 import { setCurrentUser } from "../../redux/user/user.actions";
@@ -17,6 +17,7 @@ import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Board = ({ station }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
+  const users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const history = useHistory();
   const currentSpaceId = history.location.pathname.split("/")[2];
@@ -88,18 +89,34 @@ const Board = ({ station }) => {
           },
         };
 
-        // set array user
-        let taskArray = currentUser.assignedTasks.filter(
-          (item) => item.id !== taskId
-        );
-        let newUser = {
-          ...currentUser,
-          assignedTasks: [...taskArray],
-        };
-        dispatch(setCurrentUser(newUser));
-
         setState(newState);
         updateDrag(currentSpaceId, currentStationId, newState);
+
+        // ASSIGN THING
+
+        let findUser = users.filter((user) => {
+          let tasks = user.assignedTasks.filter((task) => task.id === taskId);
+          console.log(tasks);
+          return tasks[0];
+        });
+
+        let theUser = findUser[0];
+        if (theUser !== undefined) {
+          let deletTaskFromUser = theUser.assignedTasks.filter(
+            (item) => item.id !== taskId
+          );
+
+          console.log(theUser);
+          console.log(deletTaskFromUser);
+
+          let newUser = {
+            ...theUser,
+            assignedTasks: [...deletTaskFromUser],
+          };
+
+          console.log(newUser);
+          updateUser(newUser.uid, newUser);
+        }
 
         return;
       }
