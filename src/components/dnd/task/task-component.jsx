@@ -32,8 +32,6 @@ const Task = ({ task, index }) => {
     const gotTaskRes = gotTask[0];
 
     if (gotTaskRes === undefined) {
-      /* user.assignedTasks.push(task);
-      updateUser(user.uid, user); */
       return;
     } else {
       let copyUser = user;
@@ -45,14 +43,8 @@ const Task = ({ task, index }) => {
         ...copyUser,
         assignedTasks: [...deleteOldTask],
       };
-      console.log("updateing from task ocmponent");
       updateUser(user.uid, newUser);
     }
-
-    /* user.assignedTasks.push(task);
-
-    console.log(user);
-    updateUser(user.uid, user); */
   }, [task]);
   return (
     <Draggable draggableId={task.id} index={index}>

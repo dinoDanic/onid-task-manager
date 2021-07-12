@@ -1,4 +1,9 @@
 .assignedTasks {
+  .children {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
 }
 .at__task {
   background: #eff2f5;
@@ -44,5 +49,11 @@
   .avatar {
     width: 25px !important;
     height: 25px !important;
+  }
+}
+.at__item {
+  margin-bottom: 5px;
+  &:last-child {
+    margin-bottom: 0px;
   }
 }

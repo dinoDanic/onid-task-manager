@@ -180,6 +180,7 @@ export const createNewTask = async (
       created: new Date(),
       deadline: null,
       fromSpaceId: spaceId,
+      fromStationId: stationId,
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -229,6 +230,7 @@ export const updateDrag = (spaceId, stationId, newState) => {
 };
 
 export const removeMember = (spaceId, memberId) => {
+  console.log(spaceId, memberId);
   db.collection("space")
     .doc(spaceId)
     .update({
@@ -377,7 +379,8 @@ export const assignMember = (spaceId, stationId, taskId, userId) => {
 };
 
 export const unAssign = (spaceId, stationId, taskId) => {
-  let task = [];
+  let task = {};
+  let tasks = {};
   const tasksRef = db
     .collection("space")
     .doc(spaceId)
@@ -390,17 +393,21 @@ export const unAssign = (spaceId, stationId, taskId) => {
     .get()
     .then((taskData) => {
       task = taskData.data().tasks[taskId];
-      task = {
-        ...task,
-        assign: [],
+      tasks = taskData.data().tasks;
+      console.log(taskData.data());
+      tasks = {
+        ...tasks,
+        [taskId]: {
+          ...task,
+          assign: [],
+        },
       };
     })
     .then(() => {
+      console.log(tasks);
       tasksRef.update({
         tasks: {
-          [taskId]: {
-            ...task,
-          },
+          ...tasks,
         },
       });
     });
@@ -762,6 +769,41 @@ export const addStarFavorite = (userId, stationId) => {
     .update({
       favoriteStations: firebase.firestore.FieldValue.arrayUnion(stationId),
     });
+};
+
+export const unAssignFromAllTasks = (assignedArray, spaceId, userId) => {
+  let mustRemoveTasks = assignedArray.filter(
+    (item) => item.fromSpaceId === spaceId
+  );
+  console.log(mustRemoveTasks);
+  mustRemoveTasks.map((task) => {
+    let allTasks = {};
+    const { fromSpaceId, fromStationId } = task;
+    const tasksRef = db
+      .collection("space")
+      .doc(fromSpaceId)
+      .collection("stations")
+      .doc(fromStationId)
+      .collection("tasks")
+      .doc("tasks");
+
+    tasksRef
+      .get()
+      .then((tasksData) => {
+        allTasks = tasksData.data().tasks;
+        allTasks[task.id].assign = [];
+      })
+      .then(() => {
+        tasksRef.set(
+          {
+            tasks: {
+              ...allTasks,
+            },
+          },
+          { merge: true }
+        );
+      });
+  });
 };
 
 export {

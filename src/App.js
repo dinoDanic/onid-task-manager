@@ -8,7 +8,7 @@ import {
   updateUser,
 } from "./firebase/firebase.utils";
 
-import { setCurrentUser, signOut } from "./redux/user/user.actions";
+import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
 
 import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
@@ -30,7 +30,6 @@ function App() {
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
       if (user) {
-        console.log("on auth change setcurrent user");
         const { photoURL, uid, displayName, email } = user;
         const userRef = db.collection("users").doc(uid);
         const getRef = await userRef.get();
@@ -65,7 +64,17 @@ function App() {
         history.push("/signin");
       }
     });
-  }, [dispatch, history, users]);
+  }, []);
+
+  useEffect(async () => {
+    db.collection("users").onSnapshot((usersData) => {
+      let users = [];
+      usersData.forEach((userData) => {
+        users.push(userData.data());
+      });
+      dispatch(setUsers(users));
+    });
+  }, []);
 
   /*  useEffect(() => {
     if (users === null) return;

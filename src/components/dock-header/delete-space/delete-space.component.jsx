@@ -2,8 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useHistory } from "react-router-dom";
 
-import { useActiveSpaceData } from "../../../hooks/useActiveSpaceData.hook";
-
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faSignOutAlt, faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
@@ -14,6 +12,7 @@ import {
   deleteSpace,
   removeMember,
   updateUser,
+  unAssignFromAllTasks,
 } from "../../../firebase/firebase.utils";
 
 import { removeOneSpace } from "../../../redux/space/space.actions";
@@ -72,6 +71,19 @@ const DeleteStation = ({ data }) => {
     let assignedArray = user.assignedTasks;
     let newUser = {};
 
+    // check if got tasks
+    const findFromThisSpace = assignedArray.filter(
+      (item) => item.fromSpaceId === spaceId
+    );
+    console.log(findFromThisSpace);
+
+    if (findFromThisSpace.length > 0) {
+      alert(
+        `you have ${findFromThisSpace.length} task assigned to you in this Space. Delete thouse tasks or unAssign your self`
+      );
+      return;
+    }
+
     // remove assigned thigns
     if (assignedArray.length > 0) {
       let removed = assignedArray.filter(
@@ -82,7 +94,7 @@ const DeleteStation = ({ data }) => {
         assignedTasks: [...removed],
       };
     }
-    //remove favorite things
+    // remove favorite things
     if (user.favoriteStations.length > 0) {
       user.favoriteStations = user.favoriteStations.filter(
         (staion) => staion.fromSpaceId !== spaceId
@@ -93,8 +105,11 @@ const DeleteStation = ({ data }) => {
       };
     }
 
+    // update tasks
+
     updateUser(newUser.uid, newUser);
-    removeMember(spaceId, newUser.uid);
+    removeMember(spaceId, currentUser.uid);
+    dispatch(removeOneSpace(spaceId));
     history.push("/");
   };
 

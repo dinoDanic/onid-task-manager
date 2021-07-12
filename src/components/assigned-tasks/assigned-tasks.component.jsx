@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 
 import "./assigned-tasks.styles.scss";
 
 import DaysLeft from "../modules/days-left/days-left.component";
 import Priority from "../modules/priority/priority.component";
 import CreatedBy from "../modules/created-by/created-by.component";
+import RetroButton from "../retro/button/retro-button.component";
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
@@ -33,20 +36,27 @@ const AssingedTasks = () => {
       ) : (
         <>
           {assignedTasks.map((task) => {
+            console.log(task);
             return (
-              <div className="at__task" key={task.id}>
-                <p>{task.content}</p>
-                <div className="at__modules">
-                  <div className="at__daysLeft">
-                    <DaysLeft task={task} />
-                  </div>
-                  <div className="at__priority">
-                    <Priority task={task} />
-                  </div>
-                  <div className="at__by">
-                    <CreatedBy task={task} />
-                  </div>
-                </div>
+              <div key={task.id} className="at__item">
+                <Link to={``}>
+                  <RetroButton mode="flat">
+                    <div className="at__content">
+                      <p>{task.content}</p>
+                    </div>
+                    <div className="at__modules">
+                      <div className="at__daysLeft">
+                        <DaysLeft task={task} />
+                      </div>
+                      <div className="at__priority">
+                        <Priority task={task} />
+                      </div>
+                      <div className="at__by">
+                        <CreatedBy task={task} />
+                      </div>
+                    </div>
+                  </RetroButton>
+                </Link>
               </div>
             );
           })}
