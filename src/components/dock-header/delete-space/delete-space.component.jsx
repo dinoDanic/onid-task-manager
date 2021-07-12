@@ -24,13 +24,12 @@ const DeleteStation = ({ data }) => {
   const history = useHistory();
   const currentUser = useSelector((state) => state.user.currentUser);
   const spaceId = useSelector((state) => state.history.spaceId);
-  const activeSpaceData = useActiveSpaceData();
   const [isUserAdmin, setIsUserAdmin] = useState(false);
   const [showAction, setShowAction] = useState(false);
   const currentUserUid = currentUser.uid;
 
   useEffect(() => {
-    const { admin } = activeSpaceData;
+    const { admin } = data;
     if (currentUserUid === admin) {
       setIsUserAdmin(true);
     } else {
@@ -42,35 +41,61 @@ const DeleteStation = ({ data }) => {
     // in favorite or assinged tasks ?
     let user = currentUser;
     let assignedArray = user.assignedTasks;
-    console.log(user);
-    let filter = assignedArray.filter((item) => item.fromSpaceId === spaceId);
-    let result = filter[0];
-    // za assign
-    if (result !== undefined) {
-      let taskIdtoRemove = result.id;
-      let filteredAssign = assignedArray.filter(
-        (item) => item.id !== taskIdtoRemove
-      );
-      let newUser = {
-        ...user,
-        assignedTasks: [...filteredAssign],
-      };
-      updateUser(newUser.uid, newUser);
-    }
-    console.log(user);
-    console.log(data);
+    let newUser = {};
 
+    // za assign
+    if (assignedArray.length > 0) {
+      let filter = assignedArray.filter((item) => item.fromSpaceId !== spaceId);
+      newUser = {
+        ...user,
+        assignedTasks: [...filter],
+      };
+    }
     if (user.favoriteStations.length > 0) {
       user.favoriteStations = user.favoriteStations.filter(
         (staion) => staion.fromSpaceId !== spaceId
       );
-      console.log(user);
-      updateUser(user.uid, user);
+      newUser = {
+        ...user,
+        assignedTasks: [...user.favoriteStations],
+      };
     }
 
-    /* deleteSpace(spaceId);
+    updateUser(newUser.uid, newUser);
+    deleteSpace(spaceId);
     dispatch(removeOneSpace(spaceId));
-    history.push("/"); */
+    history.push("/");
+  };
+
+  const handleLeaveSpace = () => {
+    let user = currentUser;
+    let assignedArray = user.assignedTasks;
+    let newUser = {};
+
+    // remove assigned thigns
+    if (assignedArray.length > 0) {
+      let removed = assignedArray.filter(
+        (item) => item.fromSpaceId !== spaceId
+      );
+      newUser = {
+        ...user,
+        assignedTasks: [...removed],
+      };
+    }
+    //remove favorite things
+    if (user.favoriteStations.length > 0) {
+      user.favoriteStations = user.favoriteStations.filter(
+        (staion) => staion.fromSpaceId !== spaceId
+      );
+      newUser = {
+        ...user,
+        favoriteStations: [...user.favoriteStations],
+      };
+    }
+
+    updateUser(newUser.uid, newUser);
+    removeMember(spaceId, newUser.uid);
+    history.push("/");
   };
 
   return (
@@ -99,10 +124,7 @@ const DeleteStation = ({ data }) => {
                   <RetroButton
                     color="danger"
                     mode="flat"
-                    onClick={() => {
-                      removeMember(spaceId, currentUserUid);
-                      history.push("/");
-                    }}
+                    onClick={() => handleLeaveSpace()}
                   >
                     Leave
                   </RetroButton>
