@@ -1,12 +1,11 @@
 import React, { useState } from "react";
 
-import RetroButton from "../../components/retro/button/retro-button.component";
 import CreateSpace from "../create-space/create-space.component";
 
 import "./no-space-data.styles.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faPlus, faRocket } from "@fortawesome/free-solid-svg-icons";
+import { faRocket } from "@fortawesome/free-solid-svg-icons";
 
 function NoSpaceData() {
   const [create, setCreate] = useState(false);
@@ -20,9 +19,6 @@ function NoSpaceData() {
             <b>Create New Space!</b>
           </span>
         </p>
-        {/*  <p>
-          By creating a <b>Space</b> you can invite others to work on tasks
-        </p> */}
         <div className="nsd__createBtn"></div>
       </div>
       {create && <CreateSpace setLayer={setCreate} />}

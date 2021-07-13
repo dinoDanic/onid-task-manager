@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { Draggable } from "react-beautiful-dnd";
-import { useSelector, useDispatch } from "react-redux";
-
-import { setCurrentUser, setUsers } from "../../../redux/user/user.actions";
+import { useSelector } from "react-redux";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -17,15 +15,14 @@ import { updateUser } from "../../../firebase/firebase.utils";
 
 const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
-  const currentUser = useSelector((state) => state.user.currentUser);
   const users = useSelector((state) => state.user.users);
-  const dispatch = useDispatch();
+  let getUser = users.filter((item) => item.uid === task.assign);
+  let user = getUser[0];
 
   useEffect(() => {
+    console.log("auto update tasks => db.users");
     // AUTO UPDATE TASKS
     if (!task.assign) return;
-    let getUser = users.filter((item) => item.uid === task.assign);
-    let user = getUser[0];
     if (user === undefined) return;
 
     const gotTask = user.assignedTasks.filter((item) => item.id === task.id);
@@ -71,7 +68,9 @@ const Task = ({ task, index }) => {
               </div>
             </div>
             {activeModules?.map((module) => {
-              return <LoadModule module={module} task={task} />;
+              return (
+                <LoadModule module={module} key={module.name} task={task} />
+              );
             })}
           </div>
         );

@@ -1,7 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
-import styled from "styled-components";
 
 import Task from "../task/task-component";
 import RetroInput from "../../retro/input/input.component";
@@ -28,6 +27,7 @@ const StatusType = ({
   const currentUser = useSelector((state) => state.user.currentUser);
   const statusType = useSelector((state) => state.space.statusType);
   const [newTaskName, setNewTaskName] = useState("");
+  const [inputName, setInputName] = useState("");
   const inputRef = useRef();
   const inputNameRef = useRef();
 
@@ -56,13 +56,9 @@ const StatusType = ({
     );
   };
 
-  const InputName = styled.input`
-    &::placeholder {
-      color: ${status.color};
-    }
-    &:hover {
-    }
-  `;
+  useEffect(() => {
+    setInputName(status.name);
+  }, [status.name]);
 
   return (
     <Draggable draggableId={status.name} index={index}>
@@ -75,7 +71,12 @@ const StatusType = ({
           <div className="st__header">
             <div className="st__title">
               <form onSubmit={(e) => handleNameSubmit(e)}>
-                <InputName placeholder={status.name} ref={inputNameRef} />
+                <input
+                  ref={inputNameRef}
+                  value={inputName}
+                  style={{ color: status.color }}
+                  onChange={(e) => setInputName(e.target.value)}
+                />
               </form>
             </div>
             <div className="st__menu">
@@ -103,7 +104,7 @@ const StatusType = ({
                       style={style}
                     >
                       {tasks?.map((task, index) => {
-                        if (task === undefined) return;
+                        if (task === undefined) return false;
                         return <Task key={task.id} task={task} index={index} />;
                       })}
                       {provided.placeholder}

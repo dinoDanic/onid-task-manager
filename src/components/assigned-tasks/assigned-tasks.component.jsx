@@ -25,7 +25,7 @@ const AssingedTasks = () => {
           setAssignedTasks(userData.data().assignedTasks);
         }
       });
-  }, [currentUser]);
+  }, []);
   return (
     <div className="assignedTasks">
       {!assignedTasks.length > 0 ? (
@@ -36,7 +36,6 @@ const AssingedTasks = () => {
       ) : (
         <>
           {assignedTasks.map((task) => {
-            console.log(task);
             return (
               <div key={task.id} className="at__item">
                 <Link to={``}>

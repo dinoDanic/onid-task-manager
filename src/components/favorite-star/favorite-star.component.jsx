@@ -30,7 +30,7 @@ const FavoriteStar = ({ data }) => {
     if (findStationId === stationId) {
       setIsFavorite(true);
     }
-  }, [currentUser, stationId, dispatch, user]);
+  }, [currentUser, stationId, dispatch, user, favoriteStations]);
 
   const removeStar = () => {
     currentUser.favoriteStations = currentUser.favoriteStations.filter(

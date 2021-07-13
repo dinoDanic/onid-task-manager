@@ -2,7 +2,6 @@ import React from "react";
 import { motion } from "framer-motion";
 
 import Box from "../box/box.component";
-import RetroButton from "../button/retro-button.component";
 
 import "./box-layer.styles.scss";
 

@@ -1,14 +1,11 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { auth, db } from "../../firebase/firebase.utils";
-import { createStructuredSelector } from "reselect";
 
 import Avatar from "../../components/retro/avatar/avatar.component";
 import SpaceFly from "../../components/space-fly/space-fly.component";
 
 import { setSpaceData, removeSpaceData } from "../../redux/space/space.actions";
-
-import { selectCurrentUser } from "../../redux/user/user.selectors";
 
 import "./space.styles.scss";
 

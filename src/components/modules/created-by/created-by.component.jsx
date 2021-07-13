@@ -14,7 +14,7 @@ const CreatedBy = ({ task }) => {
     if (!users) return;
     const userIndex = users.findIndex((item) => item.uid === createdBy);
     setUser(users[userIndex]);
-  }, [users]);
+  }, [users, createdBy]);
 
   return (
     <div className="createdBy">

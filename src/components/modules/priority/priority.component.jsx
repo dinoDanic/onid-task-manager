@@ -51,6 +51,7 @@ const Priority = ({ task }) => {
                 return (
                   <div
                     className="priority__priority"
+                    key={priority.name}
                     onClick={() => {
                       setPriority(
                         spaceId,

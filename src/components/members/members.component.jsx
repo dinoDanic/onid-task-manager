@@ -71,12 +71,7 @@ const Members = ({ activeSpaceData }) => {
             className="members__invite"
             onChange={(e) => setEmail(e.target.value)}
           >
-            <RetroInput
-              ref={inputRef}
-              type="submit"
-              placeholder="email"
-              type="email"
-            />
+            <RetroInput ref={inputRef} placeholder="email" type="email" />
           </div>
         </form>
       )}

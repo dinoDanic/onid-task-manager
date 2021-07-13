@@ -5,7 +5,6 @@ import { useHistory } from "react-router";
 import { updateDrag, updateUser } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
-import { setCurrentUser } from "../../redux/user/user.actions";
 
 import StatusType from "../../components/dnd/status-type/status-type.component";
 import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
@@ -16,7 +15,6 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
 const Board = ({ station }) => {
-  const currentUser = useSelector((state) => state.user.currentUser);
   const users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -162,7 +160,6 @@ const Board = ({ station }) => {
   };
 
   const onDragStart = (result) => {
-    const { destination, source, draggableId } = result;
     if (result.type === "DEFAULT") {
       setBOpacity(1);
     }

@@ -38,7 +38,7 @@ const DockHeader = ({ activeSpaceData }) => {
     updateColorOfSpace(spaceId, color);
     setShowColors(false);
     setShowMiniMenu(false);
-  }, [color]);
+  }, [color, spaceId]);
 
   const handleSubmitDesc = (e) => {
     e.preventDefault();
@@ -56,7 +56,7 @@ const DockHeader = ({ activeSpaceData }) => {
 
   return (
     <div className="dockHeader">
-      <img src={bg1Img} />
+      <img src={bg1Img} alt={bg1Img} />
       <div className="dh__header">
         <div className="dh__text">
           <div className="dh__name">

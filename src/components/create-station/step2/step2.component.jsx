@@ -1,8 +1,7 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState, useRef } from "react";
 
 import RetroButton from "../../retro/button/retro-button.component";
 import RetroInput from "../../retro/input/input.component";
-import Box from "../../retro/box/box.component";
 import Status from "./status/status.component";
 
 import "./step2.styles.scss";

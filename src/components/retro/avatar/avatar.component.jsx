@@ -7,7 +7,7 @@ import "./avatar.styles.scss";
 
 const Avatar = ({ src }) => (
   <div className="avatar">
-    {src ? <img src={src} /> : <FontAwesomeIcon icon={faUser} />}
+    {src ? <img alt="" src={src} /> : <FontAwesomeIcon icon={faUser} />}
   </div>
 );
 

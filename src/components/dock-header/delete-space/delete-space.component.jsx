@@ -12,11 +12,9 @@ import {
   deleteSpace,
   removeMember,
   updateUser,
-  unAssignFromAllTasks,
 } from "../../../firebase/firebase.utils";
 
 import { removeOneSpace } from "../../../redux/space/space.actions";
-import { setCurrentUser } from "../../../redux/user/user.actions";
 
 const DeleteStation = ({ data }) => {
   const dispatch = useDispatch();
@@ -34,7 +32,7 @@ const DeleteStation = ({ data }) => {
     } else {
       setIsUserAdmin(false);
     }
-  }, []);
+  }, [currentUserUid, data]);
 
   const handleDeleteSpace = () => {
     // in favorite or assinged tasks ?

@@ -12,11 +12,9 @@ export const filterForMembers = (allUsers, membersIds) => {
 
   let filteredUsersArray = [];
   membersIds.forEach((memberId) => {
-    const newArray = allUsers.filter((member) => member.uid == memberId);
+    const newArray = allUsers.filter((member) => member.uid === memberId);
     filteredUsersArray.push(newArray);
   });
-
-  const filterdMembers = allUsers.filter((member) => member.uid == membersIds);
 
   return filteredUsersArray;
 };

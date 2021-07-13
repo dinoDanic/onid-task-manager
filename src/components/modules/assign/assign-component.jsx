@@ -1,11 +1,11 @@
 import React, { useState, useMemo } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 import { useActiveSpaceData } from "../../../hooks/useActiveSpaceData.hook";
 
 import { AnimatePresence } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserSlash, faUserTimes } from "@fortawesome/free-solid-svg-icons";
+import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
 
 import {
   assignMember,
@@ -16,17 +16,13 @@ import {
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
 
-import { setCurrentUser } from "../../../redux/user/user.actions";
-
 import "./assign-styles.scss";
 
 const Assign = ({ task }) => {
   const users = useSelector((state) => state.user.users);
   const spaceId = useSelector((state) => state.history.spaceId);
   const stationId = useSelector((state) => state.history.stationId);
-  const currentUser = useSelector((state) => state.user.currentUser);
   const spaceData = useActiveSpaceData();
-  const dispatch = useDispatch();
 
   const [showMembers, setShowMembers] = useState(false);
   const [assignedUser, setAssignedUser] = useState({});
@@ -36,19 +32,19 @@ const Assign = ({ task }) => {
     if (spaceData) {
       const { members } = spaceData;
       let list = [];
-      members.map((memberId) => {
+      list = members.map((memberId) => {
         const memberFind = users.filter((item) => item.uid === memberId);
-        list.push(memberFind[0]);
+        return memberFind[0];
       });
       setAllMembers(list);
     }
-  }, [spaceData]);
+  }, [spaceData, users]);
 
   useMemo(() => {
     const { assign } = task;
     const getAssignUser = users.filter((item) => item.uid === assign);
     setAssignedUser(getAssignUser[0]);
-  }, [task]);
+  }, [task, users]);
 
   const handleAssignMember = (userId) => {
     if (task.assign) {
@@ -90,16 +86,6 @@ const Assign = ({ task }) => {
 
     unAssign(spaceId, stationId, task.id);
     setShowMembers(false);
-
-    /* // set array user
-    let taskArray = currentUser.assignedTasks.filter(
-      (item) => item.id !== task.id
-    );
-    let newUser = {
-      ...currentUser,
-      assignedTasks: [...taskArray],
-    };
-    dispatch(setCurrentUser(newUser)); */
   };
   return (
     <div className="assign">

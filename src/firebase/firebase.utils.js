@@ -424,7 +424,7 @@ export const setPriority = (
   let task = [];
 
   // set all false
-  allPriority.map((item) => (item, (item.active = false)));
+  allPriority.map((item) => (item.active = false));
 
   // set active on clicked element
   priority.active = true;
@@ -470,7 +470,6 @@ export const setStatus = (
   status,
   statusType
 ) => {
-  let allStatusType = {};
   let removedStatus = {};
 
   console.log(statusType);
@@ -771,7 +770,7 @@ export const addStarFavorite = (userId, stationId) => {
     });
 };
 
-export const unAssignFromAllTasks = (assignedArray, spaceId, userId) => {
+/* export const unAssignFromAllTasks = (assignedArray, spaceId, userId) => {
   let mustRemoveTasks = assignedArray.filter(
     (item) => item.fromSpaceId === spaceId
   );
@@ -804,7 +803,7 @@ export const unAssignFromAllTasks = (assignedArray, spaceId, userId) => {
         );
       });
   });
-};
+}; */
 
 export {
   db,

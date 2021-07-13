@@ -1,12 +1,7 @@
 import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  auth,
-  createUserInFirebase,
-  db,
-  updateUser,
-} from "./firebase/firebase.utils";
+import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
 
@@ -25,10 +20,11 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
-  const { currentUser, users } = user;
+  const { currentUser } = user;
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
+      console.log("onautsh state change dispathicng current suer");
       if (user) {
         const { photoURL, uid, displayName, email } = user;
         const userRef = db.collection("users").doc(uid);
@@ -64,22 +60,18 @@ function App() {
         history.push("/signin");
       }
     });
-  }, []);
+  }, [dispatch, history]);
 
-  useEffect(async () => {
+  useEffect(() => {
     db.collection("users").onSnapshot((usersData) => {
+      console.log("db user change, dispatching setUsers");
       let users = [];
       usersData.forEach((userData) => {
         users.push(userData.data());
       });
       dispatch(setUsers(users));
     });
-  }, []);
-
-  /*  useEffect(() => {
-    if (users === null) return;
-    updateUser(currentUser.uid, currentUser);
-  }, [user]); */
+  }, [dispatch]);
 
   return (
     <div className="app">

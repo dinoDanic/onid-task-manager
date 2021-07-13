@@ -33,7 +33,7 @@ const TaskSettings = ({ status, inputNameRef }) => {
     setTaskColor(spaceId, stationId, status.name, color);
     setShowColors(false);
     setShowSettings(false);
-  }, [color]);
+  }, [color, spaceId, stationId, status.name]);
 
   return (
     <div className="taskSettings">

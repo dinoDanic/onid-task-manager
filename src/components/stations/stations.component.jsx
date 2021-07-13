@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { db, createNewStation } from "../../firebase/firebase.utils";
-import { AnimatePresence, motion } from "framer-motion";
+import { db } from "../../firebase/firebase.utils";
+import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 
@@ -20,7 +20,6 @@ import "./stations.styles.scss";
 const Stations = () => {
   const stationData = useSelector((state) => state.space.stationData);
   const [createStation, setCreateStation] = useState(false);
-  const [newStationName, setNewStationName] = useState("");
 
   const history = useHistory();
   const dispatch = useDispatch();
@@ -60,25 +59,18 @@ const Stations = () => {
         });
       dispatch(setStationId(activeStationId));
     }
-  }, [activeStationId]);
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (newStationName === "") {
-      alert("no name");
-      return;
-    }
-    createNewStation(activeSpaceId, newStationName);
-    setCreateStation(false);
-    setNewStationName("");
-  };
+  }, [activeStationId, activeSpaceId, dispatch]);
 
   return (
     <div className="stations">
       <p className="stations__pre">Stations</p>
       <div className="stations__stationItem">
         {stationData?.map((station) => {
-          return <StationItem key={station.stationId} data={station} />;
+          return (
+            <div className="stations__item" key={station.stationId}>
+              <StationItem data={station} />
+            </div>
+          );
         })}
       </div>
       <div className="stations__createStation">

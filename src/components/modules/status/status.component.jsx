@@ -22,7 +22,7 @@ const Status = ({ task }) => {
     let findStatus = toArray.filter((item) => item.taskIds.includes(task.id));
     setCurrentStatusType(findStatus[0]);
     setStatusTypeArray(toArray);
-  }, [statusType]);
+  }, [statusType, task.id]);
   return (
     <div className="status" onClick={() => setShowStatusType(!showStatusType)}>
       <div className="status__show">
