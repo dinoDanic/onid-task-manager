@@ -181,6 +181,7 @@ export const createNewTask = async (
       deadline: null,
       fromSpaceId: spaceId,
       fromStationId: stationId,
+      message: [],
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -804,6 +805,20 @@ export const addStarFavorite = (userId, stationId) => {
       });
   });
 }; */
+
+export const createUpdateToTask = (spaceId, stationId, newMessage, userId) => {
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks")
+    .collection("msg")
+    .add({
+      message: newMessage,
+      from: userId,
+    });
+};
 
 export {
   db,

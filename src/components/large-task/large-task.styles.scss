@@ -37,3 +37,12 @@
   max-height: 500px;
   border-radius: 10px;
 }
+
+.lt__input {
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 8px;
+    height: fit-content;
+  }
+}
