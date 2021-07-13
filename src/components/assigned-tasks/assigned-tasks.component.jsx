@@ -36,9 +36,11 @@ const AssingedTasks = () => {
       ) : (
         <>
           {assignedTasks.map((task) => {
+            console.log(task);
+            const { fromSpaceId, fromStationId } = task;
             return (
               <div key={task.id} className="at__item">
-                <Link to={``}>
+                <Link to={`/s/${fromSpaceId}/e/${fromStationId}/b`}>
                   <RetroButton mode="flat">
                     <div className="at__content">
                       <p>{task.content}</p>

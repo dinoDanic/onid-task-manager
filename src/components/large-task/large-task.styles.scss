@@ -1,0 +1,39 @@
+.largeTask {
+  .bl__content {
+    width: 100% !important;
+  }
+  min-width: 500px;
+  width: 100%;
+  .loadModule {
+    border-bottom: 1px solid #f0f2f5;
+
+    padding: 23px 0;
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+}
+
+.lt__content {
+  margin-bottom: 10px;
+}
+.lt__columns {
+  display: grid;
+  grid-template-columns: auto auto;
+  grid-gap: 20px;
+}
+
+.lt__comments {
+  border-radius: 10px;
+  input {
+    margin-bottom: 0;
+    &::placeholder {
+      color: rgb(119, 119, 119) !important;
+    }
+  }
+}
+
+.lt__modules {
+  max-height: 500px;
+  border-radius: 10px;
+}

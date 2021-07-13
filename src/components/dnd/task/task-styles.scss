@@ -6,6 +6,11 @@
   background: white;
   align-items: center;
   border-radius: 8px;
+  .bl__content {
+    width: 70%;
+    min-width: 500px;
+    max-width: 1000px;
+  }
   &:hover {
     .task__drag {
       opacity: 1;

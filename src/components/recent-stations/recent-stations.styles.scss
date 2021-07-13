@@ -4,5 +4,10 @@
     &:last-child {
       margin-bottom: 0;
     }
+    button {
+      svg {
+        margin-right: 5px;
+      }
+    }
   }
 }

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 
@@ -11,12 +11,16 @@ import {
 import "./task-styles.scss";
 
 import LoadModule from "../../modules/load-module.component.jsx/load-module.component";
+import BoxLayer from "../../retro/box-layer/box-layer.component";
+import LargeTask from "../../large-task/large-task.component";
+
 import { updateUser } from "../../../firebase/firebase.utils";
 
 const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   let getUser = users.filter((item) => item.uid === task.assign);
+  const [showLargeTask, setShowLargeTask] = useState(false);
   let user = getUser[0];
 
   useEffect(() => {
@@ -63,7 +67,10 @@ const Task = ({ task, index }) => {
               <div className="task__taskName">
                 <p>{task.content}</p>
               </div>
-              <div className="task__expand">
+              <div
+                className="task__expand"
+                onClick={() => setShowLargeTask(!showLargeTask)}
+              >
                 <FontAwesomeIcon icon={faExpandAlt} />
               </div>
             </div>
@@ -72,6 +79,11 @@ const Task = ({ task, index }) => {
                 <LoadModule module={module} key={module.name} task={task} />
               );
             })}
+            {showLargeTask && (
+              <BoxLayer setLayer={setShowLargeTask}>
+                <LargeTask task={task} />
+              </BoxLayer>
+            )}
           </div>
         );
       }}
