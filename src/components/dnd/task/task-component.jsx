@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 
@@ -6,6 +6,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faGripLinesVertical,
   faExpandAlt,
+  faCommentAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
 import "./task-styles.scss";
@@ -14,12 +15,14 @@ import LoadModule from "../../modules/load-module.component.jsx/load-module.comp
 import BoxLayer from "../../retro/box-layer/box-layer.component";
 import LargeTask from "../../large-task/large-task.component";
 
-import { updateUser } from "../../../firebase/firebase.utils";
+import { updateUser, db } from "../../../firebase/firebase.utils";
 
 const Task = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   let getUser = users.filter((item) => item.uid === task.assign);
+  const [msgs, setMsgs] = useState(0);
+
   const [showLargeTask, setShowLargeTask] = useState(false);
   let user = getUser[0];
 
@@ -47,6 +50,27 @@ const Task = ({ task, index }) => {
       updateUser(user.uid, newUser);
     }
   }, [task]);
+
+  useMemo(() => {
+    const { fromSpaceId, fromStationId, id } = task;
+    if (msgs === 0) {
+      db.collection("space")
+        .doc(fromSpaceId)
+        .collection("stations")
+        .doc(fromStationId)
+        .collection("tasks")
+        .doc("tasks")
+        .collection("msg")
+        .where("taskId", "==", id)
+        .get()
+        .then((msgsData) => {
+          if (!msgsData.empty) {
+            setMsgs(msgsData.size);
+          }
+        });
+    }
+  }, [msgs]);
+
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {
@@ -73,6 +97,12 @@ const Task = ({ task, index }) => {
               >
                 <FontAwesomeIcon icon={faExpandAlt} />
               </div>
+              {msgs > 0 && (
+                <div className="task__comments">
+                  <FontAwesomeIcon icon={faCommentAlt} />
+                  <p>{msgs}</p>
+                </div>
+              )}
             </div>
             {activeModules?.map((module) => {
               return (
@@ -81,7 +111,7 @@ const Task = ({ task, index }) => {
             })}
             {showLargeTask && (
               <BoxLayer setLayer={setShowLargeTask}>
-                <LargeTask task={task} />
+                <LargeTask task={task} msgs={msgs} />
               </BoxLayer>
             )}
           </div>

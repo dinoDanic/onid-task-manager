@@ -336,6 +336,7 @@ export const updateModulesDb = (spaceId, stationId, module, modules) => {
 };
 
 export const getUserDataWithId = async (userId) => {
+  console.log(userId);
   const userRef = db.collection("users").doc(userId);
   const userData = await userRef.get();
   const data = userData.data();
@@ -806,7 +807,13 @@ export const addStarFavorite = (userId, stationId) => {
   });
 }; */
 
-export const createUpdateToTask = (spaceId, stationId, newMessage, userId) => {
+export const createMessageToTask = (
+  spaceId,
+  stationId,
+  newMessage,
+  userId,
+  taskId
+) => {
   db.collection("space")
     .doc(spaceId)
     .collection("stations")
@@ -817,6 +824,8 @@ export const createUpdateToTask = (spaceId, stationId, newMessage, userId) => {
     .add({
       message: newMessage,
       from: userId,
+      created: new Date(),
+      taskId: taskId,
     });
 };
 

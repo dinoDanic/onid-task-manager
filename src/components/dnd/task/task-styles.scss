@@ -49,3 +49,31 @@
     transform: slace(0.95);
   }
 }
+.task__comments {
+  position: absolute;
+  top: 6px;
+  right: 30px;
+  opacity: 1;
+  transition: 0.2s ease;
+  cursor: pointer;
+  svg {
+    color: #ccc;
+  }
+  p {
+    position: absolute;
+    top: 3px;
+    display: flex;
+    width: 15px;
+    justify-content: center;
+    opacity: 1;
+    color: #666;
+    font-size: 10px;
+    font-weight: 800;
+  }
+  &:hover {
+    transform: scale(1.15);
+  }
+  &:active {
+    transform: slace(0.95);
+  }
+}

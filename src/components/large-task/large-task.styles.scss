@@ -25,14 +25,20 @@
 
 .lt__comments {
   border-radius: 10px;
+  width: 100%;
+
   input {
     margin-bottom: 0;
+    width: 100%;
     &::placeholder {
       color: rgb(119, 119, 119) !important;
     }
   }
 }
-
+.lt__messeges {
+  max-height: 292px;
+  overflow-y: auto;
+}
 .lt__modules {
   max-height: 500px;
   border-radius: 10px;
@@ -45,4 +51,7 @@
     margin-right: 8px;
     height: fit-content;
   }
+}
+.lt__inputMsg {
+  width: 100%;
 }
