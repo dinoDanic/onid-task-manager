@@ -1,0 +1,28 @@
+.listTask {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: 1px solid #f0f2f5;
+  padding: 5px 10px;
+  background: white;
+  border-radius: 8px;
+  margin-bottom: 5px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  .lt__task {
+    padding-right: 20px;
+    height: 40px;
+    align-items: center;
+    min-width: fit-content;
+    display: flex;
+  }
+  .lt__modules {
+    display: flex;
+  }
+  .lt__clickable {
+    width: 100%;
+    height: 40px;
+    cursor: pointer;
+  }
+}

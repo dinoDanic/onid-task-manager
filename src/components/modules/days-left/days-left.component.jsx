@@ -36,7 +36,7 @@ const DaysLeft = ({ task }) => {
       <p style={{ color: daysColor }}>
         {daysLeft > 0 && `${daysLeft} days`}
         {daysLeft === 0 && `today`}
-        {daysLeft === null && `no deadline set`}
+        {daysLeft === null && `no deadline`}
         {daysLeft !== null && <FontAwesomeIcon icon={faHourglassHalf} />}
       </p>
     </div>

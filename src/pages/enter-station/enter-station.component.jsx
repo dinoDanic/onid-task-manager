@@ -11,9 +11,11 @@ const EnterStation = () => {
   const history = useHistory();
   const currentSpaceId = history.location.pathname.split("/")[2];
   const currentStationId = history.location.pathname.split("/")[4];
-
   const [station, setStation] = useState([]);
+
   useEffect(() => {
+    if (!currentSpaceId) return;
+    if (!currentStationId) return;
     db.collection("space")
       .doc(currentSpaceId)
       .collection("stations")
@@ -33,7 +35,12 @@ const EnterStation = () => {
       <Route
         exact
         path="/s/:id/e/:id/b"
-        render={() => <Board station={station} />}
+        render={() => <Board station={station} direction="horizontal" />}
+      />
+      <Route
+        exact
+        path="/s/:id/e/:id/l"
+        render={() => <Board station={station} direction="vertical" />}
       />
     </div>
   );

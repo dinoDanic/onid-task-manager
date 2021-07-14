@@ -10,13 +10,19 @@ import DaysLeft from "../days-left/days-left.component";
 
 import "./load-module.styles.scss";
 
-const LoadModule = memo(({ module, task }) => {
+const LoadModule = memo(({ module, task, direction }) => {
   return (
     <div className="loadModule">
-      <div className="lm__name">
-        <p>{module.name}</p>
-      </div>
-      <div className="lm__module">
+      {direction !== "vertical" && (
+        <div className="lm__name">
+          <p>{module.name}</p>
+        </div>
+      )}
+      <div
+        className={` ${
+          direction === "vertical" ? "lm__vertical-module" : "lm__module"
+        } `}
+      >
         {module.name === "CreatedBy" && <CreatedBy task={task} />}
         {module.name === "Assign" && <Assign task={task} />}
         {module.name === "Priority" && <Priority task={task} />}

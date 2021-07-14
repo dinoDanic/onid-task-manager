@@ -10,7 +10,8 @@
     "@testing-library/jest-dom": "^5.14.1",
     "@testing-library/react": "^11.2.7",
     "@testing-library/user-event": "^12.8.3",
-    "firebase": "^8.6.7",
+    "firebase": "^8.7.1",
+    "firebase-tools": "^9.16.0",
     "framer-motion": "^4.1.17",
     "react": "^17.0.2",
     "react-beautiful-dnd": "^13.1.0",
@@ -21,7 +22,7 @@
     "react-scripts": "4.0.3",
     "redux": "^4.1.0",
     "reselect": "^4.0.0",
-    "sass": "^1.35.0",
+    "sass": "^1.35.2",
     "styled-components": "^5.3.0",
     "uuid": "^8.3.2",
     "web-vitals": "^1.1.2"

@@ -14,7 +14,7 @@ import "./board.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Board = ({ station }) => {
+const Board = ({ station, direction }) => {
   const users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -170,16 +170,16 @@ const Board = ({ station }) => {
       <Droppable
         droppableId={"allStatusTypes"}
         type="column"
-        direction="horizontal"
+        direction={direction}
       >
         {(provided) => {
-          const style = {};
           return (
             <div
-              className="board"
+              className={`board ${
+                direction === "vertical" && "board__vertical"
+              }`}
               ref={provided.innerRef}
               {...provided.droppableProps}
-              style={style}
             >
               <>
                 {state?.statusOrder?.map((statusId, index) => {
@@ -196,6 +196,7 @@ const Board = ({ station }) => {
                       status={status}
                       tasks={tasks}
                       index={index}
+                      direction={direction}
                     />
                   );
                 })}

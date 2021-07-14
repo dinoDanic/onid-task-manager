@@ -3,6 +3,7 @@ import { Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 
 import Task from "../task/task-component";
+import ListTask from "../list-task/list-task.component";
 import RetroInput from "../../retro/input/input.component";
 import Box from "../../retro/box/box.component";
 import TaskSettings from "../../task-settings/task-settings.component";
@@ -23,6 +24,7 @@ const StatusType = ({
   status,
   tasks,
   index,
+  direction,
 }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const statusType = useSelector((state) => state.space.statusType);
@@ -64,7 +66,9 @@ const StatusType = ({
     <Draggable draggableId={status.name} index={index}>
       {(provided) => (
         <div
-          className="statusType"
+          className={`statusType ${
+            direction === "vertical" && "st__vertical"
+          } `}
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
@@ -86,7 +90,9 @@ const StatusType = ({
               <TaskSettings status={status} inputNameRef={inputNameRef} />
             </div>
           </div>
-          <Box style={{ background: status.color }}>
+          <Box
+            style={{ background: direction === "vertical" ? "" : status.color }}
+          >
             <div className="st__content">
               <Droppable droppableId={status.id}>
                 {(provided, snapshot) => {
@@ -105,7 +111,19 @@ const StatusType = ({
                     >
                       {tasks?.map((task, index) => {
                         if (task === undefined) return false;
-                        return <Task key={task.id} task={task} index={index} />;
+                        return (
+                          <>
+                            {direction === "vertical" ? (
+                              <ListTask
+                                key={task.id}
+                                task={task}
+                                index={index}
+                              />
+                            ) : (
+                              <Task key={task.id} task={task} index={index} />
+                            )}
+                          </>
+                        );
                       })}
                       {provided.placeholder}
                     </div>

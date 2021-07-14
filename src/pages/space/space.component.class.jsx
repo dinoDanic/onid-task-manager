@@ -16,7 +16,7 @@ const Space = () => {
   useEffect(() => {
     db.collection("space")
       .where("members", "array-contains", currentUser.uid)
-      .orderBy("created", "asc")
+      /* .orderBy("created", "asc") */
       .onSnapshot((snapShot) => {
         if (!snapShot.empty) {
           let shots = [];

@@ -94,3 +94,11 @@
     }
   }
 }
+
+// vertical
+.st__vertical {
+  max-width: 100%;
+  .st__taskList {
+    min-height: 0px;
+  }
+}
