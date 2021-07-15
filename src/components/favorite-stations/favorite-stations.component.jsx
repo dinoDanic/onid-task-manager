@@ -1,4 +1,5 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { db, updateUser } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -10,9 +11,47 @@ import { faStar } from "@fortawesome/free-solid-svg-icons";
 import "./favorite-stations.styles.scss";
 
 const FavoriteStations = () => {
-  const favoriteStations = useSelector(
-    (state) => state.user.currentUser.favoriteStations
-  );
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const [favoriteStations, setFavoriteStations] = useState([]);
+
+  useEffect(() => {
+    if (!currentUser) return;
+    const { favoriteStations } = currentUser;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .onSnapshot((userData) => {
+        const user = userData.data();
+        setFavoriteStations(user.favoriteStations);
+      });
+    // but dose it exists ?
+    favoriteStations.map((station) => {
+      db.collection("space")
+        .doc(station.fromSpaceId)
+        .collection("stations")
+        .doc(station.stationId)
+        .get()
+        .then((stationData) => {
+          if (stationData.exists) {
+            console.log("well it exists, no code (write somethign)");
+          } else {
+            console.log(
+              "it dose not exist, need to delete from favorite",
+              station.stationId
+            );
+            db.collection("users")
+              .doc(currentUser.uid)
+              .get()
+              .then((userData) => {
+                let user = userData.data();
+                user.favoriteStations = user.favoriteStations.filter(
+                  (st) => st.stationId !== station.stationId
+                );
+                updateUser(currentUser.uid, user);
+              });
+          }
+        });
+    });
+  }, [currentUser]);
   return (
     <div className="favoriteStation">
       {favoriteStations.length === 0 ? (
