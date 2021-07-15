@@ -25,7 +25,7 @@ const EnterStation = () => {
       .onSnapshot((stationData) => {
         setStation(stationData.data());
       });
-  }, []);
+  }, [currentSpaceId, currentStationId]);
 
   return (
     <div className="enterStation">

@@ -20,8 +20,7 @@ const Home = () => {
         </SectionBox>
         <SectionBox
           title="Favorite Stations"
-          subTitle="Active Favorite stations
-      "
+          subTitle="Active Favorite stations"
         >
           <div className="home__favorite">
             <div className="home__favoriteStations">

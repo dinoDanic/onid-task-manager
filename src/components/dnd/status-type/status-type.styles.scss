@@ -9,7 +9,7 @@
   flex: 1;
 
   .retroBox {
-    padding: 10px;
+    padding: 5px;
   }
 }
 
@@ -36,6 +36,7 @@
 }
 
 .st__header {
+  position: relative;
   display: flex;
   justify-content: space-between;
 }
@@ -100,5 +101,15 @@
   max-width: 100%;
   .st__taskList {
     min-height: 0px;
+  }
+}
+.st__menu-vertical {
+  .bll__content {
+    left: -90px;
+  }
+}
+.st__newTask-vertical {
+  input {
+    max-width: 300px;
   }
 }

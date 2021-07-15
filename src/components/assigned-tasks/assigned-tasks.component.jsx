@@ -16,6 +16,8 @@ import { faTasks } from "@fortawesome/free-solid-svg-icons";
 const AssingedTasks = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const [assignedTasks, setAssignedTasks] = useState([]);
+  const [task, setTask] = useState([]);
+
   useEffect(() => {
     if (!currentUser) return;
     db.collection("users")
@@ -26,6 +28,46 @@ const AssingedTasks = () => {
         }
       });
   }, []);
+
+  useEffect(() => {
+    let allTasks = [];
+    db.collection("space")
+      .get()
+      .then((spaceQuery) => {
+        spaceQuery.forEach((spaceDoc) => {
+          let spaceId = spaceDoc.data().spaceId;
+          db.collection("space")
+            .doc(spaceId)
+            .collection("stations")
+            .get()
+            .then((stationQuery) => {
+              stationQuery.forEach((stationDoc) => {
+                let stationId = stationDoc.data().stationId;
+                db.collection("space")
+                  .doc(spaceId)
+                  .collection("stations")
+                  .doc(stationId)
+                  .collection("tasks")
+                  .doc("tasks")
+                  .onSnapshot((taskData) => {
+                    allTasks.push(taskData.data().tasks);
+                  });
+              });
+            });
+        });
+      })
+      .then(() => {
+        setTask(allTasks);
+      });
+  }, []);
+
+  useEffect(() => {
+    console.log(task);
+    task.map((tsk, nkj, index) => {
+      console.log(tsk, nkj, index);
+    });
+  }, [task]);
+
   return (
     <div className="assignedTasks">
       {!assignedTasks.length > 0 ? (

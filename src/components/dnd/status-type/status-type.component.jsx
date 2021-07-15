@@ -83,7 +83,13 @@ const StatusType = ({
                 />
               </form>
             </div>
-            <div className="st__menu">
+            <div
+              className={
+                direction === "vertical"
+                  ? "st__menu st__menu-vertical"
+                  : "st__menu"
+              }
+            >
               <div className="st__drag" {...provided.dragHandleProps}>
                 <FontAwesomeIcon icon={faGripLines} />
               </div>
@@ -138,7 +144,10 @@ const StatusType = ({
                 handleSubmit(e);
               }}
             >
-              <div onChange={(e) => setNewTaskName(e.target.value)}>
+              <div
+                onChange={(e) => setNewTaskName(e.target.value)}
+                className={direction === "vertical" && "st__newTask-vertical"}
+              >
                 <RetroInput ref={inputRef} placeholder="Add Task" />
               </div>
             </form>

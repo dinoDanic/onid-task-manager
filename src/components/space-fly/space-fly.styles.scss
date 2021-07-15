@@ -1,7 +1,7 @@
 .spaceFly {
   display: flex;
   flex-direction: column;
-  width: 55px;
+  width: 40px;
   align-items: center;
   button {
     margin-bottom: 10px;
@@ -30,14 +30,16 @@
   background: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;
-  padding: 8px 0;
+  padding: 5px;
   flex-direction: column;
   align-items: center;
   margin-bottom: 10px;
-  width: 100%;
   position: relative;
   button {
-    width: 30px;
+    padding-left: 0;
+    padding-right: 0;
+    width: 36px;
+    height: 36px;
   }
 }
 .sf__flysName {
@@ -61,5 +63,6 @@
 .sf__controls {
   button {
     width: 30px;
+    background: transparent;
   }
 }

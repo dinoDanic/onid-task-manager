@@ -76,9 +76,10 @@ const Stations = () => {
       <div className="stations__createStation">
         <RetroButton
           mode="flat"
+          color="info"
           onClick={() => setCreateStation(!createStation)}
         >
-          {createStation ? "Cancel" : "Create station"}
+          {createStation ? "Cancel" : "Create new station"}
         </RetroButton>
       </div>
       <AnimatePresence>

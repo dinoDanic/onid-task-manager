@@ -6,6 +6,9 @@ import LoadModule from "../../modules/load-module.component.jsx/load-module.comp
 import LargeTask from "../../large-task/large-task.component";
 import BoxLayer from "../../retro/box-layer/box-layer.component";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
+
 import "./list-task.styles.scss";
 
 const ListTask = ({ task, index }) => {
@@ -22,7 +25,6 @@ const ListTask = ({ task, index }) => {
             className="listTask"
             ref={provided.innerRef}
             {...provided.draggableProps}
-            {...provided.dragHandleProps}
             style={style}
           >
             <div className="lt__task">
@@ -32,6 +34,9 @@ const ListTask = ({ task, index }) => {
               className="lt__clickable"
               onClick={() => setShowLargeTask(!showLargeTask)}
             />
+            <div className="lt__drag" {...provided.dragHandleProps}>
+              <FontAwesomeIcon icon={faGripLinesVertical} />
+            </div>
             <div className="lt__modules">
               {activeModules?.map((module) => {
                 return (
