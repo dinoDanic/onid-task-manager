@@ -286,7 +286,34 @@ export const renameSpace = (spaceId, newName) => {
 };
 
 export const deleteSpace = (spaceId) => {
-  db.collection("space").doc(spaceId).delete();
+  db.collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .get()
+    .then((stationQuery) => {
+      if (!stationQuery.empty) {
+        stationQuery.forEach((stationDoc) => {
+          db.collection("space")
+            .doc(spaceId)
+            .collection("stations")
+            .doc(stationDoc.id)
+            .collection("tasks")
+            .doc("tasks")
+            .delete();
+          db.collection("space")
+            .doc(spaceId)
+            .collection("stations")
+            .doc(stationDoc.id)
+            .collection("modules")
+            .doc("modules")
+            .delete();
+          stationDoc.ref.delete();
+        });
+      }
+    })
+    .then(() => {
+      db.collection("space").doc(spaceId).delete();
+    });
 };
 
 export const updateColorOfSpace = (spaceId, color) => {

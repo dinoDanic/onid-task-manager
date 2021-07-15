@@ -35,37 +35,13 @@ const DeleteStation = ({ data }) => {
   }, [currentUserUid, data]);
 
   const handleDeleteSpace = () => {
-    // in favorite or assinged tasks ?
-    let user = currentUser;
-    let assignedArray = user.assignedTasks;
-    let newUser = {};
-
-    // za assign
-    if (assignedArray.length > 0) {
-      let filter = assignedArray.filter((item) => item.fromSpaceId !== spaceId);
-      newUser = {
-        ...user,
-        assignedTasks: [...filter],
-      };
-    }
-    if (user.favoriteStations.length > 0) {
-      user.favoriteStations = user.favoriteStations.filter(
-        (staion) => staion.fromSpaceId !== spaceId
-      );
-      newUser = {
-        ...user,
-        assignedTasks: [...user.favoriteStations],
-      };
-    }
-
-    updateUser(newUser.uid, newUser);
     deleteSpace(spaceId);
     dispatch(removeOneSpace(spaceId));
     history.push("/");
   };
 
   const handleLeaveSpace = () => {
-    let user = currentUser;
+    /*   let user = currentUser;
     let assignedArray = user.assignedTasks;
     let newUser = {};
 
@@ -105,7 +81,7 @@ const DeleteStation = ({ data }) => {
 
     // update tasks
 
-    updateUser(newUser.uid, newUser);
+    updateUser(newUser.uid, newUser); */
     removeMember(spaceId, currentUser.uid);
     dispatch(removeOneSpace(spaceId));
     history.push("/");

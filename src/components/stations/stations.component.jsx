@@ -52,10 +52,12 @@ const Stations = () => {
         .collection("modules")
         .doc("modules")
         .onSnapshot((doc) => {
-          const modules = doc.data().modules;
-          const filterData = modules.filter((item) => item.active === true);
-          dispatch(setModules(modules));
-          dispatch(setActiveModules(filterData));
+          if (doc.exists) {
+            const modules = doc.data().modules;
+            const filterData = modules.filter((item) => item.active === true);
+            dispatch(setModules(modules));
+            dispatch(setActiveModules(filterData));
+          }
         });
       dispatch(setStationId(activeStationId));
     }

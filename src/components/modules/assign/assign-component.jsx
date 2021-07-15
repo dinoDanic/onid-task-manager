@@ -70,20 +70,6 @@ const Assign = ({ task }) => {
   };
 
   const handleUnAssignMember = () => {
-    if (task.assign !== null) {
-      let findUser = users.filter((user) => user.uid === task.assign);
-      let theUser = findUser[0];
-      //remove task
-      theUser.assignedTasks = theUser.assignedTasks.filter(
-        (item) => item.id !== task.id
-      );
-
-      // za sve users
-      let filterUsers = users.filter((user) => user.uid !== theUser.uid);
-      filterUsers.push(theUser);
-      updateUser(theUser.uid, theUser);
-    }
-
     unAssign(spaceId, stationId, task.id);
     setShowMembers(false);
   };

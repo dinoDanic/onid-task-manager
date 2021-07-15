@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { db } from "../../firebase/firebase.utils";
+import { db, updateUser } from "../../firebase/firebase.utils";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
@@ -30,43 +30,78 @@ const AssingedTasks = () => {
   }, []);
 
   useEffect(() => {
-    let allTasks = [];
-    db.collection("space")
-      .get()
-      .then((spaceQuery) => {
-        spaceQuery.forEach((spaceDoc) => {
-          let spaceId = spaceDoc.data().spaceId;
-          db.collection("space")
-            .doc(spaceId)
-            .collection("stations")
-            .get()
-            .then((stationQuery) => {
-              stationQuery.forEach((stationDoc) => {
-                let stationId = stationDoc.data().stationId;
-                db.collection("space")
-                  .doc(spaceId)
-                  .collection("stations")
-                  .doc(stationId)
-                  .collection("tasks")
-                  .doc("tasks")
-                  .onSnapshot((taskData) => {
-                    allTasks.push(taskData.data().tasks);
-                  });
-              });
-            });
-        });
-      })
-      .then(() => {
-        setTask(allTasks);
-      });
-  }, []);
+    const checkIfTaskHealthy = () => {
+      assignedTasks.map(async (task) => {
+        console.log(task); // još Leave space napravi da se zbrise task ako nema akses
+        const { fromSpaceId, fromStationId, id, assign } = task;
+        const taskRef = db
+          .collection("space")
+          .doc(fromSpaceId)
+          .collection("stations")
+          .doc(fromStationId)
+          .collection("tasks")
+          .doc("tasks");
+        const getTaskData = await taskRef.get();
+        if (getTaskData.data() === undefined) {
+          const getUserData = await db.collection("users").doc(assign).get();
+          const userData = getUserData.data();
+          console.log(userData);
+          userData.assignedTasks = userData.assignedTasks.filter(
+            (task) => task.id !== id
+          );
+          console.log(userData);
+          updateUser(assign, userData);
+          return;
+        }
 
-  useEffect(() => {
-    console.log(task);
-    task.map((tsk, nkj, index) => {
-      console.log(tsk, nkj, index);
-    });
-  }, [task]);
+        const taskData = getTaskData.data().tasks;
+        const theTask = taskData[id];
+        if (theTask.assign.includes(assign)) {
+          console.log("its ok");
+          //but are you a member ?
+          const getUserData = await db.collection("users").doc(assign).get();
+          const userData = getUserData.data();
+          console.log(userData);
+          db.collection("space")
+            .doc(fromSpaceId)
+            .get()
+            .then((docSpaceData) => {
+              if (docSpaceData.exists) {
+                const spaceData = docSpaceData.data();
+                if (spaceData.members.includes(userData.uid)) {
+                  console.log("its ok ur a member");
+                } else {
+                  console.log("your not even a member i see");
+                  db.collection("users")
+                    .doc(assign)
+                    .get()
+                    .then((user) => {
+                      const userData = user.data();
+                      userData.assignedTasks = userData.assignedTasks.filter(
+                        (task) => task.id !== id
+                      );
+                      updateUser(assign, userData);
+                    });
+                }
+              }
+            });
+        } else {
+          console.log("its not ok, have to delete task", id);
+          if (assign) {
+            const getUserData = await db.collection("users").doc(assign).get();
+            const userData = getUserData.data();
+            console.log(userData);
+            userData.assignedTasks = userData.assignedTasks.filter(
+              (task) => task.id !== id
+            );
+            console.log(userData);
+            updateUser(assign, userData);
+          }
+        }
+      });
+    };
+    checkIfTaskHealthy();
+  }, [assignedTasks]);
 
   return (
     <div className="assignedTasks">
@@ -78,7 +113,6 @@ const AssingedTasks = () => {
       ) : (
         <>
           {assignedTasks.map((task) => {
-            console.log(task);
             const { fromSpaceId, fromStationId } = task;
             return (
               <div key={task.id} className="at__item">
