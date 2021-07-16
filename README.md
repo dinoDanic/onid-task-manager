@@ -1,4 +1,5 @@
 # onid - Task manager
+[https://img.shields.io/badge/React-v%2017.0.2-blue]
 
 onid is a task manager web app made with **React, Firebase, React Beautiful DND, Redux and React Router**.
 
