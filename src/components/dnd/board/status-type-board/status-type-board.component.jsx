@@ -2,11 +2,10 @@ import React, { useRef, useState, useEffect } from "react";
 import { Droppable, Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
 
-import Task from "../task/task-component";
-import ListTask from "../list-task/list-task.component";
-import RetroInput from "../../retro/input/input.component";
-import Box from "../../retro/box/box.component";
-import TaskSettings from "../../task-settings/task-settings.component";
+import TaskBoard from "../../board/task-board/task-board.component";
+import RetroInput from "../../../retro/input/input.component";
+import Box from "../../../retro/box/box.component";
+import TaskSettings from "../../../task-settings/task-settings.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLines } from "@fortawesome/free-solid-svg-icons";
@@ -14,17 +13,16 @@ import { faGripLines } from "@fortawesome/free-solid-svg-icons";
 import {
   createNewTask,
   changeStatusTypeName,
-} from "../../../firebase/firebase.utils";
+} from "../../../../firebase/firebase.utils";
 
-import "./status-type.styles.scss";
+import "./status-type-board.styles.scss";
 
-const StatusType = ({
+const StatusTypeBoard = ({
   currentSpaceId,
   currentStationId,
   status,
   tasks,
   index,
-  direction,
 }) => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const statusType = useSelector((state) => state.space.statusType);
@@ -66,9 +64,7 @@ const StatusType = ({
     <Draggable draggableId={status.name} index={index}>
       {(provided) => (
         <div
-          className={`statusType ${
-            direction === "vertical" && "st__vertical"
-          } `}
+          className="statusType"
           {...provided.draggableProps}
           ref={provided.innerRef}
         >
@@ -83,22 +79,14 @@ const StatusType = ({
                 />
               </form>
             </div>
-            <div
-              className={
-                direction === "vertical"
-                  ? "st__menu st__menu-vertical"
-                  : "st__menu"
-              }
-            >
+            <div className="st__menu">
               <div className="st__drag" {...provided.dragHandleProps}>
                 <FontAwesomeIcon icon={faGripLines} />
               </div>
               <TaskSettings status={status} inputNameRef={inputNameRef} />
             </div>
           </div>
-          <Box
-            style={{ background: direction === "vertical" ? "" : status.color }}
-          >
+          <Box style={{ background: status.color }}>
             <div className="st__content">
               <Droppable droppableId={status.id}>
                 {(provided, snapshot) => {
@@ -118,17 +106,7 @@ const StatusType = ({
                       {tasks?.map((task, index) => {
                         if (task === undefined) return false;
                         return (
-                          <>
-                            {direction === "vertical" ? (
-                              <ListTask
-                                key={task.id}
-                                task={task}
-                                index={index}
-                              />
-                            ) : (
-                              <Task key={task.id} task={task} index={index} />
-                            )}
-                          </>
+                          <TaskBoard key={task.id} task={task} index={index} />
                         );
                       })}
                       {provided.placeholder}
@@ -144,10 +122,7 @@ const StatusType = ({
                 handleSubmit(e);
               }}
             >
-              <div
-                onChange={(e) => setNewTaskName(e.target.value)}
-                className={direction === "vertical" && "st__newTask-vertical"}
-              >
+              <div onChange={(e) => setNewTaskName(e.target.value)}>
                 <RetroInput ref={inputRef} placeholder="Add Task" />
               </div>
             </form>
@@ -158,4 +133,4 @@ const StatusType = ({
   );
 };
 
-export default StatusType;
+export default StatusTypeBoard;

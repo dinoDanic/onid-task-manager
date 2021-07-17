@@ -21,7 +21,9 @@ const FavoriteStations = () => {
       .doc(currentUser.uid)
       .onSnapshot((userData) => {
         const user = userData.data();
-        setFavoriteStations(user.favoriteStations);
+        if (userData.exists) {
+          setFavoriteStations(user.favoriteStations);
+        }
       });
     // but dose it exists ?
     favoriteStations.map((station) => {

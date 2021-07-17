@@ -2,11 +2,12 @@
   position: absolute;
   width: 100%;
   height: 100%;
-  ul {
+
+  ul#scene {
     height: 100%;
     width: 100%;
     left: -50px;
-    bottom: -20px;
+    bottom: -30px;
     li {
       width: 100%;
       height: 100%;
@@ -46,34 +47,34 @@
       position: absolute;
     }
   }
-}
-
-.wp__startUp {
-  position: absolute;
-  z-index: 100;
-  width: 100%;
-  display: flex;
-  justify-content: flex-end;
-  height: 100%;
-  align-items: center;
-}
-.wp__startUp-content {
-  width: 50%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-.wp__startUp-items {
-  width: 400px;
-  h1 {
-    font-size: 50px;
-    color: #333;
-    margin-bottom: 20px;
+  .layer-startUp-li {
   }
-  h4 {
-    font-weight: 300;
-    color: #333;
+  .layer-startUp-container {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
   }
-  margin-bottom: 50px;
+  .layer-startUp {
+    width: 400px;
+    margin-right: 15%;
+    pointer-events: all;
+    background: #f0f2f5;
+    padding: 20px;
+    border-radius: 10px;
+    h1 {
+      font-size: 70px;
+      margin-bottom: 10px;
+      color: #27538c;
+      font-family: "Ubuntu Mono", monospace;
+    }
+    h4 {
+      margin-bottom: 20px;
+      font-weight: lighter;
+      color: #5d8dcf;
+    }
+  }
+  .retroBox {
+    padding: 0 !important;
+  }
 }

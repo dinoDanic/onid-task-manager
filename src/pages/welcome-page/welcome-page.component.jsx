@@ -1,4 +1,4 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 
 import SignIn from "../sing-in/sign-in.component.class";
 
@@ -11,13 +11,16 @@ import rocket from "../../img/parallax/rocket.svg";
 
 import "./welcome-page.styles.scss";
 
+import RetroButton from "../../components/retro/button/retro-button.component";
+import BoxLayer from "../../components/retro/box-layer/box-layer.component";
+
 const WelcomePage = () => {
   const sceneEl = useRef(null);
+  const [showLogin, setShowLogin] = useState(false);
 
   useEffect(() => {
     const parallaxInstance = new Parallax(sceneEl.current, {
       relativeInput: true,
-      hoverOnly: true,
     });
 
     parallaxInstance.enable();
@@ -26,19 +29,6 @@ const WelcomePage = () => {
   }, []);
   return (
     <div className="welcomePage">
-      <div className="wp__startUp">
-        <div className="wp__startUp-content">
-          {/* <div className="wp__startUp-items">
-            <h1>Start Up</h1>
-            <h4>
-              Lorem Ipsum is simply dummy text of the printing and typesetting
-              industry. Lorem Ipsum has been the industry's standard dummy text
-              ever since the 1500s
-            </h4>
-          </div> */}
-          <SignIn />
-        </div>
-      </div>
       <ul id="scene" ref={sceneEl}>
         <li className="layer layer4" data-depth="0.05">
           <img src={layer4} alt="" />
@@ -57,7 +47,26 @@ const WelcomePage = () => {
         <li className="layer layer1" data-depth="0.2">
           <img src={layer1} alt="" />
         </li>
+        <li className="layer-startUp-li" data-depth="0.25">
+          <div className="layer-startUp-container">
+            <div className="layer-startUp">
+              <h1>onid</h1>
+              <h4>
+                Lorem Ipsum is simply dummy text of the printing and typesetting
+                industry.
+              </h4>
+              <RetroButton onClick={() => setShowLogin(!showLogin)}>
+                Login or Register
+              </RetroButton>
+            </div>
+          </div>
+        </li>
       </ul>
+      {showLogin && (
+        <BoxLayer setLayer={setShowLogin}>
+          <SignIn />
+        </BoxLayer>
+      )}
     </div>
   );
 };

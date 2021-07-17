@@ -6,15 +6,15 @@ import { updateDrag, updateUser } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
 
-import StatusTypeBoard from "../../components/dnd/board/status-type-board/status-type-board.component";
+import StatusTypeList from "../../components/dnd/list/status-type-list/status-type-list.component";
 import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
 
-import "./board.styles.scss";
+import "./list.styles.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Board = ({ station }) => {
+const List = ({ station }) => {
   const users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -167,11 +167,15 @@ const Board = ({ station }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      <Droppable droppableId={"allStatusTypes"} type="column">
+      <Droppable
+        droppableId={"allStatusTypes"}
+        type="column"
+        direction="vertical"
+      >
         {(provided) => {
           return (
             <div
-              className="board"
+              className="list"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -183,7 +187,7 @@ const Board = ({ station }) => {
                   );
 
                   return (
-                    <StatusTypeBoard
+                    <StatusTypeList
                       currentSpaceId={currentSpaceId}
                       currentStationId={currentStationId}
                       key={status.id}
@@ -196,7 +200,7 @@ const Board = ({ station }) => {
                 {provided.placeholder}
               </>
 
-              <div className="statusType board__newStatus">
+              <div className="statusType list__newStatus">
                 <BoardNewStatus />
               </div>
             </div>
@@ -204,7 +208,7 @@ const Board = ({ station }) => {
         }}
       </Droppable>
       <div
-        className="board__dragDelete"
+        className="list__dragDelete"
         style={{
           opacity: bOpacity,
         }}
@@ -224,7 +228,7 @@ const Board = ({ station }) => {
                 >
                   <FontAwesomeIcon icon={faTrashAlt} size="1x" />
                 </div>
-                <div className="board__placeholder" style={style}>
+                <div className="list__placeholder" style={style}>
                   {provided.placeholder}
                 </div>
               </>
@@ -236,4 +240,4 @@ const Board = ({ station }) => {
   );
 };
 
-export default Board;
+export default List;

@@ -1,8 +1,5 @@
 import React, { useMemo, useState } from "react";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHourglassHalf } from "@fortawesome/free-solid-svg-icons";
-
 import "./days-left-styles.scss";
 
 const DaysLeft = ({ task }) => {
@@ -38,7 +35,6 @@ const DaysLeft = ({ task }) => {
         {daysLeft === 1 && `tomorrow`}
         {daysLeft > 1 && `${daysLeft} days`}
         {daysLeft === null && `set date`}
-        {daysLeft !== null && <FontAwesomeIcon icon={faHourglassHalf} />}
       </p>
     </div>
   );

@@ -9,15 +9,15 @@ import {
   faCommentAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import "./task-styles.scss";
+import "./task-board.styles.scss";
 
-import LoadModule from "../../modules/load-module.component.jsx/load-module.component";
-import BoxLayer from "../../retro/box-layer/box-layer.component";
-import LargeTask from "../../large-task/large-task.component";
+import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
+import BoxLayer from "../../../retro/box-layer/box-layer.component";
+import LargeTask from "../../../large-task/large-task.component";
 
-import { updateUser, db } from "../../../firebase/firebase.utils";
+import { updateUser, db } from "../../../../firebase/firebase.utils";
 
-const Task = ({ task, index }) => {
+const TaskBoard = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   let getUser = users.filter((item) => item.uid === task.assign);
@@ -121,4 +121,4 @@ const Task = ({ task, index }) => {
   );
 };
 
-export default Task;
+export default TaskBoard;
