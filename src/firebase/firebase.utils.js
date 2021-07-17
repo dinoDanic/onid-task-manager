@@ -718,6 +718,7 @@ export const createNewStatus = (spaceId, stationId, newName) => {
           id: newName,
           name: newName,
           taskIds: [],
+          open: true,
         },
       };
       console.log(statusType);
@@ -853,6 +854,34 @@ export const createMessageToTask = (
       from: userId,
       created: new Date(),
       taskId: taskId,
+    });
+};
+
+export const toggleStatus = (spaceId, stationId, statusName) => {
+  let statusType = {};
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+  tasksRef
+    .get()
+    .then((taskData) => {
+      statusType = taskData.data().statusType;
+      statusType = {
+        ...statusType,
+        [statusName]: {
+          ...statusType[statusName],
+          open: !statusType[statusName].open,
+        },
+      };
+    })
+    .then(() => {
+      tasksRef.update({
+        statusType,
+      });
     });
 };
 

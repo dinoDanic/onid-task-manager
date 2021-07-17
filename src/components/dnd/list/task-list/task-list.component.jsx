@@ -17,15 +17,11 @@ const TaskList = ({ task, index }) => {
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {
-        const style = {
-          ...provided.draggableProps.style,
-        };
         return (
           <div
             className="taskList"
-            ref={provided.innerRef}
             {...provided.draggableProps}
-            style={style}
+            ref={provided.innerRef}
           >
             <div className="tl__task">
               <p>{task.content}</p>

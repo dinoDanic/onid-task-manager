@@ -47,6 +47,7 @@
   padding-right: 10px;
   padding-top: 20px;
   position: relative;
+  width: 100%;
   .bll__content {
     left: -50%;
     top: 60px;
@@ -91,6 +92,21 @@
       &::placeholder {
         color: gray;
       }
+    }
+  }
+}
+
+.stl__arrow {
+  cursor: pointer;
+  display: flex;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+  svg {
+    transition: 0.2s ease;
+    margin-top: 5px;
+    &:hover {
+      transform: scale(1.2);
     }
   }
 }

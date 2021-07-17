@@ -8,10 +8,11 @@ import Box from "../../../retro/box/box.component";
 import TaskSettings from "../../../task-settings/task-settings.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLines } from "@fortawesome/free-solid-svg-icons";
+import { faAngleDown, faGripLines } from "@fortawesome/free-solid-svg-icons";
 
 import {
   createNewTask,
+  toggleStatus,
   changeStatusTypeName,
 } from "../../../../firebase/firebase.utils";
 
@@ -30,6 +31,8 @@ const StatusTypeList = ({
   const [inputName, setInputName] = useState("");
   const inputRef = useRef();
   const inputNameRef = useRef();
+
+  console.log(status);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -69,6 +72,18 @@ const StatusTypeList = ({
           ref={provided.innerRef}
         >
           <div className="stl__header">
+            <div className="stl__arrow">
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{
+                  color: status.color,
+                  transform: status.open ? "" : "rotate(-90deg)",
+                }}
+                onClick={() =>
+                  toggleStatus(currentSpaceId, currentStationId, status.name)
+                }
+              />
+            </div>
             <div className="stl__title">
               <form onSubmit={(e) => handleNameSubmit(e)}>
                 <input
@@ -97,36 +112,41 @@ const StatusTypeList = ({
                     borderRadius: "8px",
                   };
                   return (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="stl__taskList"
-                      style={style}
-                    >
-                      {tasks?.map((task, index) => {
-                        if (task === undefined) return false;
-                        return (
-                          <TaskList key={task.id} task={task} index={index} />
-                        );
-                      })}
-                      {provided.placeholder}
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {status.open && (
+                        <div className="stl__taskList" style={style}>
+                          {tasks?.map((task, index) => {
+                            if (task === undefined) return false;
+                            return (
+                              <TaskList
+                                key={task.id}
+                                task={task}
+                                index={index}
+                              />
+                            );
+                          })}
+                          {provided.placeholder}
+                        </div>
+                      )}
                     </div>
                   );
                 }}
               </Droppable>
             </div>
           </Box>
-          <div className="stl__newTask">
-            <form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-            >
-              <div onChange={(e) => setNewTaskName(e.target.value)}>
-                <RetroInput ref={inputRef} placeholder="Add Task" />
-              </div>
-            </form>
-          </div>
+          {status.open && (
+            <div className="stl__newTask">
+              <form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <div onChange={(e) => setNewTaskName(e.target.value)}>
+                  <RetroInput ref={inputRef} placeholder="Add Task" />
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </Draggable>

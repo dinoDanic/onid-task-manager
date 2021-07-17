@@ -24,18 +24,21 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
       name: "to do",
       taskIds: [],
       color: "#34b5e4",
+      open: true,
     },
     stuck: {
       id: "stuck",
       name: "stuck",
       taskIds: [],
       color: "#e2445c",
+      open: true,
     },
     done: {
       id: "done",
       name: "done",
       taskIds: [],
       color: "#05ce91",
+      open: true,
     },
   });
 

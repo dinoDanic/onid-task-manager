@@ -1,7 +1,7 @@
 @import "../../theme.styles.scss";
 .station {
   height: 100vh;
-  min-width: 230px;
+  min-width: 220px;
   padding: 20px 10px;
   background: $secondary2;
   color: white;
@@ -62,5 +62,21 @@
 
   .bl__content {
     margin-top: 70px;
+  }
+}
+.station__hide {
+  position: absolute;
+  right: 10px;
+  top: 10px;
+  padding: 0 5px;
+  color: white;
+  border-radius: 10px;
+  cursor: pointer;
+  z-index: 100;
+  svg {
+    opacity: 0.3;
+    &:hover {
+      opacity: 0.7;
+    }
   }
 }

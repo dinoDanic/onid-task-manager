@@ -43,6 +43,7 @@ const AssingedTasks = () => {
           .doc("tasks");
         const getTaskData = await taskRef.get();
         if (getTaskData.data() === undefined) {
+          if (!assign) return;
           const getUserData = await db.collection("users").doc(assign).get();
           const userData = getUserData.data();
           console.log(userData);

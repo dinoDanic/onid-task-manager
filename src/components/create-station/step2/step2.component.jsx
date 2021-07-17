@@ -23,6 +23,7 @@ const Step2 = ({ setSteps, setStatusType, statusType }) => {
         id: newStatusName,
         color: "#FDAB3D",
         taskIds: [],
+        open: true,
       },
     };
 

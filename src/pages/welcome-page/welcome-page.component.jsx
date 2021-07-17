@@ -51,10 +51,7 @@ const WelcomePage = () => {
           <div className="layer-startUp-container">
             <div className="layer-startUp">
               <h1>onid</h1>
-              <h4>
-                Lorem Ipsum is simply dummy text of the printing and typesetting
-                industry.
-              </h4>
+              <h4>Task manager done bad</h4>
               <RetroButton onClick={() => setShowLogin(!showLogin)}>
                 Login or Register
               </RetroButton>

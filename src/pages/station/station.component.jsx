@@ -6,6 +6,9 @@ import { motion } from "framer-motion";
 
 import Stations from "../../components/stations/stations.component";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faArrowsAltH } from "@fortawesome/free-solid-svg-icons";
+
 import "./station.syles.scss";
 
 const Station = () => {
@@ -31,6 +34,9 @@ const Station = () => {
 
   return (
     <motion.div className="station">
+      <div className="station__hide">
+        <FontAwesomeIcon icon={faArrowsAltH} />
+      </div>
       <Stations />
     </motion.div>
   );

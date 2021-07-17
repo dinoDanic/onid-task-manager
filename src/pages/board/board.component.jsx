@@ -167,7 +167,11 @@ const Board = ({ station }) => {
 
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
-      <Droppable droppableId={"allStatusTypes"} type="column">
+      <Droppable
+        droppableId={"allStatusTypes"}
+        type="column"
+        direction="horizontal"
+      >
         {(provided) => {
           return (
             <div

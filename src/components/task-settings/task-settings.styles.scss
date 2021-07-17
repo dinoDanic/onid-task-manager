@@ -1,4 +1,9 @@
 .taskSettings {
+  position: relative;
+  .bll__content {
+    margin-left: -100px;
+    top: 30px !important;
+  }
 }
 .ts__item {
   padding: 5px 10px;
