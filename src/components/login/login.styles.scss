@@ -1,0 +1,11 @@
+.login {
+  height: 100%;
+  position: relative;
+}
+
+.login__error {
+  margin-top: 10px;
+  p {
+    color: red;
+  }
+}

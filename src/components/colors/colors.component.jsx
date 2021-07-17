@@ -7,7 +7,7 @@ function Colors({ returnColor }) {
     <div className="colors">
       <div
         className="colors__color color1"
-        onClick={() => returnColor("#8f00ff")}
+        onClick={() => returnColor("#05ce91")}
       ></div>
       <div
         className="colors__color color2"

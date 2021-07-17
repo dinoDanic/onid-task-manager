@@ -8,6 +8,13 @@
   top: 0;
   left: 0;
   z-index: 100;
+  .bll__content {
+    margin-left: -70px;
+    .retroBox {
+      padding: 10px;
+    }
+  }
+
   .cs__layer {
     background: rgba(0, 0, 0, 0.4);
     width: 100%;
@@ -27,6 +34,17 @@
     margin: 30px 0;
     flex-direction: column;
     align-items: center;
+
+    svg {
+      transition: 0.2s ease all;
+      cursor: pointer;
+      &:hover {
+        transform: scale(1.05);
+      }
+      &:active {
+        transform: scale(0.95);
+      }
+    }
 
     p {
       margin-bottom: 5px;

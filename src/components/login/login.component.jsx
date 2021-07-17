@@ -4,7 +4,7 @@ import { LoginWithGoogle, auth } from "../../firebase/firebase.utils";
 import RetroButton from "../retro/button/retro-button.component";
 import Input from "../retro/input/input.component";
 
-import { LoginContainer, Error } from "./login.styles";
+import "./login.styles.scss";
 
 class Login extends React.Component {
   constructor() {
@@ -26,7 +26,7 @@ class Login extends React.Component {
   }
   render() {
     return (
-      <LoginContainer>
+      <div className="login">
         <h2>Login</h2>
         <div onChange={(e) => this.setState({ email: e.target.value })}>
           <Input placeholder="email" type="email" />
@@ -44,10 +44,10 @@ class Login extends React.Component {
         <div onClick={() => LoginWithGoogle()}>
           <RetroButton style={{ width: "100%" }}>Login with Google</RetroButton>
         </div>
-        <Error>
+        <div className="login__error">
           <p>{this.state.errorMessage}</p>
-        </Error>
-      </LoginContainer>
+        </div>
+      </div>
     );
   }
 }

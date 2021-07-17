@@ -10,6 +10,7 @@ import Home from "./pages/home/home.component.class";
 import DockStation from "./pages/dock-station/dock-station.component";
 import Station from "./pages/station/station.component";
 import SignIn from "./pages/sing-in/sign-in.component.class";
+import WelcomePage from "./pages/welcome-page/welcome-page.component";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 import EnterStation from "./pages/enter-station/enter-station.component";
 
@@ -104,7 +105,7 @@ function App() {
           />
         </>
       )}
-      {!currentUser && <Route path="/signin" component={SignIn} />}
+      {!currentUser && <Route path="/signin" component={WelcomePage} />}
     </div>
   );
 }
