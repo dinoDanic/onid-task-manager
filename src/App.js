@@ -33,6 +33,7 @@ function App() {
         const getRef = await userRef.get();
         const gotData = getRef.data();
         if (!gotData) {
+          console.log("got no data");
           const userData = {
             image: photoURL,
             uid,
@@ -45,12 +46,12 @@ function App() {
           createUserInFirebase(userData);
         }
         if (gotData) {
-          console.log(user);
+          console.log(gotData);
           const userData = {
-            image: photoURL,
-            uid,
-            userName: displayName,
-            email,
+            image: gotData.imageUrl,
+            uid: gotData.uid,
+            userName: gotData.userName,
+            email: gotData.email,
             favoriteStations: gotData.favoriteStations,
             assignedTasks: gotData.assignedTasks,
           };

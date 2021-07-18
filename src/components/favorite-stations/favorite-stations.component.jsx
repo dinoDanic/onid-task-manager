@@ -26,7 +26,7 @@ const FavoriteStations = () => {
         }
       });
     // but dose it exists ?
-    favoriteStations.map((station) => {
+    favoriteStations?.map((station) => {
       db.collection("space")
         .doc(station.fromSpaceId)
         .collection("stations")
@@ -56,7 +56,7 @@ const FavoriteStations = () => {
   }, [currentUser]);
   return (
     <div className="favoriteStation">
-      {favoriteStations.length === 0 ? (
+      {favoriteStations?.length === 0 ? (
         <div className="fs__noStar">
           <FontAwesomeIcon icon={faStar} size="4x" />
           <p>No Stations Favorited</p>

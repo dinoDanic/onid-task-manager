@@ -35,7 +35,10 @@ const loginWithEmailAndPassword = (email, password) => {
   });
 };
 
-const createUserInFirebase = async ({ email, image, uid, userName }) => {
+const createUserInFirebase = async (userData) => {
+  const { email, image, uid, userName } = userData;
+  console.log(userData);
+  if (!uid) return;
   const userRef = db.doc(`users/${uid}`);
   const snapShot = await userRef.get();
   if (!snapShot.exists) {
@@ -49,6 +52,7 @@ const createUserInFirebase = async ({ email, image, uid, userName }) => {
       assignedTasks: [],
     });
   } else {
+    console.log("just updaiting");
     userRef.update({
       email,
       imageUrl: image,

@@ -26,20 +26,21 @@ class Register extends React.Component {
       this.setState({ errorMessage: "passwords don't match" });
       return;
     }
-    auth
-      .createUserWithEmailAndPassword(email, password)
-      .then((regUser) => {
-        console.log(regUser.user.uid);
-        /*  db.collection("users").doc(regUser).add({
-          userName: this.userName,
+    auth.createUserWithEmailAndPassword(email, password).then((regUser) => {
+      console.log(regUser.user);
+      db.collection("users").doc(regUser.user.uid).set(
+        {
+          userName: this.state.userName,
+          uid: regUser.user.uid,
+          email: this.state.email,
+          assignedTasks: [],
+          favoriteStations: [],
           imageUrl:
             "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5900ce8-b6a5-4575-a9c3-dfcaab76d1eb/d4n7jp8-32d848b5-f48c-46ec-acfb-c72595e173b5.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E1OTAwY2U4LWI2YTUtNDU3NS1hOWMzLWRmY2FhYjc2ZDFlYlwvZDRuN2pwOC0zMmQ4NDhiNS1mNDhjLTQ2ZWMtYWNmYi1jNzI1OTVlMTczYjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1TpIeeQ6fo6etC8CKLgIBrjEIiWXz37b81lKZcmiA9c",
-        }); */
-      })
-      .catch((error) => {
-        var errorMessage = error.message;
-        this.setState({ errorMessage: errorMessage });
-      });
+        },
+        { merge: true }
+      );
+    });
   }
 
   render() {
@@ -51,15 +52,15 @@ class Register extends React.Component {
             <Input type="email" placeholder="email" />
           </div>
           <div onChange={(e) => this.setState({ userName: e.target.value })}>
-            <Input type="text" placeholder="User name" />
+            <Input type="text" placeholder="Username" />
           </div>
           <div onChange={(e) => this.setState({ password: e.target.value })}>
-            <Input type="password" placeholder="password" />
+            <Input type="password" placeholder="Password" />
           </div>
           <div
             onChange={(e) => this.setState({ repeatPassword: e.target.value })}
           >
-            <Input type="password" placeholder="repeat password" />
+            <Input type="password" placeholder="Repeat Password" />
           </div>
           <RetroButton
             onClick={(e) => this.register(e)}

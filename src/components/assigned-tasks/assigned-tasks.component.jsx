@@ -31,7 +31,7 @@ const AssingedTasks = () => {
 
   useEffect(() => {
     const checkIfTaskHealthy = () => {
-      assignedTasks.map(async (task) => {
+      assignedTasks?.map(async (task) => {
         const { fromSpaceId, fromStationId, id, assign } = task;
         const taskRef = db
           .collection("space")
@@ -105,7 +105,7 @@ const AssingedTasks = () => {
 
   return (
     <div className="assignedTasks">
-      {!assignedTasks.length > 0 ? (
+      {!assignedTasks?.length > 0 ? (
         <div className="at__noTasks">
           <FontAwesomeIcon icon={faTasks} size="4x" />
           <p>All Tasks Done!</p>
