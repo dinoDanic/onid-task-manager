@@ -49,6 +49,14 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
         ...state,
         statusType: action.payload,
       };
+    case spaceActionTypes.LOG_OUT:
+      return {
+        spaceData: [],
+        stationData: null,
+        moduleData: [],
+        activeModulesData: [],
+        statusType: null,
+      };
     default:
       return state;
   }

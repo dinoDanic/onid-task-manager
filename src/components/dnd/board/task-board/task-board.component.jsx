@@ -71,6 +71,8 @@ const TaskBoard = ({ task, index }) => {
     }
   }, [msgs]);
 
+  console.log(task);
+
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {

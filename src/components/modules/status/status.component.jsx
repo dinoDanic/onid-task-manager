@@ -17,12 +17,13 @@ const Status = ({ task }) => {
   const [showStatusType, setShowStatusType] = useState(false);
 
   useMemo(() => {
+    console.log(statusType);
     if (!statusType) return;
     let toArray = Object.values(statusType);
     let findStatus = toArray.filter((item) => item.taskIds.includes(task.id));
     setCurrentStatusType(findStatus[0]);
     setStatusTypeArray(toArray);
-  }, [statusType, task.id]);
+  }, [statusType, task]);
   return (
     <div className="status" onClick={() => setShowStatusType(!showStatusType)}>
       <div className="status__show">

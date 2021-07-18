@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
+import { logOut } from "./redux/space/space.actions";
 
 import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
@@ -44,6 +45,7 @@ function App() {
           createUserInFirebase(userData);
         }
         if (gotData) {
+          console.log(user);
           const userData = {
             image: photoURL,
             uid,
@@ -58,6 +60,7 @@ function App() {
         }
       } else {
         dispatch(signOut());
+        dispatch(logOut());
         history.push("/signin");
       }
     });

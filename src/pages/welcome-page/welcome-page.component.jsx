@@ -13,10 +13,12 @@ import "./welcome-page.styles.scss";
 
 import RetroButton from "../../components/retro/button/retro-button.component";
 import BoxLayer from "../../components/retro/box-layer/box-layer.component";
+import CreateDemo from "../../components/create-demo/create-demo.component";
 
 const WelcomePage = () => {
   const sceneEl = useRef(null);
   const [showLogin, setShowLogin] = useState(false);
+  const [showDemo, setShowDemo] = useState(false);
 
   useEffect(() => {
     const parallaxInstance = new Parallax(sceneEl.current, {
@@ -52,9 +54,15 @@ const WelcomePage = () => {
             <div className="layer-startUp">
               <h1>onid</h1>
               <h4>Task manager done bad</h4>
-              <RetroButton onClick={() => setShowLogin(!showLogin)}>
-                Login or Register
-              </RetroButton>
+              <div className="wp__btns">
+                <RetroButton onClick={() => setShowLogin(!showLogin)}>
+                  Login or Register
+                </RetroButton>
+
+                <RetroButton mode="flat" onClick={() => setShowDemo(!showDemo)}>
+                  Try Demo
+                </RetroButton>
+              </div>
             </div>
           </div>
         </li>
@@ -62,6 +70,11 @@ const WelcomePage = () => {
       {showLogin && (
         <BoxLayer setLayer={setShowLogin}>
           <SignIn />
+        </BoxLayer>
+      )}
+      {showDemo && (
+        <BoxLayer setLayer={setShowDemo}>
+          <CreateDemo />
         </BoxLayer>
       )}
     </div>

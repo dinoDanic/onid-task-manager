@@ -32,7 +32,6 @@ const AssingedTasks = () => {
   useEffect(() => {
     const checkIfTaskHealthy = () => {
       assignedTasks.map(async (task) => {
-        console.log(task); // još Leave space napravi da se zbrise task ako nema akses
         const { fromSpaceId, fromStationId, id, assign } = task;
         const taskRef = db
           .collection("space")

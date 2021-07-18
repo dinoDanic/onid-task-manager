@@ -8,11 +8,12 @@ import Box from "../../../retro/box/box.component";
 import TaskSettings from "../../../task-settings/task-settings.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faGripLines } from "@fortawesome/free-solid-svg-icons";
+import { faGripLines, faAngleDown } from "@fortawesome/free-solid-svg-icons";
 
 import {
   createNewTask,
   changeStatusTypeName,
+  toggleStatus,
 } from "../../../../firebase/firebase.utils";
 
 import "./status-type-board.styles.scss";
@@ -69,6 +70,18 @@ const StatusTypeBoard = ({
           ref={provided.innerRef}
         >
           <div className="st__header">
+            <div className="stl__arrow">
+              <FontAwesomeIcon
+                icon={faAngleDown}
+                style={{
+                  color: status.color,
+                  transform: status.open ? "" : "rotate(-90deg)",
+                }}
+                onClick={() =>
+                  toggleStatus(currentSpaceId, currentStationId, status.name)
+                }
+              />
+            </div>
             <div className="st__title">
               <form onSubmit={(e) => handleNameSubmit(e)}>
                 <input
@@ -97,19 +110,22 @@ const StatusTypeBoard = ({
                     borderRadius: "8px",
                   };
                   return (
-                    <div
-                      ref={provided.innerRef}
-                      {...provided.droppableProps}
-                      className="st__taskList"
-                      style={style}
-                    >
-                      {tasks?.map((task, index) => {
-                        if (task === undefined) return false;
-                        return (
-                          <TaskBoard key={task.id} task={task} index={index} />
-                        );
-                      })}
-                      {provided.placeholder}
+                    <div ref={provided.innerRef} {...provided.droppableProps}>
+                      {status.open && (
+                        <div className="st__taskList" style={style}>
+                          {tasks?.map((task, index) => {
+                            if (task === undefined) return false;
+                            return (
+                              <TaskBoard
+                                key={task.id}
+                                task={task}
+                                index={index}
+                              />
+                            );
+                          })}
+                          {provided.placeholder}
+                        </div>
+                      )}
                     </div>
                   );
                 }}

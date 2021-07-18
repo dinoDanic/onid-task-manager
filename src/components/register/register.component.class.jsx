@@ -1,5 +1,5 @@
 import React from "react";
-import { auth } from "../../firebase/firebase.utils";
+import { auth, db } from "../../firebase/firebase.utils";
 
 import Input from "../retro/input/input.component";
 import RetroButton from "../retro/button/retro-button.component";
@@ -26,10 +26,20 @@ class Register extends React.Component {
       this.setState({ errorMessage: "passwords don't match" });
       return;
     }
-    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
-      var errorMessage = error.message;
-      this.setState({ errorMessage: errorMessage });
-    });
+    auth
+      .createUserWithEmailAndPassword(email, password)
+      .then((regUser) => {
+        console.log(regUser.user.uid);
+        /*  db.collection("users").doc(regUser).add({
+          userName: this.userName,
+          imageUrl:
+            "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5900ce8-b6a5-4575-a9c3-dfcaab76d1eb/d4n7jp8-32d848b5-f48c-46ec-acfb-c72595e173b5.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E1OTAwY2U4LWI2YTUtNDU3NS1hOWMzLWRmY2FhYjc2ZDFlYlwvZDRuN2pwOC0zMmQ4NDhiNS1mNDhjLTQ2ZWMtYWNmYi1jNzI1OTVlMTczYjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1TpIeeQ6fo6etC8CKLgIBrjEIiWXz37b81lKZcmiA9c",
+        }); */
+      })
+      .catch((error) => {
+        var errorMessage = error.message;
+        this.setState({ errorMessage: errorMessage });
+      });
   }
 
   render() {

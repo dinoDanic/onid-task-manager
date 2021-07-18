@@ -1,0 +1,25 @@
+.menuBar {
+  position: fixed;
+  top: 0;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+  width: 100%;
+  background: #5d8dcf;
+  z-index: 100;
+  color: white;
+  h1 {
+    font-size: 20px;
+    margin-right: 50px;
+  }
+  ul {
+    display: flex;
+    li {
+      margin-right: 10px;
+    }
+  }
+  button {
+    background: #5d8dcf;
+  }
+}

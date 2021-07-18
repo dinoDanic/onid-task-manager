@@ -26,6 +26,13 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
       color: "#34b5e4",
       open: true,
     },
+    "on it": {
+      id: "on it",
+      name: "on it",
+      taskIds: [],
+      color: "#FDAB3D",
+      open: true,
+    },
     stuck: {
       id: "stuck",
       name: "stuck",

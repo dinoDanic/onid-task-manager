@@ -57,7 +57,7 @@
   }
   .layer-startUp {
     width: 400px;
-    margin-right: 15%;
+    margin-right: 10%;
     pointer-events: all;
     background: #f0f2f5;
     padding: 20px;
@@ -76,5 +76,18 @@
   }
   .retroBox {
     padding: 0 !important;
+  }
+}
+
+.wp__btns {
+  display: flex;
+  align-items: center;
+  button {
+    width: fit-content;
+    height: 40px;
+    margin-right: 20px;
+  }
+  span {
+    margin: 0 30px;
   }
 }
