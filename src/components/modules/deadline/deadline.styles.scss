@@ -3,14 +3,17 @@
   display: flex;
   align-items: center;
   svg {
-    opacity: 0.2;
-    margin-right: 5px;
+    opacity: 0.1;
+    transition: 0.2s ease opacity;
+    &:hover {
+      opacity: 0.3;
+    }
   }
   input {
     border: none;
     position: absolute;
     opacity: 1;
-    width: 20px;
+    width: 60px;
     left: -5px;
     z-index: 100;
     opacity: 0;
@@ -18,7 +21,7 @@
   ::-webkit-datetime-edit-fields-wrapper {
     background: silver;
     min-width: 100px;
-    opacity: 0;
+    opacity: 1;
   }
   ::-webkit-calendar-picker-indicator {
     background: orange;
@@ -27,6 +30,7 @@
     left: 0;
     margin: 0;
     opacity: 1;
+    width: 100%;
   }
   p {
     color: gray;

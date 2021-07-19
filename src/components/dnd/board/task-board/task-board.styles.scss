@@ -6,6 +6,9 @@
   background: white;
   align-items: center;
   border-radius: 8px;
+  .loadModule {
+    height: auto;
+  }
   .bl__content {
     width: 70%;
     min-width: 500px;
@@ -14,6 +17,14 @@
   &:hover {
     .task__drag {
       opacity: 1;
+    }
+
+    /* .task__modules {
+      opacity: 1;
+      filter: grayscale(0%);
+    } */
+    .task__expand {
+      opacity: 0.2;
     }
   }
   &:last-child {
@@ -38,7 +49,7 @@
   position: absolute;
   top: 5px;
   right: 8px;
-  opacity: 0.2;
+  opacity: 0;
   transition: 0.2s ease;
   cursor: pointer;
   &:hover {
@@ -75,5 +86,72 @@
   }
   &:active {
     transform: slace(0.95);
+  }
+}
+/* .task__modules {
+  display: grid;
+  grid-template-columns: repeat(4, 25%);
+  grid-auto-flow: dense;
+  justify-content: center;
+  margin-top: 20px;
+  opacity: 0.3;
+  transition: 0.2s ease;
+  filter: grayscale(100%);
+} */
+.task__modules {
+  margin-bottom: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  // MODUELS
+  .priority {
+    position: absolute;
+    bottom: 5px;
+    right: 0px;
+    svg {
+      width: 17px;
+      height: 17px;
+    }
+  }
+  .assign {
+    position: absolute;
+    bottom: 5px;
+    left: 5px;
+  }
+  /*  .createdBy {
+    position: absolute;
+    bottom: 5px;
+    left: 35px;
+  } */
+  .status {
+    position: absolute;
+    bottom: 5px;
+    right: 35px;
+  }
+  /* .daysLeft {
+    position: absolute;
+  } */
+  .daysLeft {
+    position: absolute;
+    bottom: 5px;
+    left: 50%;
+    margin-left: -40px;
+    width: 80px;
+    text-align: center;
+  }
+  .deadline {
+    display: none;
+    position: absolute;
+    bottom: 5px;
+    left: 35px;
+    svg {
+      margin-bottom: 4px;
+    }
+  }
+  .createdBy {
+    display: none;
+  }
+  .createDate {
+    display: none;
   }
 }

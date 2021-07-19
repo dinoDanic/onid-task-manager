@@ -106,11 +106,18 @@ const TaskBoard = ({ task, index }) => {
                 </div>
               )}
             </div>
-            {activeModules?.map((module) => {
-              return (
-                <LoadModule module={module} key={module.name} task={task} />
-              );
-            })}
+            <div className="task__modules">
+              {activeModules?.map((module) => {
+                return (
+                  <LoadModule
+                    module={module}
+                    key={module.name}
+                    task={task}
+                    style="box"
+                  />
+                );
+              })}
+            </div>
             {showLargeTask && (
               <BoxLayer setLayer={setShowLargeTask}>
                 <LargeTask task={task} msgs={msgs} />

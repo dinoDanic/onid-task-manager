@@ -8,7 +8,8 @@ import RetroButton from "../retro/button/retro-button.component";
 
 import { setCurrentUser } from "../../redux/user/user.actions";
 
-import { RegisterContainer, Error } from "./register.styles";
+import "./register.styles.scss";
+import Loading from "../retro/loading/loading.component";
 
 const Register = () => {
   const [email, setEmail] = useState("");
@@ -16,6 +17,7 @@ const Register = () => {
   const [userName, setUserName] = useState("");
   const [repeatPassword, setRepeatPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
   const dispatch = useDispatch();
   const history = useHistory();
   const signInUrl = history.location.pathname.split("/")[1];
@@ -32,7 +34,9 @@ const Register = () => {
         password
       );
       console.log(userName);
+      setShowLoading(true);
       await registerUserFb(user, userName);
+      setShowLoading(false);
       dispatch(setCurrentUser(user));
       if (signInUrl === "signin") {
         history.push("/");
@@ -44,7 +48,8 @@ const Register = () => {
   };
 
   return (
-    <RegisterContainer>
+    <div className="register">
+      {showLoading && <Loading />}
       <h2>Register</h2>
       <form>
         <div onChange={(e) => setEmail(e.target.value)}>
@@ -67,10 +72,10 @@ const Register = () => {
           Register
         </RetroButton>
       </form>
-      <Error>
+      <div className="register__error">
         <p>{errorMessage}</p>
-      </Error>
-    </RegisterContainer>
+      </div>
+    </div>
   );
 };
 

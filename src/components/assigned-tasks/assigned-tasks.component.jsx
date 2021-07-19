@@ -59,8 +59,10 @@ const AssingedTasks = () => {
         if (theTask.assign.includes(assign)) {
           console.log("its ok");
           //but are you a member ?
+          console.log(assign);
           const getUserData = await db.collection("users").doc(assign).get();
           const userData = getUserData.data();
+          if (!userData) return;
           console.log(userData);
           db.collection("space")
             .doc(fromSpaceId)

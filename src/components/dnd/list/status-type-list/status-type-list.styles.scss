@@ -32,6 +32,9 @@
       background: white;
     }
   }
+  ::placeholder {
+    color: rgb(151, 151, 151);
+  }
 }
 
 .stl__header {

@@ -1,12 +1,7 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  auth,
-  createUserInFirebase,
-  db,
-  registerUserFb,
-} from "./firebase/firebase.utils";
+import { auth, db, registerUserFb } from "./firebase/firebase.utils";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
 import { logOut } from "./redux/space/space.actions";
@@ -15,7 +10,6 @@ import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
 import DockStation from "./pages/dock-station/dock-station.component";
 import Station from "./pages/station/station.component";
-import SignIn from "./pages/sing-in/sign-in.component.class";
 import WelcomePage from "./pages/welcome-page/welcome-page.component";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 import EnterStation from "./pages/enter-station/enter-station.component";
@@ -40,7 +34,6 @@ function App() {
         if (userData) {
           // ima usera samo dispetchaj
           dispatch(setCurrentUser(userData));
-          console.log(signInUrl);
           if (signInUrl === "signin") {
             history.push("/");
           }

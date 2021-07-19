@@ -16,7 +16,7 @@ const CreatedDate = ({ task }) => {
 
   return (
     <div className="createDate">
-      <FontAwesomeIcon icon={faCalendarDay} />
+      {/* <FontAwesomeIcon icon={faCalendarDay} /> */}
       <p>{date}</p>
     </div>
   );

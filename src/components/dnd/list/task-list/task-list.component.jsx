@@ -37,7 +37,7 @@ const TaskList = ({ task, index }) => {
               {activeModules?.map((module) => {
                 return (
                   <LoadModule
-                    direction="vertical"
+                    style="vertical"
                     module={module}
                     key={module.name}
                     task={task}
