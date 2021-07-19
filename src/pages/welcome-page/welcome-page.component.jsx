@@ -29,6 +29,7 @@ const WelcomePage = () => {
 
     return () => parallaxInstance.disable();
   }, []);
+
   return (
     <div className="welcomePage">
       <ul id="scene" ref={sceneEl}>

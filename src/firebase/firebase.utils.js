@@ -22,6 +22,44 @@ const auth = firebase.auth();
 export const timestamp = firebase.firestore.Timestamp;
 export const fieldValue = firebase.firestore.FieldValue;
 
+/* auth
+  .createUserWithEmailAndPassword("buko@onid.com", "111111")
+  .then((regUser) => {
+    console.log(regUser.user);
+    db.collection("users").doc(regUser.user.uid).set(
+      {
+        userName: this.state.userName,
+        uid: regUser.user.uid,
+        email: this.state.email,
+        assignedTasks: [],
+        favoriteStations: [],
+        imageUrl:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5900ce8-b6a5-4575-a9c3-dfcaab76d1eb/d4n7jp8-32d848b5-f48c-46ec-acfb-c72595e173b5.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E1OTAwY2U4LWI2YTUtNDU3NS1hOWMzLWRmY2FhYjc2ZDFlYlwvZDRuN2pwOC0zMmQ4NDhiNS1mNDhjLTQ2ZWMtYWNmYi1jNzI1OTVlMTczYjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1TpIeeQ6fo6etC8CKLgIBrjEIiWXz37b81lKZcmiA9c",
+      },
+      { merge: true }
+    );
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+ */
+/* const demoUser = async () => {
+  const userRef = await db.collection("users").doc("buko").get();
+  if (userRef.exists) {
+    return;
+  } else {
+    let userData = {
+      email: "buko@onid.app",
+      image:
+        "https://i.pinimg.com/originals/61/88/7c/61887ce0f50a0e04475d62039944415c.jpg",
+      uid: "bukYVVqVPcuGdSRMoDuxSTGEUU2Ggp2o",
+      userName: "buko",
+    };
+    createUserInFirebase(userData);
+  }
+};
+demoUser(); */
+
 const LoginWithGoogle = () => {
   auth.signInWithPopup(provider).catch((error) => {
     console.log(error.message);
@@ -35,29 +73,18 @@ const loginWithEmailAndPassword = (email, password) => {
   });
 };
 
-const createUserInFirebase = async (userData) => {
-  const { email, image, uid, userName } = userData;
-  console.log(userData);
-  if (!uid) return;
-  const userRef = db.doc(`users/${uid}`);
-  const snapShot = await userRef.get();
-  if (!snapShot.exists) {
-    console.log("no data, creating");
-    userRef.set({
-      email,
-      imageUrl: image,
-      uid,
-      userName,
-      favoriteStations: [],
+export const registerUserFb = async (user, userName) => {
+  const { uid, email } = user;
+  const userRef = await db.collection("users").doc(uid).get();
+  if (!userRef.exists) {
+    db.collection("users").doc(uid).set({
+      userName: userName,
+      uid: uid,
+      email: email,
       assignedTasks: [],
-    });
-  } else {
-    console.log("just updaiting");
-    userRef.update({
-      email,
-      imageUrl: image,
-      uid,
-      userName,
+      favoriteStations: [],
+      imageUrl:
+        "https://i.pinimg.com/originals/61/88/7c/61887ce0f50a0e04475d62039944415c.jpg",
     });
   }
 };
@@ -92,30 +119,6 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
   if (setLayer) {
     setLayer(false);
   }
-};
-
-const createNewStation = (spaceId, stationName, modules, statusType) => {
-  const stationsRef = db
-    .collection("space")
-    .doc(spaceId)
-    .collection("stations");
-
-  stationsRef
-    .add({
-      name: stationName,
-      created: new Date(),
-      modules,
-      statusType,
-    })
-    .then((data) => {
-      let id = data.id;
-      stationsRef.doc(id).set(
-        {
-          stationId: id,
-        },
-        { merge: true }
-      );
-    });
 };
 
 export const createNewStation2 = (
@@ -889,12 +892,4 @@ export const toggleStatus = (spaceId, stationId, statusName) => {
     });
 };
 
-export {
-  db,
-  auth,
-  LoginWithGoogle,
-  loginWithEmailAndPassword,
-  createUserInFirebase,
-  createNewSpace,
-  createNewStation,
-};
+export { db, auth, LoginWithGoogle, loginWithEmailAndPassword, createNewSpace };

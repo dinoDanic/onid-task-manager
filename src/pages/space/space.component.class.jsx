@@ -39,7 +39,7 @@ const Space = () => {
         <SpaceFly />
       </div>
       <div className="space__user" onClick={() => handleLogout()}>
-        <Avatar src={currentUser.image} />
+        <Avatar src={currentUser.imageUrl} />
       </div>
     </div>
   );

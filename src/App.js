@@ -1,7 +1,12 @@
 import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
+import {
+  auth,
+  createUserInFirebase,
+  db,
+  registerUserFb,
+} from "./firebase/firebase.utils";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
 import { logOut } from "./redux/space/space.actions";
@@ -22,54 +27,38 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const signInUrl = history.location.pathname.split("/")[1];
   const { currentUser } = user;
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      console.log("onautsh state change dispathicng current suer");
+      console.log("auth change App", user);
       if (user) {
-        const { photoURL, uid, displayName, email } = user;
-        const userRef = db.collection("users").doc(uid);
-        const getRef = await userRef.get();
-        const gotData = getRef.data();
-        if (!gotData) {
-          console.log("got no data");
-          const userData = {
-            image: photoURL,
-            uid,
-            userName: displayName,
-            email,
-            favoriteStations: [],
-            assignedTasks: [],
-          };
+        const { uid } = user;
+        const userRef = await db.collection("users").doc(uid).get();
+        if (userRef.exists) {
+          // ima usera samo dispetchaj
+          const userData = userRef.data();
           dispatch(setCurrentUser(userData));
-          createUserInFirebase(userData);
-        }
-        if (gotData) {
-          console.log(gotData);
-          const userData = {
-            image: gotData.imageUrl,
-            uid: gotData.uid,
-            userName: gotData.userName,
-            email: gotData.email,
-            favoriteStations: gotData.favoriteStations,
-            assignedTasks: gotData.assignedTasks,
-          };
-
-          dispatch(setCurrentUser(userData));
-          createUserInFirebase(userData);
+          console.log(signInUrl);
+          if (signInUrl === "signin") {
+            history.push("/");
+          }
+        } else {
+          // nema usera u db. vjerovatno login putem googla
+          registerUserFb(user, user.displayName);
         }
       } else {
+        history.push("/signin");
         dispatch(signOut());
         dispatch(logOut());
-        history.push("/signin");
       }
     });
-  }, [dispatch, history]);
+  }, []);
 
   useEffect(() => {
     db.collection("users").onSnapshot((usersData) => {
-      console.log("db user change, dispatching setUsers");
+      console.log("db users changed, dispatching setUsers");
       let users = [];
       usersData.forEach((userData) => {
         users.push(userData.data());
