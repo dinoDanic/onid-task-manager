@@ -47,17 +47,21 @@ function CreateSpace({ setLayer }) {
         <Box>
           <h2>Create space</h2>
           <div className="cs__icon">
-            {/* <p>Preview</p>
-            <RetroButton style={{ background: currentColor }}>
-            {spaceName.charAt(0)}
-          </RetroButton> */}
-            <FontAwesomeIcon
+            <p>Preview</p>
+            <RetroButton
+              style={{ background: currentColor }}
+              onClick={() => setShowColors(!showColors)}
+            >
+              {spaceName.charAt(0)}
+            </RetroButton>
+            <br />
+            <p onClick={() => setShowColors(!showColors)}>Set color</p>
+            {/*   <FontAwesomeIcon
               icon={faRocket}
               size="6x"
               style={{ color: currentColor }}
               onClick={() => setShowColors(!showColors)}
-            />
-            <p>Choose your rocket</p>
+            /> */}
             {showColors && (
               <BoxLayerLite setLayer={setShowColors}>
                 <div className="cs__chooseColor">

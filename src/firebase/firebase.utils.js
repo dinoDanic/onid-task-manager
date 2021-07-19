@@ -74,18 +74,31 @@ const loginWithEmailAndPassword = (email, password) => {
 };
 
 export const registerUserFb = async (user, userName) => {
-  const { uid, email } = user;
+  console.log(userName);
+  const { uid, email, photoURL } = user;
   const userRef = await db.collection("users").doc(uid).get();
   if (!userRef.exists) {
-    db.collection("users").doc(uid).set({
+    await db.collection("users").doc(uid).set({
       userName: userName,
       uid: uid,
       email: email,
       assignedTasks: [],
       favoriteStations: [],
-      imageUrl:
-        "https://i.pinimg.com/originals/61/88/7c/61887ce0f50a0e04475d62039944415c.jpg",
+      imageUrl: photoURL,
     });
+    const userImage = await db.collection("users").doc(uid).get();
+    const userImageUrl = userImage.data().imageUrl;
+    if (userImageUrl === null) {
+      db.collection("users").doc(uid).set(
+        {
+          imageUrl:
+            "https://i.pinimg.com/originals/30/b0/d5/30b0d5530cd5accbba769802de6cb9af.jpg",
+        },
+        { merge: true }
+      );
+    }
+  } else {
+    console.log("no code");
   }
 };
 

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -36,17 +36,31 @@ function App() {
       if (user) {
         const { uid } = user;
         const userRef = await db.collection("users").doc(uid).get();
-        if (userRef.exists) {
+        const userData = userRef.data();
+        if (userData) {
           // ima usera samo dispetchaj
-          const userData = userRef.data();
           dispatch(setCurrentUser(userData));
           console.log(signInUrl);
           if (signInUrl === "signin") {
             history.push("/");
           }
-        } else {
-          // nema usera u db. vjerovatno login putem googla
-          registerUserFb(user, user.displayName);
+        }
+        if (!userData) {
+          if (user.displayName === null) {
+            return;
+          } else {
+            console.log("no user, creating");
+            // nema usera u db. vjerovatno login putem googla
+            console.log(user);
+            await registerUserFb(user, user.displayName);
+            const newUserRef = await db.collection("users").doc(uid).get();
+            const newUserData = newUserRef.data();
+            console.log(userData);
+            dispatch(setCurrentUser(newUserData));
+            if (signInUrl === "signin") {
+              history.push("/");
+            }
+          }
         }
       } else {
         history.push("/signin");
