@@ -74,7 +74,7 @@ const StatusTypeBoard = ({
               <FontAwesomeIcon
                 icon={faAngleDown}
                 style={{
-                  color: status.color,
+                  color: status.fontColor,
                   transform: status.open ? "" : "rotate(-90deg)",
                 }}
                 onClick={() =>
@@ -87,7 +87,7 @@ const StatusTypeBoard = ({
                 <input
                   ref={inputNameRef}
                   value={inputName}
-                  style={{ color: status.color }}
+                  style={{ color: status.fontColor }}
                   onChange={(e) => setInputName(e.target.value)}
                 />
               </form>
@@ -105,7 +105,7 @@ const StatusTypeBoard = ({
                 {(provided, snapshot) => {
                   const style = {
                     backgroundColor: snapshot.isDraggingOver
-                      ? "rgba(0,0,0,0.1)"
+                      ? "rgba(0,0,0,0.05)"
                       : "",
                     borderRadius: "8px",
                   };

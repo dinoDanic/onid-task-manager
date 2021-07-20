@@ -565,7 +565,7 @@ export const convertDate = (timestamp) => {
   let date = myTime.getDate();
   let month = myTime.getMonth();
   let year = myTime.getFullYear();
-  return `${date}.${month + 1}.${year}`;
+  return `${date}.${month + 1}`;
 };
 
 export const setDeadlineDate = (spaceId, stationId, date, taskId) => {

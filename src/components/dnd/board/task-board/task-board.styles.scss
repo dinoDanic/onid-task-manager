@@ -1,6 +1,6 @@
 .task {
   position: relative;
-  border: 1px solid lightgray;
+  border: 1px solid rgba(0, 0, 0, 0.1);
   padding: 8px;
   margin-bottom: 8px;
   background: white;
@@ -14,17 +14,23 @@
     min-width: 500px;
     max-width: 1000px;
   }
+
   &:hover {
+    border: 1px solid rgba(0, 0, 0, 0.2);
     .task__drag {
       opacity: 1;
     }
-
-    /* .task__modules {
-      opacity: 1;
-      filter: grayscale(0%);
-    } */
     .task__expand {
       opacity: 0.2;
+    }
+    .status {
+      filter: grayscale(0%);
+      opacity: 1;
+    }
+    .daysLeft,
+    .deadline,
+    .assign {
+      opacity: 1;
     }
   }
   &:last-child {
@@ -42,7 +48,7 @@
 }
 .task__taskName {
   margin-bottom: 10px;
-  font-weight: 800;
+  font-weight: 500;
 }
 
 .task__expand {
@@ -99,59 +105,23 @@
   filter: grayscale(100%);
 } */
 .task__modules {
-  margin-bottom: 30px;
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  justify-content: space-between;
+  margin-top: 30px;
+  /*   font-weight: 500; */
+  p {
+    font-size: 12px;
+  }
+  .loadModule {
+  }
   // MODUELS
-  .priority {
-    position: absolute;
-    bottom: 5px;
-    right: 0px;
-    svg {
-      width: 17px;
-      height: 17px;
-    }
-  }
-  .assign {
-    position: absolute;
-    bottom: 5px;
-    left: 5px;
-  }
-  /*  .createdBy {
-    position: absolute;
-    bottom: 5px;
-    left: 35px;
-  } */
+  .deadline,
+  .assign,
   .status {
-    position: absolute;
-    bottom: 5px;
-    right: 35px;
+    opacity: 1;
+    transition: 0.2s ease;
   }
-  /* .daysLeft {
-    position: absolute;
-  } */
-  .daysLeft {
-    position: absolute;
-    bottom: 5px;
-    left: 50%;
-    margin-left: -40px;
-    width: 80px;
-    text-align: center;
-  }
-  .deadline {
-    display: none;
-    position: absolute;
-    bottom: 5px;
-    left: 35px;
-    svg {
-      margin-bottom: 4px;
-    }
-  }
-  .createdBy {
-    display: none;
-  }
-  .createDate {
-    display: none;
+  .status {
+    /*  filter: grayscale(100%); */
   }
 }
