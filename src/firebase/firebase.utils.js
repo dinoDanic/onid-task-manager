@@ -203,6 +203,7 @@ export const createNewTask = async (
       fromSpaceId: spaceId,
       fromStationId: stationId,
       message: [],
+      description: "Add description",
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -996,6 +997,46 @@ export const setOpenFb = (spaceId, currentOpen) => {
   db.collection("space").doc(spaceId).update({
     open: !currentOpen,
   });
+};
+
+export const setTaskDescription = (
+  spaceId,
+  stationId,
+  taskId,
+  taskDescription
+) => {
+  let task = {};
+  let tasks = {};
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      task = taskData.data().tasks[taskId];
+      tasks = taskData.data().tasks;
+      console.log(taskData.data());
+      tasks = {
+        ...tasks,
+        [taskId]: {
+          ...task,
+          description: taskDescription,
+        },
+      };
+    })
+    .then(() => {
+      console.log(tasks);
+      tasksRef.update({
+        tasks: {
+          ...tasks,
+        },
+      });
+    });
 };
 
 export { db, auth, LoginWithGoogle, loginWithEmailAndPassword, createNewSpace };

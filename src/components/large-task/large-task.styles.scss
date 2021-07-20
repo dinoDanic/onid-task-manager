@@ -2,8 +2,8 @@
 .largeTask {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
+  overflow-y: auto;
   .bl__content {
     width: 100% !important;
   }
@@ -80,7 +80,7 @@
     transition: 0.2s ease;
     &:focus {
       outline: none;
-      height: 200px;
+      height: 150px;
       border: 1px solid rgb(179, 179, 179);
     }
   }
@@ -92,4 +92,11 @@
 }
 .lt__writeUpdate-msgs {
   margin: 20px 0;
+}
+
+.lt__content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
 }

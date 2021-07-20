@@ -10,8 +10,7 @@ import "./large-task.styles.scss";
 
 import LoadModule from "../modules/load-module.component.jsx/load-module.component";
 import RetroButton from "../retro/button/retro-button.component";
-import RetroInput from "../retro/input/input.component";
-import Box from "../retro/box/box.component";
+import TaskDescription from "../task-description/task-description.component";
 import Avatar from "../retro/avatar/avatar.component";
 import Message from "../message/message.component";
 import Loading from "../retro/loading/loading.component";
@@ -23,7 +22,7 @@ const LargeTask = ({ task }) => {
   const [message, setMessage] = useState("");
   const [newTaskName, setNewTaskName] = useState("");
   const [showLoading, setShowLoading] = useState(false);
-  const [limit, setLimit] = useState(5);
+  const [limit, setLimit] = useState(3);
   const inputRef = useRef();
   const inputTaskRef = useRef();
   const messagesEndRef = useRef();
@@ -103,32 +102,37 @@ const LargeTask = ({ task }) => {
           />
         </form>
       </div>
-      <div className="lt__modules">
-        {moduleData?.map((module) => {
-          return <LoadModule module={module} key={module.name} task={task} />;
-        })}
-      </div>
-      <div className="lt__writeUpdate">
-        <div className="lt__writeUpdate-msgs">
-          {msgs.map((msg) => {
-            return <Message msg={msg} />;
+      <div className="lt__content">
+        <div className="lt__modules">
+          {moduleData?.map((module) => {
+            return <LoadModule module={module} key={module.name} task={task} />;
           })}
-        </div>
-        <div className="lt__writeUpdate-send">
-          <div className="lt__writeUpdate-avatar">
-            <Avatar src={currentUser.imageUrl} />
+          <div className="lt__description">
+            <TaskDescription description={task.description} taskId={task.id} />
           </div>
-          <div className="lt__writeUpdate-message">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <textarea
-                onChange={(e) => setMessage(e.target.value)}
-                ref={textareaRef}
-                placeholder="Write update"
-              />
-              <div className="lt__writeUpdate-btn">
-                <RetroButton>Submit</RetroButton>
-              </div>
-            </form>
+        </div>
+        <div className="lt__writeUpdate">
+          <div className="lt__writeUpdate-msgs">
+            {msgs.map((msg) => {
+              return <Message msg={msg} />;
+            })}
+          </div>
+          <div className="lt__writeUpdate-send">
+            <div className="lt__writeUpdate-avatar">
+              <Avatar src={currentUser.imageUrl} />
+            </div>
+            <div className="lt__writeUpdate-message">
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <textarea
+                  onChange={(e) => setMessage(e.target.value)}
+                  ref={textareaRef}
+                  placeholder="Write update"
+                />
+                <div className="lt__writeUpdate-btn">
+                  <RetroButton>Submit</RetroButton>
+                </div>
+              </form>
+            </div>
           </div>
         </div>
       </div>
