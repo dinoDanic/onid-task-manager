@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -9,25 +10,25 @@ import {
   faCommentAlt,
 } from "@fortawesome/free-solid-svg-icons";
 
-import "./task-styles.scss";
+import "./task-board.styles.scss";
 
-import LoadModule from "../../modules/load-module.component.jsx/load-module.component";
-import BoxLayer from "../../retro/box-layer/box-layer.component";
-import LargeTask from "../../large-task/large-task.component";
+import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
+import BoxLayer from "../../../retro/box-layer/box-layer.component";
+import BoxRight from "../../../retro/box-right/box-right.component";
+import LargeTask from "../../../large-task/large-task.component";
 
-import { updateUser, db } from "../../../firebase/firebase.utils";
+import { updateUser, db } from "../../../../firebase/firebase.utils";
 
-const Task = ({ task, index }) => {
+const TaskBoard = ({ task, index }) => {
+  const [showLargeTask, setShowLargeTask] = useState(false);
+  const [msgs, setMsgs] = useState(0);
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   let getUser = users.filter((item) => item.uid === task.assign);
-  const [msgs, setMsgs] = useState(0);
 
-  const [showLargeTask, setShowLargeTask] = useState(false);
   let user = getUser[0];
 
   useEffect(() => {
-    console.log("auto update tasks => db.users");
     // AUTO UPDATE TASKS
     if (!task.assign) return;
     if (user === undefined) return;
@@ -104,16 +105,28 @@ const Task = ({ task, index }) => {
                 </div>
               )}
             </div>
-            {activeModules?.map((module) => {
-              return (
-                <LoadModule module={module} key={module.name} task={task} />
-              );
-            })}
-            {showLargeTask && (
-              <BoxLayer setLayer={setShowLargeTask}>
-                <LargeTask task={task} msgs={msgs} />
-              </BoxLayer>
-            )}
+            <div className="task__modules">
+              {activeModules?.map((module) => {
+                return (
+                  <LoadModule
+                    module={module}
+                    key={module.name}
+                    task={task}
+                    style="box"
+                  />
+                );
+              })}
+            </div>
+            <AnimatePresence>
+              {showLargeTask && (
+                <BoxRight
+                  setLayer={setShowLargeTask}
+                  setLayer={setShowLargeTask}
+                >
+                  <LargeTask task={task} msgs={msgs} />
+                </BoxRight>
+              )}
+            </AnimatePresence>
           </div>
         );
       }}
@@ -121,4 +134,4 @@ const Task = ({ task, index }) => {
   );
 };
 
-export default Task;
+export default TaskBoard;

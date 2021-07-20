@@ -1,0 +1,116 @@
+.statusType {
+  margin: 8px;
+  border-radius: 2px;
+  height: fit-content;
+  max-width: 280px;
+  display: flex;
+  flex-direction: column;
+  border-radius: 10px;
+  flex: 1;
+  .retroBox {
+    padding: 5px;
+    box-shadow: none;
+  }
+}
+
+.st__content {
+  border-radius: 10px;
+}
+.st__taskList {
+  padding: 8px;
+  flex-grow: 1;
+  min-height: 108px;
+  transition: 0.2s background-color;
+}
+.st__newTask {
+  margin-top: 10px;
+  input {
+    width: 80px;
+    background: transparent;
+    border: none;
+    &:focus {
+      width: 100%;
+      background: white;
+    }
+  }
+}
+
+.st__header {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+}
+
+.st__menu {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  padding-right: 10px;
+  padding-top: 20px;
+  position: relative;
+  width: 100%;
+  .bll__content {
+    left: -50%;
+    top: 60px;
+    .retroBox {
+    }
+  }
+}
+
+.st__settings,
+.st__expand,
+.st__drag {
+  opacity: 0.1;
+  transition: 0.2s ease;
+  cursor: pointer;
+  margin-left: 10px;
+  &:hover {
+    opacity: 0.4;
+  }
+}
+
+.st__title {
+  padding: 5px 10px;
+  max-width: 50%;
+  form {
+  }
+  input {
+    background: transparent;
+    border: 1px dotted rgba(0, 0, 0, 0);
+    padding: 5px 7px;
+    border-radius: 5px;
+    margin-left: -10px;
+    outline: none;
+    max-width: 100%;
+    font-size: 24px;
+    font-weight: 800;
+    color: #333;
+    &:hover {
+      border: 1px dotted gray;
+    }
+    &:focus {
+      border: 1px dotted gray;
+      &::placeholder {
+        color: gray;
+      }
+    }
+  }
+}
+
+// vertical
+.st__vertical {
+  max-width: 100%;
+  .st__taskList {
+    min-height: 0px;
+  }
+}
+.st__menu-vertical {
+  .bll__content {
+    left: -90px;
+  }
+}
+.st__newTask-vertical {
+  input {
+    max-width: 300px;
+  }
+}

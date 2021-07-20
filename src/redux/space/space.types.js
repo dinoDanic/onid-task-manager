@@ -6,6 +6,8 @@ const spaceActionTypes = {
   SET_MODULES: "SET_MODULES",
   SET_ACTIVE_MODULES: "SET_ACTIVE_MODULES",
   SET_STATUS_TYPE: "SET_STATUS_TYPE",
+  LOG_OUT: "LOG_OUT",
+  SET_OPEN: "SET_OPEN",
 };
 
 export default spaceActionTypes;

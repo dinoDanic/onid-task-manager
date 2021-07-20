@@ -2,46 +2,42 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Draggable } from "react-beautiful-dnd";
 
-import LoadModule from "../../modules/load-module.component.jsx/load-module.component";
-import LargeTask from "../../large-task/large-task.component";
-import BoxLayer from "../../retro/box-layer/box-layer.component";
+import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
+import LargeTask from "../../../large-task/large-task.component";
+import BoxLayer from "../../../retro/box-layer/box-layer.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 
-import "./list-task.styles.scss";
+import "./task-list.styles.scss";
 
-const ListTask = ({ task, index }) => {
+const TaskList = ({ task, index }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const [showLargeTask, setShowLargeTask] = useState(false);
   return (
     <Draggable draggableId={task.id} index={index}>
       {(provided) => {
-        const style = {
-          ...provided.draggableProps.style,
-        };
         return (
           <div
-            className="listTask"
-            ref={provided.innerRef}
+            className="taskList"
             {...provided.draggableProps}
-            style={style}
+            ref={provided.innerRef}
           >
-            <div className="lt__task">
+            <div className="tl__task">
               <p>{task.content}</p>
             </div>
             <div
-              className="lt__clickable"
+              className="tl__clickable"
               onClick={() => setShowLargeTask(!showLargeTask)}
             />
-            <div className="lt__drag" {...provided.dragHandleProps}>
+            <div className="tl__drag" {...provided.dragHandleProps}>
               <FontAwesomeIcon icon={faGripLinesVertical} />
             </div>
-            <div className="lt__modules">
+            <div className="tl__modules">
               {activeModules?.map((module) => {
                 return (
                   <LoadModule
-                    direction="vertical"
+                    style="vertical"
                     module={module}
                     key={module.name}
                     task={task}
@@ -61,4 +57,4 @@ const ListTask = ({ task, index }) => {
   );
 };
 
-export default ListTask;
+export default TaskList;

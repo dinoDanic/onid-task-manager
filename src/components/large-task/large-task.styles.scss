@@ -1,57 +1,95 @@
+@import "../../theme.styles.scss";
 .largeTask {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
   .bl__content {
     width: 100% !important;
   }
   min-width: 500px;
   width: 100%;
   .loadModule {
-    border-bottom: 1px solid #f0f2f5;
-
-    padding: 23px 0;
+    border-bottom: 1px solid $body;
+    padding: 10px 0;
     &:last-child {
       border-bottom: none;
     }
   }
+  .retroBox {
+    box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px !important;
+  }
 }
 
-.lt__content {
+.lt__taskStuff {
   margin-bottom: 10px;
-}
-.lt__columns {
-  display: grid;
-  grid-template-columns: auto auto;
-  grid-gap: 20px;
-}
-
-.lt__comments {
-  border-radius: 10px;
-  width: 100%;
-
-  input {
-    margin-bottom: 0;
+  padding: 20px;
+  form {
+    position: relative;
     width: 100%;
-    &::placeholder {
-      color: rgb(119, 119, 119) !important;
+  }
+  input {
+    border: none;
+    font-size: 25px;
+    border: 1px dotted rgb(255, 255, 255);
+    padding: 5px 10px;
+    border-radius: 8px;
+    width: 100%;
+    &:hover {
+      border: 1px dotted gray;
+    }
+    &:focus {
+      border: 1px dotted gray;
+    }
+    &:active {
+      border: 1px dotted gray;
     }
   }
-}
-.lt__messeges {
-  max-height: 292px;
-  overflow-y: auto;
-}
-.lt__modules {
-  max-height: 500px;
-  border-radius: 10px;
-}
-
-.lt__input {
-  display: flex;
-  align-items: center;
-  .avatar {
-    margin-right: 8px;
-    height: fit-content;
+  ::placeholder {
+    color: #333;
+    font-weight: 500;
   }
 }
-.lt__inputMsg {
+
+.lt__modules {
+  padding: 20px;
+}
+
+.lt__writeUpdate {
+  background: $body;
+}
+.lt__writeUpdate-send {
+  display: flex;
+  padding: 20px;
+  border-top: 1px solid rgb(224, 224, 224);
+}
+.lt__writeUpdate-message {
+  position: relative;
   width: 100%;
+  margin-left: 10px;
+  border-radius: 10px;
+  textarea {
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    padding: 20px;
+    width: 100%;
+    max-width: 100% !important;
+    height: 100px;
+    border: 1px solid rgb(228, 228, 228);
+    border-radius: 10px;
+    resize: none;
+    transition: 0.2s ease;
+    &:focus {
+      outline: none;
+      height: 200px;
+      border: 1px solid rgb(179, 179, 179);
+    }
+  }
+  .lt__writeUpdate-btn {
+    position: absolute;
+    right: 10px;
+    bottom: 20px;
+  }
+}
+.lt__writeUpdate-msgs {
+  margin: 20px 0;
 }

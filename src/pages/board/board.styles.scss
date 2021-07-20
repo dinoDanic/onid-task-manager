@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .board {
   display: flex;
   overflow-y: auto;
@@ -7,7 +8,7 @@
   padding: 10px;
 }
 ::-webkit-scrollbar-track {
-  background: #f0f2f5;
+  background: $body;
 }
 ::-webkit-scrollbar {
   width: 10px;

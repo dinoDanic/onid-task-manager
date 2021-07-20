@@ -37,9 +37,9 @@ const Priority = ({ task }) => {
               icon={faFire}
               style={{ color: currentPriority.color }}
             />
-            <p style={{ color: currentPriority.color }}>
+            {/* <p style={{ color: currentPriority.color }}>
               {currentPriority.name}
-            </p>
+            </p> */}
           </div>
         )}
       </>

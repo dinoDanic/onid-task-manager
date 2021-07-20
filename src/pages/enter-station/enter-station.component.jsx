@@ -3,6 +3,7 @@ import { Route, useHistory } from "react-router-dom";
 import { db } from "../../firebase/firebase.utils";
 
 import Board from "../board/board.component";
+import List from "../list/list.component";
 import StationMenu from "../../components/create-station/station-menu/station-menu.component";
 
 import "./enter-station.stayles.scss";
@@ -35,12 +36,12 @@ const EnterStation = () => {
       <Route
         exact
         path="/s/:id/e/:id/b"
-        render={() => <Board station={station} direction="horizontal" />}
+        render={() => <Board station={station} />}
       />
       <Route
         exact
         path="/s/:id/e/:id/l"
-        render={() => <Board station={station} direction="vertical" />}
+        render={() => <List station={station} />}
       />
     </div>
   );

@@ -1,15 +1,16 @@
 import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { auth, createUserInFirebase, db } from "./firebase/firebase.utils";
+import { auth, db, registerUserFb } from "./firebase/firebase.utils";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
+import { logOut } from "./redux/space/space.actions";
 
 import Space from "./pages/space/space.component.class";
 import Home from "./pages/home/home.component.class";
 import DockStation from "./pages/dock-station/dock-station.component";
 import Station from "./pages/station/station.component";
-import SignIn from "./pages/sing-in/sign-in.component.class";
+import WelcomePage from "./pages/welcome-page/welcome-page.component";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 import EnterStation from "./pages/enter-station/enter-station.component";
 
@@ -20,51 +21,51 @@ function App() {
   const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
+  const signInUrl = history.location.pathname.split("/")[1];
   const { currentUser } = user;
 
   useEffect(() => {
     auth.onAuthStateChanged(async (user) => {
-      console.log("onautsh state change dispathicng current suer");
+      console.log("auth change App", user);
       if (user) {
-        const { photoURL, uid, displayName, email } = user;
-        const userRef = db.collection("users").doc(uid);
-        const getRef = await userRef.get();
-        const gotData = getRef.data();
-        if (!gotData) {
-          const userData = {
-            image: photoURL,
-            uid,
-            userName: displayName,
-            email,
-            favoriteStations: [],
-            assignedTasks: [],
-          };
+        const { uid } = user;
+        const userRef = await db.collection("users").doc(uid).get();
+        const userData = userRef.data();
+        if (userData) {
+          // ima usera samo dispetchaj
           dispatch(setCurrentUser(userData));
-          createUserInFirebase(userData);
+          if (signInUrl === "signin") {
+            history.push("/");
+          }
         }
-        if (gotData) {
-          const userData = {
-            image: photoURL,
-            uid,
-            userName: displayName,
-            email,
-            favoriteStations: gotData.favoriteStations,
-            assignedTasks: gotData.assignedTasks,
-          };
-
-          dispatch(setCurrentUser(userData));
-          createUserInFirebase(userData);
+        if (!userData) {
+          if (user.displayName === null) {
+            return;
+          } else {
+            console.log("no user, creating");
+            // nema usera u db. vjerovatno login putem googla
+            console.log(user);
+            await registerUserFb(user, user.displayName);
+            const newUserRef = await db.collection("users").doc(uid).get();
+            const newUserData = newUserRef.data();
+            console.log(userData);
+            dispatch(setCurrentUser(newUserData));
+            if (signInUrl === "signin") {
+              history.push("/");
+            }
+          }
         }
       } else {
-        dispatch(signOut());
         history.push("/signin");
+        dispatch(signOut());
+        dispatch(logOut());
       }
     });
-  }, [dispatch, history]);
+  }, []);
 
   useEffect(() => {
     db.collection("users").onSnapshot((usersData) => {
-      console.log("db user change, dispatching setUsers");
+      console.log("db users changed, dispatching setUsers");
       let users = [];
       usersData.forEach((userData) => {
         users.push(userData.data());
@@ -104,7 +105,7 @@ function App() {
           />
         </>
       )}
-      {!currentUser && <Route path="/signin" component={SignIn} />}
+      {!currentUser && <Route path="/signin" component={WelcomePage} />}
     </div>
   );
 }

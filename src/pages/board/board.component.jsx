@@ -6,7 +6,7 @@ import { updateDrag, updateUser } from "../../firebase/firebase.utils";
 
 import { setStatusType } from "../../redux/space/space.actions";
 
-import StatusType from "../../components/dnd/status-type/status-type.component";
+import StatusTypeBoard from "../../components/dnd/board/status-type-board/status-type-board.component";
 import BoardNewStatus from "../../components/board-new-status/board-new-status.component";
 
 import "./board.styles.scss";
@@ -14,7 +14,7 @@ import "./board.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrashAlt } from "@fortawesome/free-solid-svg-icons";
 
-const Board = ({ station, direction }) => {
+const Board = ({ station }) => {
   const users = useSelector((state) => state.user.users);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -170,14 +170,12 @@ const Board = ({ station, direction }) => {
       <Droppable
         droppableId={"allStatusTypes"}
         type="column"
-        direction={direction}
+        direction="horizontal"
       >
         {(provided) => {
           return (
             <div
-              className={`board ${
-                direction === "vertical" && "board__vertical"
-              }`}
+              className="board"
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
@@ -189,14 +187,13 @@ const Board = ({ station, direction }) => {
                   );
 
                   return (
-                    <StatusType
+                    <StatusTypeBoard
                       currentSpaceId={currentSpaceId}
                       currentStationId={currentStationId}
                       key={status.id}
                       status={status}
                       tasks={tasks}
                       index={index}
-                      direction={direction}
                     />
                   );
                 })}

@@ -22,6 +22,44 @@ const auth = firebase.auth();
 export const timestamp = firebase.firestore.Timestamp;
 export const fieldValue = firebase.firestore.FieldValue;
 
+/* auth
+  .createUserWithEmailAndPassword("buko@onid.com", "111111")
+  .then((regUser) => {
+    console.log(regUser.user);
+    db.collection("users").doc(regUser.user.uid).set(
+      {
+        userName: this.state.userName,
+        uid: regUser.user.uid,
+        email: this.state.email,
+        assignedTasks: [],
+        favoriteStations: [],
+        imageUrl:
+          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5900ce8-b6a5-4575-a9c3-dfcaab76d1eb/d4n7jp8-32d848b5-f48c-46ec-acfb-c72595e173b5.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E1OTAwY2U4LWI2YTUtNDU3NS1hOWMzLWRmY2FhYjc2ZDFlYlwvZDRuN2pwOC0zMmQ4NDhiNS1mNDhjLTQ2ZWMtYWNmYi1jNzI1OTVlMTczYjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1TpIeeQ6fo6etC8CKLgIBrjEIiWXz37b81lKZcmiA9c",
+      },
+      { merge: true }
+    );
+  })
+  .catch((error) => {
+    console.log(error.message);
+  });
+ */
+/* const demoUser = async () => {
+  const userRef = await db.collection("users").doc("buko").get();
+  if (userRef.exists) {
+    return;
+  } else {
+    let userData = {
+      email: "buko@onid.app",
+      image:
+        "https://i.pinimg.com/originals/61/88/7c/61887ce0f50a0e04475d62039944415c.jpg",
+      uid: "bukYVVqVPcuGdSRMoDuxSTGEUU2Ggp2o",
+      userName: "buko",
+    };
+    createUserInFirebase(userData);
+  }
+};
+demoUser(); */
+
 const LoginWithGoogle = () => {
   auth.signInWithPopup(provider).catch((error) => {
     console.log(error.message);
@@ -35,26 +73,32 @@ const loginWithEmailAndPassword = (email, password) => {
   });
 };
 
-const createUserInFirebase = async ({ email, image, uid, userName }) => {
-  const userRef = db.doc(`users/${uid}`);
-  const snapShot = await userRef.get();
-  if (!snapShot.exists) {
-    console.log("no data, creating");
-    userRef.set({
-      email,
-      imageUrl: image,
-      uid,
-      userName,
-      favoriteStations: [],
+export const registerUserFb = async (user, userName) => {
+  console.log(userName);
+  const { uid, email, photoURL } = user;
+  const userRef = await db.collection("users").doc(uid).get();
+  if (!userRef.exists) {
+    await db.collection("users").doc(uid).set({
+      userName: userName,
+      uid: uid,
+      email: email,
       assignedTasks: [],
+      favoriteStations: [],
+      imageUrl: photoURL,
     });
+    const userImage = await db.collection("users").doc(uid).get();
+    const userImageUrl = userImage.data().imageUrl;
+    if (userImageUrl === null) {
+      db.collection("users").doc(uid).set(
+        {
+          imageUrl:
+            "https://i.pinimg.com/originals/30/b0/d5/30b0d5530cd5accbba769802de6cb9af.jpg",
+        },
+        { merge: true }
+      );
+    }
   } else {
-    userRef.update({
-      email,
-      imageUrl: image,
-      uid,
-      userName,
-    });
+    console.log("no code");
   }
 };
 
@@ -74,6 +118,7 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
       members: firebase.firestore.FieldValue.arrayUnion(uid),
       created: new Date(),
       description: "Add description",
+      open: true,
     })
     .then((data) => {
       let id = data.id;
@@ -88,30 +133,6 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
   if (setLayer) {
     setLayer(false);
   }
-};
-
-const createNewStation = (spaceId, stationName, modules, statusType) => {
-  const stationsRef = db
-    .collection("space")
-    .doc(spaceId)
-    .collection("stations");
-
-  stationsRef
-    .add({
-      name: stationName,
-      created: new Date(),
-      modules,
-      statusType,
-    })
-    .then((data) => {
-      let id = data.id;
-      stationsRef.doc(id).set(
-        {
-          stationId: id,
-        },
-        { merge: true }
-      );
-    });
 };
 
 export const createNewStation2 = (
@@ -316,6 +337,55 @@ export const deleteSpace = (spaceId) => {
     });
 };
 
+export const deleteStation = async (spaceId, stationId) => {
+  await db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("modules")
+    .doc("modules")
+    .delete();
+
+  await db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks")
+    .collection("msg")
+    .get()
+    .then((query) => {
+      query.forEach((msgDoc) => {
+        db.collection("space")
+          .doc(spaceId)
+          .collection("stations")
+          .doc(stationId)
+          .collection("tasks")
+          .doc("tasks")
+          .collection("msg")
+          .doc(msgDoc.id)
+          .delete();
+      });
+    })
+    .then(() => {
+      db.collection("space")
+        .doc(spaceId)
+        .collection("stations")
+        .doc(stationId)
+        .collection("tasks")
+        .doc("tasks")
+        .delete();
+
+      db.collection("space")
+        .doc(spaceId)
+        .collection("stations")
+        .doc(stationId)
+        .delete();
+    });
+};
+
 export const updateColorOfSpace = (spaceId, color) => {
   db.collection("space").doc(spaceId).update({
     color: color,
@@ -348,6 +418,43 @@ export const changeNameOfStation = (spaceId, stationId, newName) => {
     });
 };
 
+export const changeTaskName = async (spaceId, stationId, newName, taskId) => {
+  let allTasks = [];
+  let task = [];
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        content: newName,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
+};
+
 export const updateModulesDb = (spaceId, stationId, module, modules) => {
   let objIndex = modules.findIndex((item) => item.name === module.name);
   modules[objIndex].active = !modules[objIndex].active;
@@ -363,7 +470,6 @@ export const updateModulesDb = (spaceId, stationId, module, modules) => {
 };
 
 export const getUserDataWithId = async (userId) => {
-  console.log(userId);
   const userRef = db.collection("users").doc(userId);
   const userData = await userRef.get();
   const data = userData.data();
@@ -545,7 +651,7 @@ export const convertDate = (timestamp) => {
   let date = myTime.getDate();
   let month = myTime.getMonth();
   let year = myTime.getFullYear();
-  return `${date}.${month + 1}.${year}`;
+  return `${date}.${month + 1}`;
 };
 
 export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
@@ -714,10 +820,12 @@ export const createNewStatus = (spaceId, stationId, newName) => {
       statusType = {
         ...statusType,
         [newName]: {
-          color: "#FDAB3D",
+          color: "rgb(234, 236, 239)",
+          fontColor: "rgb(246, 91, 196)",
           id: newName,
           name: newName,
           taskIds: [],
+          open: true,
         },
       };
       console.log(statusType);
@@ -753,7 +861,7 @@ export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
         ...statusType,
         [statusName]: {
           ...statusType[statusName],
-          color: newColor,
+          fontColor: newColor,
         },
       };
       console.log(statusType);
@@ -856,12 +964,38 @@ export const createMessageToTask = (
     });
 };
 
-export {
-  db,
-  auth,
-  LoginWithGoogle,
-  loginWithEmailAndPassword,
-  createUserInFirebase,
-  createNewSpace,
-  createNewStation,
+export const toggleStatus = (spaceId, stationId, statusName) => {
+  let statusType = {};
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+  tasksRef
+    .get()
+    .then((taskData) => {
+      statusType = taskData.data().statusType;
+      statusType = {
+        ...statusType,
+        [statusName]: {
+          ...statusType[statusName],
+          open: !statusType[statusName].open,
+        },
+      };
+    })
+    .then(() => {
+      tasksRef.update({
+        statusType,
+      });
+    });
 };
+
+export const setOpenFb = (spaceId, currentOpen) => {
+  db.collection("space").doc(spaceId).update({
+    open: !currentOpen,
+  });
+};
+
+export { db, auth, LoginWithGoogle, loginWithEmailAndPassword, createNewSpace };

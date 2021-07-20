@@ -2,6 +2,7 @@
   display: flex;
   height: 40px;
   align-items: center;
+  justify-content: center;
 }
 .lm__name {
   flex: 0.4;
@@ -11,11 +12,14 @@
   display: flex;
   justify-content: center;
 }
-.lm__vertical-module {
+.lm__module-vertical {
   display: flex;
   width: 90px;
   margin-right: 5px;
   height: 30px;
   align-items: center;
   justify-content: center;
+}
+.lm__module-box {
+  display: flex;
 }

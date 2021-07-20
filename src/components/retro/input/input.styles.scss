@@ -1,7 +1,8 @@
+@import "../../../theme.styles.scss";
 .retroInput {
   border-radius: 5px;
   border: none;
-  border: 1px solid #f0f2f5;
+  border: 1px solid $body;
   border-radius: 8px;
   height: 36px;
   width: 100px;

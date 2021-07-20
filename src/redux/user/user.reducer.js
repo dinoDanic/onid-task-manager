@@ -16,6 +16,8 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         currentUser: null,
+        favoriteSpaces: {},
+        users: null,
       };
     case UserActionTypes.SET_USERS:
       return {

@@ -1,70 +1,82 @@
-import React from "react";
-import { auth } from "../../firebase/firebase.utils";
+import React, { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
+import { auth, registerUserFb } from "../../firebase/firebase.utils";
 
 import Input from "../retro/input/input.component";
 import RetroButton from "../retro/button/retro-button.component";
 
-import { RegisterContainer, Error } from "./register.styles";
+import { setCurrentUser } from "../../redux/user/user.actions";
 
-class Register extends React.Component {
-  constructor() {
-    super();
-    this.state = {
-      email: "",
-      password: "",
-      userName: "",
-      repeatPassword: "",
-      errorMessage: "",
-    };
-    this.register = this.register.bind(this);
-  }
+import "./register.styles.scss";
+import Loading from "../retro/loading/loading.component";
 
-  register(e) {
+const Register = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [userName, setUserName] = useState("");
+  const [repeatPassword, setRepeatPassword] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
+  const [showLoading, setShowLoading] = useState(false);
+  const dispatch = useDispatch();
+  const history = useHistory();
+  const signInUrl = history.location.pathname.split("/")[1];
+
+  const register = async (e) => {
     e.preventDefault();
-    const { email, password, repeatPassword } = this.state;
     if (password !== repeatPassword) {
-      this.setState({ errorMessage: "passwords don't match" });
+      setErrorMessage("passwords don't match");
       return;
     }
-    auth.createUserWithEmailAndPassword(email, password).catch((error) => {
-      var errorMessage = error.message;
-      this.setState({ errorMessage: errorMessage });
-    });
-  }
+    try {
+      const { user } = await auth.createUserWithEmailAndPassword(
+        email,
+        password
+      );
+      console.log(userName);
+      setShowLoading(true);
+      await registerUserFb(user, userName);
+      setShowLoading(false);
+      dispatch(setCurrentUser(user));
+      if (signInUrl === "signin") {
+        history.push("/");
+      }
+    } catch (error) {
+      console.log(error.message);
+      setErrorMessage(error.message);
+    }
+  };
 
-  render() {
-    return (
-      <RegisterContainer>
-        <h2>Register</h2>
-        <form>
-          <div onChange={(e) => this.setState({ email: e.target.value })}>
-            <Input type="email" placeholder="email" />
-          </div>
-          <div onChange={(e) => this.setState({ userName: e.target.value })}>
-            <Input type="text" placeholder="User name" />
-          </div>
-          <div onChange={(e) => this.setState({ password: e.target.value })}>
-            <Input type="password" placeholder="password" />
-          </div>
-          <div
-            onChange={(e) => this.setState({ repeatPassword: e.target.value })}
-          >
-            <Input type="password" placeholder="repeat password" />
-          </div>
-          <RetroButton
-            onClick={(e) => this.register(e)}
-            type="submit"
-            style={{ width: "100%" }}
-          >
-            Register
-          </RetroButton>
-        </form>
-        <Error>
-          <p>{this.state.errorMessage}</p>
-        </Error>
-      </RegisterContainer>
-    );
-  }
-}
+  return (
+    <div className="register">
+      {showLoading && <Loading />}
+      <h2>Register</h2>
+      <form>
+        <div onChange={(e) => setEmail(e.target.value)}>
+          <Input type="email" placeholder="email" />
+        </div>
+        <div onChange={(e) => setUserName(e.target.value)}>
+          <Input type="text" placeholder="Username" />
+        </div>
+        <div onChange={(e) => setPassword(e.target.value)}>
+          <Input type="password" placeholder="Password" />
+        </div>
+        <div onChange={(e) => setRepeatPassword(e.target.value)}>
+          <Input type="password" placeholder="Repeat Password" />
+        </div>
+        <RetroButton
+          onClick={(e) => register(e)}
+          type="submit"
+          style={{ width: "100%" }}
+        >
+          Register
+        </RetroButton>
+      </form>
+      <div className="register__error">
+        <p>{errorMessage}</p>
+      </div>
+    </div>
+  );
+};
 
 export default Register;

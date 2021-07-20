@@ -1,0 +1,10 @@
+@import "../../theme.styles.scss";
+.register {
+  height: 100%;
+}
+.register_error {
+  margin-top: 10px;
+  p {
+    color: $danger;
+  }
+}

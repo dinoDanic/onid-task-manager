@@ -34,3 +34,12 @@ export const setStatusType = (statusType) => ({
   type: spaceActionTypes.SET_STATUS_TYPE,
   payload: statusType,
 });
+
+export const logOut = () => ({
+  type: spaceActionTypes.LOG_OUT,
+});
+
+export const setOpen = (state) => ({
+  type: spaceActionTypes.SET_OPEN,
+  payload: state,
+});

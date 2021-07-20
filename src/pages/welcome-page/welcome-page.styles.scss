@@ -1,0 +1,94 @@
+@import "../../theme.styles.scss";
+.welcomePage {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+
+  ul#scene {
+    height: 100%;
+    width: 100%;
+    left: -50px;
+    bottom: -30px;
+    li {
+      width: 100%;
+      height: 100%;
+      img {
+        height: 100%;
+      }
+    }
+  }
+  img {
+  }
+  .layer1 {
+    img {
+      position: absolute;
+      left: 0%;
+    }
+  }
+  .layer2 {
+    img {
+      position: absolute;
+      left: 0%;
+    }
+  }
+  .layer3 {
+    img {
+      position: absolute;
+      left: 0%;
+    }
+  }
+  .layer4 {
+    img {
+      position: absolute;
+      left: 0%;
+    }
+  }
+  .layer-rocket {
+    img {
+      position: absolute;
+    }
+  }
+  .layer-startUp-li {
+  }
+  .layer-startUp-container {
+    height: 100%;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+  .layer-startUp {
+    width: 400px;
+    margin-right: 10%;
+    pointer-events: all;
+    background: $body;
+    padding: 20px;
+    border-radius: 10px;
+    h1 {
+      font-size: 70px;
+      margin-bottom: 10px;
+      color: #27538c;
+      font-family: "Ubuntu Mono", monospace;
+    }
+    h4 {
+      margin-bottom: 20px;
+      font-weight: lighter;
+      color: #5d8dcf;
+    }
+  }
+  .retroBox {
+    padding: 0 !important;
+  }
+}
+
+.wp__btns {
+  display: flex;
+  align-items: center;
+  button {
+    width: fit-content;
+    height: 40px;
+    margin-right: 20px;
+  }
+  span {
+    margin: 0 30px;
+  }
+}

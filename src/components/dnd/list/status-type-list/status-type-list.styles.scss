@@ -1,53 +1,56 @@
-.statusType {
+.statusTypeList {
   margin: 8px;
   border-radius: 2px;
   height: fit-content;
-  max-width: 280px;
   display: flex;
   flex-direction: column;
   border-radius: 10px;
   flex: 1;
-
   .retroBox {
-    padding: 5px;
+    padding: 0px;
+    box-shadow: none;
   }
 }
 
-.st__content {
+.stl__content {
   border-radius: 10px;
 }
-.st__taskList {
-  padding: 8px;
+.stl__taskList {
+  padding: 4px 8px;
+  min-height: 20px;
   flex-grow: 1;
-  min-height: 100px;
   transition: 0.2s background-color;
 }
-.st__newTask {
+.stl__newTask {
   margin-top: 10px;
   input {
     width: 80px;
     background: transparent;
     border: none;
     &:focus {
-      width: 100%;
+      width: 300px;
       background: white;
     }
   }
+  ::placeholder {
+    color: rgb(151, 151, 151);
+  }
 }
 
-.st__header {
+.stl__header {
   position: relative;
   display: flex;
   justify-content: space-between;
 }
 
-.st__menu {
+.stl__menu {
   display: flex;
   align-items: center;
   justify-content: flex-end;
   padding-right: 10px;
   padding-top: 20px;
   position: relative;
+  width: 100%;
   .bll__content {
     left: -50%;
     top: 60px;
@@ -56,9 +59,9 @@
   }
 }
 
-.st__settings,
-.st__expand,
-.st__drag {
+.stl__settings,
+.stl__expand,
+.stl__drag {
   opacity: 0.1;
   transition: 0.2s ease;
   cursor: pointer;
@@ -68,7 +71,7 @@
   }
 }
 
-.st__title {
+.stl__title {
   padding: 5px 10px;
   max-width: 50%;
   form {
@@ -96,20 +99,17 @@
   }
 }
 
-// vertical
-.st__vertical {
-  max-width: 100%;
-  .st__taskList {
-    min-height: 0px;
-  }
-}
-.st__menu-vertical {
-  .bll__content {
-    left: -90px;
-  }
-}
-.st__newTask-vertical {
-  input {
-    max-width: 300px;
+.stl__arrow {
+  cursor: pointer;
+  display: flex;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+  svg {
+    transition: 0.2s ease;
+    margin-top: 5px;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }

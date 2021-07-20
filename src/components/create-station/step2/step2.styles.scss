@@ -1,3 +1,4 @@
+@import "../../../theme.styles.scss";
 .sn__name {
   margin-top: 50px;
   margin-bottom: 20px;
@@ -19,7 +20,7 @@
   width: fit-content;
 }
 .step2__types {
-  background: #f0f2f5;
+  background: $body;
   padding: 10px;
   border-radius: 10px;
   button {

@@ -23,19 +23,33 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
       id: "to do",
       name: "to do",
       taskIds: [],
-      color: "#34b5e4",
+      color: "rgb(234 236 239)",
+      fontColor: "#34b5e4",
+      open: true,
+    },
+    "on it": {
+      id: "on it",
+      name: "on it",
+      taskIds: [],
+      color: "rgb(234 236 239)",
+      fontColor: "#FDAB3D",
+      open: true,
     },
     stuck: {
       id: "stuck",
       name: "stuck",
       taskIds: [],
-      color: "#e2445c",
+      color: "rgb(234 236 239)",
+      fontColor: "#e2445c",
+      open: true,
     },
     done: {
       id: "done",
       name: "done",
       taskIds: [],
-      color: "#05ce91",
+      color: "rgb(234 236 239)",
+      fontColor: "#05ce91",
+      open: true,
     },
   });
 
@@ -49,11 +63,11 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   const [modules, setModules] = useState([
     { name: "CreatedBy", active: false, icon: "faUser" },
     { name: "Assign", active: true, icon: "faUserCheck" },
-    { name: "Priority", active: true, icon: "faExclamationCircle" },
     { name: "Status", active: true, icon: "faInfoCircle" },
     { name: "CreatedDate", active: false, icon: "faCalendarCheck" },
     { name: "Deadline", active: true, icon: "faCalendarAlt" },
     { name: "DaysLeft", active: true, icon: "faHourglassHalf" },
+    { name: "Priority", active: true, icon: "faExclamationCircle" },
   ]);
 
   const handleCreate = () => {

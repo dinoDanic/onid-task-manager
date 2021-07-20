@@ -27,12 +27,12 @@ const AssingedTasks = () => {
           setAssignedTasks(userData.data().assignedTasks);
         }
       });
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     const checkIfTaskHealthy = () => {
-      assignedTasks.map(async (task) => {
-        console.log(task); // još Leave space napravi da se zbrise task ako nema akses
+      assignedTasks?.map(async (task) => {
+        console.log(task);
         const { fromSpaceId, fromStationId, id, assign } = task;
         const taskRef = db
           .collection("space")
@@ -43,14 +43,20 @@ const AssingedTasks = () => {
           .doc("tasks");
         const getTaskData = await taskRef.get();
         if (getTaskData.data() === undefined) {
-          const getUserData = await db.collection("users").doc(assign).get();
+          if (assign === null) {
+            console.log("its null");
+          }
+          const getUserData = await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .get();
           const userData = getUserData.data();
           console.log(userData);
           userData.assignedTasks = userData.assignedTasks.filter(
             (task) => task.id !== id
           );
           console.log(userData);
-          updateUser(assign, userData);
+          updateUser(currentUser.uid, userData);
           return;
         }
 
@@ -59,8 +65,10 @@ const AssingedTasks = () => {
         if (theTask.assign.includes(assign)) {
           console.log("its ok");
           //but are you a member ?
+          console.log(assign);
           const getUserData = await db.collection("users").doc(assign).get();
           const userData = getUserData.data();
+          if (!userData) return;
           console.log(userData);
           db.collection("space")
             .doc(fromSpaceId)
@@ -105,7 +113,7 @@ const AssingedTasks = () => {
 
   return (
     <div className="assignedTasks">
-      {!assignedTasks.length > 0 ? (
+      {!assignedTasks?.length > 0 ? (
         <div className="at__noTasks">
           <FontAwesomeIcon icon={faTasks} size="4x" />
           <p>All Tasks Done!</p>

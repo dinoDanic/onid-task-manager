@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .views {
   display: flex;
   cursor: pointer;
@@ -10,7 +11,7 @@
   display: flex;
   align-items: center;
   &:hover {
-    background: #f0f2f5;
+    background: $body;
   }
   p {
     font-size: 14px;

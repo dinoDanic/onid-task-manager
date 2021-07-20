@@ -30,13 +30,14 @@ const Deadline = ({ task }) => {
     let day = d.getDate();
     let month = d.getMonth();
     let year = d.getFullYear();
-    setDate(`${day}.${month + 1}.${year}`);
+    setDate(`${day}.${month + 1}.`);
   }, [task]);
 
   return (
     <div className="deadline">
       <input type="date" onChange={(e) => handleDate(e)} />
-      <FontAwesomeIcon icon={faCalendarAlt} />
+      {!date && <FontAwesomeIcon icon={faCalendarAlt} />}
+
       <p>{date}</p>
     </div>
   );

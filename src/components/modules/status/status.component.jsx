@@ -22,11 +22,11 @@ const Status = ({ task }) => {
     let findStatus = toArray.filter((item) => item.taskIds.includes(task.id));
     setCurrentStatusType(findStatus[0]);
     setStatusTypeArray(toArray);
-  }, [statusType, task.id]);
+  }, [statusType, task]);
   return (
     <div className="status" onClick={() => setShowStatusType(!showStatusType)}>
       <div className="status__show">
-        <p style={{ color: currentStatusType.color }}>
+        <p style={{ color: currentStatusType.fontColor }}>
           {currentStatusType?.name}
         </p>
       </div>
@@ -50,7 +50,7 @@ const Status = ({ task }) => {
                       )
                     }
                   >
-                    <p style={{ color: status.color }}>{status.name}</p>
+                    <p style={{ color: status.fontColor }}>{status.name}</p>
                   </div>
                 );
               })}
