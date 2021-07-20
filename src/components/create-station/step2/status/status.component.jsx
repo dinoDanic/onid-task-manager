@@ -20,18 +20,19 @@ const Status = ({
   force,
 }) => {
   const [controls, setControls] = useState(false);
-  const [color, setColor] = useState(status.color);
+  const [newColor, setNewColor] = useState(status.color);
   const [name, setName] = useState(status.name);
-
+  console.log(status);
   const handleSubmit = (e) => {
     e.preventDefault();
     let array = statusTypeValues;
     let index = array.findIndex((item) => item.name === status.name);
     array[index] = {
       name: name,
-      color: color,
+      fontColor: newColor,
       id: name,
       taskIds: [],
+      color: "rgb(234 236 239)",
     };
     let ArrayToObject = convertArrayToObject(array, "id");
     setStatusType(ArrayToObject);
@@ -52,7 +53,7 @@ const Status = ({
   return (
     <div className="status__btn">
       <RetroButton
-        style={{ background: status.color }}
+        style={{ background: status.color, color: status.fontColor }}
         onClick={() => setControls(!controls)}
       >
         {status.name}
@@ -75,9 +76,10 @@ const Status = ({
                   <FontAwesomeIcon icon={faTrashAlt} />
                 </div>
               </div>
-              <Colors returnColor={setColor} />
+              <Colors returnColor={setNewColor} />
+
               <div className="status__setbtn">
-                <RetroButton color="info" style={{ background: color }}>
+                <RetroButton color="info" style={{ background: newColor }}>
                   set
                 </RetroButton>
               </div>

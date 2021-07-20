@@ -21,7 +21,8 @@ const Step2 = ({ setSteps, setStatusType, statusType }) => {
       [newStatusName]: {
         name: newStatusName,
         id: newStatusName,
-        color: "#FDAB3D",
+        fontColor: "#FDAB3D",
+        color: "rgb(234 236 239)",
         taskIds: [],
         open: true,
       },

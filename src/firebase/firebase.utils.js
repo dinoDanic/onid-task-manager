@@ -151,6 +151,7 @@ export const createNewStation2 = (
       name: stationName,
       description: "Add description",
       fromSpaceId: spaceId,
+      open: true,
     })
     .then((data) => {
       let id = data.id;
@@ -336,6 +337,55 @@ export const deleteSpace = (spaceId) => {
     });
 };
 
+export const deleteStation = async (spaceId, stationId) => {
+  await db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("modules")
+    .doc("modules")
+    .delete();
+
+  await db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks")
+    .collection("msg")
+    .get()
+    .then((query) => {
+      query.forEach((msgDoc) => {
+        db.collection("space")
+          .doc(spaceId)
+          .collection("stations")
+          .doc(stationId)
+          .collection("tasks")
+          .doc("tasks")
+          .collection("msg")
+          .doc(msgDoc.id)
+          .delete();
+      });
+    })
+    .then(() => {
+      db.collection("space")
+        .doc(spaceId)
+        .collection("stations")
+        .doc(stationId)
+        .collection("tasks")
+        .doc("tasks")
+        .delete();
+
+      db.collection("space")
+        .doc(spaceId)
+        .collection("stations")
+        .doc(stationId)
+        .delete();
+    });
+};
+
 export const updateColorOfSpace = (spaceId, color) => {
   db.collection("space").doc(spaceId).update({
     color: color,
@@ -365,6 +415,43 @@ export const changeNameOfStation = (spaceId, stationId, newName) => {
     .doc(stationId)
     .update({
       name: newName,
+    });
+};
+
+export const changeTaskName = async (spaceId, stationId, newName, taskId) => {
+  let allTasks = [];
+  let task = [];
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        content: newName,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
     });
 };
 

@@ -16,7 +16,7 @@ const Message = ({ msg }) => {
   return (
     <div className="message">
       <div className="message__avatar">
-        <Avatar src={user?.image} />
+        <Avatar src={user?.imageUrl} />
       </div>
       <div className="message__msg">
         <p>{msg.message}</p>

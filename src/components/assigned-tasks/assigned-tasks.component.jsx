@@ -27,11 +27,12 @@ const AssingedTasks = () => {
           setAssignedTasks(userData.data().assignedTasks);
         }
       });
-  }, []);
+  }, [currentUser]);
 
   useEffect(() => {
     const checkIfTaskHealthy = () => {
       assignedTasks?.map(async (task) => {
+        console.log(task);
         const { fromSpaceId, fromStationId, id, assign } = task;
         const taskRef = db
           .collection("space")
@@ -42,15 +43,20 @@ const AssingedTasks = () => {
           .doc("tasks");
         const getTaskData = await taskRef.get();
         if (getTaskData.data() === undefined) {
-          if (!assign) return;
-          const getUserData = await db.collection("users").doc(assign).get();
+          if (assign === null) {
+            console.log("its null");
+          }
+          const getUserData = await db
+            .collection("users")
+            .doc(currentUser.uid)
+            .get();
           const userData = getUserData.data();
           console.log(userData);
           userData.assignedTasks = userData.assignedTasks.filter(
             (task) => task.id !== id
           );
           console.log(userData);
-          updateUser(assign, userData);
+          updateUser(currentUser.uid, userData);
           return;
         }
 

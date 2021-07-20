@@ -35,7 +35,7 @@ const DaysLeft = ({ task }) => {
         {daysLeft === 1 && `tomorrow`}
         {daysLeft > 1 && `${daysLeft} days`}
         {daysLeft < 0 && `${daysLeft} days`}
-        {daysLeft === null && ` `}
+        {daysLeft === null && `-`}
       </p>
     </div>
   );

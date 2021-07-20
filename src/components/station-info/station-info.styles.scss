@@ -1,7 +1,20 @@
+.stationInfo {
+  li {
+    svg {
+      opacity: 0.5 !important;
+    }
+  }
+  .miniMenu {
+    ul {
+      grid-template-columns: repeat(2, 40px);
+    }
+  }
+}
 .si__title {
   display: flex;
   flex-direction: column;
   max-width: 300px;
+
   input {
     background: transparent;
     border: 1px dotted rgba(0, 0, 0, 0);
@@ -30,4 +43,9 @@
       font-weight: 800;
     }
   }
+}
+.si__btns {
+  margin-top: 20%;
+  display: flex;
+  justify-content: flex-end;
 }

@@ -13,6 +13,14 @@
   &:hover {
     .fs__false {
     }
+    .sm__settings {
+      svg {
+        opacity: 0.1;
+        &:hover {
+          opacity: 0.4;
+        }
+      }
+    }
   }
 }
 
@@ -28,4 +36,16 @@
   top: 27.5px;
   left: 20px;
   color: #f0f2f5;
+}
+.sm__settings {
+  position: absolute;
+  top: 70px;
+  left: 23px;
+  svg {
+    cursor: pointer;
+    opacity: 0;
+    width: 20px;
+    height: 20px;
+    transition: 0.2s ease;
+  }
 }

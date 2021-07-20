@@ -1,6 +1,9 @@
 .message {
   display: flex;
   align-items: center;
+  background: rgb(241, 241, 241);
+  padding: 10px;
+  border-radius: 10px;
   margin-bottom: 10px;
   .avatar {
     margin-right: 10px;
