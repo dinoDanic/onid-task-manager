@@ -6,6 +6,7 @@ const INITIAL_STATE = {
   moduleData: [],
   activeModulesData: [],
   statusType: null,
+  open: true,
 };
 
 const spaceReducer = (state = INITIAL_STATE, action) => {
@@ -48,6 +49,11 @@ const spaceReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         statusType: action.payload,
+      };
+    case spaceActionTypes.SET_OPEN:
+      return {
+        ...state,
+        open: action.payload,
       };
     case spaceActionTypes.LOG_OUT:
       return {

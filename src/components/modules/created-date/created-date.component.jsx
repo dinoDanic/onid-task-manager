@@ -1,9 +1,6 @@
 import React, { useState, useMemo } from "react";
 import { convertDate } from "../../../firebase/firebase.utils";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faCalendarDay } from "@fortawesome/free-solid-svg-icons";
-
 import "./created-date.styles.scss";
 
 const CreatedDate = ({ task }) => {
@@ -16,7 +13,6 @@ const CreatedDate = ({ task }) => {
 
   return (
     <div className="createDate">
-      {/* <FontAwesomeIcon icon={faCalendarDay} /> */}
       <p>{date}</p>
     </div>
   );

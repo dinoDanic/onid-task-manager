@@ -32,8 +32,6 @@ const StatusTypeList = ({
   const inputRef = useRef();
   const inputNameRef = useRef();
 
-  console.log(status);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewTask(
@@ -76,7 +74,7 @@ const StatusTypeList = ({
               <FontAwesomeIcon
                 icon={faAngleDown}
                 style={{
-                  color: status.color,
+                  color: status.fontColor,
                   transform: status.open ? "" : "rotate(-90deg)",
                 }}
                 onClick={() =>
@@ -89,7 +87,7 @@ const StatusTypeList = ({
                 <input
                   ref={inputNameRef}
                   value={inputName}
-                  style={{ color: status.color }}
+                  style={{ color: status.fontColor }}
                   onChange={(e) => setInputName(e.target.value)}
                 />
               </form>

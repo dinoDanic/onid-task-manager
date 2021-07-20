@@ -15,19 +15,37 @@ const Views = ({ view }) => {
       <Link to={`/s/${spaceId}/e/${stationId}/b`}>
         <div
           className="views__board views__view"
-          style={{ background: view === "b" ? "#f0f2f5" : "" }}
+          style={{
+            background: view === "b" ? "#34b5e4" : "",
+            color: view === "b" ? "white" : "",
+          }}
         >
           <FontAwesomeIcon icon={faColumns} />
-          <p>Board</p>
+          <p
+            style={{
+              color: view === "b" ? "white" : "",
+            }}
+          >
+            Board
+          </p>
         </div>
       </Link>
       <Link to={`/s/${spaceId}/e/${stationId}/l`}>
         <div
           className="views__list views__view"
-          style={{ background: view === "l" ? "#f0f2f5" : "" }}
+          style={{
+            background: view === "l" ? "#34b5e4" : "",
+            color: view === "l" ? "white" : "",
+          }}
         >
           <FontAwesomeIcon icon={faTasks} />
-          <p>List</p>
+          <p
+            style={{
+              color: view === "l" ? "white" : "",
+            }}
+          >
+            List
+          </p>
         </div>
       </Link>
     </div>

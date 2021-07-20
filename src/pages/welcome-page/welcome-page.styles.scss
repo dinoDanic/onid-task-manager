@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .welcomePage {
   position: absolute;
   width: 100%;
@@ -59,7 +60,7 @@
     width: 400px;
     margin-right: 10%;
     pointer-events: all;
-    background: #f0f2f5;
+    background: $body;
     padding: 20px;
     border-radius: 10px;
     h1 {

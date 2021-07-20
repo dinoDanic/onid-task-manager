@@ -17,7 +17,6 @@ const Status = ({ task }) => {
   const [showStatusType, setShowStatusType] = useState(false);
 
   useMemo(() => {
-    console.log(statusType);
     if (!statusType) return;
     let toArray = Object.values(statusType);
     let findStatus = toArray.filter((item) => item.taskIds.includes(task.id));

@@ -1,9 +1,10 @@
+@import "../../../../theme.styles.scss";
 .taskList {
   position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  border-bottom: 1px solid #f0f2f5;
+  border-bottom: 1px solid $body;
   padding: 5px 10px;
   background: white;
   border-radius: 8px;

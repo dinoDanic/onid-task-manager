@@ -79,7 +79,6 @@ const DockHeader = ({ activeSpaceData }) => {
           </div>
         </div>
       </div>
-
       <div className="dh__settings">
         <div className="dh__settings-tool">
           <div className="dh__settings-icon">

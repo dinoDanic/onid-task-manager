@@ -5,7 +5,6 @@
   padding: 20px 10px;
   background: #2e4048;
   color: white;
-  /*  border-left: 2px solid rgba(0, 0, 0, 0.2); */
   position: relative;
 }
 
@@ -74,7 +73,7 @@
   cursor: pointer;
   z-index: 100;
   svg {
-    opacity: 0.3;
+    opacity: 1;
     &:hover {
       opacity: 0.7;
     }

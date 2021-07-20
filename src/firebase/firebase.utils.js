@@ -118,6 +118,7 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
       members: firebase.firestore.FieldValue.arrayUnion(uid),
       created: new Date(),
       description: "Add description",
+      open: true,
     })
     .then((data) => {
       let id = data.id;
@@ -151,7 +152,6 @@ export const createNewStation2 = (
       name: stationName,
       description: "Add description",
       fromSpaceId: spaceId,
-      open: true,
     })
     .then((data) => {
       let id = data.id;
@@ -470,7 +470,6 @@ export const updateModulesDb = (spaceId, stationId, module, modules) => {
 };
 
 export const getUserDataWithId = async (userId) => {
-  console.log(userId);
   const userRef = db.collection("users").doc(userId);
   const userData = await userRef.get();
   const data = userData.data();
@@ -821,7 +820,8 @@ export const createNewStatus = (spaceId, stationId, newName) => {
       statusType = {
         ...statusType,
         [newName]: {
-          color: "#FDAB3D",
+          color: "rgb(234, 236, 239)",
+          fontColor: "rgb(246, 91, 196)",
           id: newName,
           name: newName,
           taskIds: [],
@@ -861,7 +861,7 @@ export const setTaskColor = (spaceId, stationId, statusName, newColor) => {
         ...statusType,
         [statusName]: {
           ...statusType[statusName],
-          color: newColor,
+          fontColor: newColor,
         },
       };
       console.log(statusType);
@@ -990,6 +990,12 @@ export const toggleStatus = (spaceId, stationId, statusName) => {
         statusType,
       });
     });
+};
+
+export const setOpenFb = (spaceId, currentOpen) => {
+  db.collection("space").doc(spaceId).update({
+    open: !currentOpen,
+  });
 };
 
 export { db, auth, LoginWithGoogle, loginWithEmailAndPassword, createNewSpace };

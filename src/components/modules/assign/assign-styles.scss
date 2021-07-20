@@ -1,5 +1,9 @@
+@import "../../../theme.styles.scss";
 .assign {
   position: relative;
+  .retroBox {
+    padding: 5px !important;
+  }
   .avatar {
     width: 25px;
     height: 25px;
@@ -36,7 +40,7 @@
     margin-bottom: 0;
   }
   &:hover {
-    background-color: #f0f2f5;
+    background-color: $body;
   }
   .avatar {
     margin-right: 10px;

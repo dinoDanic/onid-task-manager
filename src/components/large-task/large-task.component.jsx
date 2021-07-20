@@ -9,6 +9,7 @@ import {
 import "./large-task.styles.scss";
 
 import LoadModule from "../modules/load-module.component.jsx/load-module.component";
+import RetroButton from "../retro/button/retro-button.component";
 import RetroInput from "../retro/input/input.component";
 import Box from "../retro/box/box.component";
 import Avatar from "../retro/avatar/avatar.component";
@@ -22,21 +23,27 @@ const LargeTask = ({ task }) => {
   const [message, setMessage] = useState("");
   const [newTaskName, setNewTaskName] = useState("");
   const [showLoading, setShowLoading] = useState(false);
+  const [limit, setLimit] = useState(5);
   const inputRef = useRef();
   const inputTaskRef = useRef();
   const messagesEndRef = useRef();
+  const textareaRef = useRef();
 
   const { fromSpaceId, fromStationId } = task;
 
-  useEffect(() => {
+  /* useEffect(() => {
     const scrollToBottom = () => {
       messagesEndRef.current.scrollIntoView();
     };
     scrollToBottom();
-  }, [msgs]);
+  }, [msgs]); */
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    if (!message) {
+      alert("no message");
+      return;
+    }
     createMessageToTask(
       task.fromSpaceId,
       task.fromStationId,
@@ -44,7 +51,8 @@ const LargeTask = ({ task }) => {
       currentUser.uid,
       task.id
     );
-    inputRef.current.value = "";
+    textareaRef.current.value = "";
+    setMessage("");
   };
 
   useEffect(() => {
@@ -58,6 +66,7 @@ const LargeTask = ({ task }) => {
       .collection("msg")
       /* .orderBy("created", "asc") */
       .where("taskId", "==", id)
+      .limit(limit)
       .onSnapshot((msgsData) => {
         let list = [];
         msgsData.forEach((msg) => {
@@ -84,7 +93,7 @@ const LargeTask = ({ task }) => {
 
   return (
     <div className="largeTask">
-      <div className="lt__content">
+      <div className="lt__taskStuff">
         <form onSubmit={(e) => handleChangeTask(e)}>
           {showLoading && <Loading />}
           <input
@@ -94,34 +103,33 @@ const LargeTask = ({ task }) => {
           />
         </form>
       </div>
-      <div className="lt__columns">
-        <div className="lt__comments">
-          <div className="lt__messeges">
-            {msgs?.map((msg) => (
-              <Message key={msg.message} msg={msg} />
-            ))}
-            <div ref={messagesEndRef} />
-          </div>
-          <form onSubmit={(e) => handleSubmit(e)}>
-            <div className="lt__input">
-              <Avatar src={currentUser.imageUrl} />
-              <div
-                className="lt__inputMsg"
-                onChange={(e) => setMessage(e.target.value)}
-              >
-                <RetroInput ref={inputRef} placeholder="Write update" />
-              </div>
-            </div>
-          </form>
+      <div className="lt__modules">
+        {moduleData?.map((module) => {
+          return <LoadModule module={module} key={module.name} task={task} />;
+        })}
+      </div>
+      <div className="lt__writeUpdate">
+        <div className="lt__writeUpdate-msgs">
+          {msgs.map((msg) => {
+            return <Message msg={msg} />;
+          })}
         </div>
-        <div className="lt__modules">
-          <Box>
-            {moduleData?.map((module) => {
-              return (
-                <LoadModule module={module} key={module.name} task={task} />
-              );
-            })}
-          </Box>
+        <div className="lt__writeUpdate-send">
+          <div className="lt__writeUpdate-avatar">
+            <Avatar src={currentUser.imageUrl} />
+          </div>
+          <div className="lt__writeUpdate-message">
+            <form onSubmit={(e) => handleSubmit(e)}>
+              <textarea
+                onChange={(e) => setMessage(e.target.value)}
+                ref={textareaRef}
+                placeholder="Write update"
+              />
+              <div className="lt__writeUpdate-btn">
+                <RetroButton>Submit</RetroButton>
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </div>

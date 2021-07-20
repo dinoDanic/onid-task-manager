@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useMemo } from "react";
 import { Draggable } from "react-beautiful-dnd";
 import { useSelector } from "react-redux";
+import { AnimatePresence } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,21 +14,21 @@ import "./task-board.styles.scss";
 
 import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
 import BoxLayer from "../../../retro/box-layer/box-layer.component";
+import BoxRight from "../../../retro/box-right/box-right.component";
 import LargeTask from "../../../large-task/large-task.component";
 
 import { updateUser, db } from "../../../../firebase/firebase.utils";
 
 const TaskBoard = ({ task, index }) => {
+  const [showLargeTask, setShowLargeTask] = useState(false);
+  const [msgs, setMsgs] = useState(0);
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   let getUser = users.filter((item) => item.uid === task.assign);
-  const [msgs, setMsgs] = useState(0);
 
-  const [showLargeTask, setShowLargeTask] = useState(false);
   let user = getUser[0];
 
   useEffect(() => {
-    console.log("auto update tasks => db.users");
     // AUTO UPDATE TASKS
     if (!task.assign) return;
     if (user === undefined) return;
@@ -70,8 +71,6 @@ const TaskBoard = ({ task, index }) => {
         });
     }
   }, [msgs]);
-
-  console.log(task);
 
   return (
     <Draggable draggableId={task.id} index={index}>
@@ -118,11 +117,16 @@ const TaskBoard = ({ task, index }) => {
                 );
               })}
             </div>
-            {showLargeTask && (
-              <BoxLayer setLayer={setShowLargeTask}>
-                <LargeTask task={task} msgs={msgs} />
-              </BoxLayer>
-            )}
+            <AnimatePresence>
+              {showLargeTask && (
+                <BoxRight
+                  setLayer={setShowLargeTask}
+                  setLayer={setShowLargeTask}
+                >
+                  <LargeTask task={task} msgs={msgs} />
+                </BoxRight>
+              )}
+            </AnimatePresence>
           </div>
         );
       }}
