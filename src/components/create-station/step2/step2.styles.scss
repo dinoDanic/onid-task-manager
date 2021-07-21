@@ -1,6 +1,5 @@
 @import "../../../theme.styles.scss";
 .sn__name {
-  margin-top: 50px;
   margin-bottom: 20px;
   p {
     margin-bottom: 5px;
@@ -12,9 +11,9 @@
   justify-content: flex-end;
 }
 .step2__statusContainer {
-  /*   display: flex;
+  display: flex;
   justify-content: center;
-  align-items: center; */
+  align-items: center;
 }
 .step2__statusType {
   width: fit-content;

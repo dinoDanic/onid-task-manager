@@ -18,7 +18,7 @@ const Modules = ({ currentStationId, currentSpaceId }) => {
           color="info"
           onClick={() => setModuleWindow(!moduleWindow)}
         >
-          Moduels
+          Task Modules
         </RetroButton>
       </div>
       {moduleWindow && (

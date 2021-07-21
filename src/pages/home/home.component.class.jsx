@@ -8,12 +8,16 @@ import SpaceData from "../../components/spaceData/space-data.component";
 import SectionBox from "../../components/section-box/section-box.component";
 import FavoriteStations from "../../components/favorite-stations/favorite-stations.component";
 import AssignedTasks from "../../components/assigned-tasks/assigned-tasks.component";
+import WelcomeHome from "../../components/welcome-home/welcome-home.component";
 
 const Home = () => {
   const spaceData = useSelector((state) => state.space.spaceData);
 
   return (
     <div className="home">
+      <div className="home__welcomeHome">
+        <WelcomeHome />
+      </div>
       <div className="home__content">
         <SectionBox title="Your Space" subTitle="Space you are member of">
           {spaceData.length !== 0 ? <SpaceData /> : <NoSpaceData />}
@@ -28,10 +32,7 @@ const Home = () => {
             </div>
           </div>
         </SectionBox>
-        <SectionBox
-          title="Assigned Tasks"
-          subTitle="Tasks that are Assinged to you"
-        >
+        <SectionBox title="My Tasks" subTitle="Tasks that are Assinged to you">
           <AssignedTasks />
         </SectionBox>
       </div>

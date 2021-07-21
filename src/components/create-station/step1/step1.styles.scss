@@ -1,9 +1,14 @@
 @import "../../../theme.styles.scss";
 .sn__name {
-  margin-top: 50px;
+  margin-top: 10px;
   margin-bottom: 20px;
+  display: flex;
+  justify-content: center;
   p {
     margin-bottom: 5px;
+  }
+  input {
+    width: fit-content;
   }
 }
 .sn__next {

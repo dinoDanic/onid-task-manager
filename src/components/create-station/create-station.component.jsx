@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useHistory } from "react-router";
 
 import "./create-station.styles.scss";
 
@@ -6,13 +7,17 @@ import { createNewStation2 } from "../../firebase/firebase.utils";
 
 import BoxLayer from "../retro/box-layer/box-layer.component";
 import RetroButton from "../retro/button/retro-button.component";
+import Loading from "../retro/loading/loading.component";
 import Step1 from "./step1/step1.component";
 import Step2 from "./step2/step2.component";
 import Step3 from "./step3/step3.component";
 
 const CreateStation = ({ setCreateStation, activeSpaceId }) => {
+  const history = useHistory();
   const [stationName, setStationName] = useState("Enter Station name");
+  const [stationId, setStationId] = useState("");
   const [force, setForce] = useState(0);
+  const [loading, setLoading] = useState(false);
   const [steps, setSteps] = useState({
     step1: true,
     step2: false,
@@ -70,20 +75,27 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
     { name: "Priority", active: true, icon: "faExclamationCircle" },
   ]);
 
-  const handleCreate = () => {
-    createNewStation2(
+  const handleCreate = async () => {
+    setLoading(true);
+    const stationId = await createNewStation2(
       activeSpaceId,
       stationName,
       statusType,
       statusOrder,
       modules
     );
-    setCreateStation(false);
+    setTimeout(() => {
+      setLoading(false);
+      setCreateStation(false);
+      if (!stationId) return;
+      history.push(`/s/${activeSpaceId}/e/${stationId}/b`);
+    }, 300);
   };
 
   return (
     <div className="createStation">
       <BoxLayer setLayer={setCreateStation}>
+        {loading && <Loading />}
         <div className="cs__createPop">
           {steps.step1 && (
             <Step1

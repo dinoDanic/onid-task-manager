@@ -2,6 +2,7 @@ import React, { useState, useRef, useEffect } from "react";
 import { useSelector } from "react-redux";
 
 import bg1Img from "../../img/bg6.jpeg";
+import bg2Img from "../../img/arches.png";
 
 import "./dock-header-styles.scss";
 
@@ -56,7 +57,7 @@ const DockHeader = ({ activeSpaceData }) => {
 
   return (
     <div className="dockHeader">
-      <img src={bg1Img} alt={bg1Img} />
+      {/* <img src={bg2Img} alt={bg1Img} /> */}
       <div className="dh__header">
         <div className="dh__text">
           <div className="dh__name">

@@ -24,11 +24,12 @@ const TaskBoard = ({ task, index }) => {
   const [msgs, setMsgs] = useState(0);
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
-  let getUser = users.filter((item) => item.uid === task.assign);
-
-  let user = getUser[0];
 
   useEffect(() => {
+    if (!users) return;
+    let getUser = users.filter((item) => item.uid === task.assign);
+    let user = getUser[0];
+
     // AUTO UPDATE TASKS
     if (!task.assign) return;
     if (user === undefined) return;

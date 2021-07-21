@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .spaceFly {
   display: flex;
   flex-direction: column;
@@ -64,5 +65,20 @@
   button {
     width: 30px;
     background: transparent;
+  }
+}
+
+.sf__controls-home {
+  position: relative;
+}
+
+.sf__controls-homeArrow {
+  position: absolute;
+  right: -21px;
+  top: 3px;
+  svg {
+    color: $body;
+    width: 30px !important;
+    height: 30px !important;
   }
 }

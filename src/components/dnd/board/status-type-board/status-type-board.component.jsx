@@ -132,17 +132,19 @@ const StatusTypeBoard = ({
               </Droppable>
             </div>
           </Box>
-          <div className="st__newTask">
-            <form
-              onSubmit={(e) => {
-                handleSubmit(e);
-              }}
-            >
-              <div onChange={(e) => setNewTaskName(e.target.value)}>
-                <RetroInput ref={inputRef} placeholder="Add Task" />
-              </div>
-            </form>
-          </div>
+          {status.open && (
+            <div className="st__newTask">
+              <form
+                onSubmit={(e) => {
+                  handleSubmit(e);
+                }}
+              >
+                <div onChange={(e) => setNewTaskName(e.target.value)}>
+                  <RetroInput ref={inputRef} placeholder="Add Task" />
+                </div>
+              </form>
+            </div>
+          )}
         </div>
       )}
     </Draggable>

@@ -1,7 +1,16 @@
+.step3 {
+}
 .step3__create {
   display: flex;
   justify-content: flex-end;
   margin-top: 10px;
+}
+.step3__h2 {
+  margin-bottom: 5px !important;
+}
+.step3__p {
+  margin-bottom: 20px;
+  text-align: center;
 }
 
 .step3__modules {

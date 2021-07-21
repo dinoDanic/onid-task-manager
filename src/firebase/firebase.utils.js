@@ -135,19 +135,20 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
   }
 };
 
-export const createNewStation2 = (
+export const createNewStation2 = async (
   spaceId,
   stationName,
   statusType,
   statusOrder,
   modules
 ) => {
+  let stationId = "123";
   const stationsRef = db
     .collection("space")
     .doc(spaceId)
     .collection("stations");
 
-  stationsRef
+  await stationsRef
     .add({
       name: stationName,
       description: "Add description",
@@ -155,6 +156,7 @@ export const createNewStation2 = (
     })
     .then((data) => {
       let id = data.id;
+      stationId = id;
       stationsRef.doc(id).set(
         {
           stationId: id,
@@ -170,6 +172,7 @@ export const createNewStation2 = (
         modules,
       });
     });
+  return stationId;
 };
 
 export const createNewTask = async (

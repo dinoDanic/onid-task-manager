@@ -1,0 +1,13 @@
+@import "../../theme.styles.scss";
+.welcomeHome {
+  padding: 20px 80px;
+  background: white;
+  box-shadow: $boxShadow-small;
+  margin-bottom: 20px;
+  h3 {
+    font-weight: 300;
+    span {
+      font-size: 25px;
+    }
+  }
+}

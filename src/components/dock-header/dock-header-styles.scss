@@ -1,3 +1,4 @@
+@import "../../theme.styles.scss";
 .dockHeader {
   margin-bottom: 20px;
   padding-left: 60px;
@@ -7,6 +8,13 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
+  background: rgb(255, 255, 255);
+  background-image: url("../../img/white-wall-3-2.png");
+  background-image: url("../../img/white-bed-sheet.png");
+  background-image: url("../../img/type.png");
+  background-image: url("../../img/transparent-square-tiles.png");
+  background-image: url("../../img/swirl.png");
+  border-bottom: 1px solid $bodyGray;
   &:hover {
     .dh__settings-icon {
       opacity: 1;

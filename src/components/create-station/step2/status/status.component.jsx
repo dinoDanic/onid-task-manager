@@ -2,6 +2,8 @@ import React, { useState } from "react";
 
 import RetroButton from "../../../retro/button/retro-button.component";
 import Box from "../../../retro/box/box.component";
+import BoxLayer from "../../../retro/box-layer/box-layer.component";
+import BoxLayerLite from "../../../retro/box-layer-lite/box-layer-lite.component";
 import RetroInput from "../../../retro/input/input.component";
 import Colors from "../../../colors/colors.component";
 
@@ -63,7 +65,7 @@ const Status = ({
       </div>
       {controls && (
         <div className="status__controls">
-          <Box>
+          <BoxLayerLite setLayer={setControls}>
             <form onSubmit={(e) => handleSubmit(e)}>
               <div className="status__header">
                 <div
@@ -77,14 +79,13 @@ const Status = ({
                 </div>
               </div>
               <Colors returnColor={setNewColor} />
-
               <div className="status__setbtn">
                 <RetroButton color="info" style={{ background: newColor }}>
                   set
                 </RetroButton>
               </div>
             </form>
-          </Box>
+          </BoxLayerLite>
         </div>
       )}
     </div>

@@ -33,11 +33,10 @@
 
 .status__controls {
   position: absolute;
-  width: 270px;
   top: -10px;
   left: 170px;
   .retroBox {
-    padding: 10px;
+    padding: 10px !important;
   }
   .boxLayer {
   }
@@ -49,6 +48,7 @@
 .status__header {
   display: flex;
   justify-content: space-between;
+  margin-bottom: 10px;
 }
 .status__input {
   width: 100%;
