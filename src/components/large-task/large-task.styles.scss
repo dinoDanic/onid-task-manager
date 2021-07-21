@@ -22,17 +22,21 @@
 }
 
 .lt__taskStuff {
-  margin-bottom: 10px;
+  background: $body;
   padding: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid $bodyGray;
   form {
     position: relative;
     width: 100%;
   }
   input {
     border: none;
+    background: transparent;
     font-size: 25px;
-    border: 1px dotted rgb(255, 255, 255);
+    border: 1px dotted $body;
     padding: 5px 10px;
+    margin-left: -10px;
     border-radius: 8px;
     width: 100%;
     &:hover {

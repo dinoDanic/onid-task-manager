@@ -1,3 +1,4 @@
+@import "../../../../theme.styles.scss";
 .statusType {
   margin: 8px;
   border-radius: 2px;
@@ -10,6 +11,11 @@
   .retroBox {
     padding: 5px;
     box-shadow: none;
+  }
+  &:hover {
+    .st__menu {
+      opacity: 1;
+    }
   }
 }
 
@@ -49,6 +55,8 @@
   padding-top: 20px;
   position: relative;
   width: 100%;
+  opacity: 1;
+  transition: 0.2s ease;
   .bll__content {
     left: -50%;
     top: 60px;
@@ -70,7 +78,7 @@
 }
 
 .st__title {
-  padding: 5px 10px;
+  padding: 0px 5px;
   max-width: 50%;
   form {
   }
@@ -112,5 +120,20 @@
 .st__newTask-vertical {
   input {
     max-width: 300px;
+  }
+}
+
+.st__arrow {
+  cursor: pointer;
+  display: flex;
+  margin-right: 5px;
+  justify-content: center;
+  align-items: center;
+  svg {
+    transition: 0.2s ease;
+    margin-top: 8px;
+    &:hover {
+      transform: scale(1.2);
+    }
   }
 }

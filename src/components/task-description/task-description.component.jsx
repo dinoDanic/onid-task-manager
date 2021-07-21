@@ -15,6 +15,7 @@ const TaskDescription = ({ description, taskId }) => {
 
   useEffect(() => {
     setTextDescription(description);
+    setOpacity(0);
   }, [description]);
 
   const handleDescription = (e) => {

@@ -70,7 +70,7 @@ const StatusTypeBoard = ({
           ref={provided.innerRef}
         >
           <div className="st__header">
-            <div className="stl__arrow">
+            <div className="st__arrow">
               <FontAwesomeIcon
                 icon={faAngleDown}
                 style={{

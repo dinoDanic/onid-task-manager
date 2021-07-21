@@ -4,7 +4,7 @@ import { Draggable } from "react-beautiful-dnd";
 
 import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
 import LargeTask from "../../../large-task/large-task.component";
-import BoxLayer from "../../../retro/box-layer/box-layer.component";
+import BoxRight from "../../../retro/box-right/box-right.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
@@ -46,9 +46,9 @@ const TaskList = ({ task, index }) => {
               })}
             </div>
             {showLargeTask && (
-              <BoxLayer setLayer={setShowLargeTask}>
+              <BoxRight setLayer={setShowLargeTask}>
                 <LargeTask task={task} />
-              </BoxLayer>
+              </BoxRight>
             )}
           </div>
         );

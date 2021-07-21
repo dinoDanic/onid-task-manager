@@ -1,5 +1,6 @@
+@import "../../../theme.styles.scss";
 .retroBox {
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 18px 50px -10px;
+  box-shadow: $boxShadow-large;
   padding: 30px;
   border-radius: 10px;
   background: white;

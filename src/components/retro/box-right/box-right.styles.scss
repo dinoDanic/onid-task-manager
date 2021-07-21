@@ -1,3 +1,4 @@
+@import "../../../theme.styles.scss";
 .boxRight {
   position: fixed;
   width: 100%;
@@ -7,10 +8,10 @@
   z-index: 200;
 }
 .boxRight__content {
-  box-shadow: 0 5px 20px 0 rgba(21, 7, 38, 0.08);
+  box-shadow: $boxShadow-small;
   width: 40%;
   height: 100%;
-  max-width: 600px;
+  max-width: 570px;
   right: 0;
   background: white;
   position: absolute;
