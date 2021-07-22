@@ -4,14 +4,14 @@
   padding-left: 70px;
   padding-top: 20px;
   padding-right: 70px;
-  padding-bottom: 5px;
+  padding-bottom: 10px;
   height: 160px;
   position: relative;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   background: white;
-  background-image: url("../../../img/swirl.png");
+  /*   background-image: url("../../../img/swirl.png"); */
   border-bottom: 1px solid $bodyGray;
   &:hover {
     .fs__false {

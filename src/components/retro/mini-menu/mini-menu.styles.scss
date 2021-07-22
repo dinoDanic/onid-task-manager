@@ -3,6 +3,7 @@
   .retroBox {
     &:first-of-type {
       box-shadow: $boxShadow-small !important;
+      background: white !important;
       border: 1px solid $bodyGray;
       padding: 10px;
     }

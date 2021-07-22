@@ -81,7 +81,7 @@ const TaskSettings = ({ status, inputNameRef }) => {
             <div className="ts__delete-msg">
               <h2>
                 Delete status
-                <span style={{ color: status.color }}> {status.name}</span> ?
+                <span style={{ color: status.fontColor }}> {status.name}</span>?
               </h2>
               <p>
                 All task inside

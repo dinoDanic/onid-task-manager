@@ -1,7 +1,9 @@
 import UserActionTypes from "./user.types";
 const INITIAL_STATE = {
   currentUser: null,
-  favoriteSpaces: {},
+  favoriteSpaces: {
+    open: true,
+  },
   users: null,
 };
 
@@ -23,6 +25,14 @@ const userReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         users: action.payload,
+      };
+    case UserActionTypes.SET_OPEN:
+      return {
+        ...state,
+        currentUser: {
+          ...state.currentUser,
+          open: action.payload,
+        },
       };
     default:
       return state;

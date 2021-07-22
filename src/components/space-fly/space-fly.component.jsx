@@ -17,6 +17,7 @@ import {
   faRocket,
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
+import { setOpen } from "../../redux/user/user.actions";
 
 const SpaceFly = () => {
   const spaceData = useSelector((state) => state.space.spaceData);
@@ -37,7 +38,7 @@ const SpaceFly = () => {
   return (
     <>
       <div className="spaceFly">
-        <p>Space</p>
+        {spaceData.length > 0 && <p>Space</p>}
         <div className="sf__flys">
           {spaceData?.map((space) => {
             return (
@@ -53,7 +54,13 @@ const SpaceFly = () => {
           <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
             <FontAwesomeIcon icon={faRocket} />
           </RetroButton>
-          <Link to="/" onClick={() => dispatch(setIdsNull())}>
+          <Link
+            to="/"
+            onClick={() => {
+              dispatch(setIdsNull());
+              dispatch(setOpen(true));
+            }}
+          >
             <div className="sf__controls-home">
               <RetroButton size="box">
                 <FontAwesomeIcon icon={faHome} />

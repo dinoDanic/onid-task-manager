@@ -32,6 +32,8 @@ const StatusTypeBoard = ({
   const inputRef = useRef();
   const inputNameRef = useRef();
 
+  console.log(tasks.length);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewTask(
@@ -99,7 +101,7 @@ const StatusTypeBoard = ({
               <TaskSettings status={status} inputNameRef={inputNameRef} />
             </div>
           </div>
-          <Box style={{ background: status.color }}>
+          <Box /* style={{ backgroundColor: status.fontColor }} */>
             <div className="st__content">
               <Droppable droppableId={status.id}>
                 {(provided, snapshot) => {
@@ -124,6 +126,26 @@ const StatusTypeBoard = ({
                             );
                           })}
                           {provided.placeholder}
+                          <div className="st__newTask st__newTask-inside">
+                            {status.open && (
+                              <form
+                                onSubmit={(e) => {
+                                  handleSubmit(e);
+                                }}
+                              >
+                                <div
+                                  onChange={(e) =>
+                                    setNewTaskName(e.target.value)
+                                  }
+                                >
+                                  <RetroInput
+                                    ref={inputRef}
+                                    placeholder="Add Task"
+                                  />
+                                </div>
+                              </form>
+                            )}
+                          </div>
                         </div>
                       )}
                     </div>
@@ -132,19 +154,6 @@ const StatusTypeBoard = ({
               </Droppable>
             </div>
           </Box>
-          {status.open && (
-            <div className="st__newTask">
-              <form
-                onSubmit={(e) => {
-                  handleSubmit(e);
-                }}
-              >
-                <div onChange={(e) => setNewTaskName(e.target.value)}>
-                  <RetroInput ref={inputRef} placeholder="Add Task" />
-                </div>
-              </form>
-            </div>
-          )}
         </div>
       )}
     </Draggable>

@@ -9,9 +9,6 @@ import RetroInput from "../retro/input/input.component";
 import RetroButton from "../retro/button/retro-button.component";
 import Colors from "../colors/colors.component";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faRocket } from "@fortawesome/free-solid-svg-icons";
-
 import "./create-space.styles.scss";
 
 function CreateSpace({ setLayer }) {
@@ -56,12 +53,6 @@ function CreateSpace({ setLayer }) {
             </RetroButton>
             <br />
             <p onClick={() => setShowColors(!showColors)}>Set color</p>
-            {/*   <FontAwesomeIcon
-              icon={faRocket}
-              size="6x"
-              style={{ color: currentColor }}
-              onClick={() => setShowColors(!showColors)}
-            /> */}
             {showColors && (
               <BoxLayerLite setLayer={setShowColors}>
                 <div className="cs__chooseColor">
@@ -71,7 +62,6 @@ function CreateSpace({ setLayer }) {
             )}
           </div>
           <div className="cs__spaceName">
-            {/* <p>Where to?</p> */}
             <div onChange={(e) => setSpaceName(e.target.value)}>
               <RetroInput placeholder="Space Name" />
             </div>

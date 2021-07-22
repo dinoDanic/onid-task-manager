@@ -3,6 +3,9 @@
   position: relative;
   .retroBox {
     padding: 5px !important;
+    background: white !important;
+    box-shadow: $boxShadow-small !important;
+    border: 1px solid $bodyGray;
   }
   .avatar {
     width: 25px;

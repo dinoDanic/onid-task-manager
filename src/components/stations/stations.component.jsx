@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { db } from "../../firebase/firebase.utils";
-import { AnimatePresence } from "framer-motion";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
 

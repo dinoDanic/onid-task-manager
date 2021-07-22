@@ -8,7 +8,7 @@ const Icon = ({ space }) => {
   const buttonStyle = {
     background: `${space.color}`,
     /*    filter: space.spaceId === spaceId ? "" : "grayscale(50%)", */
-    transform: space.spaceId === spaceId ? "scale(1.1)" : "scale(0.85)",
+    transform: space.spaceId === spaceId ? "scale(1)" : "scale(0.85)",
   };
   return (
     <div className="icon">

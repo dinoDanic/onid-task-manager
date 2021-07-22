@@ -18,3 +18,8 @@ export const setUsers = (users) => ({
   type: UserActionTypes.SET_USERS,
   payload: users,
 });
+
+export const setOpen = (state) => ({
+  type: UserActionTypes.SET_OPEN,
+  payload: state,
+});

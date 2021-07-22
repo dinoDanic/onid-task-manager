@@ -9,11 +9,6 @@
   flex-direction: column;
   justify-content: center;
   background: rgb(255, 255, 255);
-  background-image: url("../../img/white-wall-3-2.png");
-  background-image: url("../../img/white-bed-sheet.png");
-  background-image: url("../../img/type.png");
-  background-image: url("../../img/transparent-square-tiles.png");
-  background-image: url("../../img/swirl.png");
   border-bottom: 1px solid $bodyGray;
   &:hover {
     .dh__settings-icon {
@@ -76,6 +71,9 @@
   top: 20px;
   .bll__content {
     margin-top: 10px;
+    .retroBox {
+      min-height: auto;
+    }
   }
 }
 .dh__btns {

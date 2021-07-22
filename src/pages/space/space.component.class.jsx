@@ -6,18 +6,15 @@ import { motion } from "framer-motion";
 import Avatar from "../../components/retro/avatar/avatar.component";
 import SpaceFly from "../../components/space-fly/space-fly.component";
 
-import {
-  setSpaceData,
-  removeSpaceData,
-  setOpen,
-} from "../../redux/space/space.actions";
+import { setSpaceData, removeSpaceData } from "../../redux/space/space.actions";
+import { setOpen } from "../../redux/user/user.actions";
 
 import "./space.styles.scss";
 
 const Space = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
   const spaceId = useSelector((state) => state.history.spaceId);
-  const open = useSelector((state) => state.space.open);
+  const open = useSelector((state) => state.user.currentUser.open);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -36,19 +33,18 @@ const Space = () => {
   }, [currentUser]);
 
   useEffect(() => {
-    if (!spaceId) return;
-    db.collection("space")
-      .doc(spaceId)
-      .get()
-      .then((spaceData) => {
-        const getOpen = spaceData.data().open;
+    if (!currentUser) return;
+    db.collection("users")
+      .doc(currentUser.uid)
+      .onSnapshot((userDatat) => {
+        const getOpen = userDatat.data().open;
         if (getOpen) {
           dispatch(setOpen(true));
         } else {
           dispatch(setOpen(false));
         }
       });
-  }, [spaceId]);
+  }, []);
 
   function handleLogout() {
     removeSpaceData();

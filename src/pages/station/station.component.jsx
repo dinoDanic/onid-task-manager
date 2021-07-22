@@ -6,7 +6,7 @@ import { motion } from "framer-motion";
 
 import Stations from "../../components/stations/stations.component";
 
-import { setOpen } from "../../redux/space/space.actions";
+import { setOpen } from "../../redux/user/user.actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBars } from "@fortawesome/free-solid-svg-icons";
@@ -19,7 +19,7 @@ const Station = () => {
   const currentUserUid = useSelector((state) => state.user.currentUser.uid);
   const spaceId = useSelector((state) => state.history.spaceId);
   const stationId = useSelector((state) => state.history.stationId);
-  const open = useSelector((state) => state.space.open);
+  const open = useSelector((state) => state.user.currentUser.open);
   const [x, setX] = useState(0);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -49,7 +49,7 @@ const Station = () => {
 
   const handleMini = () => {
     dispatch(setOpen(!open));
-    setOpenFb(spaceId, open);
+    setOpenFb(currentUserUid, open);
   };
 
   return (

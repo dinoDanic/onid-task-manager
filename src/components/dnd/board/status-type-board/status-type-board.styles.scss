@@ -11,6 +11,11 @@
   .retroBox {
     padding: 5px;
     box-shadow: none;
+    background: linear-gradient(
+      180deg,
+      rgba(0, 0, 0, 0.02) 0%,
+      rgba(238, 238, 238, 0) 100%
+    );
   }
   &:hover {
     .st__menu {
@@ -29,15 +34,29 @@
   transition: 0.2s background-color;
 }
 .st__newTask {
-  margin-top: 10px;
+  margin-top: -5px;
   input {
     width: 80px;
     background: transparent;
     border: none;
+    font-size: 12px;
     &:focus {
       width: 100%;
       background: white;
+      transform: scale(1);
     }
+  }
+  form {
+    padding: 0 15px;
+  }
+  ::placeholder {
+    color: gray;
+  }
+}
+.st__newTask-inside {
+  margin-top: 2px;
+  form {
+    padding: 0;
   }
 }
 

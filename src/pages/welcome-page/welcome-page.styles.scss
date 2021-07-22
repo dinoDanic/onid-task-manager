@@ -3,7 +3,11 @@
   position: absolute;
   width: 100%;
   height: 100%;
-
+  background: linear-gradient(
+    200deg,
+    rgba(115, 166, 230, 0.5) 30%,
+    rgba(238, 238, 238, 0) 100%
+  );
   ul#scene {
     height: 100%;
     width: 100%;
@@ -57,32 +61,41 @@
     align-items: center;
   }
   .layer-startUp {
-    width: 400px;
+    width: 450px;
+
     margin-right: 10%;
     pointer-events: all;
-    background: $body;
+    /* background: $body; */
     padding: 20px;
     border-radius: 10px;
+    button {
+    }
     h1 {
-      font-size: 70px;
-      margin-bottom: 10px;
+      /*   position: absolute;
+      margin-top: -100px; */
+      font-size: 100px;
+      margin-bottom: 5px;
       color: #27538c;
       font-family: "Ubuntu Mono", monospace;
     }
-    h4 {
-      margin-bottom: 20px;
-      font-weight: lighter;
+    h3 {
       color: #5d8dcf;
+      font-size: 25px;
     }
   }
   .retroBox {
     padding: 0 !important;
   }
 }
+.welcomePage__message {
+  margin-bottom: 80px;
+  margin-left: 20px;
+}
 
 .wp__btns {
   display: flex;
   align-items: center;
+  justify-content: flex-end;
   button {
     width: fit-content;
     height: 40px;
@@ -90,5 +103,16 @@
   }
   span {
     margin: 0 30px;
+  }
+}
+.wp__btns-register {
+  button {
+    background: #73a6e6;
+    color: white;
+  }
+}
+.wp__btns-try {
+  button {
+    color: #27538c;
   }
 }

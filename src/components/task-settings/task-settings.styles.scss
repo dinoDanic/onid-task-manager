@@ -6,6 +6,7 @@
     top: 30px !important;
   }
 }
+
 .ts__item {
   padding: 5px 10px;
   cursor: pointer;
@@ -37,10 +38,10 @@
 
 .ts__delete {
   display: flex;
-
   .retroBox {
     padding: 30px !important;
     width: 500px;
+    background: white !important;
   }
 }
 

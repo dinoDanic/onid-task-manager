@@ -13,7 +13,7 @@
   transition: 0.2s;
   &:focus {
     transform: scale(1.02);
-    border: 1px solid #c5c6c7;
+    border: 1px solid rgba(0, 0, 0, 0.1);
   }
 }
 /* .retroInput {

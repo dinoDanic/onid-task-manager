@@ -85,6 +85,7 @@ export const registerUserFb = async (user, userName) => {
       assignedTasks: [],
       favoriteStations: [],
       imageUrl: photoURL,
+      open: true,
     });
     const userImage = await db.collection("users").doc(uid).get();
     const userImageUrl = userImage.data().imageUrl;
@@ -118,7 +119,6 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
       members: firebase.firestore.FieldValue.arrayUnion(uid),
       created: new Date(),
       description: "Add description",
-      open: true,
     })
     .then((data) => {
       let id = data.id;
@@ -996,8 +996,8 @@ export const toggleStatus = (spaceId, stationId, statusName) => {
     });
 };
 
-export const setOpenFb = (spaceId, currentOpen) => {
-  db.collection("space").doc(spaceId).update({
+export const setOpenFb = (userId, currentOpen) => {
+  db.collection("users").doc(userId).update({
     open: !currentOpen,
   });
 };

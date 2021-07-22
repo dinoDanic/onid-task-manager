@@ -6,6 +6,7 @@ const UserActionTypes = {
   REMOVE_ONE_STATION: "REMOVE_ONE_STATION",
   ADD_ONE_STATION: "ADD_ONE_STATION",
   ADD_TO_FAVORITE: "ADD_TO_FAVORITE",
+  SET_OPEN: "SET_OPEN",
 };
 
 export default UserActionTypes;

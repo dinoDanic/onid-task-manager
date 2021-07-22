@@ -1,7 +1,14 @@
+@import "../../../theme.styles.scss";
 .status {
   cursor: pointer;
+  z-index: 200 !important;
+
   .bll__content {
-    margin-left: -15px;
+    margin-left: -10px;
+  }
+  .retroBox {
+    background: white !important;
+    box-shadow: $boxShadow-small !important;
   }
 }
 
