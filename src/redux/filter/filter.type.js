@@ -1,0 +1,9 @@
+const FilterType = {
+  SET_FILTER_NULL: "SET_FILTER_NULL",
+  TOGGLE_URGENT: "TOGGLE_URGENT",
+  SET_HIGH_TRUE: "SET_HIGH_TRUE",
+  SET_NORMAL_TRUE: "SET_NORMAL_TRUE",
+  SET_LOW_TRUE: "SET_LOW_TRUE",
+};
+
+export default FilterType;

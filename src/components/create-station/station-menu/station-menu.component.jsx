@@ -6,6 +6,7 @@ import Views from "../../views/views.component";
 import Modules from "../../modules/modules.component";
 import StationInfo from "../../station-info/station-info.component";
 import FavoriteStar from "../../favorite-star/favorite-star.component";
+import Filter from "../../filter/filter-component";
 
 import "./station-menu.styles.scss";
 
@@ -34,6 +35,7 @@ const StationMenu = () => {
       />
       <div className="sm__buttomRow">
         <Views view={view} />
+        <Filter />
         <Modules
           currentStationId={currentStationId}
           currentSpaceId={currentSpaceId}

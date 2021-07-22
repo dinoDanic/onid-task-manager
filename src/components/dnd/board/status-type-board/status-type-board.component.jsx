@@ -32,8 +32,6 @@ const StatusTypeBoard = ({
   const inputRef = useRef();
   const inputNameRef = useRef();
 
-  console.log(tasks.length);
-
   const handleSubmit = (e) => {
     e.preventDefault();
     createNewTask(
