@@ -24,14 +24,15 @@ const TaskBoard = ({ task, index }) => {
   const filter = useSelector((state) => state.filter);
 
   const [showLargeTask, setShowLargeTask] = useState(false);
-  const [taskInfilter, setTaskInFilter] = useState(true);
+  const [statusFilter, setStatusFilter] = useState(true);
+  const [timeFilter, setTimeFilter] = useState(true);
   const [msgs, setMsgs] = useState(0);
 
   useEffect(() => {
     // check if all is true
     const isAllTrue = filter.status.filter((item) => item.status === false);
     if (isAllTrue.length === 4) {
-      setTaskInFilter(true);
+      setStatusFilter(true);
       return;
     }
     // what is this task ?
@@ -42,12 +43,35 @@ const TaskBoard = ({ task, index }) => {
     if (i >= 0) {
       const statusIs = filter.status[i].status;
       if (!statusIs) {
-        setTaskInFilter(false);
+        setStatusFilter(false);
       } else {
-        setTaskInFilter(true);
+        setStatusFilter(true);
       }
     }
   }, [task, filter]);
+
+  useEffect(() => {
+    // check if all is true
+    const isAllTrue = filter.time.filter((item) => item.status === false);
+    if (isAllTrue.length === 4) {
+      setTimeFilter(true);
+      return;
+    }
+
+    const thisTaskName = task.time;
+    console.log(filter.time);
+    // is this task.time status true in filter.time?
+
+    const i = filter.time.findIndex((item) => item.name === thisTaskName);
+    if (i >= 0) {
+      const statusIs = filter.time[i].status;
+      if (!statusIs) {
+        setTimeFilter(false);
+      } else {
+        setTimeFilter(true);
+      }
+    }
+  }, [filter]);
 
   useEffect(() => {
     // AUTO UPDATE TASKS
@@ -105,56 +129,60 @@ const TaskBoard = ({ task, index }) => {
         };
         return (
           <>
-            {taskInfilter && (
-              <div
-                className="task"
-                {...provided.draggableProps}
-                ref={provided.innerRef}
-                style={style}
-              >
-                <div className="task__drag" {...provided.dragHandleProps}>
-                  <FontAwesomeIcon icon={faGripLinesVertical} />
-                </div>
-                <div className="task__header">
-                  <div className="task__taskName">
-                    <p>{task.content}</p>
-                  </div>
+            {statusFilter && (
+              <>
+                {timeFilter && (
                   <div
-                    className="task__expand"
-                    onClick={() => setShowLargeTask(!showLargeTask)}
+                    className="task"
+                    {...provided.draggableProps}
+                    ref={provided.innerRef}
+                    style={style}
                   >
-                    <FontAwesomeIcon icon={faExpandAlt} />
-                  </div>
-                  {msgs > 0 && (
-                    <div className="task__comments">
-                      <FontAwesomeIcon icon={faCommentAlt} />
-                      <p>{msgs}</p>
+                    <div className="task__drag" {...provided.dragHandleProps}>
+                      <FontAwesomeIcon icon={faGripLinesVertical} />
                     </div>
-                  )}
-                </div>
-                <div className="task__modules">
-                  {activeModules?.map((module) => {
-                    return (
-                      <LoadModule
-                        module={module}
-                        key={module.name}
-                        task={task}
-                        style="box"
-                      />
-                    );
-                  })}
-                </div>
-                <AnimatePresence>
-                  {showLargeTask && (
-                    <BoxRight
-                      setLayer={setShowLargeTask}
-                      setLayer={setShowLargeTask}
-                    >
-                      <LargeTask task={task} msgs={msgs} />
-                    </BoxRight>
-                  )}
-                </AnimatePresence>
-              </div>
+                    <div className="task__header">
+                      <div className="task__taskName">
+                        <p>{task.content}</p>
+                      </div>
+                      <div
+                        className="task__expand"
+                        onClick={() => setShowLargeTask(!showLargeTask)}
+                      >
+                        <FontAwesomeIcon icon={faExpandAlt} />
+                      </div>
+                      {msgs > 0 && (
+                        <div className="task__comments">
+                          <FontAwesomeIcon icon={faCommentAlt} />
+                          <p>{msgs}</p>
+                        </div>
+                      )}
+                    </div>
+                    <div className="task__modules">
+                      {activeModules?.map((module) => {
+                        return (
+                          <LoadModule
+                            module={module}
+                            key={module.name}
+                            task={task}
+                            style="box"
+                          />
+                        );
+                      })}
+                    </div>
+                    <AnimatePresence>
+                      {showLargeTask && (
+                        <BoxRight
+                          setLayer={setShowLargeTask}
+                          setLayer={setShowLargeTask}
+                        >
+                          <LargeTask task={task} msgs={msgs} />
+                        </BoxRight>
+                      )}
+                    </AnimatePresence>
+                  </div>
+                )}
+              </>
             )}
           </>
         );

@@ -1,6 +1,8 @@
 @import "../../theme.styles.scss";
 .filter {
   margin-left: 20px;
+  display: flex;
+  align-items: center;
 }
 .filter__priority {
   display: flex;
@@ -17,4 +19,7 @@
   background: $body;
   padding: 11px 10px;
   border-radius: 8px;
+}
+.filter__time {
+  margin-left: 10px;
 }

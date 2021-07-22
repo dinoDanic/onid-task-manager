@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 
-import { toggleUrgent } from "../../../redux/filter/filter.actions";
+import { toggleStatus } from "../../../redux/filter/filter.actions";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faFire } from "@fortawesome/free-solid-svg-icons";
@@ -17,7 +17,7 @@ const FirePriority = ({ priority }) => {
     <div className="firePriority">
       <div
         className={`firePriority-item filter__${name}`}
-        onClick={() => dispatch(toggleUrgent(name))}
+        onClick={() => dispatch(toggleStatus(name))}
       >
         <Tooltip text={name} />
         <FontAwesomeIcon

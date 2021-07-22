@@ -13,6 +13,16 @@ const Deadline = ({ task }) => {
   const stationId = useSelector((state) => state.history.stationId);
   const [date, setDate] = useState();
 
+  useMemo(() => {
+    if (!task);
+    if (task.deadline === null) return;
+    let d = task.deadline.toDate();
+    let day = d.getDate();
+    let month = d.getMonth();
+    let year = d.getFullYear();
+    setDate(`${day}.${month + 1}.`);
+  }, [task]);
+
   const handleDate = (e) => {
     let dd = new Date(e.target.value);
 
@@ -23,15 +33,6 @@ const Deadline = ({ task }) => {
     setDate(`${day}.${month + 1}.${year}`);
     setDeadlineDate(spaceId, stationId, dd, task.id);
   };
-  useMemo(() => {
-    if (!task);
-    if (task.deadline === null) return;
-    let d = task.deadline.toDate();
-    let day = d.getDate();
-    let month = d.getMonth();
-    let year = d.getFullYear();
-    setDate(`${day}.${month + 1}.`);
-  }, [task]);
 
   return (
     <div className="deadline">

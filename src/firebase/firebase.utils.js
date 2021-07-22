@@ -203,6 +203,7 @@ export const createNewTask = async (
       assign: null,
       created: new Date(),
       deadline: null,
+      time: "",
       fromSpaceId: spaceId,
       fromStationId: stationId,
       message: [],
@@ -678,6 +679,42 @@ export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
       task = {
         ...task,
         deadline: date,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
+};
+export const setTimeTask = (spaceId, stationId, time, taskId) => {
+  let allTasks = [];
+  let task = [];
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        time: time,
       };
     })
     .then(() => {

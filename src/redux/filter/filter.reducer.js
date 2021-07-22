@@ -7,18 +7,30 @@ const INITIAL_STATE = {
     { name: "normal", status: false },
     { name: "low", status: false },
   ],
+  time: [
+    { name: 0, status: false },
+    { name: 1, status: false },
+    { name: 7, status: false },
+    { name: 30, status: false },
+    // PRESELI IZ TEKST  U DANE. 1. UPDEJTAJ DA SALJE DOBRO U DB.
+  ],
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FilterType.SET_FILTER_NULL:
       return {};
-    case FilterType.TOGGLE_URGENT:
+    case FilterType.TOGGLE_STATUS:
       const i = state.status.findIndex((item) => item.name === action.payload);
       const currentState = state.status[i].status;
-      console.log(currentState);
       state.status[i].status = !currentState;
-      console.log(state);
+      return {
+        ...state,
+      };
+    case FilterType.TOGGLE_TIME:
+      const iT = state.time.findIndex((item) => item.name === action.payload);
+      const currentStateTime = state.time[iT].status;
+      state.time[iT].status = !currentStateTime;
       return {
         ...state,
       };

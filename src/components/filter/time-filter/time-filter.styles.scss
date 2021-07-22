@@ -1,0 +1,22 @@
+@import "../../../theme.styles.scss";
+.timeFilter {
+  display: flex;
+  background: $body;
+  border-radius: 10px;
+}
+.timeFilter-item {
+  padding: 10px;
+  border-right: 1px solid $bodyGray;
+  cursor: pointer;
+  &:last-child {
+    border-right: none;
+  }
+  p {
+    opacity: 0.5;
+  }
+  &:hover {
+    p {
+      opacity: 1;
+    }
+  }
+}

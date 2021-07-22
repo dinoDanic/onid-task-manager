@@ -1,14 +1,14 @@
 .firePriority {
-}
-.firePriority-item {
-  position: relative;
   margin-right: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
   &:last-child {
     margin-right: 0;
   }
+}
+.firePriority-item {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   &:hover {
     .tooltip {
       opacity: 1;
