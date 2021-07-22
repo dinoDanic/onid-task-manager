@@ -31,14 +31,16 @@ function App() {
         const { uid } = user;
         const userRef = await db.collection("users").doc(uid).get();
         const userData = userRef.data();
+        console.log(userData);
         if (userData) {
-          // ima usera samo dispetchaj
+          console.log("got user in db, only dispatch");
           dispatch(setCurrentUser(userData));
           if (signInUrl === "signin") {
             history.push("/");
           }
         }
         if (!userData) {
+          console.log("no user in db");
           if (user.displayName === null) {
             return;
           } else {
@@ -56,6 +58,7 @@ function App() {
           }
         }
       } else {
+        console.log("no user");
         history.push("/signin");
         dispatch(signOut());
         dispatch(logOut());

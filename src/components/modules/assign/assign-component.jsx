@@ -29,6 +29,7 @@ const Assign = ({ task }) => {
   const [allMembers, setAllMembers] = useState([]);
 
   useMemo(() => {
+    if (!users) return;
     if (spaceData) {
       const { members } = spaceData;
       let list = [];
@@ -41,6 +42,7 @@ const Assign = ({ task }) => {
   }, [spaceData, users]);
 
   useMemo(() => {
+    if (!users) return;
     const { assign } = task;
     const getAssignUser = users.filter((item) => item.uid === assign);
     setAssignedUser(getAssignUser[0]);

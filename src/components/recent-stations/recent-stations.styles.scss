@@ -12,3 +12,17 @@
     }
   }
 }
+
+.recentStations__noStations {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  height: 85px;
+}
+.recentStations__noBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+.recentStations__msg {
+}

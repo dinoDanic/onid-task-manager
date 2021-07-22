@@ -78,27 +78,19 @@ const Members = ({ activeSpaceData }) => {
       <div className="members__button">
         {invite && (
           <>
-            <RetroButton
-              size="small"
-              mode="gray"
-              onClick={() => setInvite(false)}
-            >
+            <RetroButton mode="gray" onClick={() => setInvite(false)}>
               cancel
             </RetroButton>
-            <RetroButton
-              onClick={(e) => handleSubmit(e)}
-              type="submit"
-              size="small"
-            >
+            <RetroButton color="info" onClick={(e) => handleSubmit(e)}>
               Submit
             </RetroButton>
           </>
         )}
         {!invite && (
           <RetroButton
+            color="info"
             onClick={() => setInvite(!invite)}
             type="submit"
-            size="small"
           >
             Invite
           </RetroButton>

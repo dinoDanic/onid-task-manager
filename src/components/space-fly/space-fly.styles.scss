@@ -26,9 +26,13 @@
   &:last-child {
     margin-bottom: 0;
   }
+  button {
+    &:hover {
+      transform: scale(1.05) !important;
+    }
+  }
 }
 .sf__flys {
-  background: rgba(0, 0, 0, 0.2);
   border-radius: 8px;
   display: flex;
   padding: 5px;

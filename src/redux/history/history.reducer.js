@@ -17,6 +17,11 @@ const historyReducer = (state = initialState, action) => {
         ...state,
         stationId: action.payload,
       };
+    case historyActionTypes.SET_IDS_NULL:
+      return {
+        spaceId: null,
+        stationId: null,
+      };
     default:
       return state;
   }

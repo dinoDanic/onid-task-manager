@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import { Link, useHistory, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
+
+import { setIdsNull } from "../../redux/history/history.actions";
 
 import RetroButton from "../retro/button/retro-button.component";
 import CreateSpace from "../create-space/create-space.component";
+import Icon from "./icon/icon.component";
 
 import "./space-fly.styles.scss";
 
@@ -14,12 +18,9 @@ import {
   faCaretLeft,
 } from "@fortawesome/free-solid-svg-icons";
 
-import { AnimatePresence } from "framer-motion";
-
 const SpaceFly = () => {
   const spaceData = useSelector((state) => state.space.spaceData);
-  const spaceId = useSelector((state) => state.history.spaceId);
-  const history = useHistory();
+  const dispatch = useDispatch();
   const location = useLocation();
   const path = location.pathname;
   const [createNewSpace, setCreateNewSpace] = useState(false);
@@ -42,13 +43,7 @@ const SpaceFly = () => {
             return (
               <div className="sf__icon" key={space.spaceId}>
                 <Link to={`/s/${space.spaceId}`}>
-                  <RetroButton
-                    style={{ background: `${space.color}` }}
-                    charAt
-                    size="box"
-                  >
-                    {space.name}
-                  </RetroButton>
+                  <Icon space={space} />
                 </Link>
               </div>
             );
@@ -58,7 +53,7 @@ const SpaceFly = () => {
           <RetroButton size="box" onClick={() => setCreateNewSpace(true)}>
             <FontAwesomeIcon icon={faRocket} />
           </RetroButton>
-          <Link to="/">
+          <Link to="/" onClick={() => dispatch(setIdsNull())}>
             <div className="sf__controls-home">
               <RetroButton size="box">
                 <FontAwesomeIcon icon={faHome} />

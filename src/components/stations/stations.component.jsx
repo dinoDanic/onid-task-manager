@@ -84,14 +84,13 @@ const Stations = () => {
           {createStation ? "Cancel" : "Create new station"}
         </RetroButton>
       </div>
-      <AnimatePresence>
-        {createStation && (
-          <CreateStation
-            setCreateStation={setCreateStation}
-            activeSpaceId={activeSpaceId}
-          />
-        )}
-      </AnimatePresence>
+
+      {createStation && (
+        <CreateStation
+          setCreateStation={setCreateStation}
+          activeSpaceId={activeSpaceId}
+        />
+      )}
     </div>
   );
 };
