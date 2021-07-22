@@ -210,7 +210,7 @@ export const createNewTask = async (
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
-        { name: "Nomal", active: true, color: "rgb(52, 181, 228)" },
+        { name: "Normal", active: true, color: "rgb(52, 181, 228)" },
         { name: "Low", active: false, color: "rgb(5, 206, 145)" },
       ],
     },

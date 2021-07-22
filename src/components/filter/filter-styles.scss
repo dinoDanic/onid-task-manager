@@ -1,44 +1,20 @@
+@import "../../theme.styles.scss";
+.filter {
+  margin-left: 20px;
+}
 .filter__priority {
   display: flex;
   align-items: center;
   .filter__priority-text {
+    svg {
+      color: rgb(52, 181, 228);
+    }
   }
 }
 .filter__priority-fire {
   display: flex;
-}
-.filter__f {
-  position: relative;
-  margin-right: 5px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  cursor: pointer;
-  opacity: 0.3;
-  transition: 0.2s ease;
-  &:last-child {
-    margin-right: 0;
-  }
-  &:hover {
-    .tooltip {
-      opacity: 1;
-    }
-    opacity: 1;
-  }
-  svg {
-    width: 18px !important;
-    height: 18px !important;
-  }
-}
-.filter__urgent {
-  color: rgb(226, 68, 92);
-}
-.filter__high {
-  color: rgb(253, 171, 61);
-}
-.filter__normal {
-  color: rgb(52, 181, 228);
-}
-.filter__low {
-  color: rgb(5, 206, 145);
+  margin-left: 5px;
+  background: $body;
+  padding: 11px 10px;
+  border-radius: 8px;
 }

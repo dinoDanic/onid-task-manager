@@ -2,8 +2,10 @@ import FilterType from "./filter.type";
 
 const INITIAL_STATE = {
   status: [
-    { name: "urgent", status: true },
-    { name: "high", status: true },
+    { name: "urgent", status: false },
+    { name: "high", status: false },
+    { name: "normal", status: false },
+    { name: "low", status: false },
   ],
 };
 

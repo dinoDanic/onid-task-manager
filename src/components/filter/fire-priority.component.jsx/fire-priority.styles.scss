@@ -1,0 +1,39 @@
+.firePriority {
+}
+.firePriority-item {
+  position: relative;
+  margin-right: 5px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  &:last-child {
+    margin-right: 0;
+  }
+  &:hover {
+    .tooltip {
+      opacity: 1;
+    }
+    svg {
+      opacity: 1 !important;
+      transform: scale(1.15) !important;
+    }
+  }
+  svg {
+    width: 18px !important;
+    height: 18px !important;
+    cursor: pointer;
+    transition: 0.2s ease;
+  }
+}
+.filter__urgent {
+  color: rgb(226, 68, 92);
+}
+.filter__high {
+  color: rgb(253, 171, 61);
+}
+.filter__normal {
+  color: rgb(52, 181, 228);
+}
+.filter__low {
+  color: rgb(5, 206, 145);
+}

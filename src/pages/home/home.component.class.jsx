@@ -19,11 +19,11 @@ const Home = () => {
         <WelcomeHome />
       </div>
       <div className="home__content">
-        <SectionBox title="🚀 Your Space" subTitle="Space you are member of">
+        <SectionBox title="Your Space" subTitle="Space you are member of">
           {spaceData.length !== 0 ? <SpaceData /> : <NoSpaceData />}
         </SectionBox>
         <SectionBox
-          title="⭐ Favorite Stations"
+          title="Favorite Stations"
           subTitle="Active Favorite stations"
         >
           <div className="home__favorite">
@@ -32,10 +32,7 @@ const Home = () => {
             </div>
           </div>
         </SectionBox>
-        <SectionBox
-          title="✅ My Tasks"
-          subTitle="Tasks that are Assinged to you"
-        >
+        <SectionBox title="My Tasks" subTitle="Tasks that are Assinged to you">
           <AssignedTasks />
         </SectionBox>
       </div>

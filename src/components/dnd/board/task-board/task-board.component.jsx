@@ -28,17 +28,19 @@ const TaskBoard = ({ task, index }) => {
   const [msgs, setMsgs] = useState(0);
 
   useEffect(() => {
-    console.log(filter);
+    // check if all is true
+    const isAllTrue = filter.status.filter((item) => item.status === false);
+    if (isAllTrue.length === 4) {
+      setTaskInFilter(true);
+      return;
+    }
     // what is this task ?
-    const thisTaskIs = task.priority.filter((item) => item.active !== true);
-    const thisTask = thisTaskIs[0].name.toLowerCase();
-
+    const thisTaskIs = task.priority.filter((item) => item.active === true);
+    const thisTaskName = thisTaskIs[0].name.toLowerCase();
     // ok. is urgent on ?
-    console.log(filter);
-    const i = filter.status.findIndex((item) => item.name === thisTask);
+    const i = filter.status.findIndex((item) => item.name === thisTaskName);
     if (i >= 0) {
       const statusIs = filter.status[i].status;
-      console.log(statusIs);
       if (!statusIs) {
         setTaskInFilter(false);
       } else {
