@@ -124,6 +124,26 @@ const StatusTypeList = ({
                             );
                           })}
                           {provided.placeholder}
+                          {status.open && (
+                            <div className="stl__newTask">
+                              <form
+                                onSubmit={(e) => {
+                                  handleSubmit(e);
+                                }}
+                              >
+                                <div
+                                  onChange={(e) =>
+                                    setNewTaskName(e.target.value)
+                                  }
+                                >
+                                  <RetroInput
+                                    ref={inputRef}
+                                    placeholder="Add Task"
+                                  />
+                                </div>
+                              </form>
+                            </div>
+                          )}
                         </div>
                       )}
                     </div>
@@ -132,19 +152,6 @@ const StatusTypeList = ({
               </Droppable>
             </div>
           </Box>
-          {status.open && (
-            <div className="stl__newTask">
-              <form
-                onSubmit={(e) => {
-                  handleSubmit(e);
-                }}
-              >
-                <div onChange={(e) => setNewTaskName(e.target.value)}>
-                  <RetroInput ref={inputRef} placeholder="Add Task" />
-                </div>
-              </form>
-            </div>
-          )}
         </div>
       )}
     </Draggable>

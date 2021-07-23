@@ -68,7 +68,7 @@ const CreateStation = ({ setCreateStation, activeSpaceId }) => {
   const [modules, setModules] = useState([
     { name: "CreatedBy", active: false, icon: "faUser" },
     { name: "Assign", active: true, icon: "faUserCheck" },
-    { name: "Status", active: true, icon: "faInfoCircle" },
+    { name: "Status", active: false, icon: "faInfoCircle" },
     { name: "CreatedDate", active: false, icon: "faCalendarCheck" },
     { name: "Deadline", active: true, icon: "faCalendarAlt" },
     { name: "DaysLeft", active: true, icon: "faHourglassHalf" },

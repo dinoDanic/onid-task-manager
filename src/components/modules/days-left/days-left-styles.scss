@@ -1,6 +1,17 @@
 .daysLeft {
+  position: relative;
+  display: flex;
+  justify-content: center;
+
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      width: 60px;
+      display: flex;
+      justify-content: center;
+    }
+  }
   svg {
-    margin-left: 5px;
-    opacity: 0.8;
+    opacity: 0.1;
   }
 }

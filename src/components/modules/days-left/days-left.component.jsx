@@ -4,6 +4,11 @@ import { setTimeTask } from "../../../firebase/firebase.utils";
 
 import "./days-left-styles.scss";
 
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
+
+import Tooltip from "../../../components/retro/tooltip/tooltip.component";
+
 const DaysLeft = ({ task }) => {
   console.log("days left component");
   const spaceId = useSelector((state) => state.history.spaceId);
@@ -50,7 +55,7 @@ const DaysLeft = ({ task }) => {
       return;
     }
     if (daysLeft < 0) {
-      setDaysLeftText("-");
+      setDaysLeftText(`${daysLeft} days`);
       setTimeTask(spaceId, stationId, "", task.id);
       return;
     }
@@ -68,6 +73,11 @@ const DaysLeft = ({ task }) => {
 
   return (
     <div className="daysLeft">
+      {daysLeft === null && (
+        <>
+          <Tooltip text="no date" /> <FontAwesomeIcon icon={faCalendarTimes} />
+        </>
+      )}
       <p style={{ color: daysColor }}>{daysLeftText}</p>
     </div>
   );

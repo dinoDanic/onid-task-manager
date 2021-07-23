@@ -30,6 +30,8 @@
     &:focus {
       width: 300px;
       background: white;
+      border: none;
+      transform: scale(1);
     }
   }
   ::placeholder {

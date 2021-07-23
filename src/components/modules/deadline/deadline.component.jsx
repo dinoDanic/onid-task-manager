@@ -30,7 +30,6 @@ const Deadline = ({ task }) => {
     let day = dd.getDate();
     let month = dd.getMonth();
     let year = dd.getFullYear();
-    setDate(`${day}.${month + 1}.${year}`);
     setDeadlineDate(spaceId, stationId, dd, task.id);
   };
 
@@ -38,7 +37,6 @@ const Deadline = ({ task }) => {
     <div className="deadline">
       <input type="date" onChange={(e) => handleDate(e)} />
       {!date && <FontAwesomeIcon icon={faCalendarAlt} />}
-
       <p>{date}</p>
     </div>
   );
