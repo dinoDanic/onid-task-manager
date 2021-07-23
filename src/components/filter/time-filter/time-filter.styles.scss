@@ -1,13 +1,15 @@
 @import "../../../theme.styles.scss";
 .timeFilter {
   display: flex;
-  background: $body;
   border-radius: 10px;
+  overflow: hidden;
 }
 .timeFilter-item {
   padding: 10px;
   border-right: 1px solid $bodyGray;
   cursor: pointer;
+  transform: 0.2s ease all;
+  background: $body;
   &:last-child {
     border-right: none;
   }
@@ -18,5 +20,12 @@
     p {
       opacity: 1;
     }
+  }
+}
+.timeFilter__active {
+  background: $info;
+  p {
+    color: white;
+    opacity: 1;
   }
 }

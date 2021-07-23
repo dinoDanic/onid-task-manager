@@ -51,25 +51,30 @@ const TaskBoard = ({ task, index }) => {
   }, [task, filter]);
 
   useEffect(() => {
-    // check if all is true
-    const isAllTrue = filter.time.filter((item) => item.status === false);
-    if (isAllTrue.length === 4) {
+    const { time } = filter;
+    /*     console.log("task time", task.time); */
+    /*  console.log("filter time", time); */
+    if (time === null) {
       setTimeFilter(true);
       return;
     }
-
-    const thisTaskName = task.time;
-    console.log(filter.time);
-    // is this task.time status true in filter.time?
-
-    const i = filter.time.findIndex((item) => item.name === thisTaskName);
-    if (i >= 0) {
-      const statusIs = filter.time[i].status;
-      if (!statusIs) {
-        setTimeFilter(false);
-      } else {
-        setTimeFilter(true);
-      }
+    if (time === 0 && task.time === 0) {
+      setTimeFilter(true);
+      return;
+    }
+    if (time === 1 && task.time <= 1) {
+      setTimeFilter(true);
+      return;
+    }
+    if (time === 7 && task.time <= 7) {
+      setTimeFilter(true);
+      return;
+    }
+    if (time === 30 && task.time <= 30) {
+      setTimeFilter(true);
+      return;
+    } else {
+      setTimeFilter(false);
     }
   }, [filter]);
 

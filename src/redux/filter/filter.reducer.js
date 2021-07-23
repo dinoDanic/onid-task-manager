@@ -7,13 +7,7 @@ const INITIAL_STATE = {
     { name: "normal", status: false },
     { name: "low", status: false },
   ],
-  time: [
-    { name: 0, status: false },
-    { name: 1, status: false },
-    { name: 7, status: false },
-    { name: 30, status: false },
-    // PRESELI IZ TEKST  U DANE. 1. UPDEJTAJ DA SALJE DOBRO U DB.
-  ],
+  time: null,
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
@@ -28,11 +22,15 @@ const filterReducer = (state = INITIAL_STATE, action) => {
         ...state,
       };
     case FilterType.TOGGLE_TIME:
-      const iT = state.time.findIndex((item) => item.name === action.payload);
-      const currentStateTime = state.time[iT].status;
-      state.time[iT].status = !currentStateTime;
+      let newTime = null;
+      if (state.time === action.payload) {
+        newTime = null;
+      } else {
+        newTime = action.payload;
+      }
       return {
         ...state,
+        time: newTime,
       };
     default:
       return state;
