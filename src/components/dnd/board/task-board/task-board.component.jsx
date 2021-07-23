@@ -52,8 +52,8 @@ const TaskBoard = ({ task, index }) => {
 
   useEffect(() => {
     const { time } = filter;
-    /*     console.log("task time", task.time); */
-    /*  console.log("filter time", time); */
+    console.log("task time", task.time);
+    console.log("filter time", time);
     if (time === null) {
       setTimeFilter(true);
       return;
@@ -76,7 +76,7 @@ const TaskBoard = ({ task, index }) => {
     } else {
       setTimeFilter(false);
     }
-  }, [filter]);
+  }, [filter, task]);
 
   useEffect(() => {
     // AUTO UPDATE TASKS

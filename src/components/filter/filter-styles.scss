@@ -8,6 +8,11 @@
   display: flex;
   align-items: center;
   .filter__priority-text {
+    position: relative;
+    cursor: pointer;
+    &:hover {
+      transform: scale(1.1);
+    }
     svg {
       color: rgb(52, 181, 228);
     }
@@ -17,9 +22,8 @@
   display: flex;
   margin-left: 5px;
   background: $body;
-  padding: 11px 10px;
   border-radius: 8px;
 }
 .filter__time {
-  margin-left: 10px;
+  margin-left: 5px;
 }

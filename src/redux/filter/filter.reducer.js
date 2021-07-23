@@ -13,7 +13,15 @@ const INITIAL_STATE = {
 const filterReducer = (state = INITIAL_STATE, action) => {
   switch (action.type) {
     case FilterType.SET_FILTER_NULL:
-      return {};
+      return {
+        status: [
+          { name: "urgent", status: false },
+          { name: "high", status: false },
+          { name: "normal", status: false },
+          { name: "low", status: false },
+        ],
+        time: null,
+      };
     case FilterType.TOGGLE_STATUS:
       const i = state.status.findIndex((item) => item.name === action.payload);
       const currentState = state.status[i].status;

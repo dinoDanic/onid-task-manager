@@ -1,5 +1,7 @@
 import React from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setFilterNull } from "../../redux/filter/filter.actions";
 
 import FirePriority from "./fire-priority.component.jsx/fire-priority.component";
 import TimeFilter from "./time-filter/time-filter.component";
@@ -11,11 +13,15 @@ import { faFilter } from "@fortawesome/free-solid-svg-icons";
 
 const Filter = () => {
   const filter = useSelector((state) => state.filter);
+  const dispatch = useDispatch();
 
   return (
     <div className="filter">
       <div className="filter__priority">
-        <div className="filter__priority-text">
+        <div
+          className="filter__priority-text"
+          onClick={() => dispatch(setFilterNull())}
+        >
           <FontAwesomeIcon icon={faFilter} />
         </div>
         <div className="filter__priority-fire">

@@ -14,18 +14,20 @@ const FirePriority = ({ priority }) => {
   const { name, status } = priority;
   const dispatch = useDispatch();
   return (
-    <div className="firePriority">
-      <div
-        className={`firePriority-item filter__${name}`}
-        onClick={() => dispatch(toggleStatus(name))}
-      >
+    <div
+      onClick={() => dispatch(toggleStatus(name))}
+      className={`firePriority ${status && "firePriority__active"}`}
+    >
+      <div className={`firePriority-item filter__${name}`}>
         <Tooltip text={name} />
         <FontAwesomeIcon
           icon={faFire}
-          style={{
-            opacity: status ? 1 : 0.5,
-            transform: status ? "scale(1.15)" : "scale(1)",
-          }}
+          style={
+            {
+              /*  opacity: status ? 1 : 0.5,
+            transform: status ? "scale(1.15)" : "scale(1)", */
+            }
+          }
         />
       </div>
     </div>

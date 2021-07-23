@@ -1,26 +1,41 @@
+@import "../../../theme.styles.scss";
 .firePriority {
-  margin-right: 5px;
+  background: $body;
+  border-right: 1px solid $bodyGray;
+  height: 40px;
+  padding: 0 15px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  &:hover {
+    .tooltip {
+      opacity: 1;
+    }
+  }
+  &:first-child {
+    border-radius: 10px 0 0 10px;
+  }
   &:last-child {
     margin-right: 0;
+    border-right: 0;
+    border-radius: 0 10px 10px 0;
   }
+}
+.firePriority__active {
+  background: rgba(0, 0, 0, 0.08);
+
+  /*   svg {
+    color: white !important;
+  } */
 }
 .firePriority-item {
   position: relative;
   display: flex;
   justify-content: center;
   align-items: center;
-  &:hover {
-    .tooltip {
-      opacity: 1;
-    }
-    svg {
-      opacity: 1 !important;
-      transform: scale(1.15) !important;
-    }
-  }
+
   svg {
-    width: 18px !important;
-    height: 18px !important;
     cursor: pointer;
     transition: 0.2s ease;
   }

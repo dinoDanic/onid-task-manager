@@ -5,7 +5,11 @@
   overflow: hidden;
 }
 .timeFilter-item {
-  padding: 10px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 10px;
   border-right: 1px solid $bodyGray;
   cursor: pointer;
   transform: 0.2s ease all;
