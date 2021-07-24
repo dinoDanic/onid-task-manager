@@ -1,6 +1,8 @@
 import React, { useState, useMemo } from "react";
 import { convertDate } from "../../../firebase/firebase.utils";
 
+import Tooltip from "../../retro/tooltip/tooltip.component";
+
 import "./created-date.styles.scss";
 
 const CreatedDate = ({ task }) => {
@@ -13,6 +15,7 @@ const CreatedDate = ({ task }) => {
 
   return (
     <div className="createDate">
+      <Tooltip text="Created date" />
       <p>{date}</p>
     </div>
   );

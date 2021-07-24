@@ -7,6 +7,7 @@ import "./status.styles.scss";
 import { AnimatePresence } from "framer-motion";
 
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
+import Tooltip from "../../retro/tooltip/tooltip.component";
 
 const Status = ({ task }) => {
   const statusType = useSelector((state) => state.space.statusType);
@@ -27,6 +28,7 @@ const Status = ({ task }) => {
   return (
     <div className="status" onClick={() => setShowStatusType(!showStatusType)}>
       <div className="status__show">
+        <Tooltip text="Change status" />
         <p style={{ color: currentStatusType.fontColor }}>
           {currentStatusType?.name}
         </p>

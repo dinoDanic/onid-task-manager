@@ -31,3 +31,15 @@
     background: rgb(235, 235, 235);
   }
 }
+
+.status__show {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      width: 95px;
+    }
+  }
+}

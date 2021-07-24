@@ -1,11 +1,18 @@
 .createDate {
   display: flex;
   align-items: center;
+  justify-content: center;
+  position: relative;
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      width: 90px;
+    }
+  }
   p {
     color: gray;
   }
   svg {
     opacity: 0.2;
-    margin-right: 5px;
   }
 }

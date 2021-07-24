@@ -2,6 +2,7 @@ import React, { useState, useMemo } from "react";
 
 import { useSelector } from "react-redux";
 import Avatar from "../../retro/avatar/avatar.component";
+import Tooltip from "../../retro/tooltip/tooltip.component";
 
 import "./created-by.styles.scss";
 
@@ -19,7 +20,7 @@ const CreatedBy = ({ task }) => {
   return (
     <div className="createdBy">
       <Avatar src={user?.imageUrl} />
-      <p className="cb__nameHover">{user ? user.userName : ""}</p>
+      <Tooltip text={`Created by ${user.userName}`} />
     </div>
   );
 };
