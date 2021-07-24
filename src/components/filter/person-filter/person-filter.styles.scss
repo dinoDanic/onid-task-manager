@@ -1,0 +1,58 @@
+@import "../../../theme.styles.scss";
+.personFilter {
+  background: $body;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  border-radius: 10px;
+  padding: 10px;
+  margin-left: 10px;
+  &:hover {
+    .personFilter__select {
+      p {
+        opacity: 1;
+      }
+    }
+  }
+}
+.personFilter__select {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  position: relative;
+  cursor: pointer;
+  p {
+    opacity: 0.5;
+  }
+}
+.personFilter__pop {
+  position: absolute;
+  .retroBox {
+    padding: 10px;
+    width: 120px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    margin-left: -10px;
+  }
+}
+.personFilter__member {
+  display: flex;
+  align-items: center;
+  margin-bottom: 5px;
+  cursor: pointer;
+  padding: 5px;
+  border-radius: 10px;
+  &:last-child {
+    margin-bottom: 0;
+  }
+  &:hover {
+    background: $body;
+  }
+  .avatar {
+    margin-right: 10px;
+    min-width: 35px !important;
+    height: 35px;
+  }
+}

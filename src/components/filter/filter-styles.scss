@@ -4,26 +4,27 @@
   display: flex;
   align-items: center;
 }
-.filter__priority {
-  display: flex;
-  align-items: center;
-  .filter__priority-text {
-    position: relative;
-    cursor: pointer;
-    &:hover {
-      transform: scale(1.1);
-    }
-    svg {
-      color: rgb(52, 181, 228);
-    }
-  }
-}
+
 .filter__priority-fire {
   display: flex;
   margin-left: 10px;
-  background: $body;
-  border-radius: 8px;
 }
 .filter__time {
   margin-left: 10px;
+}
+
+.filter__text {
+  position: relative;
+  cursor: pointer;
+  &:hover {
+    transform: scale(1.1);
+  }
+  svg {
+    color: rgb(52, 181, 228);
+  }
+}
+
+.filter__types {
+  display: flex;
+  max-height: 40px;
 }

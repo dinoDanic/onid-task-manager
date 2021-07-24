@@ -18,7 +18,7 @@ import LargeTask from "../../../large-task/large-task.component";
 
 import { updateUser, db } from "../../../../firebase/firebase.utils";
 
-const TaskBoard = ({ task, index }) => {
+const TaskBoard = ({ task, index, status }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
   const users = useSelector((state) => state.user.users);
   const filter = useSelector((state) => state.filter);
@@ -79,7 +79,6 @@ const TaskBoard = ({ task, index }) => {
   }, [filter, task]);
 
   useEffect(() => {
-    console.log("auto update tasks");
     // AUTO UPDATE TASKS
     if (!users) return;
     let getUser = users.filter((item) => item.uid === task.assign);
@@ -129,9 +128,11 @@ const TaskBoard = ({ task, index }) => {
 
   return (
     <Draggable draggableId={task.id} index={index}>
-      {(provided) => {
+      {(provided, snapshot) => {
         const style = {
           ...provided.draggableProps.style,
+          opacity: status.open ? "1" : "0",
+          PointerEvent: "none",
         };
         return (
           <>

@@ -111,41 +111,38 @@ const StatusTypeBoard = ({
                   };
                   return (
                     <div ref={provided.innerRef} {...provided.droppableProps}>
-                      {status.open && (
-                        <div className="st__taskList" style={style}>
-                          {tasks?.map((task, index) => {
-                            if (task === undefined) return false;
-                            return (
-                              <TaskBoard
-                                key={task.id}
-                                task={task}
-                                index={index}
-                              />
-                            );
-                          })}
-                          {provided.placeholder}
-                          <div className="st__newTask st__newTask-inside">
-                            {status.open && (
-                              <form
-                                onSubmit={(e) => {
-                                  handleSubmit(e);
-                                }}
+                      <div className="st__taskList" style={style}>
+                        {tasks?.map((task, index) => {
+                          if (task === undefined) return false;
+                          return (
+                            <TaskBoard
+                              key={task.id}
+                              task={task}
+                              index={index}
+                              status={status}
+                            />
+                          );
+                        })}
+                        {provided.placeholder}
+                        <div className="st__newTask st__newTask-inside">
+                          {status.open && (
+                            <form
+                              onSubmit={(e) => {
+                                handleSubmit(e);
+                              }}
+                            >
+                              <div
+                                onChange={(e) => setNewTaskName(e.target.value)}
                               >
-                                <div
-                                  onChange={(e) =>
-                                    setNewTaskName(e.target.value)
-                                  }
-                                >
-                                  <RetroInput
-                                    ref={inputRef}
-                                    placeholder="Add Task"
-                                  />
-                                </div>
-                              </form>
-                            )}
-                          </div>
+                                <RetroInput
+                                  ref={inputRef}
+                                  placeholder="Add Task"
+                                />
+                              </div>
+                            </form>
+                          )}
                         </div>
-                      )}
+                      </div>
                     </div>
                   );
                 }}

@@ -1,5 +1,5 @@
 import React, { useMemo, useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
 import { setTimeZone } from "../../../redux/filter/filter.actions";
 
@@ -11,7 +11,6 @@ import { faCalendarTimes } from "@fortawesome/free-solid-svg-icons";
 import Tooltip from "../../../components/retro/tooltip/tooltip.component";
 
 const DaysLeft = ({ task }) => {
-  console.log("days left component");
   const [daysLeft, setDaysLeft] = useState(null);
   const [daysLeftText, setDaysLeftText] = useState("");
   const [daysColor, setDaysColor] = useState("gray");
