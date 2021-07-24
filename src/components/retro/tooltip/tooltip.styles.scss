@@ -4,8 +4,21 @@
   color: white;
   padding: 3px 6px;
   font-size: 12px;
-  top: -27px;
+  top: -30px;
   border-radius: 8px;
   opacity: 0;
   pointer-events: none;
+  display: flex;
+  justify-content: center;
+}
+
+.tooltip__arrow {
+  position: absolute;
+  bottom: -11px;
+  svg {
+    color: #666;
+    opacity: 1 !important;
+    width: 17px !important;
+    height: 17px !important;
+  }
 }

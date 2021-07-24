@@ -117,7 +117,7 @@ const createNewSpace = async (name, currentUser, color, setLayer) => {
       admin: uid,
       color: color,
       members: firebase.firestore.FieldValue.arrayUnion(uid),
-      created: new Date(),
+      created: firebase.firestore.FieldValue.serverTimestamp(),
       description: "Add description",
     })
     .then((data) => {
@@ -202,8 +202,8 @@ export const createNewTask = async (
       createdBy: userId,
       assign: null,
       created: new Date(),
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
       deadline: null,
-      time: "",
       fromSpaceId: spaceId,
       fromStationId: stationId,
       message: [],
@@ -695,7 +695,7 @@ export const setDeadlineDate = (spaceId, stationId, date, taskId) => {
       );
     });
 };
-export const setTimeTask = (spaceId, stationId, time, taskId) => {
+export const setTimeTask = async (spaceId, stationId, time, taskId) => {
   let allTasks = [];
   let task = [];
 
@@ -707,7 +707,7 @@ export const setTimeTask = (spaceId, stationId, time, taskId) => {
     .collection("tasks")
     .doc("tasks");
 
-  tasksRef
+  await tasksRef
     .get()
     .then((taskData) => {
       allTasks = taskData.data().tasks;

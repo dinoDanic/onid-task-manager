@@ -63,7 +63,7 @@ function CreateSpace({ setLayer }) {
           </div>
           <div className="cs__spaceName">
             <div onChange={(e) => setSpaceName(e.target.value)}>
-              <RetroInput placeholder="Space Name" />
+              <RetroInput placeholder="Space Name (private, work, ect.. )" />
             </div>
           </div>
 

@@ -4,6 +4,7 @@ import { useSelector } from "react-redux";
 import "./priority.styles.scss";
 
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
+import Tooltip from "../../retro/tooltip/tooltip.component";
 
 import { setPriority } from "../../../firebase/firebase.utils";
 
@@ -33,6 +34,7 @@ const Priority = ({ task }) => {
             className="priority__current"
             onClick={() => setShowPriority(!showPriority)}
           >
+            <Tooltip text="Set priority" />
             <FontAwesomeIcon
               icon={faFire}
               style={{ color: currentPriority.color }}

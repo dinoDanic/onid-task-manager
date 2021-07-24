@@ -7,8 +7,16 @@
 .priority__current {
   display: flex;
   align-items: center;
+  position: relative;
+  justify-content: center;
   svg {
     margin-right: 5px;
+  }
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      width: 80px;
+    }
   }
 }
 .priority__show {

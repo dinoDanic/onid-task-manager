@@ -15,6 +15,7 @@ import {
 
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
+import Tooltip from "../../retro/tooltip/tooltip.component";
 
 import "./assign-styles.scss";
 
@@ -82,8 +83,10 @@ const Assign = ({ task }) => {
         onClick={() => setShowMembers(!showMembers)}
       >
         <Avatar src={assignedUser ? assignedUser.imageUrl : ""} />
-        {assignedUser && (
+        {assignedUser ? (
           <p className="assign__nameHover">{assignedUser.userName}</p>
+        ) : (
+          <Tooltip text="Assign member" />
         )}
       </div>
       <AnimatePresence>

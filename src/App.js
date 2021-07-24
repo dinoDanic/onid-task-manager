@@ -31,7 +31,6 @@ function App() {
         const { uid } = user;
         const userRef = await db.collection("users").doc(uid).get();
         const userData = userRef.data();
-        console.log(userData);
         if (userData) {
           console.log("got user in db, only dispatch");
           dispatch(setCurrentUser(userData));

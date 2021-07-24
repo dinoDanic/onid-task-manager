@@ -3,6 +3,8 @@ import { useSelector } from "react-redux";
 
 import { setDeadlineDate } from "../../../firebase/firebase.utils";
 
+import Tooltip from "../../retro/tooltip/tooltip.component";
+
 import "./deadline.styles.scss";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -19,23 +21,18 @@ const Deadline = ({ task }) => {
     let d = task.deadline.toDate();
     let day = d.getDate();
     let month = d.getMonth();
-    let year = d.getFullYear();
     setDate(`${day}.${month + 1}.`);
   }, [task]);
 
   const handleDate = (e) => {
     let dd = new Date(e.target.value);
-
-    // set date order
-    let day = dd.getDate();
-    let month = dd.getMonth();
-    let year = dd.getFullYear();
     setDeadlineDate(spaceId, stationId, dd, task.id);
   };
 
   return (
     <div className="deadline">
       <input type="date" onChange={(e) => handleDate(e)} />
+      <Tooltip text="Set deadline date" />
       {!date && <FontAwesomeIcon icon={faCalendarAlt} />}
       <p>{date}</p>
     </div>

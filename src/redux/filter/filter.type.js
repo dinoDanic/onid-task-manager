@@ -2,6 +2,7 @@ const FilterType = {
   SET_FILTER_NULL: "SET_FILTER_NULL",
   TOGGLE_STATUS: "TOGGLE_STATUS",
   TOGGLE_TIME: "TOGGLE_TIME",
+  SET_TIME_ZONE: "SET_TIME_ZONE",
 };
 
 export default FilterType;

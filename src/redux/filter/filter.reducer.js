@@ -8,6 +8,7 @@ const INITIAL_STATE = {
     { name: "low", status: false },
   ],
   time: null,
+  timeZone: {},
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
@@ -21,6 +22,9 @@ const filterReducer = (state = INITIAL_STATE, action) => {
           { name: "low", status: false },
         ],
         time: null,
+        timeZone: {
+          ...state.timeZone,
+        },
       };
     case FilterType.TOGGLE_STATUS:
       const i = state.status.findIndex((item) => item.name === action.payload);
@@ -39,6 +43,17 @@ const filterReducer = (state = INITIAL_STATE, action) => {
       return {
         ...state,
         time: newTime,
+      };
+    case FilterType.SET_TIME_ZONE:
+      const { taskId, zone } = action.payload;
+      return {
+        ...state,
+        timeZone: {
+          ...state.timeZone,
+          [taskId]: {
+            zone: zone,
+          },
+        },
       };
     default:
       return state;

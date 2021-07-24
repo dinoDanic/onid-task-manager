@@ -16,7 +16,6 @@ const WelcomeHome = () => {
 
   useEffect(() => {
     let h = time.getHours();
-    console.log(h);
 
     if (h >= 0 && h <= 12) {
       setTimeOfDay("Good morning");

@@ -13,3 +13,8 @@ export const toggleTime = (state) => ({
   type: FilterType.TOGGLE_TIME,
   payload: state,
 });
+
+export const setTimeZone = (state) => ({
+  type: FilterType.SET_TIME_ZONE,
+  payload: state,
+});

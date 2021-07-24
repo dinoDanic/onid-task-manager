@@ -52,25 +52,25 @@ const TaskBoard = ({ task, index }) => {
 
   useEffect(() => {
     const { time } = filter;
-    console.log("task time", task.time);
-    console.log("filter time", time);
+    if (!filter.timeZone[task.id]) return;
+    const timeZone = filter.timeZone[task.id].zone;
     if (time === null) {
       setTimeFilter(true);
       return;
     }
-    if (time === 0 && task.time === 0) {
+    if (time === 0 && timeZone === 0) {
       setTimeFilter(true);
       return;
     }
-    if (time === 1 && task.time <= 1) {
+    if (time === 1 && timeZone <= 1) {
       setTimeFilter(true);
       return;
     }
-    if (time === 7 && task.time <= 7) {
+    if (time === 7 && timeZone <= 7) {
       setTimeFilter(true);
       return;
     }
-    if (time === 30 && task.time <= 30) {
+    if (time === 30 && timeZone <= 30) {
       setTimeFilter(true);
       return;
     } else {
@@ -79,6 +79,7 @@ const TaskBoard = ({ task, index }) => {
   }, [filter, task]);
 
   useEffect(() => {
+    console.log("auto update tasks");
     // AUTO UPDATE TASKS
     if (!users) return;
     let getUser = users.filter((item) => item.uid === task.assign);

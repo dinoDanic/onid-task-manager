@@ -1,6 +1,7 @@
-import React, { useMemo, useState, useEffect } from "react";
-import { useSelector } from "react-redux";
-import { setTimeTask } from "../../../firebase/firebase.utils";
+import React, { useMemo, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+
+import { setTimeZone } from "../../../redux/filter/filter.actions";
 
 import "./days-left-styles.scss";
 
@@ -11,14 +12,13 @@ import Tooltip from "../../../components/retro/tooltip/tooltip.component";
 
 const DaysLeft = ({ task }) => {
   console.log("days left component");
-  const spaceId = useSelector((state) => state.history.spaceId);
-  const stationId = useSelector((state) => state.history.stationId);
   const [daysLeft, setDaysLeft] = useState(null);
   const [daysLeftText, setDaysLeftText] = useState("");
   const [daysColor, setDaysColor] = useState("gray");
+  const dispatch = useDispatch();
   const { created, deadline } = task;
 
-  useMemo(() => {
+  useMemo(async () => {
     if (!created) return;
     if (!deadline) return;
 
@@ -38,7 +38,7 @@ const DaysLeft = ({ task }) => {
     // Calculating the no. of days between two dates
     const diffInDays = Math.round(diffInTime / oneDay);
 
-    setDaysLeft(diffInDays + 1);
+    setDaysLeft(diffInDays);
 
     if (daysLeft < 0) setDaysColor("rgb(226, 68, 92)");
     if (daysLeft >= 0) setDaysColor("rgb(52, 181, 228)");
@@ -46,30 +46,35 @@ const DaysLeft = ({ task }) => {
 
     if (daysLeft === 0) {
       setDaysLeftText("today");
-      setTimeTask(spaceId, stationId, 0, task.id);
-      return;
-    }
-    if (daysLeft === 1) {
-      setDaysLeftText(`tomorrow`);
-      setTimeTask(spaceId, stationId, 1, task.id);
+      const state = { taskId: task.id, zone: 0 };
+      dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft < 0) {
       setDaysLeftText(`${daysLeft} days`);
-      setTimeTask(spaceId, stationId, "", task.id);
+      const state = { taskId: task.id, zone: null };
+      dispatch(setTimeZone(state));
+      return;
+    }
+    if (daysLeft === 1) {
+      setDaysLeftText(`tomorrow`);
+      const state = { taskId: task.id, zone: 1 };
+      dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft > 1 && daysLeft < 8) {
       setDaysLeftText(`${daysLeft} days`);
-      setTimeTask(spaceId, stationId, 7, task.id);
+      const state = { taskId: task.id, zone: 7 };
+      dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft > 7) {
       setDaysLeftText(`${daysLeft} days`);
-      setTimeTask(spaceId, stationId, 30, task.id);
+      const state = { taskId: task.id, zone: 30 };
+      dispatch(setTimeZone(state));
       return;
     }
-  }, [task, daysLeft]);
+  }, [daysLeft, task]);
 
   return (
     <div className="daysLeft">

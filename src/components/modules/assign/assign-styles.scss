@@ -1,6 +1,7 @@
 @import "../../../theme.styles.scss";
 .assign {
   position: relative;
+
   .retroBox {
     padding: 5px !important;
     background: white !important;
@@ -22,6 +23,17 @@
   &:hover {
     .assign__nameHover {
       opacity: 1;
+    }
+  }
+}
+.assign__assigned {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  &:hover {
+    .tooltip {
+      opacity: 1;
+      width: 100px;
     }
   }
 }
@@ -54,7 +66,7 @@
 .assign__nameHover {
   position: absolute;
   width: 100px;
-  margin-left: -30px;
+
   text-align: center;
   background: white;
   border-radius: 8px;
