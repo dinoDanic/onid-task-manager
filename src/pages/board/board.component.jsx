@@ -86,6 +86,7 @@ const Board = ({ station }) => {
             },
           },
         };
+        delete newState.tasks[taskId];
 
         setState(newState);
         updateDrag(currentSpaceId, currentStationId, newState);
@@ -94,7 +95,6 @@ const Board = ({ station }) => {
 
         let findUser = users.filter((user) => {
           let tasks = user.assignedTasks.filter((task) => task.id === taskId);
-          console.log(tasks);
           return tasks[0];
         });
 
