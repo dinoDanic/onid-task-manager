@@ -18,3 +18,12 @@ export const setTimeZone = (state) => ({
   type: FilterType.SET_TIME_ZONE,
   payload: state,
 });
+
+export const setUserFilter = (userId) => ({
+  type: FilterType.SET_USER,
+  payload: userId,
+});
+
+export const clearUserFilter = () => ({
+  type: FilterType.CLEAR_USER,
+});

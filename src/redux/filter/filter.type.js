@@ -3,6 +3,8 @@ const FilterType = {
   TOGGLE_STATUS: "TOGGLE_STATUS",
   TOGGLE_TIME: "TOGGLE_TIME",
   SET_TIME_ZONE: "SET_TIME_ZONE",
+  SET_USER: "SET_USER",
+  CLEAR_USER: "CLEAR_USER",
 };
 
 export default FilterType;

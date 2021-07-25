@@ -9,6 +9,7 @@ const INITIAL_STATE = {
   ],
   time: null,
   timeZone: {},
+  user: null,
 };
 
 const filterReducer = (state = INITIAL_STATE, action) => {
@@ -25,6 +26,7 @@ const filterReducer = (state = INITIAL_STATE, action) => {
         timeZone: {
           ...state.timeZone,
         },
+        user: null,
       };
     case FilterType.TOGGLE_STATUS:
       const i = state.status.findIndex((item) => item.name === action.payload);
@@ -54,6 +56,16 @@ const filterReducer = (state = INITIAL_STATE, action) => {
             zone: zone,
           },
         },
+      };
+    case FilterType.SET_USER:
+      return {
+        ...state,
+        user: action.payload,
+      };
+    case FilterType.CLEAR_USER:
+      return {
+        ...state,
+        user: null,
       };
     default:
       return state;

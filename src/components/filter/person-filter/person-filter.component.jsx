@@ -1,17 +1,29 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
-import { db } from "../../../firebase/firebase.utils";
+import { useSelector, useDispatch } from "react-redux";
+import { db, getUserDataWithId } from "../../../firebase/firebase.utils";
+
+import {
+  clearUserFilter,
+  setUserFilter,
+} from "../../../redux/filter/filter.actions";
 
 import Avatar from "../../retro/avatar/avatar.component";
 import BoxLayerLite from "../../retro/box-layer-lite/box-layer-lite.component";
+
+import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import "./person-filter.styles.scss";
 
 const PersonFilter = () => {
   const spaceId = useSelector((state) => state.history.spaceId);
   const stationId = useSelector((state) => state.history.stationId);
+  const currentUser = useSelector((state) => state.user.currentUser);
+  const filter = useSelector((state) => state.filter);
   const [members, setMembers] = useState([]);
   const [showMembers, setShowMembers] = useState(false);
+  const [userData, setUserData] = useState();
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const getMembers = async () => {
@@ -35,24 +47,62 @@ const PersonFilter = () => {
     getMembers();
   }, [spaceId, stationId]);
 
+  useEffect(async () => {
+    if (filter.user) {
+      const data = await getUserDataWithId(filter.user);
+      setUserData(data);
+    } else {
+      setUserData(null);
+    }
+  }, [filter]);
+
+  const handlePersonFilter = () => {
+    dispatch(setUserFilter(currentUser.uid));
+    setShowMembers(false);
+  };
+
+  const handleRemoveUser = () => {
+    dispatch(clearUserFilter());
+    setShowMembers(false);
+  };
+
   return (
     <div className="personFilter">
       <div
         className="personFilter__select"
         onClick={() => setShowMembers(!showMembers)}
       >
-        <Avatar />
-        <p>Select user</p>
+        {userData ? (
+          <div className="personFilter__true">
+            <Avatar src={userData.imageUrl} />
+            <p>{userData.userName}</p>
+          </div>
+        ) : (
+          <div className="personFilter__false">
+            <Avatar />
+            <p>Select user</p>
+          </div>
+        )}
       </div>
       <div className="personFilter__pop">
         {showMembers && (
           <BoxLayerLite setLayer={setShowMembers}>
             {members?.map((member) => (
-              <div className="personFilter__member" key={member.uid}>
+              <div
+                className="personFilter__member"
+                key={member.uid}
+                onClick={() => handlePersonFilter()}
+              >
                 <Avatar src={member.imageUrl} />
                 <p>{member.userName}</p>
               </div>
             ))}
+            <div
+              className="personFilter__remove"
+              onClick={() => handleRemoveUser()}
+            >
+              <FontAwesomeIcon icon={faUserSlash} />
+            </div>
           </BoxLayerLite>
         )}
       </div>
