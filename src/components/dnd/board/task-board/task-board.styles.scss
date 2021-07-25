@@ -47,8 +47,8 @@
   }
 }
 .task__taskName {
-  margin-bottom: 10px;
   font-weight: 500;
+  margin-left: 5px;
 }
 
 .task__expand {
@@ -123,5 +123,22 @@
   }
   .status {
     /*  filter: grayscale(100%); */
+  }
+}
+.task__header {
+  display: flex;
+  align-items: center;
+}
+.task__done {
+  .task__taskName {
+    opacity: 0.2;
+    p {
+      text-decoration: line-through;
+    }
+  }
+  .task__modules {
+    opacity: 0.4;
+    filter: grayscale(100%);
+    pointer-events: none;
   }
 }

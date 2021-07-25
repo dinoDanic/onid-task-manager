@@ -15,6 +15,7 @@ import "./task-board.styles.scss";
 import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
 import BoxRight from "../../../retro/box-right/box-right.component";
 import LargeTask from "../../../large-task/large-task.component";
+import CheckBox from "../../../retro/check-box/check-box.component";
 
 import { updateUser, db } from "../../../../firebase/firebase.utils";
 
@@ -26,6 +27,7 @@ const TaskBoard = ({ task, index, status }) => {
   const [showLargeTask, setShowLargeTask] = useState(false);
   const [statusFilter, setStatusFilter] = useState(true);
   const [timeFilter, setTimeFilter] = useState(true);
+  const [taskClass, setTaskClass] = useState("");
   const [msgs, setMsgs] = useState(0);
 
   useEffect(() => {
@@ -106,6 +108,15 @@ const TaskBoard = ({ task, index, status }) => {
     }
   }, [task]);
 
+  useEffect(() => {
+    const { done } = task;
+    if (done) {
+      setTaskClass("task__done");
+    } else {
+      setTaskClass("");
+    }
+  }, [task]);
+
   useMemo(() => {
     const { fromSpaceId, fromStationId, id } = task;
     if (msgs === 0) {
@@ -140,7 +151,7 @@ const TaskBoard = ({ task, index, status }) => {
               <>
                 {timeFilter && (
                   <div
-                    className="task"
+                    className={`task ${taskClass}`}
                     {...provided.draggableProps}
                     ref={provided.innerRef}
                     style={style}
@@ -149,6 +160,7 @@ const TaskBoard = ({ task, index, status }) => {
                       <FontAwesomeIcon icon={faGripLinesVertical} />
                     </div>
                     <div className="task__header">
+                      <CheckBox task={task} />
                       <div className="task__taskName">
                         <p>{task.content}</p>
                       </div>

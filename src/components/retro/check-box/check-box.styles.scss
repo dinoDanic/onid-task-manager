@@ -1,0 +1,37 @@
+@import "../../../theme.styles.scss";
+.checkBox {
+  position: relative;
+  width: 14px;
+  height: 14px;
+  .checkBox__item {
+    position: absolute;
+    top: -5px;
+    cursor: pointer;
+    svg {
+      transition: 0.1s ease color;
+    }
+  }
+  .checkBox__false {
+    svg {
+      color: $bodyGray;
+    }
+    &:hover {
+      svg {
+        color: $success;
+      }
+    }
+  }
+  .checkBox__true {
+    svg {
+      color: $bodyGray;
+    }
+    &:hover {
+      svg {
+        color: $bodyGray;
+      }
+    }
+  }
+}
+
+.checkBox__container {
+}

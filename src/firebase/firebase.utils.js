@@ -1080,4 +1080,46 @@ export const setTaskDescription = (
     });
 };
 
+export const toggleCheckBox = async (
+  spaceId,
+  stationId,
+  taskId,
+  currentCheck
+) => {
+  let allTasks = [];
+  let task = [];
+
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      allTasks = taskData.data().tasks;
+      task = taskData.data().tasks[taskId];
+      task = {
+        ...task,
+        done: !currentCheck,
+      };
+    })
+    .then(() => {
+      tasksRef.set(
+        {
+          tasks: {
+            ...allTasks,
+            [taskId]: {
+              ...task,
+            },
+          },
+        },
+        { merge: true }
+      );
+    });
+};
+
 export { db, auth, LoginWithGoogle, loginWithEmailAndPassword, createNewSpace };
