@@ -30,10 +30,10 @@ const Space = () => {
             shots.push(doc.data());
           });
           dispatch(setSpaceData(shots));
-          setTimeout(() => {
-            dispatch(setLoading(false));
-          }, 1000);
         }
+        setTimeout(() => {
+          dispatch(setLoading(false));
+        }, 1000);
       });
   }, [currentUser]);
 

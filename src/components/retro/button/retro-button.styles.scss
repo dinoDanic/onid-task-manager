@@ -73,6 +73,20 @@
     }
   }
 }
+.cancel {
+  background: none;
+  color: rgba(0, 0, 0, 0.2);
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  font-weight: 400;
+  cursor: not-allowed;
+  &:hover {
+    box-shadow: none;
+    transform: scale(1);
+    .children {
+      margin-top: 0px;
+    }
+  }
+}
 .box {
 }
 .charAt {

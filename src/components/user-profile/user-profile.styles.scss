@@ -16,6 +16,7 @@
   display: flex;
 }
 .userProfile__info-avatar {
+  position: relative;
   .avatar {
     width: 100px;
     height: 100px;
@@ -39,7 +40,37 @@
   }
 }
 .userProfile__logout {
+  margin-right: 10px;
+
   svg {
     margin-right: 5px;
   }
+}
+.userProfile__buttons {
+  margin-top: 30px;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.userProfile__info-email {
+  padding: 5px 0px;
+  border: 1px solid #f6f8f9;
+  border-radius: 8px;
+  cursor: not-allowed;
+}
+.userPorfile__setImage {
+  display: flex;
+  align-items: center;
+  .avatar {
+    margin-right: 20px;
+  }
+}
+.userProfile__info-input {
+  position: absolute;
+  background: blue;
+  opacity: 0;
+  top: 0;
+  height: 100px;
+  cursor: pointer;
+  width: 100px;
 }

@@ -32,7 +32,7 @@ const WelcomeHome = () => {
       <h3>
         {timeOfDay}, {name}! <span>👋</span>
       </h3>
-      {assignedTasks.length === 0 && (
+      {assignedTasks?.length === 0 && (
         <p>You have nothing for today, take a nap!</p>
       )}
     </div>

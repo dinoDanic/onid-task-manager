@@ -1,6 +1,7 @@
 import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
+import "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 
 const firebaseConfig = {
@@ -21,44 +22,7 @@ var provider = new firebase.auth.GoogleAuthProvider();
 const auth = firebase.auth();
 export const timestamp = firebase.firestore.Timestamp;
 export const fieldValue = firebase.firestore.FieldValue;
-
-/* auth
-  .createUserWithEmailAndPassword("buko@onid.com", "111111")
-  .then((regUser) => {
-    console.log(regUser.user);
-    db.collection("users").doc(regUser.user.uid).set(
-      {
-        userName: this.state.userName,
-        uid: regUser.user.uid,
-        email: this.state.email,
-        assignedTasks: [],
-        favoriteStations: [],
-        imageUrl:
-          "https://images-wixmp-ed30a86b8c4ca887773594c2.wixmp.com/f/a5900ce8-b6a5-4575-a9c3-dfcaab76d1eb/d4n7jp8-32d848b5-f48c-46ec-acfb-c72595e173b5.gif?token=eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ1cm46YXBwOjdlMGQxODg5ODIyNjQzNzNhNWYwZDQxNWVhMGQyNmUwIiwiaXNzIjoidXJuOmFwcDo3ZTBkMTg4OTgyMjY0MzczYTVmMGQ0MTVlYTBkMjZlMCIsIm9iaiI6W1t7InBhdGgiOiJcL2ZcL2E1OTAwY2U4LWI2YTUtNDU3NS1hOWMzLWRmY2FhYjc2ZDFlYlwvZDRuN2pwOC0zMmQ4NDhiNS1mNDhjLTQ2ZWMtYWNmYi1jNzI1OTVlMTczYjUuZ2lmIn1dXSwiYXVkIjpbInVybjpzZXJ2aWNlOmZpbGUuZG93bmxvYWQiXX0.1TpIeeQ6fo6etC8CKLgIBrjEIiWXz37b81lKZcmiA9c",
-      },
-      { merge: true }
-    );
-  })
-  .catch((error) => {
-    console.log(error.message);
-  });
- */
-/* const demoUser = async () => {
-  const userRef = await db.collection("users").doc("buko").get();
-  if (userRef.exists) {
-    return;
-  } else {
-    let userData = {
-      email: "buko@onid.app",
-      image:
-        "https://i.pinimg.com/originals/61/88/7c/61887ce0f50a0e04475d62039944415c.jpg",
-      uid: "bukYVVqVPcuGdSRMoDuxSTGEUU2Ggp2o",
-      userName: "buko",
-    };
-    createUserInFirebase(userData);
-  }
-};
-demoUser(); */
+export var storage = firebase.storage();
 
 const LoginWithGoogle = () => {
   auth.signInWithPopup(provider).catch((error) => {
