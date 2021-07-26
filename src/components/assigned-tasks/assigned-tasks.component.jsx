@@ -65,7 +65,8 @@ const AssingedTasks = () => {
         if (theTask.assign.includes(assign)) {
           console.log("its ok");
           //but are you a member ?
-          console.log(assign);
+          console.log(theTask);
+
           const getUserData = await db.collection("users").doc(assign).get();
           const userData = getUserData.data();
           if (!userData) return;
@@ -93,6 +94,22 @@ const AssingedTasks = () => {
                 }
               }
             });
+          if (theTask.done === true) {
+            console.log("its not ok, have to delete task", id);
+            if (assign) {
+              const getUserData = await db
+                .collection("users")
+                .doc(assign)
+                .get();
+              const userData = getUserData.data();
+              console.log(userData);
+              userData.assignedTasks = userData.assignedTasks.filter(
+                (task) => task.id !== id
+              );
+              console.log(userData);
+              updateUser(assign, userData);
+            }
+          }
         } else {
           console.log("its not ok, have to delete task", id);
           if (assign) {

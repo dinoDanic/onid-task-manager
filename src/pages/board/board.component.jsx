@@ -161,7 +161,7 @@ const Board = ({ station }) => {
 
   const onDragStart = (result) => {
     if (result.type === "DEFAULT") {
-      setBOpacity(1);
+      setBOpacity(0.5);
     }
   };
 
@@ -216,20 +216,21 @@ const Board = ({ station }) => {
         <Droppable droppableId="delete">
           {(provided, snapshot) => {
             const style = {
-              backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "",
+              /* backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "", */
               borderRadius: "8px",
             };
             return (
               <>
+                {/*  <div className="board__placeholder" style={style}>
+                  {provided.placeholder}
+                </div> */}
                 <div
                   ref={provided.innerRef}
                   {...provided.droppableProps}
                   style={style}
+                  className="board__dragDelete-droppable"
                 >
                   <FontAwesomeIcon icon={faTrashAlt} size="1x" />
-                </div>
-                <div className="board__placeholder" style={style}>
-                  {provided.placeholder}
                 </div>
               </>
             );
