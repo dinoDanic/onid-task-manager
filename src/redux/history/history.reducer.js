@@ -3,6 +3,7 @@ import historyActionTypes from "./history.types";
 const initialState = {
   spaceId: null,
   stationId: null,
+  isLoading: true,
 };
 
 const historyReducer = (state = initialState, action) => {
@@ -21,6 +22,11 @@ const historyReducer = (state = initialState, action) => {
       return {
         spaceId: null,
         stationId: null,
+      };
+    case historyActionTypes.SET_LOADING:
+      return {
+        ...state,
+        isLoading: action.payload,
       };
     default:
       return state;

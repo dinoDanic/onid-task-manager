@@ -13,3 +13,8 @@ export const setStationId = (stationId) => ({
 export const setIdsNull = () => ({
   type: historyActionTypes.SET_IDS_NULL,
 });
+
+export const setLoading = (state) => ({
+  type: historyActionTypes.SET_LOADING,
+  payload: state,
+});

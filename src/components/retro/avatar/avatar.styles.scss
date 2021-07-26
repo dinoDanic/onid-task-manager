@@ -1,17 +1,23 @@
 .avatar {
   width: 25px;
   height: 25px;
-  border-radius: 8px;
+  border-radius: 100%;
   overflow: hidden;
   display: flex;
   justify-content: center;
   align-items: center;
+  &:hover {
+    img {
+      transform: scale(1.15);
+    }
+  }
   svg {
     width: 60% !important;
     height: 60%;
     color: lightgray;
   }
   img {
+    transition: 0.2s ease transform;
     width: 100%;
     height: 100%;
     object-fit: cover;

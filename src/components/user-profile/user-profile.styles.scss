@@ -1,0 +1,45 @@
+.userProfile {
+  .avatar {
+    width: 36px;
+    height: 36px;
+    cursor: pointer;
+  }
+  .bl__content {
+    width: 40%;
+    max-width: 1200px;
+  }
+}
+.userProfile__heading {
+  margin-bottom: 30px;
+}
+.userProfile__info {
+  display: flex;
+}
+.userProfile__info-avatar {
+  .avatar {
+    width: 100px;
+    height: 100px;
+  }
+}
+.userProfile__info-user {
+  display: flex;
+  margin-left: 30px;
+
+  width: 100%;
+  p {
+    margin-bottom: 5px;
+    margin-left: 10px;
+  }
+}
+.userProfile__info-row {
+  margin-right: 30px;
+  width: 100%;
+  &:last-child {
+    margin-right: 0;
+  }
+}
+.userProfile__logout {
+  svg {
+    margin-right: 5px;
+  }
+}

@@ -2,8 +2,10 @@ import React, { useEffect } from "react";
 import { Route, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { auth, db, registerUserFb } from "./firebase/firebase.utils";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { setCurrentUser, signOut, setUsers } from "./redux/user/user.actions";
+import { setLoading, setLoadingFalse } from "./redux/history/history.actions";
 import { logOut } from "./redux/space/space.actions";
 
 import Space from "./pages/space/space.component.class";
@@ -13,12 +15,13 @@ import Station from "./pages/station/station.component";
 import WelcomePage from "./pages/welcome-page/welcome-page.component";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 import EnterStation from "./pages/enter-station/enter-station.component";
+import LoadingPage from "./components/retro/loading-page/loading-page.component";
 
 import "./app.styles.scss";
-import { AnimatePresence } from "framer-motion";
 
 function App() {
   const user = useSelector((state) => state.user);
+  const isLoading = useSelector((state) => state.history.isLoading);
   const dispatch = useDispatch();
   const history = useHistory();
   const signInUrl = history.location.pathname.split("/")[1];
@@ -61,6 +64,7 @@ function App() {
         history.push("/signin");
         dispatch(signOut());
         dispatch(logOut());
+        dispatch(setLoading(true));
       }
     });
   }, []);
@@ -80,31 +84,34 @@ function App() {
     <div className="app">
       {currentUser && (
         <>
-          <Space />
-          <ProtectedRoute
-            exact
-            path={["/", "/signin"]}
-            component={Home}
-            isAuth={currentUser}
-          />
-          <AnimatePresence>
+          <AnimatePresence>{isLoading && <LoadingPage />}</AnimatePresence>
+          <>
+            <Space />
             <ProtectedRoute
-              path="/s/:id"
-              component={Station}
+              exact
+              path={["/", "/signin"]}
+              component={Home}
               isAuth={currentUser}
             />
-          </AnimatePresence>
-          <ProtectedRoute
-            exact
-            path="/s/:id"
-            component={DockStation}
-            isAuth={currentUser}
-          />
-          <ProtectedRoute
-            path="/s/:id/e/:id"
-            component={EnterStation}
-            isAuth={currentUser}
-          />
+            <AnimatePresence>
+              <ProtectedRoute
+                path="/s/:id"
+                component={Station}
+                isAuth={currentUser}
+              />
+            </AnimatePresence>
+            <ProtectedRoute
+              exact
+              path="/s/:id"
+              component={DockStation}
+              isAuth={currentUser}
+            />
+            <ProtectedRoute
+              path="/s/:id/e/:id"
+              component={EnterStation}
+              isAuth={currentUser}
+            />
+          </>
         </>
       )}
       {!currentUser && <Route path="/signin" component={WelcomePage} />}

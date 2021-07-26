@@ -1,15 +1,17 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { auth, db } from "../../firebase/firebase.utils";
+import { db } from "../../firebase/firebase.utils";
 import { motion } from "framer-motion";
 
 import Avatar from "../../components/retro/avatar/avatar.component";
 import SpaceFly from "../../components/space-fly/space-fly.component";
 
 import { setSpaceData, removeSpaceData } from "../../redux/space/space.actions";
+import { setLoading } from "../../redux/history/history.actions";
 import { setOpen } from "../../redux/user/user.actions";
 
 import "./space.styles.scss";
+import UserProfile from "../../components/user-profile/user-profile.component";
 
 const Space = () => {
   const currentUser = useSelector((state) => state.user.currentUser);
@@ -28,6 +30,9 @@ const Space = () => {
             shots.push(doc.data());
           });
           dispatch(setSpaceData(shots));
+          setTimeout(() => {
+            dispatch(setLoading(false));
+          }, 1000);
         }
       });
   }, [currentUser]);
@@ -46,11 +51,6 @@ const Space = () => {
       });
   }, []);
 
-  function handleLogout() {
-    removeSpaceData();
-    auth.signOut();
-  }
-
   return (
     <motion.div
       className="space"
@@ -59,8 +59,8 @@ const Space = () => {
       <div className="space__fly">
         <SpaceFly />
       </div>
-      <div className="space__user" onClick={() => handleLogout()}>
-        <Avatar src={currentUser.imageUrl} />
+      <div className="space__user">
+        <UserProfile currentUser={currentUser} />
       </div>
     </motion.div>
   );
