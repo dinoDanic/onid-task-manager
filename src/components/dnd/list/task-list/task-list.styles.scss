@@ -1,4 +1,12 @@
 @import "../../../../theme.styles.scss";
+.taskList__logic {
+  position: relative;
+  &:hover {
+    .tl__drag {
+      opacity: 0.2;
+    }
+  }
+}
 .taskList {
   position: relative;
   display: flex;
@@ -20,15 +28,16 @@
       }
     }
   }
-  &:last-child {
-    margin-bottom: 0;
-  }
+
   .tl__task {
     padding-right: 20px;
     height: 40px;
     align-items: center;
     min-width: fit-content;
     display: flex;
+    p {
+      margin-left: 5px;
+    }
   }
   .tl__modules {
     display: flex;
@@ -46,10 +55,24 @@
       width: 100%;
     }
   }
-  .tl__drag {
-    position: absolute;
-    left: -2px;
-    opacity: 0;
-    transition: 0.2s ease;
+}
+.task__done {
+  .tl__task {
+    p {
+      opacity: 0.2;
+      text-decoration: line-through;
+    }
   }
+  .tl__modules {
+    opacity: 0.4;
+    filter: grayscale(100%);
+    pointer-events: none;
+  }
+}
+.tl__drag {
+  position: absolute;
+  left: -22px;
+  opacity: 0;
+  top: 13px;
+  transition: 0.2s ease;
 }

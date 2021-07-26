@@ -1,3 +1,11 @@
+.task__logic {
+  position: relative;
+  &:hover {
+    .task__drag {
+      opacity: 1;
+    }
+  }
+}
 .task {
   position: relative;
   border: 1px solid rgba(0, 0, 0, 0.1);
@@ -17,9 +25,7 @@
 
   &:hover {
     border: 1px solid rgba(0, 0, 0, 0.2);
-    .task__drag {
-      opacity: 1;
-    }
+
     .task__expand {
       opacity: 0.2;
     }
@@ -32,9 +38,6 @@
     .assign {
       opacity: 1;
     }
-  }
-  &:last-child {
-    margin-bottom: 0;
   }
 }
 .task__drag {

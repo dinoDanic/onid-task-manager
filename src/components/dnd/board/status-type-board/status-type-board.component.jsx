@@ -114,6 +114,7 @@ const StatusTypeBoard = ({
                       <div className="st__taskList" style={style}>
                         {tasks?.map((task, index) => {
                           if (task === undefined) return false;
+
                           return (
                             <TaskBoard
                               key={task.id}

@@ -1,3 +1,5 @@
+import { updateUser } from "../../firebase/firebase.utils";
+
 export const statusFilterFunction = (task, filter) => {
   // check if all is true
   const isAllTrue = filter.status.filter((item) => item.status === false);
@@ -57,5 +59,50 @@ export const personFilterFunction = (task, filter) => {
     return true;
   } else {
     return false;
+  }
+};
+
+export const autoUpdateTasksToUser = (users, task) => {
+  // AUTO UPDATE TASKS
+  if (!users) return;
+  let getUser = users.filter((item) => item.uid === task.assign);
+  let user = getUser[0];
+
+  if (!task.assign) return;
+  if (user === undefined) return;
+
+  const gotTask = user.assignedTasks.filter((item) => item.id === task.id);
+  const gotTaskRes = gotTask[0];
+
+  if (gotTaskRes === undefined) {
+    return;
+  } else {
+    let copyUser = user;
+    let deleteOldTask = copyUser.assignedTasks.filter(
+      (item) => item.id !== task.id
+    );
+    deleteOldTask.push(task);
+    let newUser = {
+      ...copyUser,
+      assignedTasks: [...deleteOldTask],
+    };
+    updateUser(user.uid, newUser);
+  }
+};
+
+export const setTaskClassDone = (task) => {
+  const { done } = task;
+  if (done) {
+    return "task__done";
+  } else {
+    return;
+  }
+};
+
+export const filterLogicFunction = (status, time, person) => {
+  if (status === false || time === false || person === false) {
+    return false;
+  } else {
+    return true;
   }
 };
