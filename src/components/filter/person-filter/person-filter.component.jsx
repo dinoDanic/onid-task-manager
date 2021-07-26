@@ -43,7 +43,6 @@ const PersonFilter = () => {
       });
       setMembers(allMembers);
     };
-
     getMembers();
   }, [spaceId, stationId]);
 

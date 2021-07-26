@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+import React, { useMemo, useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 
 import { setTimeZone } from "../../../redux/filter/filter.actions";
@@ -17,7 +17,7 @@ const DaysLeft = ({ task }) => {
   const dispatch = useDispatch();
   const { created, deadline } = task;
 
-  useMemo(async () => {
+  useMemo(() => {
     if (!created) return;
     if (!deadline) return;
 
@@ -45,35 +45,48 @@ const DaysLeft = ({ task }) => {
 
     if (daysLeft === 0) {
       setDaysLeftText("today");
+    }
+    if (daysLeft < 0) {
+      setDaysLeftText(`${daysLeft} days`);
+    }
+    if (daysLeft === 1) {
+      setDaysLeftText(`tomorrow`);
+    }
+    if (daysLeft > 1 && daysLeft < 8) {
+      setDaysLeftText(`${daysLeft} days`);
+    }
+    if (daysLeft > 7) {
+      setDaysLeftText(`${daysLeft} days`);
+    }
+  }, [daysLeft, task]);
+
+  useEffect(() => {
+    if (daysLeft === 0) {
       const state = { taskId: task.id, zone: 0 };
       dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft < 0) {
-      setDaysLeftText(`${daysLeft} days`);
       const state = { taskId: task.id, zone: null };
       dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft === 1) {
-      setDaysLeftText(`tomorrow`);
       const state = { taskId: task.id, zone: 1 };
       dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft > 1 && daysLeft < 8) {
-      setDaysLeftText(`${daysLeft} days`);
       const state = { taskId: task.id, zone: 7 };
       dispatch(setTimeZone(state));
       return;
     }
     if (daysLeft > 7) {
-      setDaysLeftText(`${daysLeft} days`);
       const state = { taskId: task.id, zone: 30 };
       dispatch(setTimeZone(state));
       return;
     }
-  }, [daysLeft, task]);
+  }, [daysLeft]);
 
   return (
     <div className="daysLeft">

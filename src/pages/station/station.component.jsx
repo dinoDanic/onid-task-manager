@@ -58,8 +58,12 @@ const Station = () => {
       animate={{ marginLeft: x }}
       transition={{ ease: "easeOut" }}
     >
-      <motion.div className="station__hide" animate={{ x: open ? "" : -8 }}>
-        <FontAwesomeIcon icon={faBars} onClick={() => handleMini()} />
+      <motion.div
+        className="station__hide"
+        animate={{ x: open ? "" : -8 }}
+        onClick={() => handleMini()}
+      >
+        <FontAwesomeIcon icon={faBars} />
       </motion.div>
       <Stations />
     </motion.div>

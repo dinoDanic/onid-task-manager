@@ -76,6 +76,8 @@ const StatusTypeBoard = ({
                 style={{
                   color: status.fontColor,
                   transform: status.open ? "" : "rotate(-90deg)",
+                  filter: status.open ? "grayScale(0%)" : "grayScale(100%)",
+                  opacity: status.open ? "1" : "0.5",
                 }}
                 onClick={() =>
                   toggleStatus(currentSpaceId, currentStationId, status.name)
@@ -87,7 +89,11 @@ const StatusTypeBoard = ({
                 <input
                   ref={inputNameRef}
                   value={inputName}
-                  style={{ color: status.fontColor }}
+                  style={{
+                    color: status.fontColor,
+                    filter: status.open ? "grayScale(0%)" : "grayScale(100%)",
+                    opacity: status.open ? "1" : "0.5",
+                  }}
                   onChange={(e) => setInputName(e.target.value)}
                 />
               </form>
