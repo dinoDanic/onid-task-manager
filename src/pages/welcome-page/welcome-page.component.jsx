@@ -50,38 +50,32 @@ const WelcomePage = () => {
         <li className="layer layer1" data-depth="0.2">
           <img src={layer1} alt="" />
         </li>
-        <li className="layer-startUp-li" data-depth="0.2">
-          <div className="layer-startUp-container">
-            <div className="layer-startUp">
-              <h1>onid</h1>
-              <div className="welcomePage__message">
-                <h3>
-                  Think <span style={{ fontSize: "15px" }}> less, </span>
-                  Schedule
-                  <span style={{ fontSize: "15px" }}> more.</span>
-                </h3>
-                {/* <h3 style={{ fontWeight: "lighter" }}>You deserve this</h3> */}
-                {/* <h4>Your team desirves it</h4> */}
-              </div>
-              <div className="wp__btns">
-                <div className="wp__btns-try">
-                  <RetroButton
-                    mode="gray"
-                    onClick={() => setShowDemo(!showDemo)}
-                  >
-                    Try Demo
-                  </RetroButton>
-                </div>
-                <div className="wp__btns-register">
-                  <RetroButton onClick={() => setShowLogin(!showLogin)}>
-                    Login or Register
-                  </RetroButton>
-                </div>
-              </div>
+        <li className="layer-startUp-li" data-depth="0.2"></li>
+      </ul>
+      {/*  <div className="welcomePage__window">
+        <div className="welcomePage__window-box" />
+        hi
+      </div> */}
+      <div className="layer-startUp-container">
+        <div className="layer-startUp">
+          <h1>onid</h1>
+          <div className="welcomePage__message">
+            <h3>task manager</h3>
+          </div>
+          <div className="wp__btns">
+            <div className="wp__btns-try">
+              <RetroButton mode="gray" onClick={() => setShowDemo(!showDemo)}>
+                Try Demo
+              </RetroButton>
+            </div>
+            <div className="wp__btns-register">
+              <RetroButton onClick={() => setShowLogin(!showLogin)}>
+                Login or Register
+              </RetroButton>
             </div>
           </div>
-        </li>
-      </ul>
+        </div>
+      </div>
       {showLogin && (
         <BoxLayer setLayer={setShowLogin}>
           <SignIn />

@@ -2,17 +2,18 @@
 .welcomePage {
   position: absolute;
   width: 100%;
-  height: 100%;
+  height: 101% !important;
   background: linear-gradient(
     200deg,
     rgba(115, 166, 230, 0.5) 30%,
     rgba(238, 238, 238, 0) 100%
   );
   ul#scene {
-    height: 100%;
+    height: 70%;
     width: 100%;
     left: -50px;
-    bottom: -30px;
+    position: absolute !important;
+    bottom: -10px;
     li {
       width: 100%;
       height: 100%;
@@ -56,29 +57,33 @@
   }
   .layer-startUp-container {
     height: 100%;
+    width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
   }
   .layer-startUp {
+    z-index: 200;
     width: 450px;
-
-    margin-right: 10%;
     pointer-events: all;
-    /* background: $body; */
+    background: $body;
     padding: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
     border-radius: 10px;
     button {
     }
     h1 {
-      font-size: 100px;
-      margin-bottom: 5px;
+      font-size: 70px;
+      margin-bottom: 0px;
       color: #27538c;
       font-family: "Ubuntu Mono", monospace;
     }
     h3 {
       color: #5d8dcf;
-      font-size: 25px;
+      color: #27538c;
+      font-size: 15px;
     }
   }
   .retroBox {
@@ -86,18 +91,16 @@
   }
 }
 .welcomePage__message {
-  margin-bottom: 80px;
-  margin-left: 20px;
+  margin-bottom: 50px;
 }
 
 .wp__btns {
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: flex-end;
   button {
     width: fit-content;
     height: 40px;
-    margin-right: 20px;
   }
   span {
     margin: 0 30px;
@@ -113,4 +116,14 @@
   button {
     color: #27538c;
   }
+}
+
+.welcomePage__window {
+  width: 40%;
+  position: absolute;
+  height: 100%;
+  z-index: 200;
+  top: 0;
+  right: 0;
+  background: white;
 }
