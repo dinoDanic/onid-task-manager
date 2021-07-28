@@ -68,28 +68,27 @@ const TaskBoard = ({ task, index, status }) => {
             className="task__logic"
             style={style}
           >
-            <div className="task__drag" {...provided.dragHandleProps}>
-              <FontAwesomeIcon icon={faGripLinesVertical} />
-            </div>
             {filterLogic && (
-              <div className={`task ${taskClass}`}>
+              <div
+                className={`task ${taskClass}`}
+                {...provided.dragHandleProps}
+                style={{
+                  border: showLargeTask && "1px solid #34b5e4",
+                  background: showLargeTask && " rgba(52, 181, 228, 0.05)",
+                }}
+              >
+                <div
+                  className="task__expandPlace"
+                  onClick={() => setShowLargeTask(!showLargeTask)}
+                />
                 <div className="task__header">
-                  <CheckBox task={task} />
                   <div className="task__taskName">
                     <p>{task.content}</p>
                   </div>
-                  <div
-                    className="task__expand"
-                    onClick={() => setShowLargeTask(!showLargeTask)}
-                  >
-                    <FontAwesomeIcon icon={faExpandAlt} />
-                  </div>
-                  {msgs > 0 && (
-                    <div className="task__comments">
-                      <FontAwesomeIcon icon={faCommentAlt} />
-                      <p>{msgs}</p>
-                    </div>
-                  )}
+                  <CheckBox
+                    task={task}
+                    style={{ opacity: task.done ? 1 : 0 }}
+                  />
                 </div>
                 <div className="task__modules">
                   {activeModules?.map((module) => {
@@ -103,18 +102,18 @@ const TaskBoard = ({ task, index, status }) => {
                     );
                   })}
                 </div>
-                <AnimatePresence>
-                  {showLargeTask && (
-                    <BoxRight
-                      setLayer={setShowLargeTask}
-                      setLayer={setShowLargeTask}
-                    >
-                      <LargeTask task={task} msgs={msgs} />
-                    </BoxRight>
-                  )}
-                </AnimatePresence>
               </div>
             )}
+            <AnimatePresence>
+              {showLargeTask && (
+                <BoxRight
+                  setLayer={setShowLargeTask}
+                  setLayer={setShowLargeTask}
+                >
+                  <LargeTask task={task} msgs={msgs} />
+                </BoxRight>
+              )}
+            </AnimatePresence>
           </div>
         );
       }}

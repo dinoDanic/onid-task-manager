@@ -127,3 +127,14 @@
   right: 0;
   background: white;
 }
+
+@media (max-width: 500px) {
+  .layer-startUp {
+    height: 100%;
+    width: 100% !important;
+    border-radius: 0 !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

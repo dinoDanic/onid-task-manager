@@ -1,3 +1,4 @@
+@import "../../../../theme.styles.scss";
 .task__logic {
   position: relative;
   &:hover {
@@ -14,6 +15,7 @@
   background: white;
   align-items: center;
   border-radius: 8px;
+  transition: 0.2s ease all;
   .loadModule {
     height: auto;
   }
@@ -24,6 +26,7 @@
   }
 
   &:hover {
+    border: 1px solid #34b5e4;
     border: 1px solid rgba(0, 0, 0, 0.2);
 
     .task__expand {
@@ -37,6 +40,9 @@
     .deadline,
     .assign {
       opacity: 1;
+    }
+    .checkBox {
+      opacity: 1 !important;
     }
   }
 }
@@ -131,6 +137,10 @@
 .task__header {
   display: flex;
   align-items: center;
+  justify-content: space-between;
+  .checkBox {
+    margin-right: 5px;
+  }
 }
 .task__done {
   .task__taskName {
@@ -144,4 +154,12 @@
     filter: grayscale(100%);
     pointer-events: none;
   }
+}
+
+.task__expandPlace {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
 }

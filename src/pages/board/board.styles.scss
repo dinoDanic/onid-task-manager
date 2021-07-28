@@ -21,10 +21,10 @@
 .board__newStatus {
 }
 .board__dragDelete {
+  border-top: 1px solid $bodyGray;
   position: absolute;
   transition: 0.3s ease;
   padding: 10px;
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;
@@ -32,16 +32,15 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  background: rgb(226, 68, 92);
+  background: $bodyGray;
   opacity: 0.5;
   svg {
-    color: white;
+    color: rgba(0, 0, 0, 0.4);
     width: 25px !important;
     height: 25px !important;
   }
   &:hover {
     height: 150px;
-    opacity: 1 !important;
   }
 }
 .board__dragDelete-droppable {

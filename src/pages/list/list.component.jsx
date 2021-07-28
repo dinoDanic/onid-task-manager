@@ -216,7 +216,7 @@ const List = ({ station }) => {
         <Droppable droppableId="delete">
           {(provided, snapshot) => {
             const style = {
-              backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "",
+              /* backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "", */
               borderRadius: "8px",
             };
             return (
@@ -228,9 +228,9 @@ const List = ({ station }) => {
                 >
                   <FontAwesomeIcon icon={faTrashAlt} size="1x" />
                 </div>
-                <div className="list__placeholder" style={style}>
+                {/* <div className="list__placeholder" style={style}>
                   {provided.placeholder}
-                </div>
+                </div> */}
               </>
             );
           }}

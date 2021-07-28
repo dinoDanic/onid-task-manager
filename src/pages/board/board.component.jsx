@@ -21,7 +21,7 @@ const Board = ({ station }) => {
   const currentSpaceId = history.location.pathname.split("/")[2];
   const currentStationId = history.location.pathname.split("/")[4];
   const [state, setState] = useState([]);
-  const [bOpacity, setBOpacity] = useState(0);
+  const [deleteOpacity, setDeleteOpacity] = useState(0);
 
   useEffect(() => {
     setState(station);
@@ -31,7 +31,7 @@ const Board = ({ station }) => {
   const onDragEnd = (result) => {
     const { destination, source, draggableId } = result;
 
-    setBOpacity(0);
+    setDeleteOpacity(0);
 
     if (!destination) return;
 
@@ -161,7 +161,7 @@ const Board = ({ station }) => {
 
   const onDragStart = (result) => {
     if (result.type === "DEFAULT") {
-      setBOpacity(0.5);
+      setDeleteOpacity(1);
     }
   };
 
@@ -210,7 +210,7 @@ const Board = ({ station }) => {
       <div
         className="board__dragDelete"
         style={{
-          opacity: bOpacity,
+          opacity: deleteOpacity,
         }}
       >
         <Droppable droppableId="delete">
@@ -218,6 +218,7 @@ const Board = ({ station }) => {
             const style = {
               /* backgroundColor: snapshot.isDraggingOver ? "rgba(0,0,0,0.1)" : "", */
               borderRadius: "8px",
+              bottom: "0px",
             };
             return (
               <>

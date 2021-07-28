@@ -8,7 +8,7 @@ import { faSquare, faCheckSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "./check-box.styles.scss";
 
-const CheckBox = ({ task }) => {
+const CheckBox = ({ task, ...otherProps }) => {
   const { id } = task;
   const spaceId = useSelector((state) => state.history.spaceId);
   const stationId = useSelector((state) => state.history.stationId);
@@ -34,7 +34,7 @@ const CheckBox = ({ task }) => {
   };
 
   return (
-    <div className="checkBox">
+    <div className="checkBox" {...otherProps}>
       <div className="checkBox__container">
         {check ? (
           <div
