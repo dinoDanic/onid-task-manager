@@ -7,15 +7,11 @@ export const names = {
 };
 
 export const dummySpaceNames = {
-  0: { name: "Private" },
-  1: { name: "School" },
-  2: { name: "Work" },
+  0: { name: "Demo Space" },
 };
 
 export const dummySpaceColor = {
   0: { color: "#34b5e4" },
-  1: { color: "#05ce91" },
-  2: { color: "#f65bc4" },
 };
 
 export const dummyImages = {
@@ -33,10 +29,57 @@ export const dummyImages = {
   },
   3: {
     imageUrl:
-      "https://i.pinimg.com/originals/3f/00/e5/3f00e57482836b6fc08d33d5150027cc.jpg",
+      "https://images.fineartamerica.com/images-medium-large-5/head-profile-german-shepherd-dog-animal-images.jpg",
   },
   4: {
     imageUrl:
-      "https://e7.pngegg.com/pngimages/440/9/png-clipart-snout-sticker-forehead-rick-and-morty-face-head-thumbnail.png",
+      "https://e7.pngegg.com/pngimages/https://i.pinimg.com/236x/0a/2c/27/0a2c27a6https://i.pinimg.com/236x/0a/2c/27/0a2c27a6a12ad00dcab815ded6654de7--racoon-zoo-book.jpga12ad00dcab815ded6654de7--racoon-zoo-book.jpg/9/png-clipart-snout-sticker-forehead-rick-and-morty-face-head-thumbnail.png",
   },
 };
+
+export const statusType = {
+  "to do": {
+    id: "to do",
+    name: "to do",
+    taskIds: [],
+    color: "rgb(234 236 239)",
+    fontColor: "#34b5e4",
+    open: true,
+  },
+  "on it": {
+    id: "on it",
+    name: "on it",
+    taskIds: [],
+    color: "rgb(234 236 239)",
+    fontColor: "#FDAB3D",
+    open: true,
+  },
+  stuck: {
+    id: "stuck",
+    name: "stuck",
+    taskIds: [],
+    color: "rgb(234 236 239)",
+    fontColor: "#e2445c",
+    open: true,
+  },
+  done: {
+    id: "done",
+    name: "done",
+    taskIds: [],
+    color: "rgb(234 236 239)",
+    fontColor: "#05ce91",
+    open: true,
+  },
+};
+
+export const statusOrder = ["to do", "on it", "stuck", "done"];
+
+export const modules = [
+  { name: "CreatedBy", active: false, icon: "faUser" },
+  { name: "Assign", active: true, icon: "faUserCheck" },
+  { name: "Status", active: false, icon: "faInfoCircle" },
+  { name: "CreatedDate", active: false, icon: "faCalendarCheck" },
+  { name: "Deadline", active: true, icon: "faCalendarAlt" },
+  { name: "DaysLeft", active: true, icon: "faHourglassHalf" },
+  { name: "Priority", active: true, icon: "faExclamationCircle" },
+];

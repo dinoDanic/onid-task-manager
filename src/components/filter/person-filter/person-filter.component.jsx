@@ -30,10 +30,13 @@ const PersonFilter = () => {
       if (!spaceId) return;
       if (!stationId) return;
       const getSpaceData = await db.collection("space").doc(spaceId).get();
+      console.log(" soace id", spaceId);
       const spaceData = getSpaceData.data();
+      console.log(spaceData);
       const { members } = spaceData;
       let allMembers = [];
       await members.map((memberId) => {
+        console.log(memberId);
         db.collection("users")
           .doc(memberId)
           .get()
@@ -86,16 +89,19 @@ const PersonFilter = () => {
       <div className="personFilter__pop">
         {showMembers && (
           <BoxLayerLite setLayer={setShowMembers}>
-            {members?.map((member) => (
-              <div
-                className="personFilter__member"
-                key={member.uid}
-                onClick={() => handlePersonFilter()}
-              >
-                <Avatar src={member.imageUrl} />
-                <p>{member.userName}</p>
-              </div>
-            ))}
+            {members?.map((member) => {
+              console.log(members);
+              return (
+                <div
+                  className="personFilter__member"
+                  key={member?.uid}
+                  onClick={() => handlePersonFilter()}
+                >
+                  <Avatar src={member?.imageUrl} />
+                  <p>{member?.userName}</p>
+                </div>
+              );
+            })}
             <div
               className="personFilter__remove"
               onClick={() => handleRemoveUser()}

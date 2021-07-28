@@ -6,87 +6,66 @@ import RetroInput from "../retro/input/input.component";
 
 import "./create-demo.styles.scss";
 
-import { names, dummySpaceNames, dummySpaceColor, dummyImages } from "./users";
+import {
+  createDemoUser,
+  createDummyUsers,
+  createDummySpace,
+  createDummyStation,
+  createDummyTasks,
+} from "./utils";
 
 const CreateDemo = () => {
-  const [showSettings, setShowSettings] = useState(true);
+  const [startCreate, setStartCreate] = useState(false);
+  const [demoUser, setDemoUser] = useState(false);
+  const [createDummys, setCreateDummys] = useState(false);
+  const [createSpace, setCreateSpace] = useState(false);
+  const [createStation, setCreateStation] = useState(false);
+  const [createTasks, setCreateTasks] = useState(false);
+  const [logIn, setLogIn] = useState(false);
   // prvo registriraj usera demo@demo.com
   // create users
-  const createDummyUsers = () => {
-    for (let u = 0; u < 5; u++) {
-      db.collection("users")
-        .doc(`dummy${u}`)
-        .set({
-          userName: names[u].name,
-          uid: names[u].name,
-          email: `${names[u].name.toLowerCase()}@onid-tm.com`,
-          assignedTasks: [],
-          favoriteStations: [],
-          imageUrl: dummyImages[u].imageUrl,
-          open: true,
-        });
-    }
+
+  const handleCreateDemo = async () => {
+    setStartCreate(true);
+    await createDemoUser();
+    setDemoUser(true);
+    await createDummyUsers();
+    setCreateDummys(true);
+    await createDummySpace();
+    setCreateSpace(true);
+    await createDummyStation();
+    setCreateStation(true);
+    await createDummyTasks();
+    setCreateTasks(true);
+    setLogIn(true);
+    setTimeout(() => {
+      loginWithEmailAndPassword("demo@demo.com", "111111");
+    }, 1500);
   };
-  const creatDummySpace = async () => {
-    const findUser = await db
-      .collection("users")
-      .where("email", "==", "demo@demo.com")
-      .get();
-    if (!findUser) {
-      alert("no user, registriaj prvo");
-      return;
-    }
-    findUser.forEach((user) => {
-      for (let s = 0; s < 3; s++) {
-        db.collection("space")
-          .doc(`dummySpace${s}`)
-          .set({
-            name: dummySpaceNames[s].name,
-            admin: null,
-            color: dummySpaceColor[s].color,
-            admin: user.data().uid,
-            members: [
-              "Bleki",
-              "Lun",
-              "Melita",
-              "Nina",
-              "Dino",
-              user.data().uid,
-            ],
-            created: fieldValue.serverTimestamp(),
-            description: "Add description",
-            spaceId: `dummySpace${s} `,
-          });
-      }
-    });
-  };
+
   return (
     <div className="createDemo">
-      {showSettings && (
+      <h2>Create Demo </h2>
+      {startCreate ? (
         <>
-          <h2>Create Demo</h2>
           <br />
-          <RetroButton onClick={() => createDummyUsers()}>
-            Create Dummys
-          </RetroButton>
-          <RetroButton onClick={() => creatDummySpace()}>
-            Create Space
-          </RetroButton>
+          <p>Create Demo User {demoUser ? "✅" : "⬜"}</p>
+          <p>Create Dummy Users {createDummys ? "✅" : "⬜"}</p>
+          <p>Create Dummy Space {createSpace ? "✅" : "⬜"} </p>
+          <p>Create Dummy Station {createStation ? "✅" : "⬜"} </p>
+          <p>Create Tasks {createTasks ? "✅" : "⬜"} </p>
+          <br />
+          <p style={{ textAlign: "center", fontSize: "16px" }}>
+            {logIn && "All done 🤘 logging in"}
+          </p>
         </>
-      )}
-      <h2>Login Demo</h2>
-      <br />
-      <form onSubmit={(e) => e.preventDefault()}>
-        <RetroInput value="demo@demo.com" placeholder="" />
-        <RetroInput value="111111" placeholder="password" type="password" />
+      ) : (
         <div className="createDemo__button">
-          <RetroButton
-            onClick={() => loginWithEmailAndPassword("demo@demo.com", "111111")}
-          >
-            Login
+          <RetroButton onClick={() => handleCreateDemo()}>
+            Create Demo
           </RetroButton>
         </div>
-      </form>
+      )}
     </div>
   );
 };

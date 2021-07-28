@@ -137,6 +137,39 @@ export const createNewStation2 = async (
     });
   return stationId;
 };
+export const createNewStationDemo = async (
+  spaceId,
+  stationName,
+  statusType,
+  statusOrder,
+  modules
+) => {
+  let stationId = "123";
+  const stationsRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc("demoStation0");
+
+  await stationsRef
+    .set({
+      name: stationName,
+      description: "Add description",
+      fromSpaceId: spaceId,
+      stationId: "demoStation0",
+    })
+    .then(() => {
+      stationsRef.collection("tasks").doc("tasks").set({
+        tasks: null,
+        statusType,
+        statusOrder,
+      });
+      stationsRef.collection("modules").doc("modules").set({
+        modules,
+      });
+    });
+  return stationId;
+};
 
 export const createNewTask = async (
   spaceId,
@@ -178,6 +211,71 @@ export const createNewTask = async (
         { name: "Normal", active: true, color: "rgb(52, 181, 228)" },
         { name: "Low", active: false, color: "rgb(5, 206, 145)" },
       ],
+    },
+  };
+  let newTasks = {
+    ...tasks,
+    ...newTask,
+  };
+
+  // STATUS TYPE
+
+  let taskIds = statusType[statusName].taskIds;
+
+  taskIds.push(v4);
+
+  const newData = {
+    ...data,
+    statusType: {
+      ...statusType,
+      [statusName]: {
+        ...data.statusType[statusName],
+        taskIds: taskIds,
+      },
+    },
+    tasks: newTasks,
+  };
+  docRef.set({
+    ...newData,
+  });
+};
+export const createNewTaskDemo = async (
+  statusName,
+  newTaskName,
+  userId,
+  assign,
+  deadline,
+  done,
+  priority
+) => {
+  const docRef = db
+    .collection("space")
+    .doc("dummySpace0")
+    .collection("stations")
+    .doc("demoStation0")
+    .collection("tasks")
+    .doc("tasks");
+  const getData = await docRef.get();
+  const data = getData.data();
+  const { statusType, tasks } = data;
+
+  // TASKS
+  let v4 = uuidv4();
+  let newTask = {
+    [v4]: {
+      id: v4,
+      content: newTaskName,
+      createdBy: userId,
+      assign: assign,
+      created: new Date(),
+      timeStamp: firebase.firestore.FieldValue.serverTimestamp(),
+      deadline: deadline,
+      fromSpaceId: "dummySpace0",
+      fromStationId: "demoStation0",
+      message: [],
+      description: "Add description",
+      done: done,
+      priority: priority,
     },
   };
   let newTasks = {

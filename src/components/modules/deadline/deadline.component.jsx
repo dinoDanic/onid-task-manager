@@ -25,6 +25,7 @@ const Deadline = ({ task }) => {
   }, [task]);
 
   const handleDate = (e) => {
+    console.log(e.target.value);
     let dd = new Date(e.target.value);
     setDeadlineDate(spaceId, stationId, dd, task.id);
   };
