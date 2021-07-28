@@ -38,7 +38,6 @@ const loginWithEmailAndPassword = (email, password) => {
 };
 
 export const registerUserFb = async (user, userName) => {
-  console.log(userName);
   const { uid, email, photoURL } = user;
   const userRef = await db.collection("users").doc(uid).get();
   if (!userRef.exists) {

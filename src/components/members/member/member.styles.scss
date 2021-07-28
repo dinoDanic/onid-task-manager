@@ -35,6 +35,12 @@
     color: #ffdf58;
   }
 }
+.member__avatar {
+  .avatar {
+    width: 40px;
+    height: 40px;
+  }
+}
 .member__noAdmin {
   margin-left: 5px;
   svg {
