@@ -13,13 +13,6 @@ import {
 } from "../../task.util";
 import "./task-board.styles.scss";
 
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faGripLinesVertical,
-  faExpandAlt,
-  faCommentAlt,
-} from "@fortawesome/free-solid-svg-icons";
-
 import LoadModule from "../../../modules/load-module.component.jsx/load-module.component";
 import BoxRight from "../../../retro/box-right/box-right.component";
 import LargeTask from "../../../large-task/large-task.component";

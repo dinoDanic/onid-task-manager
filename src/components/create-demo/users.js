@@ -33,7 +33,7 @@ export const dummyImages = {
   },
   4: {
     imageUrl:
-      "https://e7.pngegg.com/pngimages/https://i.pinimg.com/236x/0a/2c/27/0a2c27a6https://i.pinimg.com/236x/0a/2c/27/0a2c27a6a12ad00dcab815ded6654de7--racoon-zoo-book.jpga12ad00dcab815ded6654de7--racoon-zoo-book.jpg/9/png-clipart-snout-sticker-forehead-rick-and-morty-face-head-thumbnail.png",
+      "https://static.thebark.com/sites/default/files/content/article/full/tasaki-winterize-your-dog-istock-1001897492-800x550-opt.jpg",
   },
 };
 

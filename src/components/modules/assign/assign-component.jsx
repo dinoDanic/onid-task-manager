@@ -5,7 +5,10 @@ import { useActiveSpaceData } from "../../../hooks/useActiveSpaceData.hook";
 import { AnimatePresence } from "framer-motion";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faUserSlash } from "@fortawesome/free-solid-svg-icons";
+import {
+  faToiletPaperSlash,
+  faUserSlash,
+} from "@fortawesome/free-solid-svg-icons";
 
 import {
   assignMember,
@@ -84,7 +87,7 @@ const Assign = ({ task }) => {
       >
         <Avatar src={assignedUser ? assignedUser.imageUrl : ""} />
         {assignedUser ? (
-          <p className="assign__nameHover">{assignedUser.userName}</p>
+          <Tooltip text={assignedUser.userName} />
         ) : (
           <Tooltip text="Assign member" />
         )}

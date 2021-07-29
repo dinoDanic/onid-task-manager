@@ -62,6 +62,19 @@ const AssingedTasks = () => {
 
         const taskData = getTaskData.data().tasks;
         const theTask = taskData[id];
+        if (theTask === undefined) {
+          if (assign) {
+            const getUserData = await db.collection("users").doc(assign).get();
+            const userData = getUserData.data();
+            console.log(userData);
+            userData.assignedTasks = userData.assignedTasks.filter(
+              (task) => task.id !== id
+            );
+            console.log(userData);
+            updateUser(assign, userData);
+            return;
+          }
+        }
         if (theTask.assign.includes(assign)) {
           console.log("its ok");
           //but are you a member ?

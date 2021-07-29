@@ -58,8 +58,8 @@ const PersonFilter = () => {
     }
   }, [filter]);
 
-  const handlePersonFilter = () => {
-    dispatch(setUserFilter(currentUser.uid));
+  const handlePersonFilter = (id) => {
+    dispatch(setUserFilter(id));
     setShowMembers(false);
   };
 
@@ -94,11 +94,11 @@ const PersonFilter = () => {
               return (
                 <div
                   className="personFilter__member"
-                  key={member?.uid}
-                  onClick={() => handlePersonFilter()}
+                  key={member.uid}
+                  onClick={() => handlePersonFilter(member.uid)}
                 >
-                  <Avatar src={member?.imageUrl} />
-                  <p>{member?.userName}</p>
+                  <Avatar src={member.imageUrl} />
+                  <p>{member.userName}</p>
                 </div>
               );
             })}

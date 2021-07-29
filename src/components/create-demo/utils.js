@@ -117,7 +117,7 @@ export const createDummyTasks = async () => {
     "Click on task to expand",
     "Melita",
     null,
-    null,
+    getDate(0),
     false,
     setPriority("Normal")
   );
@@ -144,7 +144,7 @@ export const createDummyTasks = async () => {
     "Write updates, set descriptions,..",
     "Melita",
     "Nina",
-    null,
+    getDate(0),
     false,
     setPriority("Urgent")
   );
@@ -189,15 +189,42 @@ export const createDummyTasks = async () => {
     "Keep exploring the app",
     "Melita",
     "Dino",
-    null,
+    getDate(0),
     true,
+    setPriority("Normal")
+  );
+  await createNewTaskDemo(
+    "on it",
+    "Try to Filter, Priority: 'urgent', Time: 'today', Select person: 'Lun'",
+    "Melita",
+    "Lun",
+    getDate(0),
+    false,
+    setPriority("Urgent")
+  );
+  await createNewTaskDemo(
+    "on it",
+    "To delete the task, drag it to the bottom of the Screen",
+    "Melita",
+    "Bleki",
+    null,
+    false,
+    setPriority("Normal")
+  );
+  await createNewTaskDemo(
+    "to do",
+    "Enter full screen mode by clicking on the 'bar icon' in top right corner of Station menu",
+    "Melita",
+    "Bleki",
+    null,
+    false,
     setPriority("Normal")
   );
 };
 
 export const createDemoUser = async () => {
   db.collection("users")
-    .where("userName", "==", "Demo (You)")
+    .where("userName", "==", "Demo")
     .get()
     .then((userData) => {
       if (userData.size > 0) {
@@ -213,7 +240,7 @@ export const createDemoUser = async () => {
       "demo@demo.com",
       "111111"
     );
-    await registerUserFb(user, "Demo (You)");
+    await registerUserFb(user, "Demo");
     return;
   };
 };
