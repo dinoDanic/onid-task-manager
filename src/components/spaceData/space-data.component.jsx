@@ -1,13 +1,15 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 import RetroButton from "../retro/button/retro-button.component";
+import CreateSpace from "../create-space/create-space.component";
 
 import "./space-data.styles.scss";
 
 function SpaceData() {
   const spaceData = useSelector((state) => state.space.spaceData);
+  const [create, setCreate] = useState(false);
 
   return (
     <div className="spaceData">
@@ -15,19 +17,25 @@ function SpaceData() {
         {spaceData.map((data) => {
           const { spaceId, color, name } = data;
           return (
-            <div key={spaceId} className="sd__btn">
-              <Link to={`/s/${data.spaceId}`}>
+            <Link to={`/s/${data.spaceId}`}>
+              <div key={spaceId} className="sd__btn">
                 <div className="sd__btnClick">
                   <RetroButton style={{ background: color }}>
                     {name.charAt(0)}
                   </RetroButton>
                   <h4>{name}</h4>
                 </div>
-              </Link>
-            </div>
+              </div>
+            </Link>
           );
         })}
       </div>
+      <div className="sd__createNewSpace">
+        <RetroButton onClick={() => setCreate(!create)}>
+          Create new Space
+        </RetroButton>
+      </div>
+      {create && <CreateSpace setLayer={setCreate} />}
     </div>
   );
 }
