@@ -14,3 +14,9 @@
   display: flex;
   justify-content: flex-end;
 }
+
+@media (max-width: 500px) {
+  .cs__createPop {
+    width: 94% !important;
+  }
+}

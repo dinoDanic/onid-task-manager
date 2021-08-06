@@ -79,3 +79,9 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .station {
+    display: none;
+  }
+}

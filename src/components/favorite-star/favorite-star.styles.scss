@@ -13,3 +13,14 @@
     color: rgb(255 227 86) !important;
   }
 }
+.fs__item {
+  .children {
+  }
+  svg {
+    color: #ecc500;
+    width: 20px !important;
+    height: 20px !important;
+    margin-bottom: 3px;
+    margin-right: 5px;
+  }
+}

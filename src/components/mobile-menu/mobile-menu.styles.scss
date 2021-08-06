@@ -1,0 +1,33 @@
+.mobileMenu {
+  position: fixed;
+  left: 20px;
+  bottom: 20px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 200;
+  button {
+    margin-right: 5px;
+    svg {
+      width: 25px !important;
+      height: 25px !important;
+    }
+  }
+}
+.mobileMenu__icon {
+  border: 1px solid gray;
+  padding: 10px;
+  border-radius: 10px;
+  margin-right: 5px;
+  background: white;
+  svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+}
+@media (min-width: 500px) {
+  .mobileMenu {
+    display: none;
+  }
+}

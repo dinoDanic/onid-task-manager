@@ -24,3 +24,11 @@
     color: $primary;
   }
 }
+
+@media (max-width: 500px) {
+  .sn__name {
+    input {
+      width: 100% !important;
+    }
+  }
+}

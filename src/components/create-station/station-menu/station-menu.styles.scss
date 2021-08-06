@@ -52,3 +52,17 @@
     transition: 0.2s ease;
   }
 }
+
+@media (max-width: 500px) {
+  .stationMenu {
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-right: 0;
+  }
+  .sm__settings {
+    opacity: 1;
+    svg {
+      opacity: 0.2;
+    }
+  }
+}

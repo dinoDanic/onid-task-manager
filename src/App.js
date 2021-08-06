@@ -16,6 +16,7 @@ import WelcomePage from "./pages/welcome-page/welcome-page.component";
 import ProtectedRoute from "./components/protectedRoute/protectedRoute.component";
 import EnterStation from "./pages/enter-station/enter-station.component";
 import LoadingPage from "./components/retro/loading-page/loading-page.component";
+import MobileMenu from "./components/mobile-menu/mobile-menu.component";
 
 import "./app.styles.scss";
 
@@ -87,6 +88,7 @@ function App() {
           <AnimatePresence>{isLoading && <LoadingPage />}</AnimatePresence>
           <>
             <Space />
+            <MobileMenu />
             <ProtectedRoute
               exact
               path={["/", "/signin"]}

@@ -68,7 +68,9 @@ const FavoriteStations = () => {
             return (
               <div className="fs__item" key={station.stationId}>
                 <Link to={`/s/${fromSpaceId}/e/${stationId}/b`}>
-                  <RetroButton mode="flat">{station.name}</RetroButton>
+                  <RetroButton mode="flat">
+                    <FontAwesomeIcon icon={faStar} /> {station.name}
+                  </RetroButton>
                 </Link>
               </div>
             );

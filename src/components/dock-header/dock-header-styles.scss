@@ -102,3 +102,12 @@
     }
   }
 }
+
+@media (max-width: 500px) {
+  .dockHeader {
+    padding: 20px;
+  }
+  .dh__settings-icon {
+    opacity: 1;
+  }
+}

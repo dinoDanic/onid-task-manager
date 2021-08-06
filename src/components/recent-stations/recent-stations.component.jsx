@@ -6,9 +6,9 @@ import RetroButton from "../retro/button/retro-button.component";
 import CreateStation from "../create-station/create-station.component";
 
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faTasks, faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 import "./recent-stations.styles.scss";
-import { faTasks } from "@fortawesome/free-solid-svg-icons";
 
 function RecentStations({ activeSpaceData }) {
   const spaceId = useSelector((state) => state.history.spaceId);
@@ -49,6 +49,12 @@ function RecentStations({ activeSpaceData }) {
           );
         })
       )}
+      <div className="recentStations__create">
+        <RetroButton mode="create" onClick={() => setCreateStation(true)}>
+          <FontAwesomeIcon icon={faPlusSquare} />
+          Create new Station
+        </RetroButton>
+      </div>
       {createStation && (
         <CreateStation
           setCreateStation={setCreateStation}

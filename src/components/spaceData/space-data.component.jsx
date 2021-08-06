@@ -6,6 +6,8 @@ import RetroButton from "../retro/button/retro-button.component";
 import CreateSpace from "../create-space/create-space.component";
 
 import "./space-data.styles.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faPlusSquare } from "@fortawesome/free-solid-svg-icons";
 
 function SpaceData() {
   const spaceData = useSelector((state) => state.space.spaceData);
@@ -31,8 +33,8 @@ function SpaceData() {
         })}
       </div>
       <div className="sd__createNewSpace">
-        <RetroButton onClick={() => setCreate(!create)}>
-          Create new Space
+        <RetroButton mode="create" onClick={() => setCreate(!create)}>
+          <FontAwesomeIcon icon={faPlusSquare} /> Create new Space
         </RetroButton>
       </div>
       {create && <CreateSpace setLayer={setCreate} />}

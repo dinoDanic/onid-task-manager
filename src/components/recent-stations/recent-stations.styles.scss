@@ -24,5 +24,11 @@
   display: flex;
   justify-content: flex-end;
 }
-.recentStations__msg {
+.recentStations__create {
+  button {
+    svg {
+      margin-right: 5px;
+      color: rgba(0, 0, 0, 0.2);
+    }
+  }
 }

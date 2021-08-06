@@ -52,5 +52,9 @@ textarea {
 @media (max-width: 500px) {
   body {
     margin-bottom: 50px;
+    overflow-y: auto;
+  }
+  input {
+    font-size: 1rem;
   }
 }
