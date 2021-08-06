@@ -26,13 +26,8 @@
   z-index: 100;
 }
 
-/* .bl__btns {
-  display: flex;
-  justify-content: flex-end;
-  button {
-    height: 30px;
-    width: fit-content;
-    margin-top: 30px;
+@media (max-width: 500px) {
+  .bl__content {
+    width: 92%;
   }
 }
- */

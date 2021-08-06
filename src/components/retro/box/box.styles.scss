@@ -5,3 +5,8 @@
   border-radius: 10px;
   background: white;
 }
+@media (max-width: 500px) {
+  .retroBox {
+    width: 100%;
+  }
+}

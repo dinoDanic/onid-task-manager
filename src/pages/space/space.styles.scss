@@ -10,3 +10,8 @@
   background: $secondary;
   z-index: 100;
 }
+@media (max-width: 500px) {
+  .space {
+    display: none;
+  }
+}

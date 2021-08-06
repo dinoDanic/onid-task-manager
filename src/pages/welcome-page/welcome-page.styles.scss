@@ -129,12 +129,12 @@
 }
 
 @media (max-width: 500px) {
+  .welcomePage {
+    ul#scene {
+      display: none;
+    }
+  }
   .layer-startUp {
-    height: 100%;
-    width: 100% !important;
-    border-radius: 0 !important;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 92% !important;
   }
 }

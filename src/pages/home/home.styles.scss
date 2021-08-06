@@ -26,3 +26,16 @@
     }
   }
 }
+@media (max-width: 500px) {
+  .welcomeHome {
+    padding: 20px;
+  }
+  .home__content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  .home {
+    overflow: auto;
+  }
+}
