@@ -27,12 +27,7 @@ function RecentStations({ activeSpaceData }) {
       {stationData?.length < 1 ? (
         <div className="recentStations__noStations">
           <div className="recentStations__msg">
-            <p>U have no Stations!</p>
-          </div>
-          <div className="recentStations__noBtn">
-            <RetroButton color="info" onClick={() => setCreateStation(true)}>
-              Cretate your first Station
-            </RetroButton>
+            <p>No Stations!</p>
           </div>
         </div>
       ) : (
