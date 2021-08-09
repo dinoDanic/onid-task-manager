@@ -2,18 +2,29 @@
 .subtask {
   display: flex;
   align-items: center;
-  margin-top: 4px;
-  margin-left: 10px;
+  margin-left: 5px;
+  width: fit-content;
+  svg {
+    opacity: 0.1;
+    margin-right: 5px;
+  }
 }
 .subtask__checkBox,
 .subtasks__addTrue-box {
   width: 13px;
   height: 13px;
-  border-radius: 3px;
+  border-radius: 2px;
   border: 1px solid $bodyGray;
   margin-right: 5px;
   background: white;
   margin-top: 2px;
+  transition: 0.2s ease all;
+  cursor: pointer;
+  transform: scale(1);
+  &:hover {
+    background: $success;
+    transform: scale(1.2);
+  }
 }
 .subtask__content {
   p {
@@ -21,8 +32,11 @@
   }
 }
 .subtask__label-gray {
-  opacity: 1;
+  opacity: 0;
   transition: 0.2s ease all;
+  svg {
+    opacity: 0.6;
+  }
 }
 .subtasks__addTrue {
   display: flex;
@@ -35,4 +49,20 @@
     border: none;
     outline: none;
   }
+}
+.subtask__done-false,
+.subtask__done-true {
+  cursor: pointer;
+}
+.subtask__done-false {
+  &:hover {
+    svg {
+      color: $success;
+      opacity: 1;
+    }
+  }
+}
+.subtask__content-done {
+  text-decoration: line-through;
+  color: rgba(0, 0, 0, 0.2);
 }

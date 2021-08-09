@@ -21,7 +21,7 @@ export const dummyImages = {
   },
   1: {
     imageUrl:
-      "https://www.loveyourdog.com/wp-content/uploads/2020/10/American-and-European-German-Shepherd-Sitting.jpg",
+      "https://s3.amazonaws.com/cdn-origin-etr.akc.org/wp-content/uploads/2016/06/21195710/German-Shepherd-Dog-laying-down-in-the-backyard-500x487.jpeg",
   },
   2: {
     imageUrl:

@@ -1,38 +1,26 @@
-import React, { useState, useMemo, useRef, useEffect } from "react";
+import React, { useState, useMemo } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import {
-  createNewSubtask,
-  updateSubDrag,
-} from "../../../firebase/firebase.utils.js";
+import { updateSubDrag } from "../../../firebase/firebase.utils.js";
+import { AnimatePresence } from "framer-motion";
 
 import RetroLabel from "../../retro/retro-label/retro-label.component";
-import RetroInput from "../../retro/input/input.component";
 import Subtask from "./subtask/subtask.component";
 import AddSubtask from "./add-subtask/add-subtask.component";
 
 import "./subtasks.styles.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 
 const Subtasks = ({ task }) => {
   const [state, setState] = useState([]);
   const [newSubtask, setNewSubtask] = useState("");
   const [subtasksOpen, setSubtasksOpen] = useState(false);
   const [subtaskView, setSubtaskView] = useState(false);
-  const { fromSpaceId, fromStationId, id, subtasks } = task;
-
-  const inputRef = useRef();
+  const { fromSpaceId, fromStationId, id, subtasks, done } = task;
 
   useMemo(() => {
     setState(task.subtasks);
-    console.log(task);
-    console.log(state);
   }, [task]);
-
-  useEffect(() => {
-    if (subtaskView) {
-      inputRef.current.focus();
-      console.log(inputRef);
-    }
-  }, [subtaskView]);
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -64,12 +52,6 @@ const Subtasks = ({ task }) => {
   };
   const onDragStart = () => {};
 
-  const handleSubmitTask = (e) => {
-    e.preventDefault();
-    createNewSubtask(fromSpaceId, fromStationId, id, newSubtask);
-    setSubtasksOpen(true);
-  };
-
   return (
     <DragDropContext onDragEnd={onDragEnd} onDragStart={onDragStart}>
       <Droppable droppableId={"subtasks"} type="subtasksType">
@@ -79,35 +61,53 @@ const Subtasks = ({ task }) => {
               className="subtasks"
               ref={provided.innerRef}
               {...provided.droppableProps}
+              style={{ opacity: done && 0.2, pointerEvents: done && "none" }}
             >
-              {state.length > 0 ? (
+              {state?.length > 0 ? (
                 <div className="subtasks__task">
                   <div
                     className="subtasks__label"
                     onClick={() => setSubtasksOpen(!subtasksOpen)}
                   >
-                    <RetroLabel>{state.length} Subtasks</RetroLabel>
+                    <RetroLabel>
+                      {state.length} <FontAwesomeIcon icon={faCheckDouble} />
+                    </RetroLabel>
                   </div>
-                  {subtasksOpen && (
-                    <>
-                      {state.map((task, index) => {
-                        return (
-                          <Subtask task={task} index={index} key={task.id} />
-                        );
-                      })}
-                    </>
-                  )}
-                  {provided.placeholder}
+                  <AnimatePresence>
+                    {subtasksOpen && (
+                      <>
+                        {state.map((task, index) => {
+                          return (
+                            <Subtask task={task} index={index} key={task.id} />
+                          );
+                        })}
+
+                        {provided.placeholder}
+                        <AddSubtask
+                          task={task}
+                          setSubtasksOpen={setSubtasksOpen}
+                          inputText="Add Subtask"
+                        />
+                      </>
+                    )}
+                  </AnimatePresence>
                 </div>
               ) : (
-                <div className="subtask__label-gray">
+                <div
+                  className="subtask__label-gray"
+                  style={{ opacity: subtaskView ? 1 : 0 }}
+                >
                   <div
                     className="subtask__addFalse"
                     onClick={() => setSubtaskView(!subtaskView)}
                   >
-                    <RetroLabel color="gray"> + Add subtask</RetroLabel>
+                    <RetroLabel color="gray">
+                      Add subtask <FontAwesomeIcon icon={faCheckDouble} />
+                    </RetroLabel>
                   </div>
-                  {subtaskView && <AddSubtask />}
+                  {subtaskView && (
+                    <AddSubtask task={task} setSubtasksOpen={setSubtasksOpen} />
+                  )}
                 </div>
               )}
             </div>
