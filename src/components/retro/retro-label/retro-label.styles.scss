@@ -1,4 +1,14 @@
 @import "../../../theme.styles.scss";
+
+.retroLabel {
+  .gray {
+    background: $body;
+    border: 1px solid $bodyGray;
+    p {
+      color: #888;
+    }
+  }
+}
 .retroLabel-box {
   background: $info-light;
   width: fit-content;

@@ -1,24 +1,38 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useMemo, useRef, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
-import { createNewSubtask } from "../../../firebase/firebase.utils.js";
+import {
+  createNewSubtask,
+  updateSubDrag,
+} from "../../../firebase/firebase.utils.js";
 
 import RetroLabel from "../../retro/retro-label/retro-label.component";
 import RetroInput from "../../retro/input/input.component";
 import Subtask from "./subtask/subtask.component";
+import AddSubtask from "./add-subtask/add-subtask.component";
 
 import "./subtasks.styles.scss";
 
 const Subtasks = ({ task }) => {
-  const station = task;
-  const [newSubtask, setNewSubtask] = useState("");
   const [state, setState] = useState([]);
+  const [newSubtask, setNewSubtask] = useState("");
+  const [subtasksOpen, setSubtasksOpen] = useState(false);
+  const [subtaskView, setSubtaskView] = useState(false);
   const { fromSpaceId, fromStationId, id, subtasks } = task;
 
-  useEffect(() => {
-    setState(task);
+  const inputRef = useRef();
+
+  useMemo(() => {
+    setState(task.subtasks);
+    console.log(task);
+    console.log(state);
   }, [task]);
 
-  const tasks = Object.values(subtasks);
+  useEffect(() => {
+    if (subtaskView) {
+      inputRef.current.focus();
+      console.log(inputRef);
+    }
+  }, [subtaskView]);
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -39,11 +53,13 @@ const Subtasks = ({ task }) => {
       ) {
         return;
       }
-      const start = task.source.index;
-      const finish = task.destionation.index;
-      console.log(result);
-      const newData = reorder(task, start, finish);
-      setState({ newData });
+
+      const start = source.index;
+      const finish = destination.index;
+
+      const newData = reorder(state, start, finish);
+      setState(newData);
+      updateSubDrag(fromSpaceId, fromStationId, id, newData);
     }
   };
   const onDragStart = () => {};
@@ -51,6 +67,7 @@ const Subtasks = ({ task }) => {
   const handleSubmitTask = (e) => {
     e.preventDefault();
     createNewSubtask(fromSpaceId, fromStationId, id, newSubtask);
+    setSubtasksOpen(true);
   };
 
   return (
@@ -63,21 +80,36 @@ const Subtasks = ({ task }) => {
               ref={provided.innerRef}
               {...provided.droppableProps}
             >
-              <div className="subtasks__task">
-                <RetroLabel>3 Subtasks</RetroLabel>
-                {tasks.map((task, index) => {
-                  return <Subtask task={task} index={index} key={task.id} />;
-                })}
-                {provided.placeholder}
-              </div>
-              <div className="subtasks__add">
-                <form onSubmit={(e) => handleSubmitTask(e)}>
-                  <RetroInput
-                    text="add"
-                    onChange={(e) => setNewSubtask(e.target.value)}
-                  />
-                </form>
-              </div>
+              {state.length > 0 ? (
+                <div className="subtasks__task">
+                  <div
+                    className="subtasks__label"
+                    onClick={() => setSubtasksOpen(!subtasksOpen)}
+                  >
+                    <RetroLabel>{state.length} Subtasks</RetroLabel>
+                  </div>
+                  {subtasksOpen && (
+                    <>
+                      {state.map((task, index) => {
+                        return (
+                          <Subtask task={task} index={index} key={task.id} />
+                        );
+                      })}
+                    </>
+                  )}
+                  {provided.placeholder}
+                </div>
+              ) : (
+                <div className="subtask__label-gray">
+                  <div
+                    className="subtask__addFalse"
+                    onClick={() => setSubtaskView(!subtaskView)}
+                  >
+                    <RetroLabel color="gray"> + Add subtask</RetroLabel>
+                  </div>
+                  {subtaskView && <AddSubtask />}
+                </div>
+              )}
             </div>
           );
         }}

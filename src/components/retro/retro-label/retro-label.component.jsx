@@ -2,10 +2,10 @@ import React from "react";
 
 import "./retro-label.styles.scss";
 
-const RetroLabel = ({ children }) => {
+const RetroLabel = ({ children, color, ...otherPorps }) => {
   return (
-    <div className="retroLabel">
-      <div className="retroLabel-box">
+    <div className={`retroLabel `} {...otherPorps}>
+      <div className={`retroLabel-box ${color}`}>
         <p>{children}</p>
       </div>
     </div>

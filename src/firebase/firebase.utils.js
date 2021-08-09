@@ -271,30 +271,45 @@ export const createNewSubtask = async (spaceId, stationId, taskId, content) => {
       },
     },
   };
-  /*  const newSubtask = {
-    [v4]: {
-      id: v4,
-      created: new Date(),
-      content: content,
-    },
-  }; */
-
-  /* const newData = {
-    ...data,
-    tasks: {
-      ...data.tasks,
-      [taskId]: {
-        ...data.tasks[taskId],
-        subtasks: [...data.tasks[taskId].subtasks, ...newSubtask],
-      },
-    },
-  }; */
 
   docRef.set({
     ...newData,
   });
 };
 
+export const updateSubDrag = (spaceId, stationId, taskId, newData) => {
+  let task = {};
+  let tasks = {};
+  const tasksRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  tasksRef
+    .get()
+    .then((taskData) => {
+      task = taskData.data().tasks[taskId];
+      tasks = taskData.data().tasks;
+      console.log(taskData.data());
+      tasks = {
+        ...tasks,
+        [taskId]: {
+          ...task,
+          subtasks: [...newData],
+        },
+      };
+    })
+    .then(() => {
+      tasksRef.update({
+        tasks: {
+          ...tasks,
+        },
+      });
+    });
+};
 export const createNewTaskDemo = async (
   statusName,
   newTaskName,
@@ -362,7 +377,6 @@ export const createNewTaskDemo = async (
 };
 
 export const updateDrag = (spaceId, stationId, newState) => {
-  console.log("updateing");
   db.collection("space")
     .doc(spaceId)
     .collection("stations")
