@@ -17,6 +17,7 @@ import LoadModule from "../../../modules/load-module.component.jsx/load-module.c
 import BoxRight from "../../../retro/box-right/box-right.component";
 import LargeTask from "../../../large-task/large-task.component";
 import CheckBox from "../../../retro/check-box/check-box.component";
+import Subtasks from "../../subtasks/subtasks.component";
 
 const TaskBoard = ({ task, index, status }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
@@ -83,6 +84,7 @@ const TaskBoard = ({ task, index, status }) => {
                     style={{ opacity: task.done ? 1 : 0 }}
                   />
                 </div>
+                <Subtasks task={task} />
                 <div className="task__modules">
                   {activeModules?.map((module) => {
                     return (

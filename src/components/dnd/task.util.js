@@ -52,7 +52,6 @@ export const timeFilterFunction = (task, filter) => {
 
 export const personFilterFunction = (task, filter) => {
   const { user } = filter;
-  console.log(task.assign, filter.user);
   if (filter.user === null) {
     return true;
   } else {

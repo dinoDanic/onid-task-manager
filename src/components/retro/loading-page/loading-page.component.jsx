@@ -5,12 +5,12 @@ import "./loading-page.styles.scss";
 const LoadingPage = () => {
   return (
     <motion.div
-      class="loadingPage"
+      className="loadingPage"
       exit={{ opacity: 0 }}
       transition={{ duration: 0.2 }}
     >
       <div className="loadingPage__item">
-        <div class="push-pop loader ">
+        <div className="push-pop loader ">
           <div></div>
           <div></div>
         </div>

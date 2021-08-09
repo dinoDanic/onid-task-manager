@@ -205,6 +205,7 @@ export const createNewTask = async (
       message: [],
       description: "Add description",
       done: false,
+      subtasks: [],
       priority: [
         { name: "Urgent", active: false, color: "rgb(226, 68, 92)" },
         { name: "High", active: false, color: "rgb(253, 171, 61)" },
@@ -239,6 +240,61 @@ export const createNewTask = async (
     ...newData,
   });
 };
+
+export const createNewSubtask = async (spaceId, stationId, taskId, content) => {
+  let v4 = uuidv4();
+
+  const docRef = db
+    .collection("space")
+    .doc(spaceId)
+    .collection("stations")
+    .doc(stationId)
+    .collection("tasks")
+    .doc("tasks");
+
+  const getRef = await docRef.get();
+  const data = getRef.data();
+
+  const newSubtask = {
+    id: v4,
+    created: new Date(),
+    content: content,
+  };
+
+  const newData = {
+    ...data,
+    tasks: {
+      ...data.tasks,
+      [taskId]: {
+        ...data.tasks[taskId],
+        subtasks: [...data.tasks[taskId].subtasks, newSubtask],
+      },
+    },
+  };
+  /*  const newSubtask = {
+    [v4]: {
+      id: v4,
+      created: new Date(),
+      content: content,
+    },
+  }; */
+
+  /* const newData = {
+    ...data,
+    tasks: {
+      ...data.tasks,
+      [taskId]: {
+        ...data.tasks[taskId],
+        subtasks: [...data.tasks[taskId].subtasks, ...newSubtask],
+      },
+    },
+  }; */
+
+  docRef.set({
+    ...newData,
+  });
+};
+
 export const createNewTaskDemo = async (
   statusName,
   newTaskName,

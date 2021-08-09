@@ -1,0 +1,12 @@
+@import "../../../theme.styles.scss";
+.retroLabel-box {
+  background: $info-light;
+  width: fit-content;
+  padding: 2px 5px;
+  border-radius: 8px;
+  border: 1px solid #c3ecff;
+  p {
+    font-size: 11px;
+    color: $info;
+  }
+}

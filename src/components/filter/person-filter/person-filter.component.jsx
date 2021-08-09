@@ -30,13 +30,10 @@ const PersonFilter = () => {
       if (!spaceId) return;
       if (!stationId) return;
       const getSpaceData = await db.collection("space").doc(spaceId).get();
-      console.log(" soace id", spaceId);
       const spaceData = getSpaceData.data();
-      console.log(spaceData);
       const { members } = spaceData;
       let allMembers = [];
       await members.map((memberId) => {
-        console.log(memberId);
         db.collection("users")
           .doc(memberId)
           .get()
@@ -90,7 +87,6 @@ const PersonFilter = () => {
         {showMembers && (
           <BoxLayerLite setLayer={setShowMembers}>
             {members?.map((member) => {
-              console.log(members);
               return (
                 <div
                   className="personFilter__member"

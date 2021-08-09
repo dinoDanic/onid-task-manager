@@ -105,7 +105,7 @@ const StatusTypeBoard = ({
               <TaskSettings status={status} inputNameRef={inputNameRef} />
             </div>
           </div>
-          <Box /* style={{ backgroundColor: status.fontColor }} */>
+          <Box>
             <div className="st__content">
               <Droppable droppableId={status.id}>
                 {(provided, snapshot) => {
@@ -120,7 +120,6 @@ const StatusTypeBoard = ({
                       <div className="st__taskList" style={style}>
                         {tasks?.map((task, index) => {
                           if (task === undefined) return false;
-
                           return (
                             <TaskBoard
                               key={task.id}
