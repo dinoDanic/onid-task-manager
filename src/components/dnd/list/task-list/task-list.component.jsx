@@ -21,6 +21,7 @@ import { faGripLinesVertical } from "@fortawesome/free-solid-svg-icons";
 import "./task-list.styles.scss";
 
 import CheckBox from "../../../retro/check-box/check-box.component";
+import Subtasks from "../../subtasks/subtasks.component";
 
 const TaskList = ({ task, index, status }) => {
   const activeModules = useSelector((state) => state.space.activeModulesData);
@@ -69,14 +70,20 @@ const TaskList = ({ task, index, status }) => {
             </div>
             {filterLogic && (
               <div className={`taskList ${taskClass}`}>
-                <div className="tl__task">
-                  <CheckBox task={task} />
-                  <p>{task.content}</p>
-                </div>
                 <div
                   className="tl__clickable"
                   onClick={() => setShowLargeTask(!showLargeTask)}
                 />
+                <div className="tl__task">
+                  <CheckBox task={task} />
+                  <p>{task.content}</p>
+                  <div
+                    className="sl__subtasks"
+                    onClick={() => setShowLargeTask(!showLargeTask)}
+                  >
+                    <Subtasks task={task} length />
+                  </div>
+                </div>
 
                 <div className="tl__modules">
                   {activeModules?.map((module) => {
@@ -91,7 +98,7 @@ const TaskList = ({ task, index, status }) => {
                   })}
                 </div>
                 {showLargeTask && (
-                  <BoxRight setLayer={setShowLargeTask}>
+                  <BoxRight setLayer={setShowLargeTask} mobileBox="mobileBox">
                     <LargeTask task={task} />
                   </BoxRight>
                 )}

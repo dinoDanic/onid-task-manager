@@ -103,7 +103,7 @@ const LargeTask = ({ task }) => {
             <TaskDescription description={task.description} taskId={task.id} />
           </div>
           <div className="lt__subtasks">
-            <Subtasks task={task} open />
+            <Subtasks task={task} open opacity="opacityTrue" />
           </div>
         </div>
 

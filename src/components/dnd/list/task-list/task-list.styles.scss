@@ -17,6 +17,7 @@
   background: white;
   border-radius: 8px;
   margin-bottom: 5px;
+
   &:last-child {
     border: none;
   }
@@ -44,6 +45,7 @@
   }
   .tl__clickable {
     width: 100%;
+    position: absolute;
     height: 40px;
     cursor: pointer;
   }
@@ -75,4 +77,10 @@
   opacity: 0;
   top: 13px;
   transition: 0.2s ease;
+}
+
+@media (max-width: 500px) {
+  .tl__modules {
+    display: none !important;
+  }
 }

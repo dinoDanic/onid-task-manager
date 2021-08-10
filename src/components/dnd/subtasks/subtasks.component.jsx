@@ -11,7 +11,7 @@ import "./subtasks.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 
-const Subtasks = ({ task, open }) => {
+const Subtasks = ({ task, open, length, opacity }) => {
   const [state, setState] = useState([]);
   const [newSubtask, setNewSubtask] = useState("");
   const [subtasksOpen, setSubtasksOpen] = useState(false);
@@ -73,7 +73,9 @@ const Subtasks = ({ task, open }) => {
                 <div className="subtasks__task">
                   <div
                     className="subtasks__label"
-                    onClick={() => setSubtasksOpen(!subtasksOpen)}
+                    onClick={() =>
+                      !length ? setSubtasksOpen(!subtasksOpen) : ""
+                    }
                   >
                     <RetroLabel>
                       {open ? (
@@ -110,7 +112,7 @@ const Subtasks = ({ task, open }) => {
                 </div>
               ) : (
                 <div
-                  className="subtask__label-gray"
+                  className={`subtask__label-gray ${opacity}`}
                   style={{ opacity: subtaskView ? 1 : 0 }}
                 >
                   <div

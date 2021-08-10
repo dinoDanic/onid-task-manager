@@ -21,3 +21,9 @@
   height: 100%;
   position: absolute;
 }
+
+@media (max-width: 500px) {
+  .boxRight__content {
+    width: 100%;
+  }
+}
