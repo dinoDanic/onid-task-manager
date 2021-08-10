@@ -28,6 +28,7 @@ Leave a ⭐ to keep me motivating :)
 - Write update on tasks
 - Create and reorder Subtasks
 - Mobile friendly
+- Fullscreen mode
 
 ## To do
 
@@ -36,3 +37,30 @@ Leave a ⭐ to keep me motivating :)
 - Calendar view
 
 ## Screenshots
+
+Login page
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/loginPage.png?raw=true)
+
+Create Demo
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/createDemo.png?raw=true)
+
+Home Page
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/homePage.png?raw=true)
+
+Station Space
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/stationSpace.png?raw=true)
+
+Board View
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/boardView.png?raw=true)
+
+Filters
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/filter.png?raw=true)
+
+Large Task View, with Subtask and updates
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/largeTask.png?raw=true)
+
+Fullscreen mode
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/fullScreenMode.png?raw=true)
+
+List view
+![alt text](https://github.com/dinoDanic/onid/blob/main/src/img/listView.png?raw=true)
