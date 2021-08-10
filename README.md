@@ -9,6 +9,8 @@
 
 **onid** is a task manager web app made with **React, Firebase, React Beautiful DND, Redux and React Router**.
 
+Leave a ⭐ to keep me motivating :)
+
 ## Features
 
 - Google sign-in
@@ -24,9 +26,13 @@
 - Filter by priority, time or user
 - User profile page, upload profile image, change info,..
 - Write update on tasks
+- Create and reorder Subtasks
+- Mobile friendly
 
 ## To do
 
 - Option to upload and share files inside tasks
+- Timeline view
+- Calendar view
 
 ## Screenshots
