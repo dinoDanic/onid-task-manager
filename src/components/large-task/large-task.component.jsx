@@ -14,6 +14,7 @@ import TaskDescription from "../task-description/task-description.component";
 import Avatar from "../retro/avatar/avatar.component";
 import Message from "../message/message.component";
 import Loading from "../retro/loading/loading.component";
+import Subtasks from "../dnd/subtasks/subtasks.component";
 
 const LargeTask = ({ task }) => {
   const moduleData = useSelector((state) => state.space.moduleData);
@@ -23,19 +24,10 @@ const LargeTask = ({ task }) => {
   const [newTaskName, setNewTaskName] = useState("");
   const [showLoading, setShowLoading] = useState(false);
   const [limit, setLimit] = useState(3);
-  const inputRef = useRef();
   const inputTaskRef = useRef();
-  const messagesEndRef = useRef();
   const textareaRef = useRef();
 
   const { fromSpaceId, fromStationId } = task;
-
-  /* useEffect(() => {
-    const scrollToBottom = () => {
-      messagesEndRef.current.scrollIntoView();
-    };
-    scrollToBottom();
-  }, [msgs]); */
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -110,7 +102,11 @@ const LargeTask = ({ task }) => {
           <div className="lt__description">
             <TaskDescription description={task.description} taskId={task.id} />
           </div>
+          <div className="lt__subtasks">
+            <Subtasks task={task} open />
+          </div>
         </div>
+
         <div className="lt__writeUpdate">
           <div className="lt__writeUpdate-msgs">
             {msgs.map((msg) => {

@@ -1,4 +1,4 @@
-import React, { useState, useMemo } from "react";
+import React, { useState, useMemo, useEffect } from "react";
 import { DragDropContext, Droppable } from "react-beautiful-dnd";
 import { updateSubDrag } from "../../../firebase/firebase.utils.js";
 import { AnimatePresence } from "framer-motion";
@@ -11,7 +11,7 @@ import "./subtasks.styles.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheckDouble } from "@fortawesome/free-solid-svg-icons";
 
-const Subtasks = ({ task }) => {
+const Subtasks = ({ task, open }) => {
   const [state, setState] = useState([]);
   const [newSubtask, setNewSubtask] = useState("");
   const [subtasksOpen, setSubtasksOpen] = useState(false);
@@ -21,6 +21,12 @@ const Subtasks = ({ task }) => {
   useMemo(() => {
     setState(task.subtasks);
   }, [task]);
+
+  useEffect(() => {
+    if (open) {
+      setSubtasksOpen(true);
+    }
+  }, [open]);
 
   const reorder = (list, startIndex, endIndex) => {
     const result = Array.from(list);
@@ -70,7 +76,17 @@ const Subtasks = ({ task }) => {
                     onClick={() => setSubtasksOpen(!subtasksOpen)}
                   >
                     <RetroLabel>
-                      {state.length} <FontAwesomeIcon icon={faCheckDouble} />
+                      {open ? (
+                        <>
+                          {state.length} subtasks {/* */}
+                          <FontAwesomeIcon icon={faCheckDouble} />
+                        </>
+                      ) : (
+                        <>
+                          {state.length}{" "}
+                          <FontAwesomeIcon icon={faCheckDouble} />
+                        </>
+                      )}
                     </RetroLabel>
                   </div>
                   <AnimatePresence>
