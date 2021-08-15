@@ -1,8 +1,6 @@
 import React, { useState } from "react";
-import { db, fieldValue, registerUserFb } from "../../firebase/firebase.utils";
 import { loginWithEmailAndPassword } from "../../firebase/firebase.utils";
 import RetroButton from "../retro/button/retro-button.component";
-import RetroInput from "../retro/input/input.component";
 
 import "./create-demo.styles.scss";
 

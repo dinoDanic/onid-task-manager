@@ -59,7 +59,7 @@ export const createDummySpace = async () => {
 export const createDummyStation = async () => {
   await createNewStationDemo(
     "dummySpace0",
-    "Tasks",
+    "Demo Project 1",
     statusType,
     statusOrder,
     modules
